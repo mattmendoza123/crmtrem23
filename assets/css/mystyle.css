@@ -1,0 +1,14 @@
+.main_logo{width: 100%;display: block;margin: 30px 0 30px;}
+.login-register{background: #02b9ff;}
+
+.form-material .form-control, .form-material .form-control.focus, .form-material .form-control:focus { background-image: linear-gradient( #e0c966, #e0c966), linear-gradient(#e9edf2, #e9edf2); }
+
+.btn-info, .btn-info.disabled{background-color: #e0c966;border: 1px solid #e0c966;}
+
+.btn-info:hover, .btn-info.disabled:hover { background: #e0c966; border: 1px solid #e0c966; opacity: .6; }
+
+#loginform label.error{font-size: 11px!important;color: red!important;margin-left: 28px;}
+select.error, textarea.error, input.error {
+    box-shadow: 0 0 3px #d92800 !important;
+    border: 1px solid #d92800 !important;
+    }

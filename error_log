@@ -1,0 +1,2 @@
+[01-Sep-2022 08:33:14 America/New_York] PHP Warning:  require_once(/home/greeocvu/public_html/Invalidclicks/system/core/CodeIgniter.php): failed to open stream: No such file or directory in /home/greeocvu/public_html/Invalidclicks/index.php on line 399
+[01-Sep-2022 08:33:14 America/New_York] PHP Fatal error:  require_once(): Failed opening required '/home/greeocvu/public_html/Invalidclicks/system/core/CodeIgniter.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/greeocvu/public_html/Invalidclicks/index.php on line 399
