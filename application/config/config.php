@@ -27,7 +27,7 @@ $config['modules_locations'] = array(
 |
 */
 global $base_url;
-$config['base_url'] = 'https://greenifymyhome.co.uk/Invalidclicks/';
+$config['base_url'] = 'https://crm.tremendio.network';
 
 /*
 |--------------------------------------------------------------------------
