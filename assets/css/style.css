@@ -63,8 +63,7 @@ Global Styles
 
 body {
   background: #fff;
-  /* font-family: "Montserrat", sans-serif; */
-  font-family: "Proxima Nova", sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
   overflow-x: hidden;
   color: #67757c;
@@ -112,8 +111,7 @@ h4,
 h5,
 h6 {
   color: #455a64;
-  /* font-family: "Montserrat", sans-serif; */
-  font-family: "Proxima Nova", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400; }
 
 h1 {
@@ -826,7 +824,7 @@ Main sidebar
   top: 0px;
   z-index: 20;
   padding-top: 70px;
-  background: #000;
+  background: #fff;
   border-right: 1px solid rgba(120, 130, 140, 0.13); }
 
 .fix-sidebar .left-sidebar {
@@ -856,7 +854,7 @@ sidebar navigation
   display: block; }
 
 .sidebar-nav {
-  background: #000;
+  background: #fff;
   padding: 15px 0 0 0px; }
   .sidebar-nav ul {
     margin: 0px;
@@ -864,19 +862,19 @@ sidebar navigation
     .sidebar-nav ul li {
       list-style: none; }
       .sidebar-nav ul li a {
-        color: #fff;
+        color: #566573;
         padding: 10px 35px 10px 15px;
         display: block;
         font-size: 15px;
         font-weight: 400; }
         .navbar-collapse {
-        background: #000;
+        background: #FDFEFE;
         }
         .scroll-sidebar.ps-container.ps-theme-default {
         /* background: linear-gradient(270deg, #1deef7 5%, #10359A 90%) ; */
-        background: #000 }
+        background: #ffffff }
         #sidebarnav {
-        background: #000 ; }
+        background: #ffffff ; }
         .sidebar-nav ul li a.active, .sidebar-nav ul li a:hover {
           color: #20aee3; }
           .sidebar-nav ul li a.active i, .sidebar-nav ul li a:hover i {
@@ -923,7 +921,7 @@ sidebar navigation
   .sidebar-nav > ul > li {
     margin-bottom: 8px;
     margin-top: 8px;
-    background: #000; }
+    background: #fff; }
     .sidebar-nav > ul > li.active > a {
       color: #20aee3;
       font-weight: 500; }
@@ -1073,7 +1071,7 @@ File: scss
     display: none; }
 
 .page-wrapper {
-  background:  #bcbcaf;;
+  background: #f6f9fa;
   padding-bottom: 60px;
   position: relative; }
 
@@ -1352,7 +1350,7 @@ Notify
  Breadcrumb and page title
 *******************/
 .page-titles {
-  background: #bcbcaf;
+  background: #f6f9fa;
   margin-bottom: 20px;
   padding: 0px; }
   .page-titles h3 {

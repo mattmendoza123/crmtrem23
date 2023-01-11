@@ -19,7 +19,7 @@ File: scss
 Login register and recover password Page
 ******************/
 .login-register {
-    background-color: #02b9ff  !important;
+    background-color: #004e91 !important;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -29,8 +29,7 @@ Login register and recover password Page
     position: fixed; }
   
     .card-body{
-      background-color: #000;
-      border-radius: 26px;
+        /* background-color: #f2f2f2; */
     }
   
     button.btn.btn-block.btn-lg.btn-info.btn-rounded{
@@ -75,7 +74,7 @@ Login register and recover password Page
   }
   
   .logintitle {
-      font-family: "Proxima Nova", sans-serif;
+      font-family: 'Zilla Slab', serif;
       text-align: center;
       border-top: 2px solid #f2f2f2;
     padding-top: 30px;
@@ -86,20 +85,18 @@ Login register and recover password Page
       width: 90%;
       padding: 20px;
       border: 1px;
-      font-family: "Proxima Nova", sans-serif;
+      font-family: 'Zilla Slab', serif;
       font-size: 16px;
-    /* background-color: #D5F5E3; */
+    background-color: #D5F5E3;
     border-radius: 4px !important;
-    margin-left: 20px;
-    border-style: solid;
+    margin-left: 24px;
   }
   .login-input:hover{
-    border: 1px solid #24bf84;
-    /* border: 1px solid #D5F5E3; */
+    border: 1px solid #0b73cc;
   }
   
   .login-btn {
-    background-color: #e03ea9;
+    background-color: #24bf84; /* Green */
     border: none;
     color: white;
     padding: 15px 40px;
@@ -108,12 +105,11 @@ Login register and recover password Page
     display: inline-block;
     font-size: 16px;
     border-radius: 4px;
-    border: 1px;
+	border: 1px;
   }
   
   .login-btn:hover {
-    background: #ffffff;
-    color: black;
+      background: #0b73cc;
   }
   
   /* --------------------------REGISTRATION CSS------------------------- */
