@@ -1,11 +1,12 @@
-.text-themecolor{color: #184fe7 !important; font-weight: 500;}
+.text-themecolor{color: #000 !important; font-weight: 600;}
 
 .text-deff {color: #dbb651 !important;}
 .bg-def{background: #0d980e !important;}
 .bg-blue{background : #101c72!important;}
 
-.sidebar-nav ul li a.active, .sidebar-nav ul li a:hover { color: #fff !important; background: #184fe7 !important; }
-.sidebar-nav > ul > li.active > a{ color: #566573 ; border-color: #cfd3ce ; }
+.sidebar-nav ul li a.active { color: #02b9ff !important; border-color: #e03ea9 !important; }
+.sidebar-nav ul li a:hover {  color: #e03ea9 !important; border-color: #02b9ff !important; }
+/* .sidebar-nav > ul > li.active > a{ color: #fff ; border-color: #000 ; } */
 .sidebar-nav > ul > li.active > a i { color: rgba(5,92,59,0.98); }
 .sidebar-nav ul li a.active i, .sidebar-nav ul li a:hover i { color: rgba(5,92,59,0.98); }
 
@@ -35,9 +36,8 @@
 
 #profileform label{margin-bottom: 0!important;}
 
-#profileform .form-material .form-control, .form-material .form-control.focus, .form-material .form-control:focus { background-image: linear-gradient( #c39226, #c6962e), linear-gradient(#e9edf2, #e9edf2); border: 0 none; border-radius: 0; box-shadow: none; float: none; }
+#profileform .form-material .form-control, .form-material .form-control.focus, .form-material .form-control:focus { background-image: linear-gradient( #004987 , #004987 ), linear-gradient(#e9edf2, #e9edf2); border: 0 none; border-radius: 0; box-shadow: none; float: none; }
 #profileform .form-material .form-control{color: #222!important  ;}
-
 .dashh6{min-height: 32px;}
 .bg-succ { background: #a0b556 !important; }
 
