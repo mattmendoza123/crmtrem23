@@ -23,7 +23,7 @@
             "processing": true,
             bLengthChange: true,
             "lengthMenu": [ [10, 15, 25, 50, 100, -1], [10, 15, 25, 50, 100, "All"] ],
-            "iDisplayLength": 10,
+            "iDisplayLength": 2,
             bInfo: false,
             responsive: true,
             "bAutoWidth": false,
