@@ -17,10 +17,12 @@
         var base_url = "<?php echo base_url(); ?>";
         var data_table = $('#crm_datatable').DataTable({
             // "pageLength": 10,
-            // "serverSide": true,
+            "serverSide": true,
             "pageLength": 10,
             // "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
-            // "processing": true,
+            "processing": true,
+            "recordsFiltered": 2,
+            "recordsTotal":2,
             bLengthChange: true,
             "lengthMenu": [ [10, 15, 25, 50, 100, -1], [10, 15, 25, 50, 100, "All"] ],
             "iDisplayLength": 10,
