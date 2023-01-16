@@ -17,7 +17,7 @@
         var base_url = "<?php echo base_url(); ?>";
         var data_table = $('#crm_datatable').DataTable({
             // "pageLength": 10,
-            // "serverSide": true,
+            "serverSide": true,
             "pageLength": 10,
             // "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
             "processing": true,
