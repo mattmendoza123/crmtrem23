@@ -11,13 +11,13 @@
 <script type="text/javascript">
 
 
-  // Users > Table
-  $(document).ready(function(e) {
+    // Users > Table
+    $(document).ready(function(e) {
         var filter_crm_type = "";
         var base_url = "<?php echo base_url(); ?>";
         var data_table = $('#crm_datatable').DataTable({
             // "pageLength": 10,
-            "serverSide": false,
+            // "serverSide": true,
             "pageLength": 5,
             // "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
             "processing": true,
