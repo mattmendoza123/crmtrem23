@@ -24,7 +24,7 @@ class Crm extends MY_Controller
 
 	public function adduser(){
 		$post = $this->input->post();
-		$files_path = 'assets/uploads/files/';
+		$files_path = 'assets/uploads/';
 		$business_card1  = $_FILES['business_card']['name'];
 		$tmp_name1 = $_FILES['business_card']['tmp_name'];
 		$name1 = $_FILES['business_card']['name'];
@@ -202,7 +202,7 @@ class Crm extends MY_Controller
 	public function updatecrm()
 	{
 		$post = $this->input->post();
-		$files_path = 'assets/uploads/files/';
+		$files_path = 'assets/uploads/';
 		$business_card1 = $_FILES['u_business_card']['name'];
 		$tmp_name1 = $_FILES['u_business_card']['tmp_name'];
 		$name1 = $_FILES['u_business_card']['name'];
