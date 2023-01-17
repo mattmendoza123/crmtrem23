@@ -77,7 +77,7 @@
                                 } else {
                                     echo "not-active";
                                 }  ?>">
-                     <a class="waves-effect" href="<?= base_url("crmads") ?>" aria-expanded="false"><i class="fas fa-handshake"></i><span class="hide-menu">CRM</span></a>
+                     <a class="waves-effect" href="<?= base_url("crmads") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM</span></a>
                     </li>
                 </ul>
             <?php } else if ($this->session->userdata('user_details')[0]['user_type'] == 'Affiliate') { ?>
@@ -87,7 +87,7 @@
                                 } else {
                                     echo "not-active";
                                 }  ?>">
-                        <a class="waves-effect" href="<?= base_url("crmaff") ?>" aria-expanded="false"><i class="fas fa-handshake"></i><span class="hide-menu">CRM</span></a>
+                        <a class="waves-effect" href="<?= base_url("crmaff") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM</span></a>
                     </li>
                 </ul>
                  <?php } else { ?>
