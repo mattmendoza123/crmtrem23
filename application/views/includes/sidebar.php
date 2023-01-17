@@ -70,24 +70,24 @@
 <aside class="left-sidebar">
     <div class="scroll-sidebar">
         <nav class="sidebar-nav">
-            <?php if ($this->session->userdata('user_details')[0]['user_type'] == 'User') { ?>
+            <?php if ($this->session->userdata('user_details')[0]['user_type'] == 'Advertiser') { ?>
                 <ul id="sidebarnav">
                     <li class="<?php if (!empty($pagename)) {
                                     echo "active";
                                 } else {
                                     echo "not-active";
                                 }  ?>">
-                     <a class="waves-effect" href="<?= base_url("jobseeker") ?>" aria-expanded="false"><i class="fas fa-handshake"></i><span class="hide-menu">Job Seekers</span></a>
+                     <a class="waves-effect" href="<?= base_url("crmads") ?>" aria-expanded="false"><i class="fas fa-handshake"></i><span class="hide-menu">CRM</span></a>
                     </li>
                 </ul>
-            <?php } else if ($this->session->userdata('user_details')[0]['user_type'] == 'Employee') { ?>
+            <?php } else if ($this->session->userdata('user_details')[0]['user_type'] == 'Affiliate') { ?>
                 <ul id="sidebarnav">
                     <li class="<?php if (!empty($pagename)) {
                                     echo "active";
                                 } else {
                                     echo "not-active";
                                 }  ?>">
-                        <a class="waves-effect" href="<?= base_url("employer") ?>" aria-expanded="false"><i class="fas fa-handshake"></i><span class="hide-menu">Employers</span></a>
+                        <a class="waves-effect" href="<?= base_url("crmaff") ?>" aria-expanded="false"><i class="fas fa-handshake"></i><span class="hide-menu">CRM</span></a>
                     </li>
                 </ul>
                  <?php } else { ?>
