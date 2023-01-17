@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Crm extends MY_Controller
+class Crmads extends MY_Controller
 {
 
 	private $errmsg = "";
@@ -16,7 +16,7 @@ class Crm extends MY_Controller
 	{
 	
 		$data["title"] = "CRM | Tremendio Portal";
-		$data["pagename"] = "CRMads";
+		$data["pagename"] = "Crmads";
 
 		$this->load_page2("crmads", $data, "crmads_footer.php", "crmads_header.php");
 	}
