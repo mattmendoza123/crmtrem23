@@ -24,38 +24,38 @@ class Crmads extends MY_Controller
 	public function adduser(){
 		$post = $this->input->post();
 		$files_path = 'assets/uploads/files/';
-		$business_card1  = $_FILES['business_card']['name'];
-		$tmp_name1 = $_FILES['business_card']['tmp_name'];
-		$name1 = $_FILES['business_card']['name'];
+		$ads_business_card1  = $_FILES['ads_business_card']['name'];
+		$tmp_name1 = $_FILES['ads_business_card']['tmp_name'];
+		$name1 = $_FILES['ads_business_card']['name'];
 		// move_uploaded_file($tmp_name1, $files_path . $name1);
 		move_uploaded_file($tmp_name1, $files_path.time().'_'.$name1);
-		$business_card = time().'_'.$business_card1;
+		$ads_business_card = time().'_'.$ads_business_card1;
 		$user_data = array(
-			'first_name' => $post["first_name"],
-			'last_name' => $post['last_name'],
-			'email' => $post["email"],
-			'skype' => $post["skype"],
+			'ads_first_name' => $post["ads_first_name"],
+			'ads_last_name' => $post['ads_last_name'],
+			'ads_email' => $post["ads_email"],
+			'ads_skype' => $post["ads_skype"],
 			'date_created' => date("Y-m-d"),
-			'user_status' => 0
+			'ads_user_status' => 0
 		);
-		$insert_user = $this->MY_Model->insert('crm_users', $user_data);
+		$insert_user = $this->MY_Model->insert('crmads_users', $user_data);
 		if ($insert_user) {
 			$user_data = array(
 			'fk_user_id' => $insert_user,
-			'company' => $post["company"],
-			'tags' => implode(", ",$post["tags"]),
-			'country' => $post["country"],
-			'website' => $post["website"],
-			'model' => implode(", ",$post["model"]),
-			'geo' => implode(", ",$post["geo"]),
-			'traffic_source' => implode(", ",$post["traffic_source"]),
-			'am' => $post["am"],
-			'business_card' => $business_card,
-			'comment' => $post["comment"],
+			'ads_company' => $post["ads_company"],
+			'ads_tags' => implode(", ",$post["ads_tags"]),
+			'ads_country' => $post["ads_country"],
+			'ads_website' => $post["ads_website"],
+			'ads_model' => implode(", ",$post["ads_model"]),
+			'ads_geo' => implode(", ",$post["ads_geo"]),
+			'ads_traffic_source' => implode(", ",$post["ads_traffic_source"]),
+			'ads_am' => $post["ads_am"],
+			'ads_business_card' => $ads_business_card,
+			'ads_comment' => $post["ads_comment"],
 			);
-			$this->MY_Model->insert('crm_user_details', $user_data);
+			$this->MY_Model->insert('crmads_user_details', $user_data);
 			$this->session->set_userdata('swal', 'Added successfully.');
-			redirect(base_url("crm"));
+			redirect(base_url("crmads"));
 		}
 	}
 
@@ -85,19 +85,19 @@ class Crmads extends MY_Controller
 		}
 
 		$valid_columns = array(
-			1 => 'company',
-			2 => 'first_name',
-			3 => 'last_name',
-            4 => 'email',
-            5 => 'skype',
-            6 => 'tags',
-            7 => 'country',
-            8 => 'website',
-			9 => 'model',
-			10 => 'geo',
-			11 => 'traffic_source',
-			12 => 'am',
-			13 => 'comment',
+			1 => 'ads_company',
+			2 => 'ads_first_name',
+			3 => 'ads_last_name',
+            4 => 'ads_email',
+            5 => 'ads_skype',
+            6 => 'ads_tags',
+            7 => 'ads_country',
+            8 => 'ads_website',
+			9 => 'ads_model',
+			10 => 'ads_geo',
+			11 => 'ads_traffic_source',
+			12 => 'ads_am',
+			13 => 'ads_comment',
 			14 => 'date_created',
 		);
 
@@ -126,8 +126,8 @@ class Crmads extends MY_Controller
 
         $crm= $this->db
         ->select('*')
-		->from('crm_users') 
-		->join('crm_user_details', 'crm_user_details.fk_user_id= crm_users.crm_id')
+		->from('crmads_users') 
+		->join('crmads_user_details', 'crmads_user_details.fk_user_id= crmads_users.crmads_id')
 		// ->where('user_type', 'User')
         ->get();
 		
@@ -141,7 +141,7 @@ class Crmads extends MY_Controller
 			$action_btn .= "<a class='btn btn-xs view-crm' crm-id=".$tm->crm_details_id." data-toggle='tooltip' data-placement='bottom' title='View'  data-toggle='modal' data-target='#ViewUsers' href=''><i class='fa fa-eye'></i></a> &nbsp;";
 			// $action_btn .= "<a class='btn btn-xs delete-crm' crm-id=".$tm->crm_details_id." data-toggle='tooltip' data-placement='bottom' title='Delete'  data-toggle='modal' data-target='#DeleteUsers' href=''><i class='fa fa-trash'></i></a>";
 			// $action_btn .= "<a class='btn btn-xs delete-users' crm-id=".$tm->crm_details_id." data-toggle='tooltip' data-placement='bottom' title='Delete' href=".base_url('crm/delete_crm/'.$tm->crm_id)."><i class='fa fa-trash'></i></a>";
-			$action_btn .= "<a class='btn btn-xs delete-crm' href='".base_url('crm/delete_crm/'.$tm->crm_id)."'><i class='fa fa-trash'></i></a>";
+			$action_btn .= "<a class='btn btn-xs delete-crm' href='".base_url('crmads/delete_crm/'.$tm->crm_id)."'><i class='fa fa-trash'></i></a>";
 			// if ($tm->user_status == 0) {
 			// 	$tm->user_status = "<span class='badge badge-pill badge-success'>Activated</span>";
 			// } else {
@@ -157,19 +157,19 @@ class Crmads extends MY_Controller
 
 			$data[] = array(
                 // $tm->crm_details_id,
-				$tm->company,
-				$tm->first_name,
-				$tm->last_name,
-				$tm->email,
-				$tm->skype,
-				$tm->tags,
-				$tm->country,
-                $tm->website,
-				$tm->model,
-				$tm->geo,
-				$tm->traffic_source,
-				$tm->am,
-				$tm->comment,
+				$tm->ads_company,
+				$tm->ads_first_name,
+				$tm->ads_last_name,
+				$tm->ads_email,
+				$tm->ads_skype,
+				$tm->ads_tags,
+				$tm->ads_country,
+                $tm->ads_website,
+				$tm->ads_model,
+				$tm->ads_geo,
+				$tm->ads_traffic_source,
+				$tm->ads_am,
+				$tm->ads_comment,
 				$tm->date_created,
 				$action_btn
 			);
@@ -189,9 +189,9 @@ class Crmads extends MY_Controller
 	{
 		$result = $this->db
 		->select('*')
-        ->from('crm_users')
-        ->join('crm_user_details', 'crm_user_details.fk_user_id= crm_users.crm_id')
-		->where('crm_details_id', $id)
+        ->from('crmads_users')
+        ->join('crmads_user_details', 'crmads_user_details.fk_user_id= crmads_users.crmads_id')
+		->where('crmads_details_id', $id)
 		->get()
 		->result_array();
 		echo json_encode($result);
