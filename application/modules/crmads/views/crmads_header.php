@@ -114,10 +114,10 @@ th:nth-of-type(14) {
       color: #000;
       font-weight: 500;
    }
-   #updatecrm input,
-   #updatecrm textarea,
-   #updatecrm select,
-   #updatecrm button
+   #updatecrmads input,
+   #updatecrmads textarea,
+   #updatecrads select,
+   #updatecrmads button
    {
       border: 1px solid #000 !important;
       padding: 4px;
@@ -125,46 +125,46 @@ th:nth-of-type(14) {
       color: #000;
    }
 
-   #viewcrm input,
-   #viewcrm textarea,
-   #viewcrm select{
+   #viewcrmads input,
+   #viewcrmads textarea,
+   #viewcrmads select{
       border: 1px solid #000 !important;
       padding: 6px;
       background-color: #87dfe9 !important;
    }
-   #viewcrm label {
+   #viewcrmads label {
       color: #000;
       font-weight: 500;
    }
    
-   #updatecrm label {
+   #updatecrmads label {
       color: #000;
       font-weight: 500;
    }
    
-   #crm_datatable thead {
+   #crmads_datatable thead {
     background: #87dfe9 !important;
     color: #000;
    }
 
-   #crm_datatable {
+   #crmads_datatable {
       border-bottom: 1px solid #0a205c;
    }
-   .edit-crm
+   .edit-crmads
    {
       background: #ECFFDC;
       color: #2E8B57;
       border-radius: 25%;
       border: 1px solid #2E8B57;
    }
-   .delete-crm
+   .delete-crmads
    {
       background: #ffcccb;
       color: #FF0000;
       border-radius: 25%;
       border: 1px solid #FF0000;
    }
-   .view-crm
+   .view-crmads
   {
       background: #e8f4f8;
       color: #0000FF;
@@ -172,21 +172,21 @@ th:nth-of-type(14) {
       border: 1px solid #0000FF;
    }
 
-   .edit-crm:hover
+   .edit-crmads:hover
    {
       background: #2E8B57;
       color: #ECFFDC;
       border-radius: 25%;
       border: 1px solid #2E8B57;
    }
-   .delete-crm:hover
+   .delete-crmads:hover
    {
       background: #FF0000;
       color: #ffcccb;
       border-radius: 25%;
       border: 1px solid #FF0000;
    }
-   .view-crm:hover
+   .view-crmads:hover
    {
       background: #0000FF;
       color:  #e8f4f8;
@@ -209,7 +209,7 @@ th:nth-of-type(14) {
     box-shadow: none !important;
     /* box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%); */
    }
-   #viewcrm .form-control:disabled {
+   #viewcrmads .form-control:disabled {
     opacity: 1 !important;
     color: #000;
    }

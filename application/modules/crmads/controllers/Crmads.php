@@ -61,7 +61,7 @@ class Crmads extends MY_Controller
 
 
 
-	public function get_crmlist()
+	public function get_crmadslist()
 	{
 		
 		$draw = intval($this->input->post("draw"));
@@ -124,7 +124,7 @@ class Crmads extends MY_Controller
 			$this->db->group_end();
 		}
 
-        $crm= $this->db
+        $crmads= $this->db
         ->select('*')
 		->from('crmads_users') 
 		->join('crmads_user_details', 'crmads_user_details.fk_user_id= crmads_users.crmads_id')
@@ -134,14 +134,14 @@ class Crmads extends MY_Controller
 
 		$data = array();
 
-		foreach ($crm->result() as $tm) {
+		foreach ($crmads->result() as $tm) {
 			$action_btn = "";
 			// $action_btn = "<button type='button' class='btn btn-xs edit-users' data-toggle='tooltip' data-toggle='modal' data-target='#UpdateUsers'><i class='fa fa-edit'></i></button>"
-            $action_btn .= "<a class='btn btn-xs edit-crm' crm-id=".$tm->crm_details_id." data-toggle='tooltip' data-placement='bottom' title='Update'  data-toggle='modal' data-target='#UpdateUsers' href=''><i class='fa fa-edit'></i></a>&nbsp;";
-			$action_btn .= "<a class='btn btn-xs view-crm' crm-id=".$tm->crm_details_id." data-toggle='tooltip' data-placement='bottom' title='View'  data-toggle='modal' data-target='#ViewUsers' href=''><i class='fa fa-eye'></i></a> &nbsp;";
+            $action_btn .= "<a class='btn btn-xs edit-crmads' crmads-id=".$tm->crmads_details_id." data-toggle='tooltip' data-placement='bottom' title='Update'  data-toggle='modal' data-target='#UpdateUsers' href=''><i class='fa fa-edit'></i></a>&nbsp;";
+			$action_btn .= "<a class='btn btn-xs view-crmads' crmads-id=".$tm->crmads_details_id." data-toggle='tooltip' data-placement='bottom' title='View'  data-toggle='modal' data-target='#ViewUsers' href=''><i class='fa fa-eye'></i></a> &nbsp;";
 			// $action_btn .= "<a class='btn btn-xs delete-crm' crm-id=".$tm->crm_details_id." data-toggle='tooltip' data-placement='bottom' title='Delete'  data-toggle='modal' data-target='#DeleteUsers' href=''><i class='fa fa-trash'></i></a>";
 			// $action_btn .= "<a class='btn btn-xs delete-users' crm-id=".$tm->crm_details_id." data-toggle='tooltip' data-placement='bottom' title='Delete' href=".base_url('crm/delete_crm/'.$tm->crm_id)."><i class='fa fa-trash'></i></a>";
-			$action_btn .= "<a class='btn btn-xs delete-crm' href='".base_url('crmads/delete_crm/'.$tm->crm_id)."'><i class='fa fa-trash'></i></a>";
+			$action_btn .= "<a class='btn btn-xs delete-crmads' href='".base_url('crmads/delete_crmads/'.$tm->crmads_id)."'><i class='fa fa-trash'></i></a>";
 			// if ($tm->user_status == 0) {
 			// 	$tm->user_status = "<span class='badge badge-pill badge-success'>Activated</span>";
 			// } else {
@@ -177,15 +177,15 @@ class Crmads extends MY_Controller
 
 		$output = array(
 			"draw" => $draw,
-			"recordsTotal" => $crm->num_rows(),
-			"recordsFiltered" => $crm->num_rows(),
+			"recordsTotal" => $crmads->num_rows(),
+			"recordsFiltered" => $crmads->num_rows(),
 			"data" => $data
 		);
 		echo json_encode($output);
 		exit();
 	}
 
-	public function get_crm($id = '')
+	public function get_crmads($id = '')
 	{
 		$result = $this->db
 		->select('*')
@@ -197,5 +197,69 @@ class Crmads extends MY_Controller
 		echo json_encode($result);
 		exit();
 	}
+	public function updatecrmads()
+	{
+		$post = $this->input->post();
+		$files_path = 'assets/uploads/files/';
+		$ads_business_card1 = $_FILES['u_ads_business_card']['name'];
+		$tmp_name1 = $_FILES['u_ads_business_card']['tmp_name'];
+		$name1 = $_FILES['u_ads_business_card']['name'];
+		// move_uploaded_file($tmp_name1, $files_path . $name1);
+		move_uploaded_file($tmp_name1, $files_path.time().'_'.$name1);
+		$ads_business_card = time().'_'.$ads_business_card1;
+			if($post){
+				$set = array(
+                    
+					'ads_company' => $post["u_ads_company"],
+					'ads_tags' => implode(", ",$post["u_ads_tags"]),
+					'ads_country' => $post["u_ads_country"],
+					'ads_website' => $post["u_ads_website"],
+					'ads_model' => implode(", ",$post["u_ads_model"]),
+					'ads_geo' => implode(", ",$post["u_ads_geo"]),
+					'ads_traffic_source' => implode(", ",$post["u_ads_traffic_source"]),
+					'ads_am' => $post["u_ads_am"],
+					'ads_business_card' => $business_card,
+					'ads_comment' => $post["u_ads_comment"],
+					
+				);
+				$where = array("fk_user_id" => $post["fk_user_id"]);
+				$update = $this->MY_Model->update("crmads_user_details", $set, $where);
+				if($update) {
+					$set = array(
+						'ads_first_name' => $post["u_ads_first_name"],
+						'ads_last_name' => $post['u_ads_last_name'],
+						'ads_email' => $post["u_ads_email"],
+						'ads_skype' => $post["u_ads_skype"],
+						'date_created' => date("Y-m-d"),
+					);
+					$where = array("crmads_id" => $post["crmads_id"]);
+					$update = $this->MY_Model->update("crmads_users", $set, $where);
+					$this->session->set_userdata('swal', 'Updated Successfully.');
+				}
+			}
+		
+		redirect(base_url("crmads"));
+	}
+	function delete_crmads($fk_user_id=''){
+		// $set = array("user_status" => 1);
+		$where = array("fk_user_id" => $id="$fk_user_id");
+		$res = $this->MY_Model->delete("crmads_user_details", $where);
+		$this->session->set_userdata('swal','User deleted successfully.');
+		redirect(base_url("crmads"));
+	}
+
+	// public function delete_crm($id=''){
+
+	// 	$this->db->
+    // //   set('user_status', '1')->
+	// 	select('*')
+    //     ->from('crm_users')
+    //     ->join('crm_user_details', 'crm_user_details.fk_user_id= crm_users.crm_id')
+	// 	->where('crm_details_id', $id)
+	// 	->delete();
+
+	// 	$this->session->set_userdata('swal','User deleted successfully.');
+	// 	redirect('crm');
+	// }
 	
 }

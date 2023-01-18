@@ -29,45 +29,45 @@
                 [0, "asc"]
             ],
             "ajax": {
-                url: base_url + 'crmads/get_crmlist',
+                url: base_url + 'crmads/get_crmadslist',
                 type: 'POST',
             },
         });
     });
 
 
-    $(document).on('click', '.edit-crm', function(e) {
+    $(document).on('click', '.edit-crmads', function(e) {
         e.preventDefault();
 
-        var crm_details_id = $(this).attr('crm-id');
-        $('#update_crm_details_id').val(crm_details_id);
+        var crmads_details_id = $(this).attr('crmads-id');
+        $('#update_crm_details_id').val(crmads_details_id);
 
         let new_array = [];
         let checker = '';
 
-        var base_url = "<?php echo base_url(); ?>crm/get_crm/";
+        var base_url = "<?php echo base_url(); ?>crm/get_crmads/";
         $.ajax({
             type: "GET",
-            url: base_url + crm_details_id,
+            url: base_url + crmads_details_id,
             success: function(data) {
                 let result = JSON.parse(data);
-                $('[name="crm_id"]').val(result[0].crm_id);
+                $('[name="crmads_id"]').val(result[0].crmads_id);
                 $('[name="fk_user_id"]').val(result[0].fk_user_id);
-                $('[name="u_first_name"]').val(result[0].first_name);
-                $('[name="u_last_name"]').val(result[0].last_name);
-                $('[name="u_email"]').val(result[0].email);
-                $('[name="u_skype"]').val(result[0].skype);
-                $('[name="u_company"]').val(result[0].company);
-                $('[id="u_tags[]"]').val(result[0].tags);
-                $('[name="u_country"]').val(result[0].country);
-                $('[name="u_website"]').val(result[0].website);
-                $('[id="u_model[]"]').val(result[0].model);
-                $('[id="u_geo[]"]').val(result[0].geo);
-                $('[id="u_traffic_source[]"]').val(result[0].traffic_source);
-                $('[name="u_am"]').val(result[0].am);
-                var business = '<?php echo base_url(); ?>assets/uploads/files/' + result[0].business_card;
-                $("#u_business_card").attr("src", business);
-                $('[name="u_comment"]').val(result[0].comment);
+                $('[name="u_ads_first_name"]').val(result[0].ads_first_name);
+                $('[name="u_ads_last_name"]').val(result[0].ads_last_name);
+                $('[name="u_ads_email"]').val(result[0].ads_email);
+                $('[name="u_ads_skype"]').val(result[0].ads_skype);
+                $('[name="u_ads_company"]').val(result[0].ads_company);
+                $('[id="u_ads_tags[]"]').val(result[0].ads_tags);
+                $('[name="u_ads_country"]').val(result[0].ads_country);
+                $('[name="u_ads_website"]').val(result[0].ads_website);
+                $('[id="u_ads_model[]"]').val(result[0].ads_model);
+                $('[id="u_ads_geo[]"]').val(result[0].ads_geo);
+                $('[id="u_ads_traffic_source[]"]').val(result[0].ads_traffic_source);
+                $('[name="u_ads_am"]').val(result[0].ads_am);
+                var ads_business = '<?php echo base_url(); ?>assets/uploads/files/' + result[0].ads_business_card;
+                $("#u_ads_business_card").attr("src", ads_business);
+                $('[name="u_ads_comment"]').val(result[0].ads_comment);
                 $('#UpdateUsers').modal('show');
             },
             error: function(data) {
@@ -77,39 +77,39 @@
     });
 
 
-    $(document).on('click', '.view-crm', function(e) {
+    $(document).on('click', '.view-crmads', function(e) {
         e.preventDefault();
 
-        var crm_details_id = $(this).attr('crm-id');
-        $('#view_crm_details_id').val(crm_details_id);
+        var crmads_details_id = $(this).attr('crmads-id');
+        $('#view_crm_details_id').val(crmads_details_id);
 
         let new_array = [];
         let checker = '';
 
-        var base_url = "<?php echo base_url(); ?>crm/get_crm/";
+        var base_url = "<?php echo base_url(); ?>crm/get_crmads/";
         $.ajax({
             type: "GET",
-            url: base_url + crm_details_id,
+            url: base_url + crmads_details_id,
             success: function(data) {
                 let result = JSON.parse(data);
-                $('[name="crm_id"]').val(result[0].crm_id);
+                $('[name="crmads_id"]').val(result[0].crmads_id);
                 $('[name="fk_user_id"]').val(result[0].fk_user_id);
-                $('[name="v_first_name"]').val(result[0].first_name);
-                $('[name="v_last_name"]').val(result[0].last_name);
-                $('[name="v_email"]').val(result[0].email);
-                $('[name="v_skype"]').val(result[0].skype);
-                $('[name="v_company"]').val(result[0].company);
-                $('[id="v_tags[]"]').val(result[0].tags);
-                $('[name="v_country"]').val(result[0].country);
-                $('[name="v_website"]').val(result[0].website);
-                $('[id="v_model[]"]').val(result[0].model);
-                $('[id="v_geo[]"]').val(result[0].geo);
-                $('[id="v_traffic_source[]"]').val(result[0].traffic_source);
-                $('[name="v_am"]').val(result[0].am);
-                var business = '<?php echo base_url(); ?>assets/uploads/files/' + result[0].business_card;
-                $("#v_business_card").attr("src", business);
-                $("a#down_business_card").attr("href", business);
-                $('[name="v_comment"]').val(result[0].comment);
+                $('[name="v_ads_first_name"]').val(result[0].ads_first_name);
+                $('[name="v_ads_last_name"]').val(result[0].ads_last_name);
+                $('[name="v_ads_email"]').val(result[0].ads_email);
+                $('[name="v_ads_skype"]').val(result[0].ads_skype);
+                $('[name="v_ads_company"]').val(result[0].ads_company);
+                $('[id="v_ads_tags[]"]').val(result[0].ads_tags);
+                $('[name="v_ads_country"]').val(result[0].ads_country);
+                $('[name="v_ads_website"]').val(result[0].ads_website);
+                $('[id="v_ads_model[]"]').val(result[0].ads_model);
+                $('[id="v_ads_geo[]"]').val(result[0].ads_geo);
+                $('[id="v_ads_traffic_source[]"]').val(result[0].ads_traffic_source);
+                $('[name="v_ads_am"]').val(result[0].ads_am);
+                var ads_business = '<?php echo base_url(); ?>assets/uploads/files/' + result[0].ads_business_card;
+                $("#v_ads_business_card").attr("src", ads_business);
+                $("a#down_ads_business_card").attr("href", ads_business);
+                $('[name="v_ads_comment"]').val(result[0].ads_comment);
                 $('#ViewUsers').modal('show');
             },
             error: function(data) {
@@ -190,7 +190,7 @@ function traffic_source() {
   }
 
 }
-$(document).on('click','.delete-crm',function(e){
+$(document).on('click','.delete-crmads',function(e){
    e.preventDefault();
    Swal.fire({
    title: 'Are you sure to delete this user?',
