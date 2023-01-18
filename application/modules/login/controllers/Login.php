@@ -42,8 +42,10 @@ class Login extends MY_Controller {
 				// $redirect = ($user_data[0]['user_type'] != 'User') ? base_url('jobseeker') : base_url('jobseeker');
 				// $redirect = ($user_data[0]['user_type'] != 'Employee') ? base_url('dashboard') : base_url('dashboard');
 				// redirect($redirect);
-				if ($user_data[0]['user_type'] == 'User'){
-					redirect(base_url("dashboard"));
+				if ($user_data[0]['user_type'] == 'Advertiser'){
+					redirect(base_url("crmads"));
+				}else if($user_data[0]['user_type'] == 'Affiliate'){
+					redirect(base_url("crmaff"));
 				} else {
 					redirect(base_url("dashboard"));
 					
