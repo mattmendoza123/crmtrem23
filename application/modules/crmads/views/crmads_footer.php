@@ -45,7 +45,7 @@
         let new_array = [];
         let checker = '';
 
-        var base_url = "<?php echo base_url(); ?>crm/get_crmads/";
+        var base_url = "<?php echo base_url(); ?>crmads/get_crmads/";
         $.ajax({
             type: "GET",
             url: base_url + crmads_details_id,
@@ -86,7 +86,7 @@
         let new_array = [];
         let checker = '';
 
-        var base_url = "<?php echo base_url(); ?>crm/get_crmads/";
+        var base_url = "<?php echo base_url(); ?>crmads/get_crmads/";
         $.ajax({
             type: "GET",
             url: base_url + crmads_details_id,
