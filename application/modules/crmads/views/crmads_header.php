@@ -116,7 +116,7 @@ th:nth-of-type(14) {
    }
    #updatecrmads input,
    #updatecrmads textarea,
-   #updatecrads select,
+   #updatecrmads select,
    #updatecrmads button
    {
       border: 1px solid #000 !important;

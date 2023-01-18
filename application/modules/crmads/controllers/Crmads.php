@@ -218,7 +218,7 @@ class Crmads extends MY_Controller
 					'ads_geo' => implode(", ",$post["u_ads_geo"]),
 					'ads_traffic_source' => implode(", ",$post["u_ads_traffic_source"]),
 					'ads_am' => $post["u_ads_am"],
-					'ads_business_card' => $business_card,
+					'ads_business_card' => $ads_business_card,
 					'ads_comment' => $post["u_ads_comment"],
 					
 				);
