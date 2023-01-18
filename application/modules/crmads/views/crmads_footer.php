@@ -40,7 +40,7 @@
         e.preventDefault();
 
         var crmads_details_id = $(this).attr('crmads-id');
-        $('#update_crm_details_id').val(crmads_details_id);
+        $('#update_crmads_details_id').val(crmads_details_id);
 
         let new_array = [];
         let checker = '';
@@ -81,7 +81,7 @@
         e.preventDefault();
 
         var crmads_details_id = $(this).attr('crmads-id');
-        $('#view_crm_details_id').val(crmads_details_id);
+        $('#view_crmads_details_id').val(crmads_details_id);
 
         let new_array = [];
         let checker = '';
