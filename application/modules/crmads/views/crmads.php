@@ -6,7 +6,7 @@
             </div>
             <div class="col-md-7 align-self-center text-right">
             <!-- <button type="button" id="excsv"><i class="fa fa-plus-circle"></i> Export to CSV </button> -->
-            <button onclick="ExportToExcel('xlsx')" class="btn atm-button"><img src="https://crm.tremendio.network/assets/css/icons/new-icons/002-export.png" style="width: 10%;"> Export table to excel</img></button>
+            <!-- <button onclick="ExportToExcel('xlsx')" class="btn atm-button"><img src="https://crm.tremendio.network/assets/css/icons/new-icons/002-export.png" style="width: 10%;"> Export table to excel</img></button> -->
             <button type="button" class="btn atm-button" data-toggle="modal" data-target="#AddUserModal"><img src="https://crm.tremendio.network/assets/css/icons/new-icons/001-add-user.png" style="width: 20%;"> Add Contact </img></button>
             </div>
         </div>
@@ -367,7 +367,8 @@
                                         <option selected hidden>-Please select-</option>
                                         <option value="JP">JP</option>
                                         <option value="Matt">Matt</option>
-                                        <option value="Nina">Nina</option>
+                                        <option value="Kirill">Kirill</option>
+                                        <option value="John">John</option>
                                     </select>
                                 </div>
                             </div>
@@ -1054,7 +1055,8 @@
                                         <option selected hidden>-Please select-</option>
                                         <option value="JP">JP</option>
                                         <option value="Matt">Matt</option>
-                                        <option value="Nina">Nina</option>
+                                        <option value="Kirill">Kirill</option>
+                                        <option value="John">John</option>
                                     </select>
                                 </div>
                             </div>
