@@ -1,9 +1,11 @@
-<div class="page-wrapper">
-    <div class="container-fluid">
-        <div class="row page-titles">
-            <div class="col-md-12 align-self-center">
-                <h3 class="text-themecolor">CRM Affiliate</h3>
-            </div>
-        </div>
-    </div>
-</div>
+
+<?php
+  
+  // PHP program to get IP address of client
+  $IP = $_SERVER['REMOTE_ADDR'];
+    
+  // $IP stores the ip address of client
+  echo "Client's IP address is: $IP";
+    
+  // Print the ip address of client
+  ?>
