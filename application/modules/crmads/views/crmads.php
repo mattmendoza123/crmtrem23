@@ -28,7 +28,7 @@
                                         <th>Website</th>
                                         <th>Model</th>
                                         <th>Geo</th>
-                                        <th>Traffic Source</th>
+                                        <th>Accepted Traffic Source</th>
                                         <th>AM</th>
                                         <th>Comment</th>
                                         <th>Date Created</th>
@@ -668,7 +668,7 @@
                                     <!-- <input id="state" class="form-control" type="text" name="state" value="" required/> -->
                                 </div>
                                 <div class="col-md-6">
-                                 <label for="ads_traffic_source">Traffic Source</label>
+                                 <label for="ads_traffic_source">Accepted Traffic Source</label>
                                     <br>
                                     <select id="ads_traffic_source[]" class="form-control" name="ads_traffic_source[]" multiple multiselect-search="true">
                                     <option>&nbsp;Facebook</option>
@@ -1371,7 +1371,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="ads_traffic_source">Traffic Source</label> 
+                                    <label for="ads_traffic_source">Accepted Traffic Source</label> 
                                     <div id="traffic_source1">
                                     <input type="hidden" class="hidden3" id="u_ads_traffic_source[]" name="u_ads_traffic_source[]" value="">
                                     <textarea class="form-control" onclick="traffic_source()" class="button" id="u_ads_traffic_source[]" rows="4" cols="50"></textarea>
@@ -1544,7 +1544,7 @@
                                     <!--<input id="geo[]" class="form-control" type="text"  name="geo[]" value="" disabled/> -->
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="ads_traffic_source">Traffic Source</label> 
+                                    <label for="ads_traffic_source">Accepted Traffic Source</label> 
                                     <textarea id="v_ads_traffic_source[]" class="form-control" name="v_ads_traffic_source[]" value="" rows="4" cols="50" disabled></textarea>
                                     <!-- <input id="traffic_source[]" class="form-control" type="text"  name="traffic_source[]" value="" disabled/> -->
                                 </div>
