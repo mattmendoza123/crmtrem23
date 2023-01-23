@@ -368,8 +368,8 @@
                                         <option selected hidden>-Please select-</option>
                                         <option value="JP">JP</option>
                                         <option value="Matt">Matt</option>
-                                        <option value="Kirill">Kirill</option>
-                                        <option value="John">John</option>
+                                        <option value="Denis">Denis</option>
+                                        <option value="Nina">Nina</option>
                                     </select>
                                 </div>
                             </div>
@@ -1056,8 +1056,8 @@
                                         <option selected hidden>-Please select-</option>
                                         <option value="JP">JP</option>
                                         <option value="Matt">Matt</option>
-                                        <option value="Kirill">Kirill</option>
-                                        <option value="John">John</option>
+                                        <option value="Denis">Denis</option>
+                                        <option value="Nina">Nina</option>
                                     </select>
                                 </div>
                             </div>
