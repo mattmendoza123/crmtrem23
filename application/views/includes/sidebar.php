@@ -130,7 +130,7 @@
                 <div class="modal-body">
                  <h1 style="color: #02b9ff; font-size: 23px;"><center>Hi, <?= $this->session->userdata('user_details')[0]['first_name'] . ' ' . $this->session->userdata('user_details')[0]['last_name']; ?></center> </h1>
                  <br>
-                 <h1 style="color: #02b9ff;"><center> Welcome to CRM Admin! </center></h1>
+                 <h1 style="color: #02b9ff;"><center> Welcome to CRM <?= $this->session->userdata('user_details')[0]['user_type']?> !</center></h1>
                 </div>
                 <!-- <div class="modal-footer"> -->
                     <!-- <button class="btn atm-button" data-dismiss="modal"><i class="fa fa-plus-circle"></i>Close</button> -->
