@@ -34,6 +34,30 @@
    <!-- ============================================================== -->
    <script src="<?=base_url()?>assets/module/styleswitcher/jQuery.style.switcher.js"></script>
 
+   <script>
+	// $(document).ready(function(){
+	// 	$("#myModal").modal('show');
+	// });
+    $(document).ready(function(){
+	// show automatically after 1s
+	setTimeout(showModal,1000);
+	$("#closeBtn").click(function(){
+		$("#myModal").hide()
+	})
+	function showModal(){
+		// get value from localStorage
+		var is_modal_show = sessionStorage.getItem('alreadyShow');
+		if(is_modal_show != 'alredy shown'){
+			$("#myModal").modal('show')
+			sessionStorage.setItem('alreadyShow','alredy shown');
+		}else{
+			console.log(is_modal_show);
+		}
+	}
+})
+
+</script>
+
 
    <?php
 

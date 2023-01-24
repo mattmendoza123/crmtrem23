@@ -12,6 +12,11 @@
     .topbar .navbar-light .navbar-nav .nav-item > a.nav-link:hover, .topbar .navbar-light .navbar-nav .nav-item > a.nav-link:focus {
       color: #fff !important;
       }
+      .modal-content
+    {
+    background-color: #000;
+    border: 2px solid #e03ea9;
+    }
 </style>
 <header class="topbar">
     <nav class="navbar top-navbar navbar-expand-md navbar-light">
@@ -113,4 +118,25 @@
         </nav>
     </div>
 </aside>
+<!-- View Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+                <!-- <div class="modal-header"> -->
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button> -->
+                <!-- </div>  -->
+                <div class="modal-body">
+                 <h1 style="color: #02b9ff; font-size: 23px;"><center>Hi, <?= $this->session->userdata('user_details')[0]['first_name'] . ' ' . $this->session->userdata('user_details')[0]['last_name']; ?></center> </h1>
+                 <br>
+                 <h1 style="color: #02b9ff;"><center> Welcome to CRM Admin! </center></h1>
+                </div>
+                <!-- <div class="modal-footer"> -->
+                    <!-- <button class="btn atm-button" data-dismiss="modal"><i class="fa fa-plus-circle"></i>Close</button> -->
+                <!-- </div> -->
+        </div>
+    </div>
+</div>
+
 
