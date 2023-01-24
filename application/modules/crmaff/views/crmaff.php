@@ -8,8 +8,9 @@
             <div class="col-md-7 align-self-center text-right">
             <!-- <button type="button" id="excsv"><i class="fa fa-plus-circle"></i> Export to CSV </button> -->
             <?php if ($this->session->userdata('user_details')[0]['user_type'] == 'Affiliate') { ?>
-            <button onclick="ExportToExcel('xlsx')" class="btn atm-button"><img src="https://crm.tremendio.network/assets/css/icons/new-icons/002-export.png" style="width: 10%;"> Export table to excel</img></button>
+            <button type="button" class="btn atm-button" data-toggle="modal" data-target="#AddUserModal"><img src="https://crm.tremendio.network/assets/css/icons/new-icons/001-add-user.png" style="width: 20%;"> Add Contact </img></button>
             <?php } else { ?>
+            <button onclick="ExportToExcel('xlsx')" class="btn atm-button"><img src="https://crm.tremendio.network/assets/css/icons/new-icons/002-export.png" style="width: 10%;"> Export table to excel</img></button>
             <button type="button" class="btn atm-button" data-toggle="modal" data-target="#AddUserModal"><img src="https://crm.tremendio.network/assets/css/icons/new-icons/001-add-user.png" style="width: 20%;"> Add Contact </img></button>
             <?php } ?>
             </div>
