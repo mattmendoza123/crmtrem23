@@ -239,6 +239,18 @@ th:nth-of-type(14) {
       padding: 6px;
       background-color: #87dfe9 !important;
    }
+   #addusermodal {
+    background-color: #fff !important;
+    border: 1px solid #000 !important;
+   }
+   #updateusermodal {
+    background-color: #fff !important;
+    border: 1px solid #000 !important;
+   }
+   #viewusermodal {
+    background-color: #fff !important;
+    border: 1px solid #000 !important;
+   }
 
 
 </style>

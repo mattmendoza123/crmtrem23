@@ -48,7 +48,7 @@
 <!-- Add User Modal -->
 <div class="modal fade" id="AddUserModal" tabindex="-1" role="dialog" aria-labelledby="AddUserModalTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content" id="addusermodal">
                 <div class="modal-header">
                     <h4 class="modal-title" id="AddUserModalTitle"><img src="https://greenifymyhome.co.uk/Invalidclicks/assets/css/icons/new-icons/001-add-users.png" style="width: 20%;">&nbsp;&nbsp;Add User </img></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -737,7 +737,7 @@
 <!-- Update Modal -->
 <div class="modal fade" id="UpdateUsers" tabindex="-1" role="dialog" aria-labelledby="UpdateUserModalTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content"  id="updateusermodal">
                 <div class="modal-header">
                     <h4 class="modal-title" id="UpdateUserModalTitle"><img src="https://greenifymyhome.co.uk/Invalidclicks/assets/css/icons/new-icons/001-edit-user.png" style="width: 15%;">&nbsp;&nbsp;Update User</img></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -1446,7 +1446,7 @@
 <!-- View Modal -->
 <div class="modal fade" id="ViewUsers" tabindex="-1" role="dialog" aria-labelledby="ViewUserModalTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content" id="viewusermodal">
                 <div class="modal-header">
                     <h4 class="modal-title" id="ViewUserModalTitle"><img src="https://greenifymyhome.co.uk/Invalidclicks/assets/css/icons/new-icons/002-view-user.png" style="width: 18%;">&nbsp;&nbsp;View User</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
