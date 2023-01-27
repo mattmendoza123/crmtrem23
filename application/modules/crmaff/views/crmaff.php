@@ -387,7 +387,6 @@
                                     <label for="aff_tags">Tags</label>
                                     <br>
                                     <select id="aff_tags[]" class="form-control" name="aff_tags[]" multiple multiselect-search="true" required>
-                                    <option>&nbsp;N/A</option>
                                     <option>&nbsp;Dating</option>
                                     <option>&nbsp;Sweeps</option>
                                     <option>&nbsp;Nutra</option>
@@ -402,7 +401,6 @@
                                     <label for="aff_model">Model</label>
                                     <br>
                                     <select id="aff_model[]" class="form-control" name="aff_model[]" multiple multiselect-search="true" required>
-                                    <option>&nbsp;N/A</option>
                                     <option>&nbsp;CPC</option>
                                     <option>&nbsp;CPM</option>
                                     <option>&nbsp;CPA</option>
@@ -679,7 +677,6 @@
                                  <label for="aff_traffic_source">Traffic Source</label>
                                     <br>
                                     <select id="aff_traffic_source[]" class="form-control" name="aff_traffic_source[]" multiple multiselect-search="true" required>
-                                    <option>&nbsp;N/A</option>
                                     <option>&nbsp;Facebook</option>
                                     <option>&nbsp;Banner</option>
                                     <option>&nbsp;Email</option>
@@ -1084,7 +1081,6 @@
                                     </div>
                                     <div id="tags2" style="display:none;">
                                     <select  name="u_aff_tags[]" multiple multiselect-search="true">
-                                    <option>&nbsp;N/A</option>
                                     <option>&nbsp;Dating</option>
                                     <option>&nbsp;Sweeps</option>
                                     <option>&nbsp;Nutra</option>
@@ -1105,7 +1101,6 @@
                                     </div>
                                     <div id="model2" style="display:none;">
                                     <select name="u_aff_model[]" multiple multiselect-search="true">
-                                    <option>&nbsp;N/A</option>
                                     <option>&nbsp;CPC</option>
                                     <option>&nbsp;CPM</option>
                                     <option>&nbsp;CPA</option>
@@ -1391,7 +1386,6 @@
                                     </div>
                                     <div id="traffic_source2" style="display:none;">
                                     <select name="u_aff_traffic_source[]" multiple multiselect-search="true">
-                                    <option>&nbsp;N/A</option>
                                     <option>&nbsp;Facebook</option>
                                     <option>&nbsp;Banner</option>
                                     <option>&nbsp;Email</option>
