@@ -77,7 +77,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="aff_company">Company</label>
-                                    <input id="aff_company" class="form-control" type="text"  name="aff_company" value="" required/>
+                                    <input id="aff_company" class="form-control" type="text"  name="aff_company" value=""/>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="aff_website">Website</label>
@@ -704,7 +704,7 @@
                                                     <span class="input-group-text" id="inputGroupFileAddon01" ><i class="fas fa-upload"></i></span>
                                                 </div>
                                                 <div class="custom-file">
-                                                    <input type="file" class="form-control custom-file-input" id="aff_business_card" name="aff_business_card" value="" aria-describedby="inputGroupFileAddon01" required>
+                                                    <input type="file" class="form-control custom-file-input" id="aff_business_card" name="aff_business_card" value="" aria-describedby="inputGroupFileAddon01">
                                                     <label class="custom-file-label form-control" for="inputGroupFile01"> &nbsp; &nbsp; Choose Business Card</label>
                                                 </div>
                                             </div>
@@ -768,7 +768,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="aff_company">Company</label>
-                                    <input id="u_aff_company" class="form-control" type="text"  name="u_aff_company" value="" required/>
+                                    <input id="u_aff_company" class="form-control" type="text"  name="u_aff_company" value="" />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="aff_website">Website</label>
