@@ -251,6 +251,13 @@ th:nth-of-type(14) {
     background-color: #fff !important;
     border: 1px solid #000 !important;
    }
+   .req {
+    color: red;
+   }
+
+   *:required {
+    background-color: gold;
+   }
 
 
 </style>

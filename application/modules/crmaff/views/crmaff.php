@@ -77,10 +77,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="aff_company">Company</label>
-                                    <input id="aff_company" class="form-control" type="text"  name="aff_company" value=""/>
+                                    <span class="req">*</span></label>
+                                    <input id="aff_company" class="form-control" type="text"  name="aff_company" value="" required/>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="aff_website">Website</label>
+                                    <span class="req">*</span></label>
                                     <input id="aff_website" class="form-control" type="text"  name="aff_website" value="" required/>
                                 </div>
                                 
@@ -91,10 +93,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="aff_first_name">First Name</label>
+                                    <span class="req">*</span></label>
                                     <input id="aff_first_name" class="form-control" type="text"  name="aff_first_name" value="" required/>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="aff_last_name">Last Name</label>
+                                    <span class="req">*</span></label>
                                     <input id="aff_last_name" class="form-control" type="text"  name="aff_last_name" value="" required/>
                                 </div>
                             </div>
@@ -103,10 +107,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="aff_email">Email Address</label>
+                                    <span class="req">*</span></label>
                                     <input id="aff_email" class="form-control" type="text"  name="aff_email" value="" required />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="aff_skype">Skype/Telegram</label>
+                                    <span class="req">*</span></label>
                                     <input id="aff_skype" class="form-control" type="text"  name="aff_skype" value="" required/>
                                 </div>
                             </div>
@@ -116,9 +122,10 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="aff_country">Country</label>
+                                    <span class="req">*</span></label>
                                     <!-- <select id="country" class="form-control" name="country"><option>Select Country</option></select> -->
                                     <!-- <input id="city" class="form-control" type="text" name="city" value="" required/> -->
-                                    <select id="aff_country" name="aff_country" class="form-control">
+                                    <select id="aff_country" name="aff_country" class="form-control" required>
                                         <option selected hidden>-Please select-</option>
                                         <option value="Afghanistan">Afghanistan</option>
                                         <option value="Åland Islands">Åland Islands</option>
@@ -368,7 +375,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="aff_am">AM</label>
-                                    <select id="aff_am" name="aff_am" class="form-control">
+                                    <span class="req">*</span></label>
+                                    <select id="aff_am" name="aff_am" class="form-control" required>
                                         <option selected hidden>-Please select-</option>
                                         <option value="JP">JP</option>
                                         <option value="Matt">Matt</option>
@@ -385,6 +393,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="aff_tags">Tags</label>
+                                    <span class="req">*</span></label>
                                     <br>
                                     <select id="aff_tags[]" class="form-control" name="aff_tags[]" multiple multiselect-search="true" required>
                                     <option>&nbsp;Dating</option>
@@ -399,6 +408,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="aff_model">Model</label>
+                                    <span class="req">*</span></label>
                                     <br>
                                     <select id="aff_model[]" class="form-control" name="aff_model[]" multiple multiselect-search="true" required>
                                     <option>&nbsp;CPC</option>
@@ -417,6 +427,7 @@
                             <div class="row">
                             <div class="col-md-6">
                                     <label for="aff_geo">GEO</label>
+                                    <span class="req">*</span></label>
                                     <br>
                                     <select id="aff_geo[]" class="form-control" name="aff_geo[]" multiple multiselect-search="true">
                                     <option>&nbsp;EUROPE</option>
@@ -675,6 +686,7 @@
                                 </div>
                                 <div class="col-md-6">
                                  <label for="aff_traffic_source">Traffic Source</label>
+                                 <span class="req">*</span></label>
                                     <br>
                                     <select id="aff_traffic_source[]" class="form-control" name="aff_traffic_source[]" multiple multiselect-search="true" required>
                                     <option>&nbsp;Facebook</option>
@@ -728,6 +740,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label for="aff_comment">Comment</label>
+                                    <span class="req">*</span></label>
                                     <textarea id="aff_comment" class="form-control" name="aff_comment" value="" rows="4" cols="50"></textarea>
                                 </div>
                             </div>

@@ -113,6 +113,7 @@
                         <li> <a class="waves-effect" href="<?= base_url("manageuser") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Manage Ads and Aff</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("crmads") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRMAds</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("crmaff") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRMAff</span></a></li>
+                        <li> <a class="waves-effect" href="<?= base_url("whitelistip") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Whitelist IP</span></a></li>
                     </li>
                 </ul>
             <?php } ?>

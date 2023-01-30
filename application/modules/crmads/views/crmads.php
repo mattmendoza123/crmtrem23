@@ -77,10 +77,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="ads_company">Company</label>
+                                    <span class="req">*</span></label>
                                     <input id="ads_company" class="form-control" type="text"  name="ads_company" value="" required/>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="ads_website">Website</label>
+                                    <span class="req">*</span></label>
                                     <input id="ads_website" class="form-control" type="text"  name="ads_website" value="" required/>
                                 </div>
                                 
@@ -91,10 +93,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="ads_first_name">First Name</label>
+                                    <span class="req">*</span></label>
                                     <input id="ads_first_name" class="form-control" type="text"  name="ads_first_name" value="" required/>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="ads_last_name">Last Name</label>
+                                    <span class="req">*</span></label>
                                     <input id="ads_last_name" class="form-control" type="text"  name="ads_last_name" value="" required/>
                                 </div>
                             </div>
@@ -103,10 +107,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="ads_email">Email Address</label>
+                                    <span class="req">*</span></label>
                                     <input id="ads_email" class="form-control" type="text"  name="ads_email" value="" required />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="ads_skype">Skype/Telegram</label>
+                                    <span class="req">*</span></label>
                                     <input id="ads_skype" class="form-control" type="text"  name="ads_skype" value="" required/>
                                 </div>
                             </div>
@@ -116,9 +122,10 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="ads_country">Country</label>
+                                    <span class="req">*</span></label>
                                     <!-- <select id="country" class="form-control" name="country"><option>Select Country</option></select> -->
                                     <!-- <input id="city" class="form-control" type="text" name="city" value="" required/> -->
-                                    <select id="ads_country" name="ads_country" class="form-control">
+                                    <select id="ads_country" name="ads_country" class="form-control" required>
                                         <option selected hidden>-Please select-</option>
                                         <option value="Afghanistan">Afghanistan</option>
                                         <option value="Åland Islands">Åland Islands</option>
@@ -368,7 +375,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="ads_am">AM</label>
-                                    <select id="ads_am" name="ads_am" class="form-control">
+                                    <span class="req">*</span></label>
+                                    <select id="ads_am" name="ads_am" class="form-control" required>
                                         <option selected hidden>-Please select-</option>
                                         <option value="JP">JP</option>
                                         <option value="Matt">Matt</option>
@@ -385,8 +393,9 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="ads_tags">Tags</label>
+                                    <span class="req">*</span></label>
                                     <br>
-                                    <select id="ads_tags[]" class="form-control" name="ads_tags[]" multiple multiselect-search="true">
+                                    <select id="ads_tags[]" class="form-control" name="ads_tags[]" multiple multiselect-search="true" required>
                                     <option>&nbsp;Dating</option>
                                     <option>&nbsp;Sweeps</option>
                                     <option>&nbsp;Nutra</option>
@@ -399,8 +408,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="ads_model">Model</label>
+                                    <span class="req">*</span></label>
                                     <br>
-                                    <select id="ads_model[]" class="form-control" name="ads_model[]" multiple multiselect-search="true">
+                                    <select id="ads_model[]" class="form-control" name="ads_model[]" multiple multiselect-search="true" required>
                                     <option>&nbsp;CPC</option>
                                     <option>&nbsp;CPM</option>
                                     <option>&nbsp;CPA</option>
@@ -417,8 +427,9 @@
                             <div class="row">
                             <div class="col-md-6">
                                     <label for="ads_geo">GEO</label>
+                                    <span class="req">*</span></label>
                                     <br>
-                                    <select id="ads_geo[]" class="form-control" name="ads_geo[]" multiple multiselect-search="true">
+                                    <select id="ads_geo[]" class="form-control" name="ads_geo[]" multiple multiselect-search="true" required>
                                     <option>&nbsp;EUROPE</option>
                                     <option>&nbsp;LATAM</option>
                                     <option>&nbsp;MENA</option>
@@ -675,8 +686,9 @@
                                 </div>
                                 <div class="col-md-6">
                                  <label for="ads_traffic_source">Accepted Traffic Source</label>
+                                 <span class="req">*</span></label>
                                     <br>
-                                    <select id="ads_traffic_source[]" class="form-control" name="ads_traffic_source[]" multiple multiselect-search="true">
+                                    <select id="ads_traffic_source[]" class="form-control" name="ads_traffic_source[]" multiple multiselect-search="true" required>
                                     <option>&nbsp;Facebook</option>
                                     <option>&nbsp;Banner</option>
                                     <option>&nbsp;Email</option>
@@ -704,7 +716,7 @@
                                                     <span class="input-group-text" id="inputGroupFileAddon01" ><i class="fas fa-upload"></i></span>
                                                 </div>
                                                 <div class="custom-file">
-                                                    <input type="file" class="form-control custom-file-input" id="ads_business_card" name="ads_business_card" value="" aria-describedby="inputGroupFileAddon01" required>
+                                                    <input type="file" class="form-control custom-file-input" id="ads_business_card" name="ads_business_card" value="" aria-describedby="inputGroupFileAddon01">
                                                     <label class="custom-file-label form-control" for="inputGroupFile01"> &nbsp; &nbsp; Choose Business Card</label>
                                                 </div>
                                             </div>
@@ -728,6 +740,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label for="ads_comment">Comment</label>
+                                    <span class="req">*</span></label>
                                     <textarea id="ads_comment" class="form-control" name="ads_comment" value="" rows="4" cols="50"></textarea>
                                 </div>
                             </div>
