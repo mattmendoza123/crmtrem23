@@ -110,6 +110,7 @@
                         <li> <a class="waves-effect" href="<?= base_url("requestcheck") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Requests Check</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("bireport") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">BI Report</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("crm") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM</span></a></li> -->
+                        <li> <a class="waves-effect" href="<?= base_url("crmaff") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Manage Ads and Aff</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("crmads") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRMAds</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("crmaff") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRMAff</span></a></li>
                     </li>
@@ -130,7 +131,7 @@
                 <div class="modal-body">
                  <h1 style="color: #02b9ff; font-size: 23px;"><center>Hi, <?= $this->session->userdata('user_details')[0]['first_name'] . ' ' . $this->session->userdata('user_details')[0]['last_name']; ?></center> </h1>
                  <br>
-                 <h1 style="color: #02b9ff;"><center> Welcome to CRM <?= $this->session->userdata('user_details')[0]['user_type']?> !</center></h1>
+                 <h1 style="color: #02b9ff;"><center> Welcome to CRM <?= $this->session->userdata('user_details')[0]['user_type']?>!</center></h1>
                 </div>
                 <!-- <div class="modal-footer"> -->
                     <!-- <button class="btn atm-button" data-dismiss="modal"><i class="fa fa-plus-circle"></i>Close</button> -->
