@@ -14,7 +14,7 @@ class MY_Controller extends MX_Controller {
 				redirect(base_url(""));
 			}
 		} else {
-			if(!$this->session->has_userdata('user_id') && $route != 'register'){
+			if(!$this->session->has_userdata('user_id') && $route != 'register' && $route != 'whatsmyip' && $route != 'adminlogin'){
 				redirect(base_url('login'));
 			}
 		}
@@ -59,6 +59,11 @@ class MY_Controller extends MX_Controller {
 		$this->load->view($page);
 		$this->load->view('includes/footer');
 	}
+	public function load_other_page($page, $data = array()){
+		$this->load->view('includes/login_head',$data);
+		$this->load->view($page,$data);
+		$this->load->view('includes/login_footer',$data);
+    }
 
 	public function setSwal($icon='warning',$msg=''){
 		$load = array('icon' => $icon, 'content' => $msg);
