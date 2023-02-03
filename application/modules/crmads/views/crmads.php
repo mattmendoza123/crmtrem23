@@ -695,6 +695,7 @@
                                     <option>&nbsp;Native</option>
                                     <option>&nbsp;Mobile</option>
                                     <option>&nbsp;Push</option>
+                                    <option>&nbsp;Other</option>
                                     </select>
                                     <!-- <label for="traffic_source">Traffic Source</label>
                                     <br>
@@ -1405,6 +1406,7 @@
                                     <option>&nbsp;Native</option>
                                     <option>&nbsp;Mobile</option>
                                     <option>&nbsp;Push</option>
+                                    <option>&nbsp;Other</option>
                                     </select>
                                     </div>
                                 </div>
