@@ -110,10 +110,10 @@
                         <li> <a class="waves-effect" href="<?= base_url("requestcheck") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Requests Check</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("bireport") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">BI Report</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("crm") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM</span></a></li> -->
-                        <li> <a class="waves-effect" href="<?= base_url("manageuser") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Manage Ads and Aff</span></a></li>
-                        <li> <a class="waves-effect" href="<?= base_url("crmads") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRMAds</span></a></li>
-                        <li> <a class="waves-effect" href="<?= base_url("crmaff") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRMAff</span></a></li>
-                        <li> <a class="waves-effect" href="<?= base_url("whitelistip") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Whitelist IP</span></a></li>
+                        <li> <a class="waves-effect" href="<?= base_url("manageuser") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Manage Advertiser and Affiliate</span></a></li>
+                        <li> <a class="waves-effect" href="<?= base_url("crmads") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM Advertiser</span></a></li>
+                        <li> <a class="waves-effect" href="<?= base_url("crmaff") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM Affiliate</span></a></li>
+                        <li> <a class="waves-effect" href="<?= base_url("ipwhitelist") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">IP Whitelist</span></a></li>
                     </li>
                 </ul>
             <?php } ?>
