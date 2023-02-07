@@ -29,6 +29,7 @@ class Ipwhitelist extends MY_Controller
 			'name' => $post["name"],
 			'user_ip' => $post["user_ip"],
 			'comment' => $post["comment"],
+			'ip_status' => 0,
 			'date_created' => date("Y-m-d"),
 			);
 			$this->MY_Model->insert('crm_ip', $user_data);
