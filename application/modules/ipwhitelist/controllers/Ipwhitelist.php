@@ -46,7 +46,7 @@ class Ipwhitelist extends MY_Controller
 		$length = intval($this->input->post("length"));
 		$order = $this->input->post("order");
 		$search = $this->input->post("search");
-		$search = $search['value'];
+		// $search = $search['value'];
 
 		$col = 0;
 		$dir = "";
