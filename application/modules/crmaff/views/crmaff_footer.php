@@ -191,6 +191,19 @@ function traffic_source() {
   }
 
 }
+function ex_hou() {
+  var x = document.getElementById("ex_hou2");
+  var y = document.getElementById("ex_hou1");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    y.style.display = "none";
+    $( ".hidden4" ).remove();
+  } else {
+    x.style.display = "block";
+    y.style.display = "none";
+  }
+
+}
 $(document).on('click','.delete-crmaff',function(e){
    e.preventDefault();
    Swal.fire({
