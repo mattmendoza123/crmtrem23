@@ -1630,8 +1630,9 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <div class="row">
                                 <div class="col-md-6">
-                                    <label for="aff_ex_hou">AM</label>
+                                    <label for="aff_ex_hou">Exclusive / In-House</label>
                                     <input id="v_aff_ex_hou" class="form-control" type="text"  name="v_aff_ex_hou" value="" disabled/>
                                 </div>
                             </div>
