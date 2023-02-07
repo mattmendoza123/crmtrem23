@@ -12,11 +12,6 @@
     .topbar .navbar-light .navbar-nav .nav-item > a.nav-link:hover, .topbar .navbar-light .navbar-nav .nav-item > a.nav-link:focus {
       color: #fff !important;
       }
-      .modal-content
-    {
-    background-color: #000;
-    border: 2px solid #e03ea9;
-    }
 </style>
 <header class="topbar">
     <nav class="navbar top-navbar navbar-expand-md navbar-light">
