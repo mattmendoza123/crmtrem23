@@ -223,7 +223,7 @@ class Crmaff extends MY_Controller
 					'aff_traffic_source' => implode(", ",$post["u_aff_traffic_source"]),
 					'aff_am' => $post["u_aff_am"],
 					'aff_business_card' => $aff_business_card,
-					'aff_ex_hou' =>	implode(", ",$post["u_aff_ex_hou"]),
+					'aff_ex_hou' => $post["u_ex_hou"],
 					'aff_comment' => $post["u_aff_comment"],
 					
 				);

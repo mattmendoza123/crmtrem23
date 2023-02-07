@@ -68,6 +68,7 @@
                 $('[name="u_aff_am"]').val(result[0].aff_am);
                 var aff_business = '<?php echo base_url(); ?>assets/uploads/files/' + result[0].aff_business_card;
                 $("#u_aff_business_card").attr("src", aff_business);
+                $('[name="u_aff_ex_hou"]').val(result[0].aff_ex_hou);
                 $('[name="u_aff_comment"]').val(result[0].aff_comment);
                 $('#UpdateUsers').modal('show');
             },
@@ -110,6 +111,7 @@
                 var aff_business = '<?php echo base_url(); ?>assets/uploads/files/' + result[0].aff_business_card;
                 $("#v_aff_business_card").attr("src", aff_business);
                 $("a#down_aff_business_card").attr("href", aff_business);
+                $('[name="v_aff_ex_hou"]').val(result[0].aff_ex_hou);
                 $('[name="v_aff_comment"]').val(result[0].aff_comment);
                 $('#ViewUsers').modal('show');
             },

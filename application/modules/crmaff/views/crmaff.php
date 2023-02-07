@@ -1469,25 +1469,14 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-8">
-                                    <div class="form-row">
-                                        <div class="col-md-8">
-                                                <label for="u_aff_ex_hou">Exclusive / In-House</label>
-                                                <div id="ex_hou1">
-                                                <input type="hidden" class="hidden4" id="u_aff_ex_hou[]" name="u_aff_ex_hou[]" value="">
-                                                </tr></tbody></table>
-                                                <textarea class="form-control" onclick="ex_hou()" class="button" id="u_aff_ex_hou[]" rows="4" cols="50"></textarea>
-                                                <!-- <input type="button" class="form-control" onclick="traffic_source()" class="button" name="traffic_source[]" id="traffic_source[]" style="text-align: left !important; overflow: hidden; text-overflow: ellipsis; word-wrap: break-word;"> -->
-                                                </div>
-                                                <div id="ex_hou2" style="display:none;">
-                                                <select name="u_aff_ex_hou[]" multiple multiselect-search="true">
-                                                <option>&nbsp;Exclusive</option>
-                                                <option>&nbsp;In-house</option>
-                                                </select>
-                                                </div>
-                                        </div>
-                                    </div>
+                                <div class="col-md-6">
+                                 <label for="u_aff_ex_hou">Exclusive / In-House</label>
+                                        <select id="u_aff_ex_hou" name="u_aff_ex_hou" class="form-control">
+                                            <option value="Exclusive">Exclusive</option>
+                                            <option value="In-house">In-house</option>
+                                        </select>
                                 </div>
+
                             </div>
                         </div>
 
@@ -1637,6 +1626,13 @@
                                     <div class="business-card">
                                         <a id="down_aff_business_card" class="btn btn-primary step-btn center_modalbutton"  href="" target="_blank" download>Download Business Card</a>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                <div class="col-md-6">
+                                    <label for="aff_ex_hou">AM</label>
+                                    <input id="v_aff_ex_hou" class="form-control" type="text"  name="v_aff_ex_hou" value="" disabled/>
                                 </div>
                             </div>
                         </div>
