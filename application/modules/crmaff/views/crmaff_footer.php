@@ -25,6 +25,7 @@
             bInfo: false,
             responsive: true,
             "bAutoWidth": false,
+            "search": {regex: true},
             "order": [
                 [0, "asc"]
             ],

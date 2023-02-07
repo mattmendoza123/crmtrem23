@@ -736,6 +736,25 @@
                                 </div>
                             </div>
                         </div> -->
+                        <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-row">
+                                            <div class="col-md-8">
+                                            <label for="aff_ex_hou">Exclusive / In-House</label> 
+                                                <table class="radio" cellspacing="0" cellpadding="0" border="0" required><tbody><tr>
+
+                                                <td style="width: 20%;"><input type="radio" name="aff_ex_hou" value="Exclusive" id="aff_ex_hou" required>
+                                                <label for="Exclusive" style="font-size:18px">Exclusive</label></td>
+
+                                                <td style="width: 20%;"><input type="radio" name="aff_ex_hou" value="In-house" id="aff_ex_hou">
+                                                <label for="In-house" style="font-size:18px" >In-house</label></td>
+                                                </tr></tbody></table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
 
                         <div class="form-group">
                             <div class="row">
@@ -1443,6 +1462,29 @@
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="u_aff_business_card" name="u_aff_business_card" aria-describedby="book-btn">
                                             <label class="custom-file-label form-control" for="inputGroupFile04">Update Business Card</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-row">
+                                        <div class="col-md-8">
+                                                <label for="u_aff_ex_hou">Exclusive / In-House</label>
+                                                <div id="ex_hou1">
+                                                <input type="hidden" class="hidden4" id="u_aff_ex_hou[]" name="u_aff_ex_hou[]" value="">
+                                                </tr></tbody></table>
+                                                <textarea class="form-control" onclick="ex_hou()" class="button" id="u_aff_ex_hou[]" rows="4" cols="50"></textarea>
+                                                <!-- <input type="button" class="form-control" onclick="traffic_source()" class="button" name="traffic_source[]" id="traffic_source[]" style="text-align: left !important; overflow: hidden; text-overflow: ellipsis; word-wrap: break-word;"> -->
+                                                </div>
+                                                <div id="ex_hou2" style="display:none;">
+                                                <select name="u_aff_ex_hou[]" multiple multiselect-search="true">
+                                                <option>&nbsp;Exclusive</option>
+                                                <option>&nbsp;In-house</option>
+                                                </select>
+                                                </div>
                                         </div>
                                     </div>
                                 </div>

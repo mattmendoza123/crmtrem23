@@ -51,6 +51,7 @@ class Crmaff extends MY_Controller
 			'aff_traffic_source' => implode(", ",$post["aff_traffic_source"]),
 			'aff_am' => $post["aff_am"],
 			'aff_business_card' => $aff_business_card,
+			'aff_ex_hou' => $post["aff_ex_hou"],
 			'aff_comment' => $post["aff_comment"],
 			);
 			$this->MY_Model->insert('crmaff_user_details', $user_data);
@@ -97,8 +98,9 @@ class Crmaff extends MY_Controller
 			10 => 'aff_geo',
 			11 => 'aff_traffic_source',
 			12 => 'aff_am',
-			13 => 'aff_comment',
-			14 => 'date_created',
+			13 => 'aff_ex_hou',
+			14 => 'aff_comment',
+			15 => 'date_created',
 		);
 
 		if (!isset($valid_columns[$col])) {
@@ -221,6 +223,7 @@ class Crmaff extends MY_Controller
 					'aff_traffic_source' => implode(", ",$post["u_aff_traffic_source"]),
 					'aff_am' => $post["u_aff_am"],
 					'aff_business_card' => $aff_business_card,
+					'aff_ex_hou' =>	implode(", ",$post["u_aff_ex_hou"]),
 					'aff_comment' => $post["u_aff_comment"],
 					
 				);
