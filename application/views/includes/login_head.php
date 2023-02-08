@@ -32,6 +32,9 @@
 <![endif]-->
 </head>
 <style>
+    #user_ip{
+        display:none;
+    }
     .login_field
     {
         display: none;
