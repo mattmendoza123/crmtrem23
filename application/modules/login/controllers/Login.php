@@ -17,6 +17,32 @@ class Login extends MY_Controller {
 		$this->input->post();
 		$username = $this->input->post("username");
 		$password = $this->input->post("password");
+		$user_ip = $this->input->post("user_ip");
+		$IP = $_SERVER['REMOTE_ADDR'];
+
+
+		if (empty($username) || empty($password)){
+			$this->session->set_flashdata('log_err', 'Please input the required fields!');
+			redirect(base_url("login"));
+		}else{
+			$params["select"] = "*";
+			$params["where"] = array("user_ip" => $user_ip);
+			$user_data1 = $this->MY_Model->getRows("crm_ip", $params);
+		}if (empty($user_data1)) {
+			$this->session->set_flashdata('log_err', 'Invalid IP. Please contact the administrator.');
+			redirect(base_url("login"));
+
+		}else{
+			if ($user_data1[0]['ip_status'] == 1) {
+				$this->session->set_flashdata('log_err', 'Your IP is Deactivated. Please contact the administrator.');
+				redirect(base_url("login"));
+			}else if ($user_data1[0]['ip_status'] == 2) {
+				$this->session->set_flashdata('log_err', 'User IP does not exist');
+				redirect(base_url("login"));
+			}
+		}
+
+
 		if (empty($username) || empty($password)) {
 			$this->session->set_flashdata('log_err', 'Please input the required fields!');
 			redirect(base_url("login"));

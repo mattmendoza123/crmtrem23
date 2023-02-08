@@ -28,7 +28,7 @@ echo 'User IP Address - '.$_SERVER['REMOTE_ADDR'];
                     </div>
                     <div class="form-group ">
                             <div class="col-xs-12">
-                                <input class="login-input" type="text" name="whatsmyip" value="<?php echo $_SERVER['REMOTE_ADDR']; ?> " style="color: white;" disabled >
+                                <input class="login-input" type="text" name="whatsmyip" value="<?php echo $_SERVER['REMOTE_ADDR'];?>" style="color: white;" disabled >
                             </div>
                         </div>
                 </form>
