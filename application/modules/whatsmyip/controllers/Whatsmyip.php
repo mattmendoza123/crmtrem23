@@ -10,7 +10,7 @@ class Whatsmyip extends MY_Controller {
 		$this->load->helper('url');
 	}
     public function index(){
-		$data["title"] = "Whats My IP";
+		$data["title"] = "What's My IP";
 		$this->load_register_page("whatsmyip", $data);
 		$this->load->view('includes/footer');
 	}

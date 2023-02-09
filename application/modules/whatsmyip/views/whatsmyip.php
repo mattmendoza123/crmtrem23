@@ -22,7 +22,7 @@ echo 'User IP Address - '.$_SERVER['REMOTE_ADDR'];
                     <div class="form-group ">
                         <div class="col-xs-12">
                             <h2 style="font-size: 30px;">
-                                <center style="color: white;">Whats My IP</center>
+                                <center style="color: white;">What's My IP</center>
                             </h2>
                         </div>
                     </div>

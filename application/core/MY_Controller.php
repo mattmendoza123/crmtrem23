@@ -40,6 +40,12 @@ class MY_Controller extends MX_Controller {
 		$this->load->view($page,$data);
 		$this->load->view('includes/login_footer',$data);
     }
+	
+	public function load_adminlogin_page($page, $data = array()){
+		$this->load->view('includes/login_head',$data);
+		$this->load->view($page,$data);
+		$this->load->view('includes/login_footer',$data);
+    }
 
 	public function load_register_page($page, $data = array()){
 		$this->load->view('includes/login_head',$data);

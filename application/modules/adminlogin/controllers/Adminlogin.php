@@ -1,51 +1,26 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends MY_Controller {
+class Adminlogin extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
 	}
 
 	public function index(){
-		$data["title"] = "Login Account";
-		$this->load_login_page("index", $data);
+		$data["title"] = "Admin Login Account";
+		$this->load_adminlogin_page("adminlogin", $data);
 	}
 
-	public function login_account()
+	public function adminlogin_account()
 	{
 		$this->input->post();
 		$username = $this->input->post("username");
 		$password = $this->input->post("password");
-		$user_ip = $this->input->post("user_ip");
-		$IP = $_SERVER['REMOTE_ADDR'];
-
-
-		if (empty($username) || empty($password)){
-			$this->session->set_flashdata('log_err', 'Please input the required fields!');
-			redirect(base_url("login"));
-		}else{
-			$params["select"] = "*";
-			$params["where"] = array("user_ip" => $user_ip);
-			$user_data1 = $this->MY_Model->getRows("crm_ip", $params);
-		}if (empty($user_data1)) {
-			$this->session->set_flashdata('log_err', 'Invalid IP. Please contact the administrator.');
-			redirect(base_url("login"));
-
-		}else{
-			if ($user_data1[0]['ip_status'] == 1) {
-				$this->session->set_flashdata('log_err', 'Your IP is Deactivated. Please contact the administrator.');
-				redirect(base_url("login"));
-			}else if ($user_data1[0]['ip_status'] == 2) {
-				$this->session->set_flashdata('log_err', 'User IP does not exist');
-				redirect(base_url("login"));
-			}
-		}
-
 
 		if (empty($username) || empty($password)) {
 			$this->session->set_flashdata('log_err', 'Please input the required fields!');
-			redirect(base_url("login"));
+			redirect(base_url("adminlogin"));
 		} else {
 			$params["select"] = "*";
 			$params["where"] = array("username" => $username);
@@ -54,29 +29,31 @@ class Login extends MY_Controller {
 
 			if (empty($user_data)) {
 				$this->session->set_flashdata('log_err', 'User does not exist');
-				redirect(base_url("login"));
+				redirect(base_url("adminlogin"));
 			} else if (!password_verify($password, $user_data[0]['password'])) {
 				$this->session->set_flashdata('log_err', 'Incorrect Password');
-				redirect(base_url("login"));
-			} else if ($user_data[0]['user_type'] == 'Admin') {
+				redirect(base_url("adminlogin"));
+			} else if ($user_data[0]['user_type'] == 'Advertiser') {
 				$this->session->set_flashdata('log_err', 'User does not exist');
-				redirect(base_url("login"));
+				redirect(base_url("adminlogin"));
+			} else if ($user_data[0]['user_type'] == 'Affiliate') {
+				$this->session->set_flashdata('log_err', 'User does not exist');
+				redirect(base_url("adminlogin"));
 			} else {
 				if ($user_data[0]['user_status'] == 1) {
 					$this->session->set_flashdata('log_err', 'Your Account is Deactivated. Please contact the administrator.');
-					redirect(base_url("login"));
+					redirect(base_url("adminlogin"));
 				}
 				$this->session->set_userdata('user_details', $user_data);
 				$this->session->set_userdata('user_id', $user_data);
 				// $redirect = ($user_data[0]['user_type'] != 'User') ? base_url('jobseeker') : base_url('jobseeker');
 				// $redirect = ($user_data[0]['user_type'] != 'Employee') ? base_url('dashboard') : base_url('dashboard');
 				// redirect($redirect);
-				if ($user_data[0]['user_type'] == 'Advertiser'){
-					redirect(base_url("crmads"));
-				}else if($user_data[0]['user_type'] == 'Affiliate'){
-					redirect(base_url("crmaff"));
+				if ($user_data[0]['user_type'] == 'Admin'){
+					redirect(base_url("dashboard"));
 				} else {
-					redirect(base_url("login"));
+					$this->session->set_flashdata('log_err', 'User does not exist');
+					redirect(base_url("adminlogin"));
 					
 				}
 				
