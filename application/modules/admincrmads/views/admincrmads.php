@@ -57,7 +57,7 @@
                 </button>
                 </div>            
                     <div class="modal-body">
-                    <form class="form-horizontal form-material" method="post" enctype="multipart/form-data" id="adduser"  action="<?= base_url("crmads/adduser"); ?>">
+                    <form class="form-horizontal form-material" method="post" enctype="multipart/form-data" id="adduser"  action="<?= base_url("admincrmads/adduser"); ?>">
 
                     <div class="form-group">
                             <div class="row">
@@ -762,7 +762,7 @@
                 </button>
                 </div>            
                     <div class="modal-body">
-                    <form  method="post" enctype="multipart/form-data" action="<?= base_url("crmads/updatecrmads"); ?>" id="updatecrmads">
+                    <form  method="post" enctype="multipart/form-data" action="<?= base_url("admincrmads/updatecrmads"); ?>" id="updatecrmads">
                     <input type="hidden" class="form-control" id="fk_user_id" name="fk_user_id">
                     <input type="hidden" class="form-control" id="crmads_id" name="crmads_id">
                      <div class="form-group">
