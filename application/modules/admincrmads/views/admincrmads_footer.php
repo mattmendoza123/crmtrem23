@@ -30,7 +30,7 @@
                 [0, "asc"]
             ],
             "ajax": {
-                url: base_url + 'crmads/get_crmadslist',
+                url: base_url + 'admincrmads/get_crmadslist',
                 type: 'POST',
             },
         });
