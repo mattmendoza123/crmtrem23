@@ -244,7 +244,7 @@ class Admincrmads extends MY_Controller
 		redirect(base_url("admincrmads"));
 	}
 
-	function delete_crmads($crm_id=''){
+	function delete_crmads($crmads_id=''){
 		$set = array("ads_user_status" => 2);
 		$where = array("crmads_id" => $id="$crmads_id");
 		$res = $this->MY_Model->update("crmads_users", $set, $where);
