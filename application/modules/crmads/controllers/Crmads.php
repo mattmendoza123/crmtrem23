@@ -128,6 +128,7 @@ class Crmads extends MY_Controller
         ->select('*')
 		->from('crmads_users') 
 		->join('crmads_user_details', 'crmads_user_details.fk_user_id= crmads_users.crmads_id')
+		->where('ads_user_status !=', '2')
 		// ->where('user_type', 'User')
         ->get();
 		

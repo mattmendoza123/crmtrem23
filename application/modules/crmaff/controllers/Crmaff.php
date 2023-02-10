@@ -130,6 +130,7 @@ class Crmaff extends MY_Controller
         ->select('*')
 		->from('crmaff_users') 
 		->join('crmaff_user_details', 'crmaff_user_details.fk_user_id= crmaff_users.crmaff_id')
+		->where('aff_user_status !=', '2')
 		// ->where('user_type', 'User')
         ->get();
 		
