@@ -139,7 +139,7 @@ class Admincrmads extends MY_Controller
 			$action_btn = "";
 			// $action_btn = "<button type='button' class='btn btn-xs edit-users' data-toggle='tooltip' data-toggle='modal' data-target='#UpdateUsers'><i class='fa fa-edit'></i></button>"
             $action_btn .= "<a class='btn btn-xs edit-crmads' crmads-id=".$tm->crmads_details_id." data-toggle='tooltip' data-placement='bottom' title='Update'  data-toggle='modal' data-target='#UpdateUsers' href=''><i class='fa fa-edit'></i></a>&nbsp;";
-			$action_btn .= "<a class='btn btn-xs view-crmads' crmads-id=".$tm->crmads_details_id." data-toggle='tooltip' data-placement='bottom' title='View'  data-toggle='modal' data-target='#ViewUsers' href=''><i class='fa fa-eye'></i></a> &nbsp;";
+			$action_btn .= "<a class='btn btn-xs view-crmads' crmads-id=".$tm->crmads_details_id." data-toggle='tooltip' data-placement='bottom' title='View'  data-toggle='modal' data-target='#ViewUsers' href=''><i class='fa fa-eye'></i></a>&nbsp;";
 			// $action_btn .= "<a class='btn btn-xs delete-crm' crm-id=".$tm->crm_details_id." data-toggle='tooltip' data-placement='bottom' title='Delete'  data-toggle='modal' data-target='#DeleteUsers' href=''><i class='fa fa-trash'></i></a>";
 			// $action_btn .= "<a class='btn btn-xs delete-users' crm-id=".$tm->crm_details_id." data-toggle='tooltip' data-placement='bottom' title='Delete' href=".base_url('crm/delete_crm/'.$tm->crm_id)."><i class='fa fa-trash'></i></a>";
 			$action_btn .= "<a class='btn btn-xs delete-crmads' data-toggle='tooltip' data-placement='bottom' title='Remove IP'  href=".base_url('admincrmads/delete_crmads/'.$tm->crmads_id)."><i class='fa fa-trash'></i></a>";
