@@ -142,8 +142,8 @@ class Admincrmads extends MY_Controller
 			$action_btn .= "<a class='btn btn-xs view-crmads' crmads-id=".$tm->crmads_details_id." data-toggle='tooltip' data-placement='bottom' title='View'  data-toggle='modal' data-target='#ViewUsers' href=''><i class='fa fa-eye'></i></a> &nbsp;";
 			// $action_btn .= "<a class='btn btn-xs delete-crm' crm-id=".$tm->crm_details_id." data-toggle='tooltip' data-placement='bottom' title='Delete'  data-toggle='modal' data-target='#DeleteUsers' href=''><i class='fa fa-trash'></i></a>";
 			// $action_btn .= "<a class='btn btn-xs delete-users' crm-id=".$tm->crm_details_id." data-toggle='tooltip' data-placement='bottom' title='Delete' href=".base_url('crm/delete_crm/'.$tm->crm_id)."><i class='fa fa-trash'></i></a>";
-			$action_btn .= "<a class='btn btn-xs delete-crmads' data-toggle='tooltip' data-placement='bottom' title='Remove IP'  href=".base_url('admincrmads/delete_crm/'.$tm->crm_id)."><i class='fa fa-trash'></i></a>";
-			// $action_btn .= "<a class='btn btn-xs delete-crmads' href='".base_url('crmads/delete_crmads/'.$tm->crmads_id)."'><i class='fa fa-trash'></i></a>";
+			// $action_btn .= "<a class='btn btn-xs delete-crmads' data-toggle='tooltip' data-placement='bottom' title='Remove IP'  href=".base_url('admincrmads/delete_crm/'.$tm->crm_id)."><i class='fa fa-trash'></i></a>";
+			$action_btn .= "<a class='btn btn-xs delete-crmads' href='".base_url('crmads/delete_crmads/'.$tm->crmads_id)."'><i class='fa fa-trash'></i></a>";
 			
 			// if ($tm->user_status == 0) {
 			// 	$tm->user_status = "<span class='badge badge-pill badge-success'>Activated</span>";
