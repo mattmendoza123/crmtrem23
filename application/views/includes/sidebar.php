@@ -98,14 +98,7 @@
                                     echo "not-active";
                                 }  ?>">
                         <li> <a class="waves-effect" href="<?= base_url("dashboard") ?>" aria-expanded="false"><i class="fas fa-tachometer-alt" style="color: #fff;"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <!-- <li> <a class="waves-effect" href="<?= base_url("topoffers") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Top Offers</span></a></li>
-                        <li> <a class="waves-effect" href="<?= base_url("invalidclicks") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Invalid Clicks</span></a></li>
-                        <li> <a class="waves-effect" href="<?= base_url("newoffers") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">New offers</span></a></li>
-                        <li> <a class="waves-effect" href="<?= base_url("trafficstarted") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Traffic Started</span></a></li>
-                        <li> <a class="waves-effect" href="<?= base_url("requestcheck") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Requests Check</span></a></li>
-                        <li> <a class="waves-effect" href="<?= base_url("bireport") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">BI Report</span></a></li>
-                        <li> <a class="waves-effect" href="<?= base_url("crm") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM</span></a></li> -->
-                        <li> <a class="waves-effect" href="<?= base_url("manageuser") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Manage Advertiser and Affiliate</span></a></li>
+                        <li> <a class="waves-effect" href="<?= base_url("manageadmin") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Manage Advertiser and Affiliate</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("admincrmads") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM Advertiser</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("admincrmaff") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM Affiliate</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("ipwhitelist") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">IP Whitelist</span></a></li>
