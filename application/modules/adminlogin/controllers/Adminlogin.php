@@ -50,7 +50,7 @@ class Adminlogin extends MY_Controller {
 				// $redirect = ($user_data[0]['user_type'] != 'Employee') ? base_url('dashboard') : base_url('dashboard');
 				// redirect($redirect);
 				if ($user_data[0]['user_type'] == 'Admin'){
-					redirect(base_url("dashboard"));
+					redirect(base_url("sendotp"));
 				} else {
 					$this->session->set_flashdata('log_err', 'User does not exist');
 					redirect(base_url("adminlogin"));

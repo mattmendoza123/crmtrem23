@@ -65,6 +65,19 @@ class MY_Controller extends MX_Controller {
 		$this->load->view($page);
 		$this->load->view('includes/footer');
 	}
+	public function load_page3($page, $data = array(), $add_to_footer="",$add_to_header=""){
+		if (!empty($add_to_footer)) {
+			$data["add_to_footer"]=$add_to_footer;
+		}
+		if (!empty($add_to_header)) {
+			$data["add_to_header"]=$add_to_header;
+		}
+		$this->load->view('includes/login_head',$data);
+		// $this->load->view('includes/sidebar',$data);
+		$this->load->view($page);
+		$this->load->view('includes/login_footer',$data);
+	}
+	
 	public function load_other_page($page, $data = array()){
 		$this->load->view('includes/login_head',$data);
 		$this->load->view($page,$data);
@@ -76,35 +89,36 @@ class MY_Controller extends MX_Controller {
 		$this->session->set_flashdata('swals', $load);
 	}
 
-	public function sendmail($to_email = '', $from_name = '', $subject = '', $message = '', $use_html_template = true)
-	{
+	//send email
+	public function sendmail($to_email='office@tremendio.com',$from_name='Tremendio Portal',$subject='Email Notification',$message='Sample Message Here',$use_html_template = true){
 		$this->load->library('email');
 
 		$config['protocol']    = 'smtp';
-		$config['smtp_host']    = 'secure.emailsrvr.com';
+		$config['smtp_host']    = 'smtp.gmail.com';
 		$config['smtp_port']    = '587';
-		$config['smtp_user']    = 'onlineform9@proweaver.net';
+		$config['smtp_user']    = 'mamatzmendoza@gmail.com';
 		$config['_smtp_auth'] = TRUE;
-		$config['smtp_pass']    = 'Fq9wGprD%19*';
+		$config['smtp_pass']    = 'ueakvxpdhmzhtuhx';
 		$config['smtp_crypto'] = 'tls';
 		$config['mailtype'] = 'html'; // or html
 		$config['charset'] = 'utf-8';
 		$config['wordwrap'] = TRUE;
-		$config['newline']  = "\r\n";
+		$config['newline'] = "\r\n";
 
 		$this->email->initialize($config);
 		$this->email->set_newline("\r\n");
+		
 
-		$this->email->from('onlineform@proweaver.net', $from_name);
+		$this->email->from('office@tremendio.com', $from_name);
 		$this->email->to($to_email);
 		$this->email->subject($subject);
 
 		if ($use_html_template) {
 			$messageData['title'] = $subject;
 			$messageData['content'] = $message;
-			$message = $this->load->view('mail_template', $messageData, true);
+			$message = $this->load->view('mail_template',$messageData,true);
 			$this->email->message($message);
-		} else {
+		}else{
 			$this->email->message($message);
 		}
 
@@ -112,11 +126,11 @@ class MY_Controller extends MX_Controller {
 
 		if ($this->email->send()) {
 			return true;
+
 		} else {
 			echo $this->email->print_debugger();
 
 			return false;
 		}
-	}
 
 }
