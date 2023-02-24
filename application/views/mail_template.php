@@ -128,7 +128,7 @@
 												<table border="0" cellpadding="10" cellspacing="0" width="100%">
 													<tbody><tr>
 														<td colspan="2" valign="middle" id="m_375604842389844652credit" style="padding:0 48px 48px 48px;border:0;color:#187abe;font-family:Arial;font-size:12px;line-height:125%;text-align:center">
-															<p>Email Notification<br>Powered by Consulting Experts LLC</p>
+															<p>Email Notification<br>Powered by Tremendio Portal</p>
 														</td>
 													</tr>
 												</tbody></table>
