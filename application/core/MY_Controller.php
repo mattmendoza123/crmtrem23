@@ -77,7 +77,7 @@ class MY_Controller extends MX_Controller {
 		$this->load->view($page);
 		$this->load->view('includes/login_footer',$data);
 	}
-	
+
 	public function load_other_page($page, $data = array()){
 		$this->load->view('includes/login_head',$data);
 		$this->load->view($page,$data);
@@ -132,5 +132,6 @@ class MY_Controller extends MX_Controller {
 
 			return false;
 		}
+	}
 
 }
