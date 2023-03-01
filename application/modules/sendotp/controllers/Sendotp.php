@@ -124,7 +124,7 @@ class Sendotp extends MY_Controller {
 					$message .= "<h3>$randomString</h3>";
 					$message .= "<p>The code expire after 10 minutes. Do not share this OTP to anyone.</p>";
 					$message .= "<p>Thank you!</p>";
-					$this->sendmail($user_email, null, 'Tremendio Portal OTP', $message);
+					$this->sendmail($user_email, 'Tremendio Portal', 'Tremendio Portal OTP', $message);
 					$this->session->set_flashdata('check', 'Please check your email.');
 					
 	

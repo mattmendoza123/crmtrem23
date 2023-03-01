@@ -19,7 +19,7 @@
 }
 
 
-#sendotpmodal input{
+#sendotpmodal input, select{
     border: 1px solid #000!important;
     padding: 6px;
     background-color: #87dfe9 !important;
@@ -86,9 +86,12 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="control-label">Email</label>
-                                        <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email Here">
-                                        <small style="color:red; font-size: 14px; font-weight:bold;" class="err"></small>
+                                    <label class="control-label">Email</label>
+                                        <select id="email" name="email" class="form-control">
+                                        <option selected hidden>-Please select-</option>
+                                        <option value="jp@tremendio.com">jp@tremendio.com</option>
+                                        <option value="matt@tremendio.com">matt@tremendio.com</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
