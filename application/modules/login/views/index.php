@@ -126,7 +126,8 @@
                                 <label class="control-label">Email</label>
                                         <select id="email" name="email" class="form-control">
                                         <option selected hidden>-Please select-</option>
-                                        <option value="mendozamattnoruel@gmail.com">mendozamattnoruel@gmail.com</option>
+                                        <option value="kirill@tremendio.com">kirill@tremendio.com</option>
+                                        <option value="john@tremendio.com">john@tremendio.com</option>
                                         </select>
                                 </div>
                             </div>
@@ -161,7 +162,8 @@
                                 <label class="control-label">Email</label>
                                         <select id="email" name="email" class="form-control">
                                         <option selected hidden>-Please select-</option>
-                                        <option value="devteam@tremendio.com">devteam@tremendio.com</option>
+                                        <option value="denis@tremendio.com">denis@tremendio.com</option>
+                                        <option value="nina@tremendio.com">nina@tremendio.com</option>
                                         </select>
                                 </div>
                             </div>
