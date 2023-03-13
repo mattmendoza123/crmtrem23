@@ -88,8 +88,17 @@
                             </div>
                         </div>
                         <div class="form-group text-center ">
+                            <div class="login_ads"> 
                             <div class="col-xs-12 p-b-20">
-                                <button class="login-btn" type="submit">Login</button>
+                            <input type="button" data-toggle="modal" class="login-btn" id="forgotadvertiser" value="Forgot Password" data-target="#modal_forgotPassAds">
+                            <button class="login-btn" type="submit">Login</button>
+                            </div>
+                            </div>
+                            <div class="login_aff"> 
+                            <div class="col-xs-12 p-b-20">
+                            <input type="button" data-toggle="modal" class="login-btn" id="forgotaffiliate" value="Forgot Password" data-target="#modal_forgotPassAff">
+                            <button class="login-btn" type="submit">Login</button>
+                            </div>
                             </div>
                         </div>
                     </div>

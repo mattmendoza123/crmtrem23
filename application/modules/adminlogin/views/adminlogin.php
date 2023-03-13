@@ -69,6 +69,7 @@
                         </div>
                         <div class="form-group text-center ">
                             <div class="col-xs-12 p-b-20">
+                                <input type="button" data-toggle="modal" class="login-btn" id="forgotadmin" value="Forgot Password" data-target="#modal_forgotPassAdmin">
                                 <button class="login-btn" type="submit">Login</button>
                             </div>
                         </div>
