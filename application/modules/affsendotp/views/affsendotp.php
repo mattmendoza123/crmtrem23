@@ -89,12 +89,9 @@
                                         <label class="control-label">Email</label>
                                         <select id="email" name="email" class="form-control">
                                         <option selected hidden>-Please select-</option>
-                                        <option value="mendozamattnoruel@gmail.com">mendozamattnoruel@gmail.com</option>
-                                        <option value="jp@tremendio.com">jp@tremendio.com</option>
-                                        <option value="devteam@tremendio.com">devteam@tremendio.com</option>
+                                        <option value="denis@tremendio.com">denis@tremendio.com</option>
+                                        <option value="nina@tremendio.com">nina@tremendio.com</option>
                                         </select>
-                                        <!-- <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email Here">
-                                        <small style="color:red; font-size: 14px; font-weight:bold;" class="err"></small> -->
                                     </div>
                                 </div>
                             </div>

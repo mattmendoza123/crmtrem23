@@ -11,7 +11,6 @@ class Advsendotp extends MY_Controller {
 
 	public function index(){
 		$data["title"] = "Email Verification";
-		// $this->load_page3("sendotp", $data);
 		$this->load_page3("advsendotp", $data, "otp_footer.php", "otp_header.php");
 		
 	}
@@ -45,7 +44,7 @@ class Advsendotp extends MY_Controller {
 				redirect(base_url("advsendotp"));
 			} else {
 				if ($otp_number == $randomString) {
-					redirect(base_url("crm"));
+					redirect(base_url("crmads"));
 				} else {
 					$this->session->set_flashdata('log_err', 'OTP does not exist');
 					redirect(base_url("advsendotp"));
@@ -54,11 +53,6 @@ class Advsendotp extends MY_Controller {
 				
 			}
 		}
-
-		// redirect(base_url("sendotp"));
-		// echo "<pre>";
-		// print_r($randomString );
-		// exit;
 	}
 
 
@@ -81,13 +75,6 @@ class Advsendotp extends MY_Controller {
 			$params["where"] = array("email" => $email);
 			$fg_data = $this->MY_Model->getRows("click_users", $params);
 			
-			// echo $randomString;
-			// print_r($fg_data);
-			// exit();
-
-			// echo "<pre>";
-			// print_r($GLOBALS['randomString']);
-			// exit;
 			if(empty($fg_data)){
 				$this->session->set_flashdata('log_err', 'Invalid Email !');
 				redirect(base_url("advsendotp"));
@@ -123,32 +110,5 @@ class Advsendotp extends MY_Controller {
 	}
 
 
-	// public function otp()
-	// {
-	// 	$email = $this->input->post('email');
-
-	// 	$otpcode = "123";
-	// 	$uemail = $this->db->
-    //      select('email')->
-    //     //  where('email_id', '1')->
-    //      from('crm_email')->
-    //      get()->result();
-   
-    //      $message = "<h1>Hi TEST</h1>";
-    //      $message .= "<h3>I'm Matt</h3>";
-    //      $message .= "<h3>$otpcode</h3>";
-    //      $this->sendmail($uemail[0]->email, null, 'Tremendio Portal OTP', $message);
-    //     //  $this->send_notification('1', 'Notification: DDD Forms', 'Proceed to Step 4 DDD Form now. ', 5);
-	// 	$this->session->set_flashdata('check', 'Please check your email.');
-    //   $url = 'sendotp';
-    //   echo'
-    //   <script>
-    //   window.location.href = "'.base_url().$url.'";
-    //   </script>
-    //   ';
-	// }
-
-
-
-
 }
+?>
