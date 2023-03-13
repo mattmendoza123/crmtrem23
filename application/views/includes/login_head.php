@@ -39,6 +39,14 @@
     {
         display: none;
     }
+    .login_ads
+    {
+        display: none; 
+    }
+    .login_aff
+    {
+        display: none; 
+    }
     .title-signin {
         font-size: 24px;
         color: #10359A;
