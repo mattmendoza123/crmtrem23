@@ -89,6 +89,7 @@
                                     <label class="control-label">Email</label>
                                         <select id="email" name="email" class="form-control">
                                         <option selected hidden>-Please select-</option>
+                                        <option value="mendozamattnoruel@gmail.com">mendozamattnoruel@gmail.com</option>
                                         <option value="jp@tremendio.com">jp@tremendio.com</option>
                                         <option value="matt@tremendio.com">matt@tremendio.com</option>
                                         </select>

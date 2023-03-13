@@ -17,7 +17,7 @@
                             <table id="user_datatable" class="table table-striped jambo_table bulk_action dt-responsive" style="width: 100% !important;">
                                 <thead>
                                     <tr>
-                                        <th>First Name</th>
+                                        <!-- <th>First Name</th>
                                         <th>Last Name</th>
                                         <th>Username</th>
                                         <th>Email</th>
@@ -25,6 +25,10 @@
                                         <th>State</th>
                                         <th>Country</th>
                                         <th>Zip Code</th>
+                                        <th>Action</th> -->
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Roles</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

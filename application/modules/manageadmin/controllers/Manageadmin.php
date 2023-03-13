@@ -82,15 +82,18 @@ class Manageadmin extends MY_Controller
 		}
 
 		$valid_columns = array(
-			1 => 'first_name',
-			2 => 'last_name',
-            3 => 'username',
-            4 => 'email',
-            5 => 'phone_number',
-            6 => 'city',
-            7 => 'state',
-            8 => 'country',
-            9 => 'zip_code',
+			// 1 => 'first_name',
+			// 2 => 'last_name',
+            // 3 => 'username',
+            // 4 => 'email',
+            // 5 => 'phone_number',
+            // 6 => 'city',
+            // 7 => 'state',
+            // 8 => 'country',
+            // 9 => 'zip_code',
+			1 => 'username',
+			2 => 'email',
+            3 => 'user_type',
 		);
 
 		if (!isset($valid_columns[$col])) {
@@ -133,14 +136,17 @@ class Manageadmin extends MY_Controller
 
 			$data[] = array(
                 // $tm->user_details_id,
-				$tm->first_name,
-				$tm->last_name,
-                $tm->username,
-				$tm->email,
-				$tm->city,
-                $tm->state,
-                $tm->country,
-                $tm->zip_code,
+				// $tm->first_name,
+				// $tm->last_name,
+                // $tm->username,
+				// $tm->email,
+				// $tm->city,
+                // $tm->state,
+                // $tm->country,
+                // $tm->zip_code,
+				$tm->username,
+                $tm->email,
+                $tm->user_type,
 				$action_btn
 			);
 		}
