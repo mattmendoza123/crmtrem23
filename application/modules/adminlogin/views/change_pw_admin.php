@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../wp-content/themes/betterlifehcg/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url() ?>/assets/images/logo1.png">
     <title>Change Password | Tremendio Portal</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/adminwrap/" />
     <!-- Bootstrap Core CSS -->
