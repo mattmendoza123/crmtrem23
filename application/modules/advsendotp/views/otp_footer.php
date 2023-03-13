@@ -61,21 +61,6 @@ if (isset($hasErr)) { ?>
     </script>
 <?php } ?>
 
-<script>
-    $(document).ready(function(){
-    $("#advertiser").click(function(){
-        $(".login_buttons").hide();
-        $(".login_field").show();
-        $(".login_ads").show();
-    });
-    $("#affiliate").click(function(){
-        $(".login_buttons").hide();
-        $(".login_field").show();
-        $(".login_aff").show();
-    });
-    });
-
-</script>
 
 <?php
 $hasSucc = $this->session->flashdata('check');

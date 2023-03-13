@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url() ?>/assets/images/logo1.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../wp-content/themes/betterlifehcg/images/favicon.png">
     <title><?= $title; ?></title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/adminwrap/" />
     <!-- Bootstrap Core CSS -->
@@ -32,9 +32,6 @@
 <![endif]-->
 </head>
 <style>
-    #user_ip{
-        display:none;
-    }
     .login_field
     {
         display: none;
@@ -175,6 +172,7 @@
     margin: 16px 20px 2px 20px;
     width: 100%;
     }
+
   
 }
  
