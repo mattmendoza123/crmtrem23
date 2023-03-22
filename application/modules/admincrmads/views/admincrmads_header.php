@@ -16,6 +16,12 @@ td:nth-of-type(9) {
 th:nth-of-type(9) {
   display: none !important;
 }
+td:nth-of-type(7) {
+  display: none !important;
+}
+th:nth-of-type(7) {
+  display: none !important;
+}
 /* td:nth-of-type(10) {
   display: none !important;
 }
@@ -28,12 +34,12 @@ td:nth-of-type(11) {
 th:nth-of-type(11) {
   display: none !important;
 }
-td:nth-of-type(12) {
+/* td:nth-of-type(12) {
   display: none !important;
 }
 th:nth-of-type(12) {
   display: none !important;
-}
+} */
 td:nth-of-type(13) {
   display: none !important;
 }

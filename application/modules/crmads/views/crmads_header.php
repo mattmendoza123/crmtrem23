@@ -10,6 +10,12 @@ table.table:first-child .delete-users{
 table#crm_datatable td:nth-child(20) ~ td {
   display: none;
 } */
+td:nth-of-type(7) {
+  display: none !important;
+}
+th:nth-of-type(7) {
+  display: none !important;
+}
 td:nth-of-type(9) {
   display: none !important;
 }
@@ -28,12 +34,12 @@ td:nth-of-type(11) {
 th:nth-of-type(11) {
   display: none !important;
 }
-td:nth-of-type(12) {
+/* td:nth-of-type(12) {
   display: none !important;
 }
 th:nth-of-type(12) {
   display: none !important;
-}
+} */
 td:nth-of-type(13) {
   display: none !important;
 }
