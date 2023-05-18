@@ -199,7 +199,7 @@
 
 
 $(document).ready(function() {
-  var base_url = "https://greenifymyhome.co.uk/Invalidclicks/";
+  var base_url = "https://crm.tremendio.network/";
   var dataTable = null;
 
   function fetchData() {
