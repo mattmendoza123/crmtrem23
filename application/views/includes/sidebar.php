@@ -102,8 +102,8 @@
                         <li> <a class="waves-effect" href="<?= base_url("admincrmads") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM Advertiser</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("admincrmaff") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM Affiliate</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("ipwhitelist") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">IP Whitelist</span></a></li>
-                        <li> <a class="waves-effect" href="<?= base_url("newoffers") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">New Offers</span></a></li>
-                        <li> <a class="waves-effect" href="<?= base_url("exclusiveoffers") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Exclusive Offers</span></a></li>
+                        <li> <a class="waves-effect" href="<?= base_url("") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">New Offers</span></a></li>
+                        <li> <a class="waves-effect" href="<?= base_url("") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Exclusive Offers</span></a></li>
                     </li>
                 </ul>
             <?php } ?>
