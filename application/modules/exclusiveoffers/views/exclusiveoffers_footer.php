@@ -1,0 +1,295 @@
+<!-- <script src="<?=base_url()?>assets/module/bootstrap/js/bootstrap.min.js"></script> -->
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+<script src="<?= base_url() . "assets"; ?>/js/jquery.dataTables.min.js"></script>
+<script src="<?= base_url() . "assets"; ?>/js/responsive.dataTables.min.js"></script>
+<script src="<?= base_url() . "assets"; ?>/js/calcheight.min.js"></script>
+<script src="<?= base_url() . "assets"; ?>/js/table2csv.js"></script>
+<script src="<?= base_url() . "assets"; ?>/js/multiselect-dropdown.js"></script>
+
+<!-- <script type="text/javascript">
+    $(window).on('load', function() {
+        $('#myModal').modal('show');
+    });
+</script> -->
+
+
+<script type="text/javascript">
+//  $(document).ready(function () {
+//             $("#weeklytable").dataTable();
+//             $.ajax({
+//                 url: 'https://cors-anywhere.herokuapp.com/https://datatables.net/examples/ajax/data/objects.txt',
+//                 type: 'GET',
+//                 dataType: 'json',
+//                 CORS: true ,
+//                 contentType: 'application/json',
+//                 secure: true, 
+//                  beforeSend: function (xhr) {
+//                 xhr.setRequestHeader ("Authorization", "Basic " + btoa(""));
+//                 },
+//                 success: function (result) {
+//                     let daftar = result.results;
+//                     var html = '';
+//                     $.each(daftar, function (i, data) {
+//                         html += `<tr>
+//                                         <td> ` + data.name + `</td>
+//                                         <td>` + data.position + `</td>
+//                                         <td>` + data.salary + `</td>
+//                                         <td>` + data.office + `</td>
+//                                     </tr>`;
+                      
+//                     });
+//                 }
+
+//         //     success: function(data) {
+                
+//         //         console.log(data);
+//         //     },
+//         //     error: function(error) {
+//         //         console.log("FAIL....=================");
+//         //     }
+//             });
+//         })
+// function loadData() {
+// console.clear();
+// //let webUrl = _spPageContextInfo.webAbsoluteUrl;
+// var mili = new Request("https://cors-anywhere.herokuapp.com/https://datatables.net/examples/ajax/data/objects.txt"
+//     ,{
+//         method: 'GET',
+//         headers: new Headers({
+//             "Accept": "application/json; odata=verbose",
+//         })
+//     });
+//     fetch(mili)
+//     .then((response) => response.json())
+//     .then((data) => {
+//       console.log(data)
+//         //if (data.d != null && data.d != undefined && data.d.results.length > 0) {
+//             var table = $('#weeklytable').DataTable();
+
+//             table.rows.add(data.data).draw();
+
+//         //}
+//         //console.log(item.Name, item.Weight, item.WeeklyWeight, item.Steps, items.WeeklySteps, item.ExerciseMinutes, item.WeeklyExerciseMin, item.StepPoints, item.MinutePoints);
+//         //console.log(item.Name.Title);
+//     });
+
+    
+// }
+ 
+
+
+// $(document).ready( function () {
+       
+           
+//           var table = $('#weeklytable').DataTable({
+//                 "columns": [
+//                     { "data": "name" },
+//                     { "data": "office" },
+//                     { "data": "position" },
+//                     { "data": "salary" }
+//                 ]
+//     }); 
+
+//          loadData();
+//         } );
+        
+
+
+// $(document).ready(function() {
+//     var base_url = "<//?php echo base_url(); ?>";
+//     var table = $('#weeklytable').DataTable({
+        
+//         "ajax": {
+//             url: base_url + 'invalidclicks/api',
+//             // "url": "https://datatables.net/examples/ajax/data/objects.txt",
+//             "type": 'GET',
+//             "dataSrc": "data",
+//             "success": function(response) {
+//                 console.log(response);
+//             }
+//         },
+//         "columns": [
+//             { "data": "name" },
+//             { "data": "office" },
+//             { "data": "position" },
+//             { "data": "salary" }
+//         ]
+//     });
+
+
+//     setInterval( function () {
+//         table.ajax.reload();
+//     }, 86400 ); // reload the data every 24hours
+// });
+// $(document).ready(function() {
+//     var base_url = "<//?php echo base_url(); ?>";
+//     var table = $('#weeklytable').DataTable({
+//         "ajax": {
+//             url: base_url + 'invalidclicks/api',
+//             "type": 'GET',
+//             "dataSrc": "info",
+//             "success": function(response) {
+//                 console.log(response);
+//             }
+//         },
+//         "columns": [
+//             { "info": "offer.title" },
+//             { "info": "offer.adv_cr" },
+//             { "info": "offer.advertiser_id" },
+//             { "info": "offer.ar" }
+//         ]
+//     });
+
+//     setInterval(function() {
+//         table.ajax.reload();
+//     }, 86400); // reload the data every 24 hours
+// });
+
+
+// $(document).ready(function() {
+//   var base_url = "https://greenifymyhome.co.uk/Invalidclicks/";
+
+//   fetch(base_url + 'newoffers/newoffers_api', {
+//     headers: {
+//       'api-key': 'aafcf12b64ca3230279a89aa8b6eacf03c7c59da'
+//     }
+//   })
+//   .then(response => response.json())
+//   .then(data => {
+//     var offers = data.info.offers;
+
+//     var dataTable = $('#newoffers_table').DataTable({
+//       processing: true,
+//       "order": [
+//                 [0, "des"]
+//             ]
+//     //   serverSide: true
+//     });
+//     offers.forEach(offer => {
+//       if (offer && offer.title_info && offer.title_info.advertiser) {
+//         var advertiserId = offer.title_info.advertiser.id;
+//         var advertiserName = offer.title_info.advertiser.company_name;
+//       } else {
+//         var advertiserId = "N/A";
+//         var advertiserName = "N/A";
+//       }
+
+//       if (offer && offer.payout && offer.payout.length > 0) {
+//         var payoutValue = offer.payout[0].value;
+//       } else {
+//         var payoutValue = "N/A";
+//       }
+
+//       var categoryTitles = "";
+//       if (offer && offer.categories && offer.categories.length > 0) {
+//         categoryTitles = offer.categories.map(category => category.title).join(', ');
+//       } else {
+//         categoryTitles = "N/A";
+//       }
+
+//       dataTable.row.add([offer.title_info.name, advertiserName, categoryTitles, payoutValue]);
+//     });
+
+//     dataTable.draw();
+//   })
+//   .catch(error => {
+//     console.error("Error:", error);
+//   });
+// });
+
+
+$(document).ready(function() {
+  var base_url = "https://greenifymyhome.co.uk/Invalidclicks/";
+  var dataTable = null;
+
+  function fetchData() {
+    fetch(base_url + 'exclusiveoffers/exclusiveoffers_api', {
+      headers: {
+        'api-key': 'aafcf12b64ca3230279a89aa8b6eacf03c7c59da'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      var offers = data.info.offers;
+
+      if (dataTable) {
+        dataTable.clear().draw(); // Clear existing data in DataTable
+      } else {
+        dataTable = $('#exclusiveoffers_table').DataTable({
+          processing: true,
+          order: [[0, "des"]]
+        });
+      }
+
+      offers.forEach(offer => {
+      if (offer && offer.title_info && offer.title_info.advertiser) {
+        var offersId = offer.id;
+        var advertiserName = offer.title_info.advertiser.company_name;
+      } else {
+        var offersId = "N/A";
+        var advertiserName = "N/A";
+      }
+
+      if (offer && offer.payout && offer.payout.length > 0) {
+        var payoutValue = offer.payout[0].value;
+      } else {
+        var payoutValue = "N/A";
+      }
+
+      var categoryTitles = "";
+      if (offer && offer.categories && offer.categories.length > 0) {
+        categoryTitles = offer.categories.map(category => category.title).join(', ');
+      } else {
+        categoryTitles = "N/A";
+      }
+
+      dataTable.row.add([offersId, offer.title_info.name, advertiserName, categoryTitles, payoutValue]);
+    });
+
+    dataTable.draw();
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+  }
+
+  fetchData(); // Initial fetch on page load
+
+  // Refresh data every 24 hours
+  setInterval(fetchData, 24 * 60 * 60 * 1000);
+});
+</script>
+
+
+
+<!-- 
+$(document).ready(function() {
+  const url = 'https://datatables.net/examples/ajax/data/objects.txt';
+  const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
+
+  $.ajax({
+    url: proxyUrl,
+    type: 'GET',
+    dataType: 'json',
+    success: function(response) {
+      // Log the response to the console
+      console.log(response);
+      
+      // Initialize the DataTables table with the response data
+      $('#example').DataTable({
+        'data': response.contents,
+        'columns': [
+          { 'data': 'name' },
+          { 'data': 'position' },
+          { 'data': 'office' },
+          { 'data': 'age' },
+          { 'data': 'start_date' },
+          { 'data': 'salary' }
+        ]
+      });
+    },
+    error: function(xhr, status, error) {
+      console.log('Error: ' + error);
+    }
+  });
+}); -->
