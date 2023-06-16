@@ -72,11 +72,11 @@
                         </div>
                     </div>
                     <div class="login_field">
-                        <div class="form-group" name="user_ip" id="user_ip">
+                        <!-- <div class="form-group" name="user_ip" id="user_ip">
                             <div class="col-xs-12">
                                 <input class="login-input" type="text" name="user_ip" id="user_ip" value="<?php echo $_SERVER['REMOTE_ADDR']; ?>">
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group ">
                             <div class="col-xs-12">
                                 <input class="login-input" type="text" name="username" placeholder="Username">
