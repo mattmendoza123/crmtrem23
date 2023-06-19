@@ -173,7 +173,7 @@ class Crmaff extends MY_Controller
 				$tm->aff_model,
 				$tm->aff_geo,
 				$tm->aff_traffic_source,
-				$tm->aff_am,
+				$tm->aff_ex_hou,
 				$tm->aff_comment,
 				$tm->date_created,
 				$action_btn
