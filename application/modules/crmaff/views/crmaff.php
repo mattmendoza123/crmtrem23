@@ -34,7 +34,7 @@
                                         <th>Model</th>
                                         <th>Geo</th>
                                         <th>Traffic Source</th>
-                                        <th>AM</th>
+                                        <th>Exclusive/In-house</th>
                                         <th>Comment</th>
                                         <th>Date Created</th>
                                         <th>Action</th>
@@ -736,7 +736,7 @@
                                 </div>
                             </div>
                         </div> -->
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div class="form-row">
@@ -754,6 +754,18 @@
                                         </div>
                                     </div>
                                 </div>
+                        </div> -->
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="aff_ex_hou">Exclusive / In-House</label> 
+                                        <select id="aff_ex_hou" name="aff_ex_hou" class="form-control">
+                                            <option selected>None</option>
+                                            <option value="Exclusive">Exclusive</option>
+                                            <option value="In-house">In-house</option>
+                                        </select>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -1470,13 +1482,13 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-6">
-                                 <label for="u_aff_ex_hou">Exclusive / In-House</label>
+                                    <label for="u_aff_ex_hou">Exclusive / In-House</label> 
                                         <select id="u_aff_ex_hou" name="u_aff_ex_hou" class="form-control">
+                                            <option selected>None</option>
                                             <option value="Exclusive">Exclusive</option>
                                             <option value="In-house">In-house</option>
                                         </select>
                                 </div>
-
                             </div>
                         </div>
 
