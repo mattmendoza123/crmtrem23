@@ -98,7 +98,7 @@ class MY_Controller extends MX_Controller {
 		$config['smtp_port']    = '587';
 		$config['smtp_user']    = 'devteam@tremendio.com';
 		$config['_smtp_auth'] = TRUE;
-		$config['smtp_pass']    = 'tbavmuumrplplbvp';
+		$config['smtp_pass']    = 'rqkqzgjqedzazili';
 		$config['smtp_crypto'] = 'tls';
 		$config['mailtype'] = 'html'; // or html
 		$config['charset'] = 'utf-8';
