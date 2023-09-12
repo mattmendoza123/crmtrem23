@@ -10,16 +10,65 @@
 
 
 <script type="text/javascript">
+// $(document).ready(function() {
+//   var base_url = "https://crm.tremendio.network/";
+
+//   fetch(base_url + 'adminlinkcheck/api', {
+//     headers: {
+//       'x-apikey': '2d79fa4d329c17de8973a1e862539c344830a0a96ccc53599848164c11630c86'
+//     }
+//   })
+//   .then(response => response.json())
+//   .then(data => {
+//     var parsedData = data.map(jsonString => JSON.parse(jsonString)); // Parse each JSON string
+
+//     // Now you can access the properties of each parsed object
+//     parsedData.forEach(obj => {
+//       if (obj.data && obj.data.attributes && obj.data.attributes.redirection_chain) {
+//         var redirectionChain = obj.data.attributes.redirection_chain[0];
+//         var analysisStats = obj.data.attributes.last_analysis_stats;
+//         var harmless = analysisStats.harmless;
+//         var malicious = analysisStats.malicious;
+//         var suspicious = analysisStats.suspicious;
+//         var undetected = analysisStats.undetected;
+//         var total = harmless + malicious + suspicious + undetected;
+
+//         var flag = malicious > 0 ? '<button class="flag-button"><i class="fas fa-flag" style="color: red;"></i></button>' : '<button class="flag-button"><i class="fas fa-flag" style="color: green;"></i></button>';
+
+//         var dataTable = $('#linkchecktable').DataTable();
+//         dataTable.row.add([redirectionChain, harmless, malicious, suspicious, undetected, total, flag]).draw();
+//       } else {
+//         console.error("Required data properties are undefined.");
+//       }
+//     });
+//   })
+//   .catch(error => {
+//     console.error("Error:", error);
+//   });
+// });
+
 $(document).ready(function() {
   var base_url = "https://crm.tremendio.network/";
+
+  // Add a loading row to the DataTable
+  var dataTable = $('#linkchecktable').DataTable();
+  dataTable.row.add(['', '', '', 'Please wait API is still loading...', '', '', '']).draw();
 
   fetch(base_url + 'adminlinkcheck/api', {
     headers: {
       'x-apikey': '2d79fa4d329c17de8973a1e862539c344830a0a96ccc53599848164c11630c86'
     }
   })
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  })
   .then(data => {
+    // Remove the loading row
+    dataTable.row(':contains("Please wait API is still loading...")').remove().draw();
+
     var parsedData = data.map(jsonString => JSON.parse(jsonString)); // Parse each JSON string
 
     // Now you can access the properties of each parsed object
@@ -35,7 +84,7 @@ $(document).ready(function() {
 
         var flag = malicious > 0 ? '<button class="flag-button"><i class="fas fa-flag" style="color: red;"></i></button>' : '<button class="flag-button"><i class="fas fa-flag" style="color: green;"></i></button>';
 
-        var dataTable = $('#linkchecktable').DataTable();
+        // Add the data to the DataTable
         dataTable.row.add([redirectionChain, harmless, malicious, suspicious, undetected, total, flag]).draw();
       } else {
         console.error("Required data properties are undefined.");
@@ -43,8 +92,11 @@ $(document).ready(function() {
     });
   })
   .catch(error => {
+    // Remove the loading row and show an error message
+    dataTable.row(':contains("Please wait API is still loading...")').remove().draw();
     console.error("Error:", error);
   });
 });
+
 </script>
 
