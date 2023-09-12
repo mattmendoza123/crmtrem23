@@ -46,6 +46,7 @@
 //     console.error("Error:", error);
 //   });
 // });
+
 $(document).ready(function() {
   var base_url = "https://crm.tremendio.network/";
 
