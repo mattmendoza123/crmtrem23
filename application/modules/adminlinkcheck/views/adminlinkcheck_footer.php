@@ -52,9 +52,12 @@ $(document).ready(function() {
   var base_url = "https://crm.tremendio.network/";
 
   // Add a loading row to the DataTable
-  var dataTable = $('#linkchecktable').DataTable();
+  var dataTable = $('#linkchecktable').DataTable({
+    "pageLength": 25, // Set default number of rows per page
+    "order": [[2, "desc"]] // Sort by the 'Malicious' column in descending order
+  });
   dataTable.row.add(['', '', '', 'Please wait API is still loading...', '', '', '']).draw();
-
+  
   fetch(base_url + 'adminlinkcheck/api', {
     headers: {
       'x-apikey': '2d79fa4d329c17de8973a1e862539c344830a0a96ccc53599848164c11630c86'

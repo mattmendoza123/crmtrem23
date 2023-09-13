@@ -51,7 +51,10 @@ $(document).ready(function() {
   var base_url = "https://crm.tremendio.network/";
 
   // Add a loading row to the DataTable
-  var dataTable = $('#linkchecktable').DataTable();
+  var dataTable = $('#linkchecktable').DataTable({
+    "pageLength": 25, // Set default number of rows per page
+    "order": [[2, "desc"]] // Sort by the 'Malicious' column in descending order
+  });
   dataTable.row.add(['', '', '', 'Please wait API is still loading...', '', '', '']).draw();
 
   fetch(base_url + 'advlinkcheck/api', {
