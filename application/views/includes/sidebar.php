@@ -78,7 +78,9 @@
                                     echo "not-active";
                                 }  ?>">
                      <li><a class="waves-effect" href="<?= base_url("crmads") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM</span></a></li>
+                     <li> <a class="waves-effect" href="<?= base_url("advinvalidclicks") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Invalid Clicks</span></a></li>
                      <li> <a class="waves-effect" href="<?= base_url("advlinkcheck") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Link Check</span></a></li>
+                     
                     </li>
                 </ul>
             <?php } else if ($this->session->userdata('user_details')[0]['user_type'] == 'Affiliate') { ?>
@@ -91,7 +93,9 @@
                         <li> <a class="waves-effect" href="<?= base_url("crmaff") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("newoffers") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">New Offers</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("exclusiveoffers") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Exclusive Offers</span></a></li>
+                        <li> <a class="waves-effect" href="<?= base_url("affinvalidclicks") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Invalid Clicks</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("afflinkcheck") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Link Check</span></a></li>
+                        
                     </li>
                 </ul>
                  <?php } else { ?>
@@ -108,6 +112,7 @@
                         <li> <a class="waves-effect" href="<?= base_url("ipwhitelist") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">IP Whitelist</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("newoffers") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">New Offers</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("exclusiveoffers") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Exclusive Offers</span></a></li>
+                        <li> <a class="waves-effect" href="<?= base_url("admininvalidclicks") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Invalid Clicks</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("adminlinkcheck") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Link Check</span></a></li>
                     </li>
                 </ul>
