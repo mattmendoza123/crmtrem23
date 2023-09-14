@@ -38,7 +38,8 @@ $(document).ready(function () {
                 } else {
                     dataTable = $('#invalidclicks_table').DataTable({
                         processing: true,
-                        order: [[2, "desc"]]
+                        order: [[2, "desc"]],
+                        "pageLength": 50 // Set default number of rows per page
                     });
                 }
 
