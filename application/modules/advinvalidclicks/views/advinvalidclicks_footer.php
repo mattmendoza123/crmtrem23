@@ -31,7 +31,7 @@ $(document).ready(function () {
                 } else {
                     dataTable = $('#invalidclicks_table').DataTable({
                         processing: true,
-                        order: [[2, "desc"]],
+                        order: [[3, "desc"]],
                         "pageLength": 50 // Set default number of rows per page
                     });
                 }
@@ -41,8 +41,11 @@ $(document).ready(function () {
                 transactions.forEach(transaction => {
                     var affiliateName = transaction.affiliate ? transaction.affiliate.value : "N/A";
                     var offerName = transaction.offer ? transaction.offer.value : "N/A";
-                    var clickTimestamp = transaction.added_timestamp ? transaction.added_timestamp : "N/A";
+                    var clickTimestamp = transaction.added_timestamp ? new Date(transaction.added_timestamp) : "N/A";
                     var reason = transaction.reason ? transaction.reason : "N/A";
+
+                    // Convert the timestamp to GMT+1 (CET)
+                    clickTimestamp = clickTimestamp.toLocaleString('en-US', { timeZone: 'Europe/Belgrade' });
 
                     if (!affiliateOffers[affiliateName]) {
                         affiliateOffers[affiliateName] = [];
@@ -152,9 +155,7 @@ $(document).ready(function () {
 
         $(modalContent).appendTo('body');
     }
-
 });
-
 
 
 </script>
