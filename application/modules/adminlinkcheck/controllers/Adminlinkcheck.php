@@ -32,7 +32,8 @@ class Adminlinkcheck extends MY_Controller
 	header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 	header("Access-Control-Allow-Headers: Content-Type, Authorization");
 	// $apiKey = '2d79fa4d329c17de8973a1e862539c344830a0a96ccc53599848164c11630c86';
-	$apiKey = 'd04a998808ef6d256cfb90991efbc5fd1987b7283bec8c38f5e5efcd2ceb2d2b';
+	// $apiKey = 'd04a998808ef6d256cfb90991efbc5fd1987b7283bec8c38f5e5efcd2ceb2d2b';
+	$apiKey = '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e';
 	$urls = array(
 
 		//Old

@@ -115,7 +115,7 @@ $(document).ready(function() {
 
   fetch(base_url + 'adminlinkcheck/api', {
     headers: {
-      'x-apikey': '2d79fa4d329c17de8973a1e862539c344830a0a96ccc53599848164c11630c86'
+      'x-apikey': '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e'
     }
   })
   .then(response => {
