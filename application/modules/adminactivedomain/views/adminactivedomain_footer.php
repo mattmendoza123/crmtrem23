@@ -1,0 +1,230 @@
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+<script src="<?= base_url() . "assets"; ?>/js/jquery.dataTables.min.js"></script>
+<script src="<?= base_url() . "assets"; ?>/js/responsive.dataTables.min.js"></script>
+<script src="<?= base_url() . "assets"; ?>/js/calcheight.min.js"></script>
+<script src="<?= base_url() . "assets"; ?>/js/table2csv.js"></script>
+<script src="<?= base_url() . "assets"; ?>/js/multiselect-dropdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    var dataTable = null;
+    var existingUrls = []; // Array to store existing URLs in the database
+
+    function fetchData() {
+        fetch(base_url + 'adminactivedomain/activedomain_api', {
+            headers: {
+                'api-key': 'aafcf12b64ca3230279a89aa8b6eacf03c7c59da'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            var trackingDomains = data.info.details.tracking_domains;
+
+            if (dataTable) {
+                dataTable.clear().draw(); // Clear existing data in DataTable
+            } else {
+                dataTable = $('#activedomain_tremendio').DataTable({
+                    processing: true,
+                    order: [[0, "desc"]],
+                    pageLength: 50
+                });
+            }
+
+            trackingDomains.forEach(trackingDomain => {
+                var trackingDomainName = trackingDomain.name;
+                if (!existingUrls.includes(trackingDomainName)) {
+                    // Insert only if it's not in the existing URLs array
+                    dataTable.row.add([trackingDomainName]);
+                    existingUrls.push(trackingDomainName); // Add to existing URLs
+                }
+            });
+
+            dataTable.draw();
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    }
+
+    fetchData(); // Initial fetch and insertion on page load
+
+    // Refresh data every 24 hours
+    setInterval(fetchData, 24 * 60 * 60 * 1000);
+});
+
+
+
+
+
+// // VIRUSTOTAL
+
+
+
+$(document).ready(function () {
+    var base_url = "https://greenifymyhome.co.uk/Invalidclicks/";
+
+    var dataTable = $('#activedomain').DataTable({
+        "pageLength": 25,
+        "order": [[3, "desc"]]
+    });
+
+    // Show a loading message in the table while fetching data
+    dataTable.row.add(['', '', '', '', 'Please wait API is still loading...', '', '', '', '']).draw();
+
+    fetch(base_url + 'adminactivedomain/api', {
+        headers: {
+            // 'x-apikey': '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e'
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Remove the loading row
+            dataTable.row(':contains("Please wait API is still loading...")').remove().draw();
+
+            // Check if the data is an array
+            if (Array.isArray(data)) {
+                data.forEach(obj => {
+                    var tags = obj.tags || 'N1';
+                    var lastFinalUrl = obj.url || 'N/A';
+                    var harmless = obj.harmless || 0;
+                    var malicious = obj.malicious || 0;
+                    var suspicious = obj.suspicious || 0;
+                    var undetected = obj.undetected || 0;
+                    var total = harmless + malicious + suspicious + undetected;
+                    var comments = obj.comments || 'N1';
+
+
+                    var viewButton = '<button class="view-button btn btn-xs"><i class="fa fa-eye"></i></button>';
+                    var updateButton = '<button class="update-button btn btn-xs" data-toggle="modal" data-target="#update-modal" data-active_id="' + obj.active_id + '"><i class="fa fa-edit"></i></button>';
+                    // var flagButton = malicious > 0 ? '<button class="flag-button btn btn-danger"><i class="fas fa-flag"></i></button>' : '<button class="flag-button btn btn-success"><i class="fas fa-flag"></i></button>';
+                    var flagButton = malicious > 0 ? '<button class="flag-button"><i class="fas fa-flag" style="color: red;"></i></button>' : '<button class="flag-button"><i class="fas fa-flag" style="color: green;"></i></button>';
+
+                    // Create a single cell with both buttons
+                    var actionsCell = flagButton + ' ' + viewButton + ' ' + updateButton;
+                    // Add the data to the DataTable
+                    dataTable.row.add([tags, lastFinalUrl, harmless, malicious, suspicious, undetected, total, comments, actionsCell]).draw();
+                });
+            } else {
+                console.error("Response data is not an array.");
+            }
+        })
+        .catch(error => {
+            // Remove the loading row and show an error message
+            dataTable.row(':contains("Please wait API is still loading...")').remove().draw();
+            console.error("Error:", error);
+        });
+
+
+        $('#activedomain').on('click', '.view-button', function () {
+        var row = $(this).closest('tr');
+        var tags = row.find('td:eq(0)').text();
+        var url = row.find('td:eq(1)').text();
+        var harmless = row.find('td:eq(2)').text();
+        var malicious = row.find('td:eq(3)').text();
+        var suspicious = row.find('td:eq(4)').text();
+        var undetected = row.find('td:eq(5)').text();
+        var total = row.find('td:eq(6)').text();
+        var comments = row.find('td:eq(7)').text();
+
+        // Populate the modal fields with data
+        $('#modal-tags').text('Aff ID: ' + tags);
+        $('#modal-url').text('URL: ' + url);
+        $('#modal-harmless').text('Harmless: ' + harmless);
+        $('#modal-malicious').text('Malicious: ' + malicious);
+        $('#modal-suspicious').text('Suspicious: ' + suspicious);
+        $('#modal-undetected').text('Undetected: ' + undetected);
+        $('#modal-total').text('Total: ' + total);
+        $('#modal-comments').text('Comments: ' + comments);
+        
+        // Show the modal
+        $('#view-modal').modal('show');
+    });
+
+    $('#activedomain').on('click', '.update-button', function () {
+    var row = $(this).closest('tr');
+    var active_id = $(this).data('active_id');
+    var tags = row.find('td:eq(0)').text();
+    var url = row.find('td:eq(1)').text();
+    var comments = row.find('td:eq(7)').text();
+
+    // Populate the modal fields with data
+    $('#u_tags').val(tags);
+    $('#u_url').val(url);
+    $('#u_comment').val(comments);
+    $('#u_active_id').val(active_id); // Set the active_id in a hidden input field
+
+    // Show the update modal
+    $('#update-modal').modal('show');
+});
+});
+$(document).on('submit', '#update-modal-form', function (e) {
+    e.preventDefault();
+
+    var base_url = "https://greenifymyhome.co.uk/Invalidclicks/adminactivedomain/update_modal";
+    
+    var formData = {
+   
+        u_tags: $('#u_tags').val(),
+        u_url: $('#u_url').val(),
+        u_comment: $('#u_comment').val(),
+        u_active_id: $('#u_active_id').val()
+    };
+
+    $.ajax({
+        type: "POST",
+        url: base_url,
+        data: formData,
+        dataType: "json", // Assuming you're returning JSON from the server
+        success: function(data) {
+                        if (data.success) {
+                            $('#update-modal').modal('hide');
+                            Swal.fire({
+                                icon: 'info',
+                                // title: 'Success',
+                                text: data.message,
+                            }).then(function() {
+                            // Reload the page
+                            location.reload();
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                // title: 'Error',
+                                text: data.message,
+                            });
+                        }
+                    },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText); // Log the actual error message
+            alert("An error occurred while updating the record. Please check the console for details.");
+        }
+    });
+});
+
+// Get the input element by its ID
+var inputElement = document.getElementById("u_tags");
+
+// Add an input event listener to the input element
+inputElement.addEventListener("input", function(event) {
+    // Get the input value
+    var inputValue = event.target.value;
+
+    // Use a regular expression to allow only numbers and semicolon
+    var numbersAndSemicolonOnly = inputValue.replace(/[^0-9;]/g, '');
+
+    // Update the input value with only numbers and semicolon
+    event.target.value = numbersAndSemicolonOnly;
+});
+
+
+
+
+
+
+    </script>
