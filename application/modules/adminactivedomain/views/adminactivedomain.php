@@ -94,7 +94,7 @@
                     </div>
             </div>
             <div class="modal-footer">
-            <button class="btn atm-button" id="submit" type="submit" style="background-color: green;"><i class="fa fa-plus-circle"></i> Save User</button>
+            <button class="btn atm-button" id="submit" type="submit"><i class="fa fa-plus-circle"></i> Save User</button>
             </div>
             </form>
         </div>

@@ -62,7 +62,7 @@ $(document).ready(function() {
 
 
 $(document).ready(function () {
-    var base_url = "https://greenifymyhome.co.uk/Invalidclicks/";
+    var base_url = "https://crm.tremendio.network/";
 
     var dataTable = $('#activedomain').DataTable({
         "pageLength": 25,
@@ -166,7 +166,7 @@ $(document).ready(function () {
 $(document).on('submit', '#update-modal-form', function (e) {
     e.preventDefault();
 
-    var base_url = "https://greenifymyhome.co.uk/Invalidclicks/adminactivedomain/update_modal";
+    var base_url = "https://crm.tremendio.network/adminactivedomain/update_modal";
     
     var formData = {
    
