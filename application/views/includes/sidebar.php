@@ -79,7 +79,7 @@
                                 }  ?>">
                      <li><a class="waves-effect" href="<?= base_url("crmads") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM</span></a></li>
                      <li> <a class="waves-effect" href="<?= base_url("advinvalidclicks") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Invalid Clicks</span></a></li>
-                     <li> <a class="waves-effect" href="<?= base_url("advactivedomain") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Link Check</span></a></li>
+                     <li> <a class="waves-effect" href="<?= base_url("advactivedomain") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Active Domain</span></a></li>
                      
                     </li>
                 </ul>
