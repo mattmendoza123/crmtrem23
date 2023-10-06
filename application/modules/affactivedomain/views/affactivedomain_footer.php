@@ -143,66 +143,188 @@ $(document).ready(function () {
         $('#view-modal').modal('show');
     });
 
-    $('#activedomain').on('click', '.update-button', function () {
+//     $('#activedomain').on('click', '.update-button', function () {
+//     var row = $(this).closest('tr');
+//     var active_id = $(this).data('active_id');
+//     var tags = row.find('td:eq(0)').text();
+//     var url = row.find('td:eq(1)').text();
+//     var comments = row.find('td:eq(7)').text();
+
+//     // Populate the modal fields with data
+//     $('#u_tags').val(tags);
+//     $('#u_url').val(url);
+//     $('#u_comment').val(comments);
+//     $('#u_active_id').val(active_id); // Set the active_id in a hidden input field
+
+//     // Show the update modal
+//     $('#update-modal').modal('show');
+// });
+$('#activedomain').on('click', '.update-button', function () {
     var row = $(this).closest('tr');
     var active_id = $(this).data('active_id');
-    var tags = row.find('td:eq(0)').text();
-    var url = row.find('td:eq(1)').text();
-    var comments = row.find('td:eq(7)').text();
+    var tags = row.find('td:eq(0)').text(); // Assuming this contains semicolon-separated tags
 
-    // Populate the modal fields with data
-    $('#u_tags').val(tags);
-    $('#u_url').val(url);
-    $('#u_comment').val(comments);
-    $('#u_active_id').val(active_id); // Set the active_id in a hidden input field
+    // Split the tags into an array using the semicolon delimiter
+    var tagArray = tags.split(';');
+
+    // Set the "Aff ID" input field with the first tag
+    $('#u_tags').val(tagArray.shift());
+
+    // Populate the "additional-tags-container" with the remaining tags
+    var additionalTagsContainer = document.getElementById("additional-tags-container");
+    additionalTagsContainer.innerHTML = ''; // Clear previous tags
+    tagArray.forEach(function (tag) {
+        const input = document.createElement("input");
+        input.setAttribute("type", "text");
+        input.setAttribute("class", "form-control");
+        input.setAttribute("name", "u_tags[]");
+        input.setAttribute("placeholder", "Additional Aff ID");
+        input.value = tag;
+        additionalTagsContainer.appendChild(input);
+    });
 
     // Show the update modal
     $('#update-modal').modal('show');
+
+    // Set other fields as well
+    var url = row.find('td:eq(1)').text();
+    var comments = row.find('td:eq(7)').text();
+
+    $('#u_url').val(url);
+    $('#u_comment').val(comments);
+    $('#u_active_id').val(active_id); // Set the active_id in a hidden input field
 });
 });
-$(document).on('submit', '#update-modal-form', function (e) {
-    e.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+            const addTagsButton = document.getElementById("add-tags-button");
+            const removeTagsButton = document.getElementById("remove-tags-button");
+            const additionalTagsContainer = document.getElementById("additional-tags-container");
 
-    var base_url = "https://crm.tremendio.network/affactivedomain/update_modal";
-    
-    var formData = {
-   
-        u_tags: $('#u_tags').val(),
-        u_url: $('#u_url').val(),
-        u_comment: $('#u_comment').val(),
-        u_active_id: $('#u_active_id').val()
-    };
+            addTagsButton.addEventListener("click", function () {
+                const input = createInputField();
+                additionalTagsContainer.appendChild(input);
+            });
 
-    $.ajax({
-        type: "POST",
-        url: base_url,
-        data: formData,
-        dataType: "json", // Assuming you're returning JSON from the server
-        success: function(data) {
-                        if (data.success) {
-                            $('#update-modal').modal('hide');
-                            Swal.fire({
-                                icon: 'info',
-                                // title: 'Success',
-                                text: data.message,
-                            }).then(function() {
-                            // Reload the page
-                            location.reload();
-                            });
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                // title: 'Error',
-                                text: data.message,
-                            });
-                        }
-                    },
-        error: function(xhr, status, error) {
-            console.error(xhr.responseText); // Log the actual error message
-            alert("An error occurred while updating the record. Please check the console for details.");
-        }
+            removeTagsButton.addEventListener("click", function () {
+                const inputFields = additionalTagsContainer.querySelectorAll("input");
+                if (inputFields.length > 0) {
+                    const lastInputField = inputFields[inputFields.length - 1];
+                    additionalTagsContainer.removeChild(lastInputField);
+                }
+            });
+
+            function createInputField() {
+                const input = document.createElement("input");
+                input.setAttribute("type", "text");
+                input.setAttribute("class", "form-control");
+                input.setAttribute("name", "u_tags[]");
+                input.setAttribute("placeholder", "Additional Aff ID");
+
+                // Add an event listener to restrict input to numbers and semicolons
+                input.addEventListener("input", function () {
+                    const inputValue = input.value;
+                    const filteredValue = inputValue.replace(/[^0-9;]/g, ''); // Allow only numbers and semicolons
+                    input.value = filteredValue;
+                });
+
+                return input;
+            }
+
+    const form = document.getElementById("update-modal-form");
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Get the value from the "Aff ID" input field
+        const uTagsInput = document.getElementById("u_tags");
+        const uTagsValue = uTagsInput.value;
+
+        // Gather all values of input fields with the name "u_tags[]" into an array
+        const uTagsInputs = document.querySelectorAll('input[name="u_tags[]"]');
+        const uTagsValues = Array.from(uTagsInputs).map((input) => input.value);
+
+        // Combine the "Aff ID" value with the dynamically added tags
+        const allTags = [uTagsValue, ...uTagsValues];
+
+        const formData = {
+            u_tags: allTags,
+            u_url: $('#u_url').val(),
+            u_comment: $('#u_comment').val(),
+            u_active_id: $('#u_active_id').val(),
+        };
+
+        var base_url = "https://crm.tremendio.network/affactivedomain/update_modal";
+
+        $.ajax({
+            type: "POST",
+            url: base_url,
+            data: formData,
+            dataType: "json",
+            success: function (data) {
+                if (data.success) {
+                    $('#update-modal').modal('hide');
+                    Swal.fire({
+                        icon: 'info',
+                        text: data.message,
+                    }).then(function () {
+                        location.reload();
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        text: data.message,
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+                alert("An error occurred while updating the record. Please check the console for details.");
+            }
+        });
     });
 });
+// $(document).on('submit', '#update-modal-form', function (e) {
+//     e.preventDefault();
+
+//     var base_url = "https://crm.tremendio.network/affactivedomain/update_modal";
+    
+//     var formData = {
+   
+//         u_tags: $('#u_tags').val(),
+//         u_url: $('#u_url').val(),
+//         u_comment: $('#u_comment').val(),
+//         u_active_id: $('#u_active_id').val()
+//     };
+
+//     $.ajax({
+//         type: "POST",
+//         url: base_url,
+//         data: formData,
+//         dataType: "json", // Assuming you're returning JSON from the server
+//         success: function(data) {
+//                         if (data.success) {
+//                             $('#update-modal').modal('hide');
+//                             Swal.fire({
+//                                 icon: 'info',
+//                                 // title: 'Success',
+//                                 text: data.message,
+//                             }).then(function() {
+//                             // Reload the page
+//                             location.reload();
+//                             });
+//                         } else {
+//                             Swal.fire({
+//                                 icon: 'error',
+//                                 // title: 'Error',
+//                                 text: data.message,
+//                             });
+//                         }
+//                     },
+//         error: function(xhr, status, error) {
+//             console.error(xhr.responseText); // Log the actual error message
+//             alert("An error occurred while updating the record. Please check the console for details.");
+//         }
+//     });
+// });
 
 // Get the input element by its ID
 var inputElement = document.getElementById("u_tags");

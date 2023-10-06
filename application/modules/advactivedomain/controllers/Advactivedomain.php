@@ -191,13 +191,35 @@ private function fetchVirusTotalData($url, $apiKey)
 }
 
 
+// public function update_modal()
+// {
+//     $post = $this->input->post();
+
+//     $set = array(
+//         'url' => $post["u_url"],
+//         'tags' => $post["u_tags"],
+//         'comments' => $post["u_comment"],
+//     );
+
+//     $where = array("active_id" => $post["u_active_id"]);
+//     $update = $this->MY_Model->update("active_domain", $set, $where);
+
+//     if ($update) {
+//         $response = array('success' => true, 'message' => 'Updated Successfully.');
+        
+//     } else {
+//         $response = array('success' => false, 'message' => 'Update failed.');
+//     }
+
+//     echo json_encode($response);
+// }
 public function update_modal()
 {
     $post = $this->input->post();
 
     $set = array(
         'url' => $post["u_url"],
-        'tags' => $post["u_tags"],
+        'tags' => implode(';', $post["u_tags"]), // Convert the array to a comma-separated string
         'comments' => $post["u_comment"],
     );
 
@@ -206,7 +228,6 @@ public function update_modal()
 
     if ($update) {
         $response = array('success' => true, 'message' => 'Updated Successfully.');
-        
     } else {
         $response = array('success' => false, 'message' => 'Update failed.');
     }

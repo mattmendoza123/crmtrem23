@@ -77,13 +77,20 @@
                     <input type="hidden" class="form-control" id="u_active_id" name="u_active_id">
                     <input type="hidden" class="form-control" id="u_url" name="u_url">
                     <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label for="tags">Aff ID</label>
-                                <input id="u_tags" class="form-control" type="text" name="u_tags" value="" required/>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <label for="tags">Aff ID</label>
+                            <input id="u_tags" class="form-control" type="text" name="u_tags" value="" required/>
+                        </div>
+                        <div class="col-md-8">
+                            <div id="additional-tags-container">
+                                <!-- Additional text fields will be added here -->
                             </div>
                         </div>
                     </div>
+                    <button class="btn btn-primary add-button" type="button" id="add-tags-button"style="margin-top: 10px;">Add Aff ID</button>
+                    <button class="btn btn-danger remove-button" type="button" id="remove-tags-button" style="margin-top: 10px;">Remove Last Aff ID</button>
+                </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-12">
