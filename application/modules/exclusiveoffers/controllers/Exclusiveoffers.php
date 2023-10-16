@@ -17,7 +17,7 @@ class Exclusiveoffers extends MY_Controller
 		header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
         header("Access-Control-Allow-Headers: Content-Type, Authorization");
-		$data["title"] = "Exclusive Offers | Click ADV";
+		$data["title"] = "Exclusive Offers | Tremendio Portal";
 		$data["pagename"] = "Exclusive Offers";
 
 		$this->load_page2("exclusiveoffers", $data, "exclusiveoffers_footer.php", "exclusiveoffers_header.php");

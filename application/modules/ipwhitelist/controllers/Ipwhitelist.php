@@ -15,7 +15,7 @@ class Ipwhitelist extends MY_Controller
 	public function index()
 	{
 	
-		$data["title"] = "IP Whitelist | Click ADV";
+		$data["title"] = "IP Whitelist | Tremendio Portal";
 		$data["pagename"] = "IP Whitelist";
 
 		$this->load_page2("ipwhitelist", $data, "ipwhitelist_footer.php", "ipwhitelist_header.php");

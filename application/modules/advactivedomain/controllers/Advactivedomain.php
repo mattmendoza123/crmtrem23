@@ -30,7 +30,7 @@ class Advactivedomain extends MY_Controller
 	public function index()
 	{
 	
-		$data["title"] = "Active Domain | Click ADV";
+		$data["title"] = "Active Domain | Tremendio Portal";
 		$data["pagename"] = "Active Domain";
 
 		$this->load_page2("advactivedomain", $data, "advactivedomain_footer.php", "advactivedomain_header.php");

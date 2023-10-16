@@ -20,7 +20,7 @@ class Advlinkcheck extends MY_Controller
 		header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
         header("Access-Control-Allow-Headers: Content-Type, Authorization");
-		$data["title"] = "Link Check | Click ADV";
+		$data["title"] = "Link Check | Tremendio Portal";
 		$data["pagename"] = "Link Check";
 		$this->load_page2("advlinkcheck", $data, "advlinkcheck_footer.php", "advlinkcheck_header.php");
 

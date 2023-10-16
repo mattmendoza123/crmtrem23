@@ -30,7 +30,7 @@ class Adminactivedomain extends MY_Controller
 	public function index()
 	{
 	
-		$data["title"] = "Active Domain | Click ADV";
+		$data["title"] = "Active Domain | Tremendio Portal";
 		$data["pagename"] = "Active Domain";
 
 		$this->load_page2("adminactivedomain", $data, "adminactivedomain_footer.php", "adminactivedomain_header.php");

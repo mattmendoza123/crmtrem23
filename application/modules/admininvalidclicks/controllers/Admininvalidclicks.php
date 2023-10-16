@@ -20,7 +20,7 @@ class Admininvalidclicks extends MY_Controller
 		header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
         header("Access-Control-Allow-Headers: Content-Type, Authorization");
-		$data["title"] = "Invalid Clicks | Click ADV";
+		$data["title"] = "Invalid Clicks | Tremendio Portal";
 		$data["pagename"] = "Invalid Clicks";
 		
 		$this->load_page2("admininvalidclicks", $data, "admininvalidclicks_footer.php", "admininvalidclicks_header.php");

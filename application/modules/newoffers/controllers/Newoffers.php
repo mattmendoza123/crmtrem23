@@ -17,7 +17,7 @@ class Newoffers extends MY_Controller
 		header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
         header("Access-Control-Allow-Headers: Content-Type, Authorization");
-		$data["title"] = "New Offers | Click ADV";
+		$data["title"] = "New Offers | Tremendio Portal";
 		$data["pagename"] = "New Offers";
 
 		$this->load_page2("newoffers", $data, "newoffers_footer.php", "newoffers_header.php");

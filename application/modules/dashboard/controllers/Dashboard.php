@@ -15,7 +15,7 @@ class Dashboard extends MY_Controller
 	public function index()
 	{
 		// echo "<pre>";print_r($this->session->userdata());exit;
-		$data["title"] = "Dashboard | Click ADV";
+		$data["title"] = "Dashboard | Tremendio Portal";
 		$data["pagename"] = "Dashboard";
 	
 
