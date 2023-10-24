@@ -7,11 +7,13 @@
         </div>
     </div>
 </div> -->
-
 <?php
-if (extension_loaded('curl')) {
-    echo "cURL is installed and enabled.";
-} else {
-    echo "cURL is not installed or enabled.";
-}
+phpinfo();
+
+// <?php
+// if (extension_loaded('curl')) {
+//     echo "cURL is installed and enabled.";
+// } else {
+//     echo "cURL is not installed or enabled.";
+// }
 
