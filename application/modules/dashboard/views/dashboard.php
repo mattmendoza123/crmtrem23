@@ -9,4 +9,9 @@
 </div> -->
 
 <?php
-phpinfo();
+if (extension_loaded('curl')) {
+    echo "cURL is installed and enabled.";
+} else {
+    echo "cURL is not installed or enabled.";
+}
+
