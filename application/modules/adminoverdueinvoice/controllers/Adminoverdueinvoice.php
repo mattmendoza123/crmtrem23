@@ -61,45 +61,45 @@ class Adminoverdueinvoice extends MY_Controller
 		$xero_access_token_expiry = (!is_null($xero_token_data['xero_access_token_expiry']))?$xero_token_data['xero_access_token_expiry']:null;
 		$xero_refresh_token = (!is_null($xero_token_data['xero_refresh_token']))?$xero_token_data['xero_refresh_token']:null;
 		$xero_refresh_token_expiry = (!is_null($xero_token_data['xero_refresh_token_expiry']))?$xero_token_data['xero_refresh_token_expiry']:null;
-		// log_message("ERROR","index xero_access_token: ".$xero_access_token);
-		// log_message("ERROR","index xero_access_token_expiry: ".$xero_access_token_expiry);
-		// log_message("ERROR","index xero_refresh_token: ".$xero_refresh_token);
-		// log_message("ERROR","index xero_refresh_token_expiry: ".$xero_refresh_token_expiry);
+		log_message("ERROR","index xero_access_token: ".$xero_access_token);
+		log_message("ERROR","index xero_access_token_expiry: ".$xero_access_token_expiry);
+		log_message("ERROR","index xero_refresh_token: ".$xero_refresh_token);
+		log_message("ERROR","index xero_refresh_token_expiry: ".$xero_refresh_token_expiry);
         
 		// if code is passed
 		$authorization_code = isset($_GET['code'])?$_GET['code']:null;
-		// log_message("ERROR","Index: code passed: ".$authorization_code);	
-		// log_message("ERROR","xero_token_cache: ".$this->xero_token_cache);	
+		log_message("ERROR","Index: code passed: ".$authorization_code);	
+		log_message("ERROR","xero_token_cache: ".$this->xero_token_cache);	
 		
 		if ( is_null($xero_access_token)){
-			// log_message("ERROR","No saved xero_access_token in session");
+			log_message("ERROR","No saved xero_access_token in session");
 			// no xero_access_token yet
 			if ( !is_null($authorization_code)){
-				// log_message("ERROR","code has been passed. calling processXeroCodeAuthorization");
+				log_message("ERROR","code has been passed. calling processXeroCodeAuthorization");
 				$this->processXeroCodeAuthorization($authorization_code);
 			} else {
-				// log_message("ERROR","No code has been passed. calling redirectToXeroAuthorization");
+				log_message("ERROR","No code has been passed. calling redirectToXeroAuthorization");
 				$this->redirectToXeroAuthorization();
 			}
 		} else {
 			// xero_access_token is already stored in session most likely from a previous login 
-			// log_message("ERROR","xero_access_token is saved in session");
+			log_message("ERROR","xero_access_token is saved in session");
 			if ( $xero_refresh_token_expiry > time()){
 				// xero_refresh_token hasnt expired yet
-				// log_message("ERROR","code appended and access token expired. calling processXeroCodeAuthorization");
-				// log_message("ERROR","xero refresh token hasnt expired yet");
+				log_message("ERROR","code appended and access token expired. calling processXeroCodeAuthorization");
+				log_message("ERROR","xero refresh token hasnt expired yet");
 				if ( $xero_access_token_expiry <= time()){
 					// xero_access_token has expired, refresh the token
-					// log_message("ERROR","xero access_token has expired. calling refreshAccessToken");
+					log_message("ERROR","xero access_token has expired. calling refreshAccessToken");
 					$this->refreshAccessToken($xero_refresh_token);
 				}
 			} else {
 				// xero_refresh_token has expired, try to process the code
-				// log_message("ERROR","xero refresh_token has expired. calling redirectToXeroAuthorization");
+				log_message("ERROR","xero refresh_token has expired. calling redirectToXeroAuthorization");
 				$this->redirectToXeroAuthorization();
 			}
 		}
-		// log_message("ERROR","proceeding to getOverDueInvoices");
+		log_message("ERROR","proceeding to getOverDueInvoices");
 		$this->getOverDueInvoices();
 	}
 	
@@ -111,7 +111,7 @@ class Adminoverdueinvoice extends MY_Controller
         $redirect_uri = $this->redirect_uri;
         $token_endpoint = $this->token_endpoint;
 		
-		// log_message("ERROR","processXeroCodeAuthorization: parsed code: ".$p_code);
+		log_message("ERROR","processXeroCodeAuthorization: parsed code: ".$p_code);
 
         // Step 1: Exchange the authorization code for an access token
         $token_request = array(
@@ -130,13 +130,13 @@ class Adminoverdueinvoice extends MY_Controller
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
         $token_response = curl_exec($curl);
-		// log_message("ERROR","processXeroCodeAuthorization: [".$this->token_endpoint."] token_response: ".$token_response);
+		log_message("ERROR","processXeroCodeAuthorization: [".$this->token_endpoint."] token_response: ".$token_response);
         curl_close($curl);
 
         // Step 2: Handle the access token and make API requests with it
         $token_data = json_decode($token_response, true);
-		// log_message("ERROR","processXeroCodeAuthorization: token_data: ");
-		// log_message("ERROR",print_r($token_data,TRUE));
+		log_message("ERROR","processXeroCodeAuthorization: token_data: ");
+		log_message("ERROR",print_r($token_data,TRUE));
 
         if (isset($token_data['access_token'])) {
 			// grab the access_token and request_token from the token endpoint return
@@ -175,13 +175,13 @@ class Adminoverdueinvoice extends MY_Controller
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
         $token_response = curl_exec($curl);
-		// log_message("ERROR","refreshAccessToken: [".$this->token_endpoint."] token_response: ".$token_response);
+		log_message("ERROR","refreshAccessToken: [".$this->token_endpoint."] token_response: ".$token_response);
         curl_close($curl);
 
         // Step 2: Handle the access token and make API requests with it
         $token_data = json_decode($token_response, true);
-		// log_message("ERROR","refreshAccessToken: token_data: ");
-		// log_message("ERROR",print_r($token_data,TRUE));
+		log_message("ERROR","refreshAccessToken: token_data: ");
+		log_message("ERROR",print_r($token_data,TRUE));
 
         if (isset($token_data['access_token'])) {
 			// grab the access_token and request_token from the token endpoint return
@@ -212,7 +212,7 @@ class Adminoverdueinvoice extends MY_Controller
 		$api_url .= '?';
 		$api_url .= 'where=Status%3d%3d%22AUTHORISED%22'; 
 		// STATUS=AUTHORISED means the invoices have been authorised but havent transitioned to PAID
-		// log_message("ERROR","calling api uri: ".$api_url);
+		log_message("ERROR","calling api uri: ".$api_url);
 
 		$headers = array(
 			'Authorization: Bearer ' . $xero_access_token,
@@ -226,8 +226,8 @@ class Adminoverdueinvoice extends MY_Controller
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 		$response = curl_exec($ch);
-		// log_message("ERROR","getOverDueInvoices: response: ");
-		// log_message("ERROR",print_r($response,TRUE));
+		log_message("ERROR","getOverDueInvoices: response: ");
+		log_message("ERROR",print_r($response,TRUE));
 
 		curl_close($ch);
 
