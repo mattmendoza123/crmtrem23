@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Adminoverdueinvoice extends MY_Controller
+class Advoverdueinvoice extends MY_Controller
 {
 	private $errmsg = "";
     private $client_id;
@@ -23,9 +23,9 @@ class Adminoverdueinvoice extends MY_Controller
 		parent::__construct();
 		$this->load->helper('url');
         // Initialize your OAuth 2.0 credentials here
-        $this->client_id = 'BC643010220E48B18C53F1E354429CD3';
-        $this->client_secret = '2Ae237axhrfi_wnltUEMsmqzfEXhpC9wwaicwGb9uqQ3ypdj';
-        $this->redirect_uri = 'https://crm.tremendio.network/adminoverdueinvoice';
+        $this->client_id = '50FF234C609E491B80859DC78E47E073';
+        $this->client_secret = '65rSFT_nXfy8jIETo0PLL3i1zsUZjuoRnLrqvOLvgutshLbk';
+        $this->redirect_uri = 'https://crm.tremendio.network/advoverdueinvoice';
         $this->authorization_endpoint = 'https://login.xero.com/identity/connect/authorize';
         $this->token_endpoint = 'https://identity.xero.com/connect/token';
         $this->xero_tenant_id = '1fc215e9-9c6c-46f6-a64e-4a2956d61ef7';
@@ -44,7 +44,7 @@ class Adminoverdueinvoice extends MY_Controller
 				break;
 			}
 		}
-        $this->xero_token_cache = $application_folder."/cache/xero_token";
+        $this->xero_token_cache = $application_folder."/cache/advxero_token";
 		$this->encrypt_method = "AES-256-CBC";
 		$this->secret_key = 'b81c3536aeba40bc2e5cb8334141163a';
 		$this->secret_iv = '16586c4284cc2666d72ec378e546db06';
@@ -278,7 +278,7 @@ class Adminoverdueinvoice extends MY_Controller
 		// to make it consumable by datatables jquery
 		// overdueinvoice_footer has the jquery code to convert that json into a javascript object to push into the datatable
 		$data['overdue_invoice_list_json'] = json_encode($overdue_invoices);
-		$this->load_page2("adminoverdueinvoice", $data, "adminoverdueinvoice_footer.php", "adminoverdueinvoice_header.php");
+		$this->load_page2("advoverdueinvoice", $data, "advoverdueinvoice_footer.php", "advoverdueinvoice_header.php");
 	}
 
     private function redirectToXeroAuthorization()
