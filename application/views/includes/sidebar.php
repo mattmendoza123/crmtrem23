@@ -115,6 +115,7 @@
                         <li> <a class="waves-effect" href="<?= base_url("admininvalidclicks") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Invalid Clicks</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("adminactivedomain") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Active Domain</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("adminoverdueinvoice") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Overdue Invoice</span></a></li>
+                        <li> <a class="waves-effect" href="<?= base_url("webassets") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Web Assets</span></a></li>
                     </li>
                 </ul>
             <?php } ?>
