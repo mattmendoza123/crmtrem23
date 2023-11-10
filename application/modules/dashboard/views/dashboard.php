@@ -1,4 +1,4 @@
-<div class="page-wrapper">
+<!-- <div class="page-wrapper">
     <div class="container-fluid">
         <div class="row page-titles">
             <div class="col-md-12 align-self-center">
@@ -6,14 +6,10 @@
             </div>
         </div>
     </div>
-</div>
-<!-- <//?php
-phpinfo(); -->
+</div> -->
+<?php
+phpinfo();
+?>
 
- <!-- <//?php
-if (extension_loaded('curl')) {
-    echo "cURL is installed and enabled.";
-} else {
-    echo "cURL is not installed or enabled.";
-} -->
+
 
