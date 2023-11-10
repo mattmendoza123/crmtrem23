@@ -144,7 +144,7 @@ class Webassets extends MY_Controller
         }
         if (!is_dir($dirname))
         {
-            mkdir($dirname, 0755, true);
+            mkdir($dirname, 0777, true);
         }
         $temp_file_stream = fopen($this->webassets_list, 'w');
         fwrite($temp_file_stream, json_encode($final_domain_list));
@@ -257,7 +257,7 @@ public function update_modal()
         }
 
         if (!is_dir($dirname)) {
-            mkdir($dirname, 0755, true);
+            mkdir($dirname, 0777, true);
         }
 
         $temp_file_stream = fopen($this->webassets_list, 'w');
