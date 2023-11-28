@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row page-titles">
             <div class="col-md-12 align-self-center">
-                <h3 class="text-themecolor">Dashboard Matt</h3>
+                <h3 class="text-themecolor">Dashboard</h3>
             </div>
         </div>
     </div>
