@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Add an event listener to restrict input to numbers and semicolons
                 input.addEventListener("input", function () {
                     const inputValue = input.value;
-                    const filteredValue = inputValue.replace(/[^0-9;]/g, ''); // Allow only numbers and semicolons
+                    const filteredValue = inputValue.replace(/[^0-9;NA\-_.,?!@#$%^&*()+=<>\/]/g, ''); // Allow numbers, semicolons, 'N', 'A', '/', and specified symbols
                     input.value = filteredValue;
                 });
 
@@ -339,7 +339,7 @@ inputElement.addEventListener("input", function(event) {
     var inputValue = event.target.value;
 
     // Use a regular expression to allow only numbers and semicolon
-    var numbersAndSemicolonOnly = inputValue.replace(/[^0-9;]/g, '');
+    var numbersAndSemicolonOnly = inputValue.replace(/[^0-9;NA\-_.,?!@#$%^&*()+=<>\/]/g, ''); // Allow numbers, semicolons, 'N', 'A', '/', and specified symbols
 
     // Update the input value with only numbers and semicolon
     event.target.value = numbersAndSemicolonOnly;
