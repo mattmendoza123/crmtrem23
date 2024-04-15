@@ -1,4 +1,4 @@
-<!-- <div class="page-wrapper">
+<div class="page-wrapper">
     <div class="container-fluid">
         <div class="row page-titles">
             <div class="col-md-12 align-self-center">
@@ -6,10 +6,10 @@
             </div>
         </div>
     </div>
-</div> -->
-<?php
+</div>
+<!-- <//?php
 phpinfo();
-?>
+?> -->
 
 
 
