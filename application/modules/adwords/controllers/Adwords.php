@@ -2,7 +2,7 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 
-require APPPATH. '/third_party/googleads-php-lib/vendor/autoload.php';
+require APPPATH. 'third_party/googleads-php-lib/vendor/autoload.php';
 
 use Google\AdsApi\AdManager\AdManagerSession;
 use Google\AdsApi\AdManager\AdManagerSessionBuilder;
