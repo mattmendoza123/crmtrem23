@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="vendor/autoload.php" colors="true" convertWarningsToExceptions="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  <coverage>
+    <include>
+      <directory suffix=".php">src/Google/AdsApi</directory>
+    </include>
+    <exclude>
+      <directory suffix=".php">src/Google/AdsApi/AdManager/v*</directory>
+    </exclude>
+    <report>
+      <text outputFile="php://stdout"/>
+    </report>
+  </coverage>
+  <testsuites>
+    <testsuite name="all-tests">
+      <directory>tests/Google/AdsApi</directory>
+    </testsuite>
+  </testsuites>
+  <logging />
+</phpunit>
