@@ -1,5 +1,6 @@
 ### Composer ###
 composer.phar
+/vendor/
 
 # Ignore a library lock file https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies
 composer.lock
