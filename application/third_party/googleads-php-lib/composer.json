@@ -2,7 +2,7 @@
   "name": "googleads/googleads-php-lib",
   "description": "Google Ad Manager SOAP API Client Library for PHP",
   "require": {
-    "php": ">=8",
+    "php": ">=7.4",
     "ext-mbstring": "*",
     "ext-openssl": "*",
     "ext-soap": "*",
@@ -11,9 +11,12 @@
     "guzzlehttp/psr7": "^1.7 || ^2.0",
     "monolog/monolog": "2.x-dev",
     "phpdocumentor/reflection-docblock": "*",
-    "symfony/serializer": "v6.0.0",
-    "symfony/deprecation-contracts" :"3.0.x-dev",
-    "ext-json": "*"
+    "symfony/serializer": "5.4.x-dev",
+    "symfony/deprecation-contracts" :"2.5.x-dev",
+    "ext-json": "*",
+    "psr/cache" : "1.0.1",
+    "psr/log" : "1.1.4",
+    "doctrine/instantiator": "1.5.x-dev"
   },
   "require-dev": {
     "phpunit/phpunit": "9.6.x-dev",

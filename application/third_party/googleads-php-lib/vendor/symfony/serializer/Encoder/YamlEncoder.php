@@ -40,7 +40,7 @@ class YamlEncoder implements EncoderInterface, DecoderInterface
         self::YAML_FLAGS => 0,
     ];
 
-    public function __construct(Dumper $dumper = null, Parser $parser = null, array $defaultContext = [])
+    public function __construct(?Dumper $dumper = null, ?Parser $parser = null, array $defaultContext = [])
     {
         if (!class_exists(Dumper::class)) {
             throw new RuntimeException('The YamlEncoder class requires the "Yaml" component. Install "symfony/yaml" to use it.');
@@ -54,7 +54,7 @@ class YamlEncoder implements EncoderInterface, DecoderInterface
     /**
      * {@inheritdoc}
      */
-    public function encode(mixed $data, string $format, array $context = []): string
+    public function encode($data, string $format, array $context = [])
     {
         $context = array_merge($this->defaultContext, $context);
 
@@ -68,7 +68,7 @@ class YamlEncoder implements EncoderInterface, DecoderInterface
     /**
      * {@inheritdoc}
      */
-    public function supportsEncoding(string $format): bool
+    public function supportsEncoding(string $format)
     {
         return self::FORMAT === $format || self::ALTERNATIVE_FORMAT === $format;
     }
@@ -76,7 +76,7 @@ class YamlEncoder implements EncoderInterface, DecoderInterface
     /**
      * {@inheritdoc}
      */
-    public function decode(string $data, string $format, array $context = []): mixed
+    public function decode(string $data, string $format, array $context = [])
     {
         $context = array_merge($this->defaultContext, $context);
 
@@ -86,7 +86,7 @@ class YamlEncoder implements EncoderInterface, DecoderInterface
     /**
      * {@inheritdoc}
      */
-    public function supportsDecoding(string $format): bool
+    public function supportsDecoding(string $format)
     {
         return self::FORMAT === $format || self::ALTERNATIVE_FORMAT === $format;
     }

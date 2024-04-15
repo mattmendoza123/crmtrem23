@@ -45,7 +45,7 @@ final class CompiledClassMetadataFactory implements ClassMetadataFactoryInterfac
     /**
      * {@inheritdoc}
      */
-    public function getMetadataFor(string|object $value): ClassMetadataInterface
+    public function getMetadataFor($value): ClassMetadataInterface
     {
         $className = \is_object($value) ? \get_class($value) : $value;
 
@@ -73,7 +73,7 @@ final class CompiledClassMetadataFactory implements ClassMetadataFactoryInterfac
     /**
      * {@inheritdoc}
      */
-    public function hasMetadataFor(mixed $value): bool
+    public function hasMetadataFor($value): bool
     {
         $className = \is_object($value) ? \get_class($value) : $value;
 

@@ -43,7 +43,7 @@ class AnnotationLoader implements LoaderInterface
 
     private $reader;
 
-    public function __construct(Reader $reader = null)
+    public function __construct(?Reader $reader = null)
     {
         $this->reader = $reader;
     }
@@ -51,7 +51,7 @@ class AnnotationLoader implements LoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function loadClassMetadata(ClassMetadataInterface $classMetadata): bool
+    public function loadClassMetadata(ClassMetadataInterface $classMetadata)
     {
         $reflectionClass = $classMetadata->getReflectionClass();
         $className = $reflectionClass->name;
@@ -100,9 +100,13 @@ class AnnotationLoader implements LoaderInterface
                 continue;
             }
 
+            if (0 === stripos($method->name, 'get') && $method->getNumberOfRequiredParameters()) {
+                continue; /*  matches the BC behavior in `Symfony\Component\Serializer\Normalizer\ObjectNormalizer::extractAttributes` */
+            }
+
             $accessorOrMutator = preg_match('/^(get|is|has|set)(.+)$/i', $method->name, $matches);
             if ($accessorOrMutator) {
-                $attributeName = lcfirst($matches[2]);
+                $attributeName = $reflectionClass->hasProperty($method->name) ? $method->name : lcfirst($matches[2]);
 
                 if (isset($attributesMetadata[$attributeName])) {
                     $attributeMetadata = $attributesMetadata[$attributeName];
@@ -134,7 +138,9 @@ class AnnotationLoader implements LoaderInterface
 
                     $attributeMetadata->setSerializedName($annotation->getSerializedName());
                 } elseif ($annotation instanceof Ignore) {
-                    $attributeMetadata->setIgnore(true);
+                    if ($accessorOrMutator) {
+                        $attributeMetadata->setIgnore(true);
+                    }
                 } elseif ($annotation instanceof Context) {
                     if (!$accessorOrMutator) {
                         throw new MappingException(sprintf('Context on "%s::%s()" cannot be added. Context can only be added on methods beginning with "get", "is", "has" or "set".', $className, $method->name));
@@ -155,9 +161,11 @@ class AnnotationLoader implements LoaderInterface
      */
     public function loadAnnotations(object $reflector): iterable
     {
-        foreach ($reflector->getAttributes() as $attribute) {
-            if ($this->isKnownAttribute($attribute->getName())) {
-                yield $attribute->newInstance();
+        if (\PHP_VERSION_ID >= 80000) {
+            foreach ($reflector->getAttributes() as $attribute) {
+                if ($this->isKnownAttribute($attribute->getName())) {
+                    yield $attribute->newInstance();
+                }
             }
         }
 

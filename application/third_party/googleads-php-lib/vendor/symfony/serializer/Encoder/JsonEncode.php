@@ -32,9 +32,11 @@ class JsonEncode implements EncoderInterface
     }
 
     /**
+     * Encodes PHP data to a JSON string.
+     *
      * {@inheritdoc}
      */
-    public function encode(mixed $data, string $format, array $context = []): string
+    public function encode($data, string $format, array $context = [])
     {
         $options = $context[self::OPTIONS] ?? $this->defaultContext[self::OPTIONS];
 
@@ -44,7 +46,7 @@ class JsonEncode implements EncoderInterface
             throw new NotEncodableValueException($e->getMessage(), 0, $e);
         }
 
-        if (\JSON_THROW_ON_ERROR & $options) {
+        if (\PHP_VERSION_ID >= 70300 && (\JSON_THROW_ON_ERROR & $options)) {
             return $encodedJson;
         }
 
@@ -58,7 +60,7 @@ class JsonEncode implements EncoderInterface
     /**
      * {@inheritdoc}
      */
-    public function supportsEncoding(string $format): bool
+    public function supportsEncoding(string $format)
     {
         return JsonEncoder::FORMAT === $format;
     }

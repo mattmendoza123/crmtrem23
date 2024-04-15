@@ -50,7 +50,7 @@ class LoaderChain implements LoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function loadClassMetadata(ClassMetadataInterface $metadata): bool
+    public function loadClassMetadata(ClassMetadataInterface $metadata)
     {
         $success = false;
 
@@ -64,7 +64,7 @@ class LoaderChain implements LoaderInterface
     /**
      * @return LoaderInterface[]
      */
-    public function getLoaders(): array
+    public function getLoaders()
     {
         return $this->loaders;
     }
