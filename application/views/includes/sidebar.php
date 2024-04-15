@@ -107,6 +107,7 @@
                                 }  ?>">
                         <li> <a class="waves-effect" href="<?= base_url("dashboard") ?>" aria-expanded="false"><i class="fas fa-tachometer-alt" style="color: #fff;"></i><span class="hide-menu">Dashboard</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("manageadmin") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Manage Access</span></a></li>
+                        <li> <a class="waves-effect" href="<?= base_url("scaleo") ?>" aria-expanded="false"><i class="fas fa-chart-bar" style="color: #fff;"></i><span class="hide-menu">Scaleo Campaign</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("admincrmads") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM Advertiser</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("admincrmaff") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM Affiliate</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("ipwhitelist") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">IP Whitelist</span></a></li>
