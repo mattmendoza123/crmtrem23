@@ -101,10 +101,10 @@
                             </div>   
                             <div class="row totalWrap">
                                 <div class="col-12">
-                                    <label>Total Revenue :   </label><?=$total_revenue;?>  <br/>                            
-                                    <label> Total Conversions : </label><?=$total_conversions?>    
-                                </div>                              
-                            </div>
+                                        <label>Total Revenue :&nbsp;</label><?=$total_revenue;?>  <br/>                            
+                                        <label> Total Conversions : &nbsp;</label><?=$total_conversions?>    
+                                    </div>                          
+                                </div>
                             <div class="rowWrap">      
                                 <?php if($num_offers == 0) { echo "<h1>No Offers Found</h1>"; } ;?>
                                 <?php                                                                                     
