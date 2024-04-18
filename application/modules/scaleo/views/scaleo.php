@@ -14,9 +14,12 @@
     label{
         font-weight:bold;
     }
-    h1{
+    h1,h2{
         font-size:20px;
         padding-right:10px;
+    }
+    h2{
+        font-size:18px;
     }
     .rowWrap{
         padding:40px 20px 20px 62px;
@@ -27,6 +30,14 @@
     button#refresh {
         height: 35px;
         margin-left: 10px;
+    }
+    .totalWrap{
+        padding:0px 15px 0px 53px;
+    }
+    .totalWrap .col-12 {
+        border: 1px solid #d1d5d7;
+        border-radius: 4px;
+        padding:10px 10px 0px;
     }
     @media only screen
     and (min-width: 200px)
@@ -52,7 +63,7 @@
     <div class="container-fluid">
         <div class="row page-titles">
             <div class="col-md-5 align-self-center">
-                <h3 class="text-themecolor page-title-text">Review site</h3>
+                <h3 class="text-themecolor page-title-text">Scaleo Campaign</h3>
             </div>
         </div>
         <div class="row">
@@ -88,6 +99,12 @@
                                 </div>
                                 <div class="col-1"></div>                          
                             </div>   
+                            <div class="row totalWrap">
+                                <div class="col-12">
+                                    <label>Total Revenue :   </label><?=$total_revenue;?>  <br/>                            
+                                    <label> Total Conversions : </label><?=$total_conversions?>    
+                                </div>                              
+                            </div>
                             <div class="rowWrap">      
                                 <?php if($num_offers == 0) { echo "<h1>No Offers Found</h1>"; } ;?>
                                 <?php                                                                                     
@@ -102,11 +119,11 @@
                                                         
                                                     <label> QTY/Approved</label> : '.$data->cv_approved.'<br/>
                                                     <label> Total Revenue</label> : '.$data->total_revenue.'<br/>
-                                                    <label> EPC</label> : '.$data->epc.'<br/>
+                                                   
                                                 </div>';
                                             echo "</div>";
                                             echo "<div class='col-6'>";
-                                            echo    '<div id="barChart'.$i.'" style="height: 300px; width: 95%;"></div>';
+                                            echo    '<div id="barChart'.$i.'" style="height: 228px; width: 50%;"></div>';
                                             echo "</div></div>";
                                         echo "</div>";
                                         echo "</div>";         

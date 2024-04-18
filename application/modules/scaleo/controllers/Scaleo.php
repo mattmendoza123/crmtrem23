@@ -51,6 +51,8 @@ class Scaleo extends MY_Controller
 		
 		$offer_arr = [];
 		$offer = [];
+		$total_revenue = 0;
+		$total_conversions = 0;
 		foreach($newreporst_api['info']['rows']['rows'] as $row=>$report){
 			$offer_name = $this->mapOffers($report['offer']['value']);
 			if($offer_name!=""){
@@ -67,10 +69,14 @@ class Scaleo extends MY_Controller
 											['value' => $report['epc'] , 'x' => "EPC"]]
 							]; 			
 					array_push($offer_arr,$offer);
-				}
+					$total_revenue += $report['total_revenue'];
+					$total_conversions += $report['cv_approved'];
+			}
 		}
 		//TAB 1	
 		$data['tab_per_offer_data'] = json_encode($offer_arr);
+		$data['total_revenue'] = $total_revenue;	
+		$data['total_conversions'] = $total_conversions;	
 		$data['num_offers'] = count($offer);		
 		
 			
