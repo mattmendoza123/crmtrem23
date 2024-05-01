@@ -10,6 +10,7 @@
 
 
     // Users > Table
+   
     $(document).ready(function(e) {
         var filter_crm_type = "";
         var base_url = "<?php echo base_url(); ?>";
@@ -33,7 +34,39 @@
                 url: base_url + 'admincrmads/get_crmadslist',
                 type: 'POST',
             },
-        });
+            initComplete: function () {
+                this.api()
+                    .columns()
+                    .every(function () {
+                        let column = this;
+                        let title = column.footer().textContent;
+                       
+                        if(title !="Action"){
+                          // Create select element
+                          let select = document.createElement('select');
+                          select.className = "form-control";
+                          select.add(new Option(''));
+                          column.footer().replaceChildren(select);
+          
+                          // Apply listener for user change in value
+                          select.addEventListener('change', function () {
+                              column
+                                  .search(select.value, {exact: true})
+                                  .draw();
+                          });
+          
+                          // Add list of options
+                          column
+                              .data()
+                              .unique()
+                              .sort()
+                              .each(function (d, j) {
+                                  select.add(new Option(d));
+                              });
+                        }
+                    });
+            }
+        });          
     });
 
 
