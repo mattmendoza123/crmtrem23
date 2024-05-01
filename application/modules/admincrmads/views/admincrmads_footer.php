@@ -68,7 +68,7 @@
             }
         });          
     });
-
+    console.log('here..')
 
     $(document).on('click', '.edit-crmads', function(e) {
         e.preventDefault();
