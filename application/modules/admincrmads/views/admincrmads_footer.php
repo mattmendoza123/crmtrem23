@@ -14,7 +14,8 @@
     $(document).ready(function(e) {
         var filter_crm_type = "";
         var base_url = "<?php echo base_url(); ?>";
-        var data_table = $('#crmads_datatable').DataTable({
+        var ads_tags = [];
+        var data_table = $('#crmads_datatable').DataTable({         
             // "pageLength": 10,
             // "serverSide": true,
             "pageLength": 10,
@@ -32,7 +33,7 @@
             ],
             "ajax": {
                 url: base_url + 'admincrmads/get_crmadslist',
-                type: 'POST',
+                type: 'POST'                
             },
             initComplete: function () {
                 this.api()
@@ -68,8 +69,8 @@
             }
         });          
     });
-    console.log('here..')
 
+    console.log("hello");
     $(document).on('click', '.edit-crmads', function(e) {
         e.preventDefault();
 
