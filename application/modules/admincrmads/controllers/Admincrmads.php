@@ -176,18 +176,37 @@ class Admincrmads extends MY_Controller
 				$tm->date_created,
 				$action_btn
 			);
+			
 		}
 
 		$output = array(
 			"draw" => $draw,
 			"recordsTotal" => $crmads->num_rows(),
 			"recordsFiltered" => $crmads->num_rows(),
-			"data" => $data
+			"data" => $data, 
+			"ads_tags"=> $this->makeOptions("ads_tags",$crmads->result() )
 		);
 		echo json_encode($output);
 		exit();
 	}
-
+	public function makeOptions($field,$optionData){
+		$option_arr = [];
+		$option_list = [];
+		foreach ($optionData as $key => $value) {		
+			$option_list = explode(",",$value->$field);
+			if(count($option_list) > 0){
+				foreach($option_list as $ol){
+					if(!in_array($ol,$option_arr)){	
+						$option_arr[] = trim($ol);
+					}
+				}
+			}
+			if(!in_array($value->$field,$option_arr)){	
+				$option_arr[] = trim($value->$field);
+			}
+		}
+		return $option_arr;
+	}
 	public function get_crmads($id = '')
 	{
 		$result = $this->db

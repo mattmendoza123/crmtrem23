@@ -14,7 +14,6 @@
     $(document).ready(function(e) {
         var filter_crm_type = "";
         var base_url = "<?php echo base_url(); ?>";
-        var ads_tags = [];
         var data_table = $('#crmads_datatable').DataTable({         
             // "pageLength": 10,
             // "serverSide": true,
