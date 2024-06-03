@@ -12,6 +12,7 @@
     // Users > Table
    
     $(document).ready(function(e) {
+      console.log("_____")
         var filter_crm_type = "";
         var base_url = "<?php echo base_url(); ?>";
         var data_table = $('#crmads_datatable').DataTable({         
