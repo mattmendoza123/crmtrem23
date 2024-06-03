@@ -41,6 +41,7 @@
                     .every(function () {
                         let column = this;
                         let title = column.footer().textContent;
+                        console.log(column,this);
                        
                         if(title !="Action"){
                           // Create select element
