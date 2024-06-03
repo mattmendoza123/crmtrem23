@@ -15,8 +15,7 @@
       console.log("_____")
         var filter_crm_type = "";
         var base_url = "<?php echo base_url(); ?>";
-        var data_table = $('#crmads_datatable').DataTable({         
-            // "pageLength": 10,
+        var data_table = $('#crmads_datatable').DataTable({                    
             // "serverSide": true,
             "pageLength": 10,
             // "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
@@ -36,6 +35,7 @@
                 type: 'POST'                
             },
             initComplete: function () {
+              console.log('complete data')
                 this.api()
                     .columns()
                     .every(function () {
