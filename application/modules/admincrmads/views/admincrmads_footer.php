@@ -40,8 +40,9 @@
                     .columns()
                     .every(function () {
                         let column = this;
-                        let title = column.footer().textContent();
-                        console.log(column,this);
+                        console.log(column);
+                        let title = column.footer().textContent;
+                       
                        
                         if(title !="Action"){
                           // Create select element
