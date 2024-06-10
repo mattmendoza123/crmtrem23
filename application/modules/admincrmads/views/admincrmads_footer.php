@@ -25,7 +25,7 @@ a#dateSearch {
         var filter_crm_type = "";
         var base_url = "<?php echo base_url(); ?>";
         var data_table = $('#crmads_datatable').DataTable({                    
-            // "serverSide": true,
+             "serverSide": true,
             "pageLength": 10,
             // "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
             "processing": true,
@@ -42,9 +42,7 @@ a#dateSearch {
             "ajax": {
                 url: base_url + 'admincrmads/get_crmadslist',
                 data: { from_date : $("#from_date").val(), to_date:  $("#to_date").val() },
-                type: "POST",
-                processing: true,
-                serverSide: true       
+                type: "POST",              
             },
             initComplete: function () {              
               $("#crmads_datatable_filter label").before("<label>Date</label> : <input type='date' id='from_date'/> to <input type='date' id='to_date'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
