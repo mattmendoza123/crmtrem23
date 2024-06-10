@@ -49,7 +49,7 @@ a#dateSearch {
             },
             initComplete: function () {
               console.log('complete data')
-              $("#crmads_datatable_filter label").before("<label>Date</label> : <input type='date' id='from_date'/> to <input type='date' id='to_date'/> <a class='btn btn-xs' href='' id='dateSearch'><i class='fa fa-search'></i></a>  ");
+              $("#crmads_datatable_filter label").before("<label>Date</label> : <input type='date' id='from_date'/> to <input type='date' id='to_date'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
                 this.api()
                     .columns()
                     .every(function () {
