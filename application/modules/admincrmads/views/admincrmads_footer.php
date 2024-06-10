@@ -39,10 +39,9 @@ a#dateSearch {
             "order": [
                 [0, "asc"]
             ],
-            "ajax": {
+            ajax: {
                 url: base_url + 'admincrmads/get_crmadslist/',
-                //data: { from_date : $("#from_date").val(), to_date:  $("#to_date").val() },
-                data: function ( d ) { d.extra_search = $('#extra').val();},
+                data: { from_date : $("#from_date").val(), to_date:  $("#to_date").val() },               
                 type: "POST",              
             },
             initComplete: function () {              
