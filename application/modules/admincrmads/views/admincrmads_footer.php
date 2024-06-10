@@ -17,12 +17,12 @@ a#dateSearch {
 <script type="text/javascript">
 
     $(document).ready(function(e) {
-        get_crmAddlists();
-        $("#dateSearch").click(function(){
+      get_crmAddlists();
+        
+      jQuery("#dateSearch").click(function(){  
         console.log("dateSearch");
-        e.preventDefault();
-        get_crmAddlists();
-      });
+        
+        get_crmAddlists();});
     });
    
     function get_crmAddlists(){
