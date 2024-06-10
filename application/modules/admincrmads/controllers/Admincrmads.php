@@ -184,7 +184,8 @@ class Admincrmads extends MY_Controller
 			"recordsTotal" => $crmads->num_rows(),
 			"recordsFiltered" => $crmads->num_rows(),
 			"data" => $data, 
-			"ads_tags"=> $this->makeOptions("ads_tags",$crmads->result() ),			
+			"ads_tags"=> $this->makeOptions("ads_tags",$crmads->result() ),		
+			"data"=> json_encode($_REQUEST),	
 		);
 		echo json_encode($output);
 		exit();
