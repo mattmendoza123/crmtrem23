@@ -45,7 +45,7 @@ a#dateSearch {
             initComplete: function () {              
               $("#crmads_datatable_filter label").before("<label>Date</label> : <input type='date' id='from_date'/> to <input type='date' id='to_date'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
               jQuery("#dateSearch").click(function(){  
-                    console.log("dateSearch");        
+                    console.log("dateSearch",$("#from_date").val(),$("#to_date").val());                                    
                     get_crmAddlists();
               });       
               this.api()
