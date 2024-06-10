@@ -21,7 +21,8 @@ a#dateSearch {
     });
    
     function get_crmAddlists(){
-      var filter_crm_type = "";
+        $('#crmads_datatable').DataTable().clear().destroy();
+        var filter_crm_type = "";
         var base_url = "<?php echo base_url(); ?>";
         var data_table = $('#crmads_datatable').DataTable({                    
             // "serverSide": true,
