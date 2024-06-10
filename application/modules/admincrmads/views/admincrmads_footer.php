@@ -21,6 +21,7 @@ a#dateSearch {
     });
     $("#dateSearch").click(function(){
       console.log("dateSearch");
+      e.preventDefault();
        get_crmAddlists();
     });
     function get_crmAddlists(){
