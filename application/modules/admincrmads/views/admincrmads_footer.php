@@ -42,7 +42,7 @@ a#dateSearch {
             "ajax": {
                 url: base_url + 'admincrmads/get_crmadslist',
                 data: { from_date : $("#from_date").val(), to_date:  $("#to_date").val() },
-                type: 'POST'                
+                method: "POST",           
             },
             initComplete: function () {              
               $("#crmads_datatable_filter label").before("<label>Date</label> : <input type='date' id='from_date'/> to <input type='date' id='to_date'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
