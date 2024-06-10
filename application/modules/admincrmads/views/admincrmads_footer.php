@@ -11,7 +11,9 @@
     $(document).ready(function(e) {
         get_crmAddlists();
     });
-
+    $("#dateSearch").click(function(){
+       get_crmAddlists();
+    });
     function get_crmAddlists(){
       var filter_crm_type = "";
         var base_url = "<?php echo base_url(); ?>";
@@ -32,11 +34,12 @@
             ],
             "ajax": {
                 url: base_url + 'admincrmads/get_crmadslist',
+                data: { from_date : $("#from_date").val(), to_date:  $("#to_date").val() }
                 type: 'POST'                
             },
             initComplete: function () {
               console.log('complete data')
-              $("#crmads_datatable_filter label").before("<label>Date</label> : <input type='date' id='from_date'/> to <input type='date' id='to_date'/> <input type='button' id='dateSearch' value='submit'/>");
+              $("#crmads_datatable_filter label").before("<label>Date</label> : <input type='date' id='from_date'/> to <input type='date' id='to_date'/> <a class='btn btn-xs view-crmads' href='javascript:void()' id='dateSearch'><i class='fa fa-search'></i></a>");
                 this.api()
                     .columns()
                     .every(function () {
