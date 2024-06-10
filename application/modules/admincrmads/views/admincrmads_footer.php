@@ -43,7 +43,7 @@
                         console.log(column);
                         let title = column.footer().textContent;
                        
-                       
+                        $("#crmads_datatable_filter").append("<input type='date'/>");
                         if(title !="Action"){
                           // Create select element
                           let select = document.createElement('select');
