@@ -6,20 +6,14 @@
 <script src="<?= base_url() . "assets"; ?>/js/calcheight.min.js"></script>
 <script src="<?= base_url() . "assets"; ?>/js/table2csv.js"></script>
 <script src="<?= base_url() . "assets"; ?>/js/multiselect-dropdown.js"></script>
-<style type="text/css">
-  .dateFilter {
-    width: 61%;    
-    float: left;
- }
-</style>
 <script type="text/javascript">
 
-
-    // Users > Table
-   
     $(document).ready(function(e) {
-      console.log("_____")
-        var filter_crm_type = "";
+        get_crmAddlists();
+    });
+
+    function get_crmAddlists(){
+      var filter_crm_type = "";
         var base_url = "<?php echo base_url(); ?>";
         var data_table = $('#crmads_datatable').DataTable({                    
             // "serverSide": true,
@@ -42,7 +36,7 @@
             },
             initComplete: function () {
               console.log('complete data')
-              $("#crmads_datatable_filter label").before("<label>Date</label> : <input type='date' id='from_date'/> to <inpu type='date' id='to_date'/>&nbsp;&nbsp;");
+              $("#crmads_datatable_filter label").before("<label>Date</label> : <input type='date' id='from_date'/> to <input type='date' id='to_date'/> <input type='button' id='dateSearch' value='submit'/>");
                 this.api()
                     .columns()
                     .every(function () {
@@ -75,8 +69,8 @@
                         }
                     });
             }
-        });          
-    });
+        });     
+    }
 
     console.log("hello");
     $(document).on('click', '.edit-crmads', function(e) {
