@@ -25,7 +25,7 @@ a#dateSearch {
         var filter_crm_type = "";
         var base_url = "<?php echo base_url(); ?>";
         var data_table = $('#crmads_datatable').DataTable({                    
-             "serverSide": true,
+           //  "serverSide": true,
             "pageLength": 10,
             // "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
             "processing": true,
