@@ -63,8 +63,7 @@ class Admincrmads extends MY_Controller
 
 	public function get_crmadslist()
 	{
-		
-		print_r($_REQUEST);
+				
 		$draw = intval($this->input->post("draw"));
 		$start = intval($this->input->post("start"));
 		$length = intval($this->input->post("length"));
