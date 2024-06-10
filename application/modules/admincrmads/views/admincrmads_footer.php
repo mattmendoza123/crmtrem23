@@ -6,6 +6,12 @@
 <script src="<?= base_url() . "assets"; ?>/js/calcheight.min.js"></script>
 <script src="<?= base_url() . "assets"; ?>/js/table2csv.js"></script>
 <script src="<?= base_url() . "assets"; ?>/js/multiselect-dropdown.js"></script>
+<style type="text/css">
+  .dateFilter {
+    width: 61%;    
+    float: left;
+ }
+</style>
 <script type="text/javascript">
 
 
@@ -36,7 +42,7 @@
             },
             initComplete: function () {
               console.log('complete data')
-              $("#crmads_datatable_filter").before("<div class='dateFilter'><label>Date</label> : <input type='date'/></div>");
+              $("#crmads_datatable_filter label").before("<div class='dateFilter'><label>Date</label> : <input type='date'/></div>");
                 this.api()
                     .columns()
                     .every(function () {
