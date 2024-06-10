@@ -18,11 +18,7 @@ a#dateSearch {
 
     $(document).ready(function(e) {
       get_crmAddlists();
-        
-      jQuery("#dateSearch").click(function(){  
-        console.log("dateSearch");
-        
-        get_crmAddlists();});
+              
     });
    
     function get_crmAddlists(){
@@ -82,11 +78,16 @@ a#dateSearch {
                               });
                         }
                     });
+
+                  
             }
         });     
     }
 
-    console.log("hello");
+    jQuery("#dateSearch").click(function(){  
+          console.log("dateSearch");        
+          get_crmAddlists();
+    });
     $(document).on('click', '.edit-crmads', function(e) {
         e.preventDefault();
 
