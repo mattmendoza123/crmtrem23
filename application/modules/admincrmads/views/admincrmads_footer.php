@@ -42,7 +42,7 @@
             },
             initComplete: function () {
               console.log('complete data')
-              $("#crmads_datatable_filter label").before("<div class='dateFilter'><label>Date</label> : <input type='date'/></div>");
+              $("#crmads_datatable_filter label").before("<label>Date</label> : <input type='date' id='from_date'/> to <inpu type='date' id='to_date'/>&nbsp;&nbsp;");
                 this.api()
                     .columns()
                     .every(function () {
