@@ -18,7 +18,10 @@ a#dateSearch {
 
     $(document).ready(function(e) {
       get_crmAddlists();
-              
+      jQuery("#dateSearch").click(function(){  
+            console.log("dateSearch");        
+            get_crmAddlists();
+      });        
     });
    
     function get_crmAddlists(){
@@ -44,8 +47,7 @@ a#dateSearch {
                 data: { from_date : $("#from_date").val(), to_date:  $("#to_date").val() },
                 type: 'POST'                
             },
-            initComplete: function () {
-              console.log('complete data')
+            initComplete: function () {              
               $("#crmads_datatable_filter label").before("<label>Date</label> : <input type='date' id='from_date'/> to <input type='date' id='to_date'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
                 this.api()
                     .columns()
@@ -83,11 +85,7 @@ a#dateSearch {
             }
         });     
     }
-
-    jQuery("#dateSearch").click(function(){  
-          console.log("dateSearch");        
-          get_crmAddlists();
-    });
+   
     $(document).on('click', '.edit-crmads', function(e) {
         e.preventDefault();
 
