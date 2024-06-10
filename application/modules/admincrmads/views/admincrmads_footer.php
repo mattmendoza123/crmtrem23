@@ -40,8 +40,9 @@ a#dateSearch {
                 [0, "asc"]
             ],
             "ajax": {
-                url: base_url + 'admincrmads/get_crmadslist',
-                data: { from_date : $("#from_date").val(), to_date:  $("#to_date").val() },
+                url: base_url + 'admincrmads/get_crmadslist/',
+                //data: { from_date : $("#from_date").val(), to_date:  $("#to_date").val() },
+                data: function ( d ) { d.extra_search = $('#extra').val();},
                 type: "POST",              
             },
             initComplete: function () {              
