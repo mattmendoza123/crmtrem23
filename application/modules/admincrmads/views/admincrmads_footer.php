@@ -18,12 +18,13 @@ a#dateSearch {
 
     $(document).ready(function(e) {
         get_crmAddlists();
+        $("#dateSearch").click(function(){
+        console.log("dateSearch");
+        e.preventDefault();
+        get_crmAddlists();
+      });
     });
-    $("#dateSearch").click(function(){
-      console.log("dateSearch");
-      e.preventDefault();
-       get_crmAddlists();
-    });
+   
     function get_crmAddlists(){
       var filter_crm_type = "";
         var base_url = "<?php echo base_url(); ?>";
