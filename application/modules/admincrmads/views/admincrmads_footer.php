@@ -38,7 +38,7 @@ a#dateSearch {
                 [0, "asc"]
             ],
             ajax: {
-                url: base_url + 'admincrmads/get_crmadslist/'+ $("#from_date").val(),
+                url: base_url + 'admincrmads/get_crmadslist/',
                 data: { from_date :from, to_date:  to},               
                 type: "POST",              
             },
