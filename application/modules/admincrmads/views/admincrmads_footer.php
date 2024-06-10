@@ -6,6 +6,14 @@
 <script src="<?= base_url() . "assets"; ?>/js/calcheight.min.js"></script>
 <script src="<?= base_url() . "assets"; ?>/js/table2csv.js"></script>
 <script src="<?= base_url() . "assets"; ?>/js/multiselect-dropdown.js"></script>
+<style type="text/css">
+a#dateSearch {
+    background: black;
+    color: #fff;
+    padding: 5px 10px;
+    margin-right: 10px;
+}
+</style>
 <script type="text/javascript">
 
     $(document).ready(function(e) {
@@ -40,7 +48,7 @@
             },
             initComplete: function () {
               console.log('complete data')
-              $("#crmads_datatable_filter label").before("<label>Date</label> : <input type='date' id='from_date'/> to <input type='date' id='to_date'/> <a class='btn btn-xs' href='javascript:void()' id='dateSearch'><i class='fa fa-search'></i></a>");
+              $("#crmads_datatable_filter label").before("<label>Date</label> : <input type='date' id='from_date'/> to <input type='date' id='to_date'/> <a class='btn btn-xs' href='' id='dateSearch'><i class='fa fa-search'></i></a>  ");
                 this.api()
                     .columns()
                     .every(function () {
