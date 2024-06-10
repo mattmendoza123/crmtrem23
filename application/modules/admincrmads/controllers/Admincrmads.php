@@ -124,13 +124,20 @@ class Admincrmads extends MY_Controller
 			$this->db->group_end();
 		}
 
-        $crmads= $this->db
-        ->select('*')
-		->from('crmads_users') 
-		->join('crmads_user_details', 'crmads_user_details.fk_user_id= crmads_users.crmads_id')
-		->where('ads_user_status !=', '2')
+        $this->db->select('*')->from('crmads_users')->join('crmads_user_details', 'crmads_user_details.fk_user_id= crmads_users.crmads_id');
+		$this->db->where('ads_user_status !=', '2');
+		if($this->input->post("from_date")!="" && $this->input->post("to_date") == ""){
+			$this->db->where('date_created', $this->input->post("from_date"));
+		}
+		if($this->input->post("to_date")!="" && $this->input->post("from_date") == ""){
+			$this->db->where('date_created', $this->input->post("to_date"));
+		}
+		if($this->input->post("to_date")!="" && $this->input->post("from_date") != ""){		
+			$this->db->where('date_created BETWEEN ' .$this->input->post("from_date"). ' AND ' . $this->input->post("to_date"));
+		}
+
 		// ->where('user_type', 'User')
-        ->get();
+        $crmads = $this->db->get();
 		
 
 		$data = array();
@@ -184,8 +191,7 @@ class Admincrmads extends MY_Controller
 			"recordsTotal" => $crmads->num_rows(),
 			"recordsFiltered" => $crmads->num_rows(),
 			"data" => $data, 
-			"ads_tags"=> $this->makeOptions("ads_tags",$crmads->result() ),		
-			"dataxxx"=> $_POST,	
+			"ads_tags"=> $this->makeOptions("ads_tags",$crmads->result() ),				
 		);
 		echo json_encode($output);
 		exit();
