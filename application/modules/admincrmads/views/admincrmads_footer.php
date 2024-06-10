@@ -17,11 +17,7 @@ a#dateSearch {
 <script type="text/javascript">
 
     $(document).ready(function(e) {
-      get_crmAddlists();
-      jQuery("#dateSearch").click(function(){  
-            console.log("dateSearch");        
-            get_crmAddlists();
-      });        
+      get_crmAddlists();        
     });
    
     function get_crmAddlists(){
@@ -49,7 +45,11 @@ a#dateSearch {
             },
             initComplete: function () {              
               $("#crmads_datatable_filter label").before("<label>Date</label> : <input type='date' id='from_date'/> to <input type='date' id='to_date'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
-                this.api()
+              jQuery("#dateSearch").click(function(){  
+                    console.log("dateSearch");        
+                    get_crmAddlists();
+              });       
+              this.api()
                     .columns()
                     .every(function () {
                         let column = this;
