@@ -64,7 +64,7 @@ class Admincrmads extends MY_Controller
 	public function get_crmadslist()
 	{
 		
-		
+		print_r($_REQUEST);
 		$draw = intval($this->input->post("draw"));
 		$start = intval($this->input->post("start"));
 		$length = intval($this->input->post("length"));
@@ -185,8 +185,7 @@ class Admincrmads extends MY_Controller
 			"recordsTotal" => $crmads->num_rows(),
 			"recordsFiltered" => $crmads->num_rows(),
 			"data" => $data, 
-			"ads_tags"=> $this->makeOptions("ads_tags",$crmads->result() ),
-			"par"=>$this->input->post("from_date")
+			"ads_tags"=> $this->makeOptions("ads_tags",$crmads->result() ),			
 		);
 		echo json_encode($output);
 		exit();
