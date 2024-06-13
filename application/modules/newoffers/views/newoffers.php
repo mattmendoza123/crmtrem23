@@ -32,7 +32,7 @@
                         </thead>
                                 <tbody>
                                 </tbody>
-                               <!-- <tfoot>
+                                <tfoot>
                                     <tr>
                                     <th>ID</th>
                                     <th>Title</th>
@@ -40,7 +40,7 @@
                                     <th>Tag Selected</th>
                                     <th>Payout</th>
                                 </tr>
-                                </tfoot>//-->
+                                </tfoot>
                             </table>
                         </div>
                     </div>
