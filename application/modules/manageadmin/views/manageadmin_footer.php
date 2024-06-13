@@ -28,7 +28,7 @@
                 [0, "asc"]
             ],          
             ajax: {
-                url: base_url + 'admincrmads/get_userlist/',
+                url: base_url + 'manageadmin/get_userlist/',
                 data: { from_date :from, to_date:  to},               
                 type: "POST",              
             },
