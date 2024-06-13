@@ -5,7 +5,14 @@
 <script src="<?= base_url() . "assets"; ?>/js/calcheight.min.js"></script>
 <script src="<?= base_url() . "assets"; ?>/js/table2csv.js"></script>
 <script src="<?= base_url() . "assets"; ?>/js/multiselect-dropdown.js"></script>
-
+<style type="text/css">
+a#dateSearch {
+    background: black;
+    color: #fff;
+    padding: 5px 10px;
+    margin-right: 10px;
+}
+</style>
 <!-- <script type="text/javascript">
     $(window).on('load', function() {
         $('#myModal').modal('show');
