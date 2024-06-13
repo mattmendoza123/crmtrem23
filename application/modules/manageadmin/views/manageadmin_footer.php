@@ -6,6 +6,9 @@
 
     // Users > Table
     $(document).ready(function(e) {
+        get_userlist();
+    });
+    function get_userlist(from = null , to = null){    
         var filter_user_type = "";
         var base_url = "<?php echo base_url(); ?>";
         var data_table = $('#user_datatable').DataTable({
@@ -69,7 +72,8 @@
                   
             }
         });
-    });
+    }
+   
 
 
     $(document).on('click', '.edit-users', function(e) {
