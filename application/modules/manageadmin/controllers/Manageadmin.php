@@ -119,13 +119,24 @@ class Manageadmin extends MY_Controller
 			$this->db->group_end();
 		}
 
-        $userlist= $this->db
+       $this->db
         ->select('*')
 		->from('click_users') 
-		->join('click_user_details', 'click_user_details.fk_user_id= click_users.user_id')
-		// ->where('user_type', 'Advertiser')
+		->join('click_user_details', 'click_user_details.fk_user_id= click_users.user_id');
+		// ->where('user_type', 'Advertiser')		
 		// ->where('user_type', 'Affiliate')
-        ->get();
+
+		if($this->input->post("from_date")!="" && $this->input->post("to_date") == ""){
+			$this->db->where('date_created', $this->input->post("from_date"));
+		}
+		if($this->input->post("to_date")!="" && $this->input->post("from_date") == ""){
+			$this->db->where('date_created', $this->input->post("to_date"));
+		}
+		if($this->input->post("to_date")!="" && $this->input->post("from_date") != ""){		
+			$this->db->where('date_created BETWEEN '."'".$this->input->post("from_date")."'". ' AND ' . "'".$this->input->post("to_date")."'");
+		}
+
+		$userlist=$this->db->get();
 		
 
 		$data = array();
