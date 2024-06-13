@@ -19,6 +19,7 @@ a#dateSearch {
     function get_userlist(from = null , to = null){    
         var filter_user_type = "";
         var base_url = "<?php echo base_url(); ?>";
+        $('#user_datatable').DataTable().clear().destroy();
         var data_table = $('#user_datatable').DataTable({
              // "pageLength": 10,
             // "serverSide": true,
