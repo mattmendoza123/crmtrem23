@@ -33,11 +33,11 @@
                 type: "POST",              
             },
             initComplete: function () {              
-              $("#crmads_datatable_filter label").before("<label>Date Created</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
+              $("#user_datatable_filter label").before("<label>Date Created</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
               jQuery("#dateSearch").click(function(){                                         
                     get_crmAddlists($("#from_date").val(),$("#to_date").val());
               });       
-              this.api()
+            /*  this.api()
                     .columns()
                     .every(function () {
                         let column = this;
@@ -67,7 +67,7 @@
                                   select.add(new Option(d));
                               });
                         }
-                    });
+                    }); */
 
                   
             }

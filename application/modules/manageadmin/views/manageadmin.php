@@ -34,14 +34,14 @@
                                 </thead>
                                 <tbody>
                                 </tbody>
-                                <tfoot>
+                               <!-- <tfoot>
                                     <tr>
                                     <th>Username</th>
                                         <th>Email</th>
                                         <th>Roles</th>
                                         <th>Action</th>
                                     </tr>                                 
-                                </tfoot>
+                                </tfoot>//-->
                             </table>
                         </div>
                     </div>
