@@ -19,7 +19,7 @@ a#dateSearch {
 
     // Users > Table
     $(document).ready(function(e) {
-
+      get_crmAff();
     });
 
     function get_crmAff(from = null , to = null){    
