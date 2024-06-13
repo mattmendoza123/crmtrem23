@@ -1,6 +1,14 @@
 <script src="<?=base_url()?>assets/module/bootstrap/js/bootstrap.min.js"></script>
 <script src="<?= base_url() . "assets"; ?>/js/jquery.dataTables.min.js"></script>
 <script src="<?= base_url() . "assets"; ?>/js/responsive.dataTables.min.js"></script>
+<style type="text/css">
+a#dateSearch {
+    background: black;
+    color: #fff;
+    padding: 5px 10px;
+    margin-right: 10px;
+}
+</style>
 <script type="text/javascript">
 
 
