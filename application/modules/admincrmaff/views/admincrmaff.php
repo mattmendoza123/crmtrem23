@@ -38,6 +38,25 @@
                                 </thead>
                                 <tbody>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Company</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Email</th>
+                                        <th>Skype</th>
+                                        <th>Tags</th>
+                                        <th>Country</th>
+                                        <th>Website</th>
+                                        <th>Model</th>
+                                        <th>Geo</th>
+                                        <th>Traffic Source</th>
+                                        <th>Exclusive/In-house</th>
+                                        <th>Comment</th>
+                                        <th>Date Created</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>

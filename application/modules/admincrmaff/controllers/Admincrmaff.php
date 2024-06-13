@@ -126,13 +126,25 @@ class Admincrmaff extends MY_Controller
 			$this->db->group_end();
 		}
 
-        $crmaff= $this->db
+        $this->db
         ->select('*')
 		->from('crmaff_users') 
 		->join('crmaff_user_details', 'crmaff_user_details.fk_user_id= crmaff_users.crmaff_id')
-		->where('aff_user_status !=', '2')
+		->where('aff_user_status !=', '2');
 		// ->where('user_type', 'User')
-        ->get();
+
+		if($this->input->post("from_date")!="" && $this->input->post("to_date") == ""){
+			$this->db->where('date_created', $this->input->post("from_date"));
+		}
+		if($this->input->post("to_date")!="" && $this->input->post("from_date") == ""){
+			$this->db->where('date_created', $this->input->post("to_date"));
+		}
+		if($this->input->post("to_date")!="" && $this->input->post("from_date") != ""){		
+			$this->db->where('date_created BETWEEN '."'".$this->input->post("from_date")."'". ' AND ' . "'".$this->input->post("to_date")."'");
+		}
+
+
+		$crmaff = $this->db->get();
 		
 
 		$data = array();
