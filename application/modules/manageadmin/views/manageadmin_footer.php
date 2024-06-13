@@ -23,11 +23,51 @@
             "search": {regex: true},
             "order": [
                 [0, "asc"]
-            ],
-            "ajax": {
-                url: base_url + 'manageadmin/get_userlist',
-                type: 'POST',
+            ],          
+            ajax: {
+                url: base_url + 'admincrmads/get_userlist/',
+                data: { from_date :from, to_date:  to},               
+                type: "POST",              
             },
+            initComplete: function () {              
+              $("#crmads_datatable_filter label").before("<label>Date Created</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
+              jQuery("#dateSearch").click(function(){                                         
+                    get_crmAddlists($("#from_date").val(),$("#to_date").val());
+              });       
+              this.api()
+                    .columns()
+                    .every(function () {
+                        let column = this;
+                        console.log(column);
+                        let title = column.footer().textContent;
+                                              
+                        if(title !="Action"){
+                          // Create select element
+                          let select = document.createElement('select');
+                          select.className = "form-control";
+                          select.add(new Option(''));
+                          column.footer().replaceChildren(select);
+          
+                          // Apply listener for user change in value
+                          select.addEventListener('change', function () {
+                              column
+                                  .search(select.value, {exact: true})
+                                  .draw();
+                          });
+          
+                          // Add list of options
+                          column
+                              .data()
+                              .unique()
+                              .sort()
+                              .each(function (d, j) {
+                                  select.add(new Option(d));
+                              });
+                        }
+                    });
+
+                  
+            }
         });
     });
 

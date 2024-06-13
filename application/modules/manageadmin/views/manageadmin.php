@@ -34,6 +34,14 @@
                                 </thead>
                                 <tbody>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                    <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Roles</th>
+                                        <th>Action</th>
+                                    </tr>                                 
+                                </tfoot>
                             </table>
                         </div>
                     </div>
