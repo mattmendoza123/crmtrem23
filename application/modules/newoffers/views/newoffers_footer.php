@@ -202,11 +202,12 @@ $(document).ready(function() {
   var base_url = "https://crm.tremendio.network/";
   var dataTable = null;
 
-  function fetchData() {
+  function fetchData(from = null , to = null) {
     fetch(base_url + 'newoffers/newoffers_api', {
       headers: {
         'api-key': 'aafcf12b64ca3230279a89aa8b6eacf03c7c59da'
-      }
+      },
+      data: { from_date :from, to_date:  to},             
     })
     .then(response => response.json())
     .then(data => {
@@ -217,7 +218,46 @@ $(document).ready(function() {
       } else {
         dataTable = $('#newoffers_table').DataTable({
           processing: true,
-          order: [[0, "des"]]
+          order: [[0, "des"]],
+          initComplete: function () {              
+              $("#newoffers_table_filter_filter label").before("<label>Date Created</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
+              jQuery("#dateSearch").click(function(){                                         
+                fetchData($("#from_date").val(),$("#to_date").val());
+              });       
+              this.api()
+                    .columns()
+                    .every(function () {
+                        let column = this;
+                        console.log(column);
+                        let title = column.footer().textContent;
+                                              
+                        if(title !="Action"){
+                          // Create select element
+                          let select = document.createElement('select');
+                          select.className = "form-control";
+                          select.add(new Option(''));
+                          column.footer().replaceChildren(select);
+          
+                          // Apply listener for user change in value
+                          select.addEventListener('change', function () {
+                              column
+                                  .search(select.value, {exact: true})
+                                  .draw();
+                          });
+          
+                          // Add list of options
+                          column
+                              .data()
+                              .unique()
+                              .sort()
+                              .each(function (d, j) {
+                                  select.add(new Option(d));
+                              });
+                        }
+                    }); 
+
+                  
+            }
         });
       }
 

@@ -32,6 +32,15 @@
                         </thead>
                                 <tbody>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th>Company Name</th>
+                                    <th>Tag Selected</th>
+                                    <th>Payout</th>
+                                </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
