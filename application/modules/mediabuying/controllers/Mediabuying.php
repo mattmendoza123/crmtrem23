@@ -49,18 +49,23 @@ class Mediabuying extends MY_Controller
 	}
 	$data = json_decode(file_get_contents($url)); // Make the request and get the response
 	//echo $data; // Return the response to your frontend code	
-	foreach ($data->info->transactions as $transaction) {
-		/*	$tags_arr = [];
-			foreach($transaction->categories as $tag){
-				$tags_arr[] = $tag->title;
-			}		
-					*/
+	$offerNameMap = [
+		"PRIVATE #1247 FlirtyNLocal - US - DOI" => "Flirty n Local",
+		"1247 - Flirtymilfs - US - CPL - SOI" => "Flirty Milfs",
+		"1247 - BBWtodate - US - CPL - SOI"=>"BBW to date",
+		"1247 - One-nightstand - US - CPL - DOI "=>"One Night stand",
+		"1247 ONLY Ashley Madison - US - CPL - SOI - WEB/WAP"=>"Ashley Madison"
+		// Add more mappings as needed
+	];
+
+	foreach ($data->info->transactions as $transaction) {		
+			$offerName = isset($offerNameMap[$transaction->offer->value]) ? $offerNameMap[$transaction->offer->value] : $transaction->offer->value;
 			if($transaction->sub_id1!=""){
 				$data_arr[] = array(
 					// $tm->crm_details_id,
 					$transaction->sub_id1,
-					$transaction->offer->value,
-					$transaction->added_timestamp,				
+					$offerName,
+					date("m/d/Y h:i:s A", strtotime($transaction->added_timestamp)),				
 					$transaction->payout,	
 					$transaction->currency,				
 				);
