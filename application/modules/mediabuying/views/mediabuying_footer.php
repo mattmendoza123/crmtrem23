@@ -35,7 +35,7 @@ $(document).ready(function(e) {
           "bAutoWidth": false,
           "search": {regex: true},
           "order": [
-              [0, "asc"]
+              [2, "desc"]
           ],            
           ajax: {
             url: base_url + 'mediabuying/mediabuying_api',
