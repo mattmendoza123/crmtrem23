@@ -5,7 +5,14 @@
 <script src="<?= base_url() . "assets"; ?>/js/calcheight.min.js"></script>
 <script src="<?= base_url() . "assets"; ?>/js/table2csv.js"></script>
 <script src="<?= base_url() . "assets"; ?>/js/multiselect-dropdown.js"></script>
-
+<style type="text/css">
+a#dateSearch {
+    background: black;
+    color: #fff;
+    padding: 5px 10px;
+    margin-right: 10px;
+}
+</style>
 <!-- <script type="text/javascript">
     $(window).on('load', function() {
         $('#myModal').modal('show');
@@ -197,7 +204,7 @@
 //   });
 // });
 
-
+/*
 $(document).ready(function() {
   var base_url = "https://crm.tremendio.network/";
   var dataTable = null;
@@ -258,38 +265,78 @@ $(document).ready(function() {
   // Refresh data every 24 hours
   setInterval(fetchData, 24 * 60 * 60 * 1000);
 });
-</script>
+*/
 
 
+$(document).ready(function(e) {
+      get_exclusiveOffers();
+});
 
-<!-- 
-$(document).ready(function() {
-  const url = 'https://datatables.net/examples/ajax/data/objects.txt';
-  const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
+  function get_exclusiveOffers(from = null , to = null){    
+      $('#exclusiveoffers_table').DataTable().clear().destroy();
+      var filter_crm_type = "";
+      var base_url = "<?php echo base_url(); ?>";
+      var data_table = $('#exclusiveoffers_table').DataTable({
+          // "pageLength": 10,
+          // "serverSide": true,
+          "pageLength": 10,
+          // "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+          "processing": true,
+          bLengthChange: true,
+          "lengthMenu": [ [10, 15, 25, 50, 100, -1], [10, 15, 25, 50, 100, "All"] ],
+          "iDisplayLength": 10,
+          bInfo: false,
+          responsive: true,
+          "bAutoWidth": false,
+          "search": {regex: true},
+          "order": [
+              [0, "asc"]
+          ],            
+          ajax: {
+            url: base_url + 'exclusiveoffers/exclusiveoffers_api',
+              data: { from_date :from, to_date:  to},               
+              type: "POST",              
+          },
+          initComplete: function () {              
+            $("#exclusiveoffers_table label").before("<label>Date Created</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
+            jQuery("#dateSearch").click(function(){                                         
+              get_exclusiveOffers($("#from_date").val(),$("#to_date").val());
+            });       
+            this.api()
+                  .columns()
+                  .every(function () {
+                      let column = this;
+                      console.log(column);
+                      let title = column.footer().textContent;
+                                            
+                      if(title !="Action"){
+                        // Create select element
+                        let select = document.createElement('select');
+                        select.className = "form-control";
+                        select.add(new Option(''));
+                        column.footer().replaceChildren(select);
+        
+                        // Apply listener for user change in value
+                        select.addEventListener('change', function () {
+                            column
+                                .search(select.value, {exact: true})
+                                .draw();
+                        });
+        
+                        // Add list of options
+                        column
+                            .data()
+                            .unique()
+                            .sort()
+                            .each(function (d, j) {
+                                select.add(new Option(d));
+                            });
+                      }
+                  }); 
 
-  $.ajax({
-    url: proxyUrl,
-    type: 'GET',
-    dataType: 'json',
-    success: function(response) {
-      // Log the response to the console
-      console.log(response);
-      
-      // Initialize the DataTables table with the response data
-      $('#example').DataTable({
-        'data': response.contents,
-        'columns': [
-          { 'data': 'name' },
-          { 'data': 'position' },
-          { 'data': 'office' },
-          { 'data': 'age' },
-          { 'data': 'start_date' },
-          { 'data': 'salary' }
-        ]
+                
+          }
       });
-    },
-    error: function(xhr, status, error) {
-      console.log('Error: ' + error);
-    }
-  });
-}); -->
+  }
+
+</script>

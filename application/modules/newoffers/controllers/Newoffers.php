@@ -32,19 +32,7 @@ class Newoffers extends MY_Controller
 	$length = intval($this->input->post("length"));
 	$order = $this->input->post("order");
 	$search = $this->input->post("search");
-
-	$col = 0;
-	$dir = "";
-	if (!empty($order)) {
-		foreach ($order as $o) {
-			$col = $o['column'];
-			$dir = $o['dir'];
-		}
-	}
-
-	if ($dir != "asc" && $dir != "desc") {
-		$dir = "desc";
-	}
+	
 
 	header('Access-Control-Allow-Origin: *'); // Allow requests from any domain
 	header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
