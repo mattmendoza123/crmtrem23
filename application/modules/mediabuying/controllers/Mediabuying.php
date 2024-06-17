@@ -53,15 +53,18 @@ class Mediabuying extends MY_Controller
 		/*	$tags_arr = [];
 			foreach($transaction->categories as $tag){
 				$tags_arr[] = $tag->title;
-			}			*/
-			$data_arr[] = array(
-				// $tm->crm_details_id,
-				$transaction->sub_id1,
-				$transaction->offer->value,
-				$transaction->added_timestamp,				
-				$transaction->payout,	
-				$transaction->currency,				
-			);
+			}		
+					*/
+			if($transaction->sub_id1!=""){
+				$data_arr[] = array(
+					// $tm->crm_details_id,
+					$transaction->sub_id1,
+					$transaction->offer->value,
+					$transaction->added_timestamp,				
+					$transaction->payout,	
+					$transaction->currency,				
+				);
+			}
 		}
 
 		$output = array(
