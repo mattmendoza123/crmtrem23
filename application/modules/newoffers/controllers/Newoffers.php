@@ -52,11 +52,10 @@ class Newoffers extends MY_Controller
 			$data_arr[] = array(
 				// $tm->crm_details_id,
 				$offer->id,
-				//$tm->title_info]->name,
-			//	$tm['advertiser']->company_name,
+				$offer->title_info->name,
+				$offer->title_info->advertiser->company_name,
 				'',
-			//	$tm['payout'][0]->value				
-			'',''
+				$offer[0]->value,			
 			);
 		}
 
