@@ -26,6 +26,14 @@ class Newoffers extends MY_Controller
 
 	public function newoffers_api()
 	{
+
+	$draw = intval($this->input->post("draw"));
+	$start = intval($this->input->post("start"));
+	$length = intval($this->input->post("length"));
+	$order = $this->input->post("order");
+	$search = $this->input->post("search");
+
+
 	header('Access-Control-Allow-Origin: *'); // Allow requests from any domain
 	header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 	header("Access-Control-Allow-Headers: Content-Type, Authorization");
@@ -39,24 +47,24 @@ class Newoffers extends MY_Controller
 	}
 	$data = json_decode(file_get_contents($url)); // Make the request and get the response
 	//echo $data; // Return the response to your frontend code
-    print_r($data->info['offers']);
-	die;
+ 
 	foreach ($data->info['offers'] as $tm) {
 			
 			$data[] = array(
 				// $tm->crm_details_id,
-				$tm['id'],
-				$tm['title_info']->name,
-				$tm['advertiser']->company_name,
+				$tm->id,
+				//$tm->title_info]->name,
+			//	$tm['advertiser']->company_name,
 				'',
-				$tm['payout'][0]->value				
+			//	$tm['payout'][0]->value				
+			'',''
 			);
 		}
 
 		$output = array(
 			"draw" => $draw,
-			"recordsTotal" => $crmaff->num_rows(),
-			"recordsFiltered" => $crmaff->num_rows(),
+			"recordsTotal" => 0,
+			"recordsFiltered" => 0,
 			"data" => $data
 		);
 		echo json_encode($output);
