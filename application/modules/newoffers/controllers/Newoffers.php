@@ -49,7 +49,7 @@ class Newoffers extends MY_Controller
 	//echo $data; // Return the response to your frontend code
 	foreach ($data->info->offers as $offer) {
 			
-			$data[] = array(
+			$data_arr[] = array(
 				// $tm->crm_details_id,
 				$offer->id,
 				//$tm->title_info]->name,
@@ -64,7 +64,7 @@ class Newoffers extends MY_Controller
 			"draw" => $draw,
 			"recordsTotal" => 0,
 			"recordsFiltered" => 0,
-			"data" => $data
+			"data" => $data_arr
 		);
 		echo json_encode($output);
 		exit();
