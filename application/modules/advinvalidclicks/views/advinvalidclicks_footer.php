@@ -113,10 +113,7 @@ $(document).ready(function () {
                     $('#' + modalId).modal('show');
                 });
           
-                $("#invalidclicks_table_filter label").before("<label>Date Created</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
-                jQuery("#dateSearch").click(function(){                                         
-                    fetchData($("#from_date").val(),$("#to_date").val());
-                });       
+               
                       
 
             })
@@ -128,7 +125,10 @@ $(document).ready(function () {
     fetchData();
 
     setInterval(fetchData, 24 * 60 * 60 * 1000);
-
+    $("#invalidclicks_table_filter label").before("<label>Date Created</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
+        jQuery("#dateSearch").click(function(){                                         
+        fetchData($("#from_date").val(),$("#to_date").val());
+    });       
     // Function to create and display the modal
     function createAndDisplayModal(offers, modalId, modalContentId) {
         var modalContent = '<div class="modal fade" id="' + modalId + '">';
