@@ -34,12 +34,7 @@ $(document).ready(function () {
                         order: [[3, "desc"]],
                         "pageLength": 50,                       
                     });
-
-                    $("#invalidclicks_table_filter label").before("<label>Date Created</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
-                    jQuery("#dateSearch").click(function(){                                         
-                        fetchData($("#from_date").val(),$("#to_date").val());
-                    });  
-                    console.log('hello');
+                    
                 }
 
                 affiliateOffers = {};
@@ -101,7 +96,11 @@ $(document).ready(function () {
                             totalClicks,
                             '<button class="btn btn-primary btn-sm view-offers" data-toggle="modal" data-target="#' + modalId + '"><i class="fas fa-eye"></i></button>'
                         ]).draw().node();
-
+                        $("#invalidclicks_table_filter label").before("<label>Date Created</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
+                            jQuery("#dateSearch").click(function(){                                         
+                                fetchData($("#from_date").val(),$("#to_date").val());
+                            });  
+                    console.log('hello');    
                         modalCounter++; // Increment modal counter
 
                         // Create the modal and display offers for the selected affiliate
