@@ -59,14 +59,18 @@ class Newoffers extends MY_Controller
 	}
 	$data = json_decode(file_get_contents($url)); // Make the request and get the response
 	//echo $data; // Return the response to your frontend code
+	$tags_arr = [];
 	foreach ($data->info->offers as $offer) {
 			
+			foreach($offer->categories as $tag){
+				$tags_arr[] = $tag;
+			}
 			$data_arr[] = array(
 				// $tm->crm_details_id,
 				$offer->id,
 				$offer->title_info->name,
 				$offer->title_info->advertiser->company_name,
-				'',
+				implode(",",$tags_arr),
 				$offer->payout[0]->value,			
 			);
 		}
