@@ -55,7 +55,7 @@ class Newoffers extends MY_Controller
 				$offer->title_info->name,
 				$offer->title_info->advertiser->company_name,
 				'',
-				$offer[0]->value,			
+				$offer->payout[0]->value,			
 			);
 		}
 
