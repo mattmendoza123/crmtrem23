@@ -43,9 +43,9 @@ class Mediabuying extends MY_Controller
 	$start_date = $this->input->post("from_date");
 	$end_date = $this->input->post("to_date");
 	if($start_date!="" && $end_date!=""){		
-		$url = 'https://tremendio.scaletrk.com/api/v2/network/reports/conversions?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=added_timestamp&sortDirection=desc&perPage=300&page=1&rangeFrom='.$start_date.'&rangeTo='.$end_date.'&columns=transaction_id,added_timestamp,payout,sub_id1,offer,affiliate,link&filters[affiliates]=1247'; // URL of the API you want to request
+		$url = 'https://tremendio.scaletrk.com/api/v2/network/reports/conversions?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=added_timestamp&sortDirection=asc&perPage=300&page=1&rangeFrom='.$start_date.'&rangeTo='.$end_date.'&columns=transaction_id,added_timestamp,payout,sub_id1,offer,affiliate,link&filters[affiliates]=1247'; // URL of the API you want to request
 	} else {
-		$url = 'https://tremendio.scaletrk.com/api/v2/network/reports/conversions?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=added_timestamp&sortDirection=desc&perPage=300&page=1&rangeFrom=2024-03-01&rangeTo=2024-12-31&columns=transaction_id,added_timestamp,payout,sub_id1,offer,affiliate,link&filters[affiliates]=1247'; // URL of the API you want to request
+		$url = 'https://tremendio.scaletrk.com/api/v2/network/reports/conversions?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=added_timestamp&sortDirection=asc&perPage=300&page=1&rangeFrom=2024-03-01&rangeTo=2024-12-31&columns=transaction_id,added_timestamp,payout,sub_id1,offer,affiliate,link&filters[affiliates]=1247'; // URL of the API you want to request
 	}
 	$data = json_decode(file_get_contents($url)); // Make the request and get the response
 	//echo $data; // Return the response to your frontend code	
