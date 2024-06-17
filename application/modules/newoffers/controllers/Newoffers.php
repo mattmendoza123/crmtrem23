@@ -63,14 +63,15 @@ class Newoffers extends MY_Controller
 	foreach ($data->info->offers as $offer) {
 			
 			foreach($offer->categories as $tag){
-				$tags_arr[] = $tag;
+				$tags_arr[] = $tag->title;
 			}
+			print_r($tags_arr);
 			$data_arr[] = array(
 				// $tm->crm_details_id,
 				$offer->id,
 				$offer->title_info->name,
 				$offer->title_info->advertiser->company_name,
-				implode(",",$tags_arr),
+				'',
 				$offer->payout[0]->value,			
 			);
 		}
