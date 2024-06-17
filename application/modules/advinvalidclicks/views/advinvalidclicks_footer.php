@@ -32,13 +32,7 @@ $(document).ready(function () {
                     dataTable = $('#invalidclicks_table').DataTable({
                         processing: true,
                         order: [[3, "desc"]],
-                        "pageLength": 50,
-                        initComplete: function () {              
-                            $("#invalidclicks_table_filter label").before("<label>Date Created</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
-                            jQuery("#dateSearch").click(function(){                                         
-                                fetchData($("#from_date").val(),$("#to_date").val());
-                            });       
-                        }
+                        "pageLength": 50,                       
                     });
                 }
 
@@ -118,6 +112,13 @@ $(document).ready(function () {
                     // Display the pre-created modal with the selected content
                     $('#' + modalId).modal('show');
                 });
+          
+                $("#invalidclicks_table_filter label").before("<label>Date Created</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
+                jQuery("#dateSearch").click(function(){                                         
+                    fetchData($("#from_date").val(),$("#to_date").val());
+                });       
+                      
+
             })
             .catch(error => {
                 console.error("Error:", error);
