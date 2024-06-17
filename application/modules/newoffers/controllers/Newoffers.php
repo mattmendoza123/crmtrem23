@@ -39,9 +39,9 @@ class Newoffers extends MY_Controller
 	}
 	$data = json_decode(file_get_contents($url)); // Make the request and get the response
 	//echo $data; // Return the response to your frontend code
-    print_r($data->info);
+    print_r($data->info['offers']);
 	die;
-	foreach ($data['info']->offers as $tm) {
+	foreach ($data->info['offers'] as $tm) {
 			
 			$data[] = array(
 				// $tm->crm_details_id,
