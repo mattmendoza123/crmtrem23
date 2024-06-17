@@ -204,10 +204,10 @@ a#dateSearch {
 //   });
 // });
 
-
+/*
 $(document).ready(function() {
   var base_url = "https://crm.tremendio.network/";
-  var dataTable = null;
+ /* var dataTable = null;
 
   function fetchData(from = null , to = null) {
     fetch(base_url + 'newoffers/newoffers_api', {
@@ -304,12 +304,85 @@ $(document).ready(function() {
   fetchData(); // Initial fetch on page load
 
   // Refresh data every 24 hours
-  setInterval(fetchData, 24 * 60 * 60 * 1000);
-});
+  setInterval(fetchData, 24 * 60 * 60 * 1000); 
+});*/
+
+
+
+
+
+  $(document).ready(function(e) {
+      get_newOffers();
+  });
+
+  function get_newOffers(from = null , to = null){    
+      $('#newoffers_table').DataTable().clear().destroy();
+      var filter_crm_type = "";
+      var base_url = "<?php echo base_url(); ?>";
+      var data_table = $('#newoffers_table').DataTable({
+          // "pageLength": 10,
+          // "serverSide": true,
+          "pageLength": 10,
+          // "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+          "processing": true,
+          bLengthChange: true,
+          "lengthMenu": [ [10, 15, 25, 50, 100, -1], [10, 15, 25, 50, 100, "All"] ],
+          "iDisplayLength": 10,
+          bInfo: false,
+          responsive: true,
+          "bAutoWidth": false,
+          "search": {regex: true},
+          "order": [
+              [0, "asc"]
+          ],            
+          ajax: {
+            url: base_url + 'newoffers/newoffers_api',
+              data: { from_date :from, to_date:  to},               
+              type: "POST",              
+          },
+          initComplete: function () {              
+            $("#newoffers_table_filter label").before("<label>Date Created</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
+            jQuery("#dateSearch").click(function(){                                         
+              get_crmAff($("#from_date").val(),$("#to_date").val());
+            });       
+            this.api()
+                  .columns()
+                  .every(function () {
+                      let column = this;
+                      console.log(column);
+                      let title = column.footer().textContent;
+                                            
+                      if(title !="Action"){
+                        // Create select element
+                        let select = document.createElement('select');
+                        select.className = "form-control";
+                        select.add(new Option(''));
+                        column.footer().replaceChildren(select);
+        
+                        // Apply listener for user change in value
+                        select.addEventListener('change', function () {
+                            column
+                                .search(select.value, {exact: true})
+                                .draw();
+                        });
+        
+                        // Add list of options
+                        column
+                            .data()
+                            .unique()
+                            .sort()
+                            .each(function (d, j) {
+                                select.add(new Option(d));
+                            });
+                      }
+                  }); 
+
+                
+          }
+      });
+  }
+
 </script>
-
-
-
 <!-- 
 $(document).ready(function() {
   const url = 'https://datatables.net/examples/ajax/data/objects.txt';
