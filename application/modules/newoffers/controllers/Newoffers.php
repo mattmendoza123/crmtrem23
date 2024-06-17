@@ -58,20 +58,18 @@ class Newoffers extends MY_Controller
 		$url = 'https://tremendio.scaletrk.com/api/v2/network/offers?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&status=active&search=&perPage=20&page=1'; // URL of the API you want to request
 	}
 	$data = json_decode(file_get_contents($url)); // Make the request and get the response
-	//echo $data; // Return the response to your frontend code
-	$tags_arr = [];
+	//echo $data; // Return the response to your frontend code	
 	foreach ($data->info->offers as $offer) {
-			
+			$tags_arr = [];
 			foreach($offer->categories as $tag){
 				$tags_arr[] = $tag->title;
-			}
-			print_r($tags_arr);
+			}			
 			$data_arr[] = array(
 				// $tm->crm_details_id,
 				$offer->id,
 				$offer->title_info->name,
 				$offer->title_info->advertiser->company_name,
-				'',
+				implode(",",$tags_arr),
 				$offer->payout[0]->value,			
 			);
 		}
