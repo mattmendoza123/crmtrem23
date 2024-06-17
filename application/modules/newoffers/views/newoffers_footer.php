@@ -343,7 +343,7 @@ $(document).ready(function() {
           initComplete: function () {              
             $("#newoffers_table_filter label").before("<label>Date Created</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
             jQuery("#dateSearch").click(function(){                                         
-              get_crmAff($("#from_date").val(),$("#to_date").val());
+              get_newOffers($("#from_date").val(),$("#to_date").val());
             });       
             this.api()
                   .columns()
