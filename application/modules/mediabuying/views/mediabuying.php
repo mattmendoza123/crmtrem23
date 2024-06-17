@@ -26,6 +26,15 @@
                         </thead>
                                 <tbody>
                                 </tbody>
+                                <tfoot>
+                                <tr>
+                                <th>GCLID</th>
+                                <th>Conversion Name</th>
+                                <th>Conversion Time</th>
+                                <th>Conversion Value</th>
+                                <th>Conversion Currency</th>
+                            </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>

@@ -13,8 +13,78 @@
 
 <script type="text/javascript">
 
+$(document).ready(function(e) {
+     get_mediaBuying();
+  });
 
+  function get_mediaBuying(from = null , to = null){    
+      $('#mediabuying_table').DataTable().clear().destroy();
+      var filter_crm_type = "";
+      var base_url = "<?php echo base_url(); ?>";
+      var data_table = $('#mediabuying_table').DataTable({
+          // "pageLength": 10,
+          // "serverSide": true,
+          "pageLength": 10,
+          // "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+          "processing": true,
+          bLengthChange: true,
+          "lengthMenu": [ [10, 15, 25, 50, 100, -1], [10, 15, 25, 50, 100, "All"] ],
+          "iDisplayLength": 10,
+          bInfo: false,
+          responsive: true,
+          "bAutoWidth": false,
+          "search": {regex: true},
+          "order": [
+              [0, "asc"]
+          ],            
+          ajax: {
+            url: base_url + 'mediabuying/mediabuying_api',
+              data: { from_date :from, to_date:  to},               
+              type: "POST",              
+          },
+          initComplete: function () {              
+            $("#mediabuying_table_filter label").before("<label>Date Created</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
+            jQuery("#dateSearch").click(function(){                                         
+              get_mediaBuying($("#from_date").val(),$("#to_date").val());
+            });       
+            this.api()
+                  .columns()
+                  .every(function () {
+                      let column = this;
+                      console.log(column);
+                      let title = column.footer().textContent;
+                                            
+                      if(title !="Action"){
+                        // Create select element
+                        let select = document.createElement('select');
+                        select.className = "form-control";
+                        select.add(new Option(''));
+                        column.footer().replaceChildren(select);
+        
+                        // Apply listener for user change in value
+                        select.addEventListener('change', function () {
+                            column
+                                .search(select.value, {exact: true})
+                                .draw();
+                        });
+        
+                        // Add list of options
+                        column
+                            .data()
+                            .unique()
+                            .sort()
+                            .each(function (d, j) {
+                                select.add(new Option(d));
+                            });
+                      }
+                  }); 
 
+                
+          }
+      });
+  }
+
+/*
 
 $(document).ready(function() {
   var base_url = "https://crm.tremendio.network/";
@@ -93,6 +163,7 @@ $(document).ready(function() {
   setInterval(fetchData, 24 * 60 * 60 * 1000);
 });
 
+*/
 function ExportToExcel(type, fn, dl) {
         var elt = document.getElementById('mediabuying_table');
         var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
