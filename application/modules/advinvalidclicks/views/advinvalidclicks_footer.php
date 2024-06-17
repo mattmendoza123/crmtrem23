@@ -39,7 +39,7 @@ $(document).ready(function () {
                     jQuery("#dateSearch").click(function(){                                         
                         fetchData($("#from_date").val(),$("#to_date").val());
                     });  
-                console.log('hello');
+                    console.log('hello');
                 }
 
                 affiliateOffers = {};
