@@ -27,7 +27,7 @@ class Admininvalidclicks extends MY_Controller
 
 	}
 	
-	public function invalidclick_api()
+	public function invalidclick_api() 
 	{
 	$draw = intval($this->input->post("draw"));
 	$start = intval($this->input->post("start"));
