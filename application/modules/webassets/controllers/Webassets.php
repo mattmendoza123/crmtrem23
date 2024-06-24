@@ -46,7 +46,7 @@ class Webassets extends MY_Controller
 	$length = intval($this->input->post("length"));
 	$order = $this->input->post("order");
 	$search = $this->input->post("search");
-	
+
 	header('Access-Control-Allow-Origin: *');
 	header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 	header("Access-Control-Allow-Headers: Content-Type, Authorization");
@@ -83,11 +83,22 @@ class Webassets extends MY_Controller
 			$total_records = $xml->CommandResponse->Paging->TotalItems;
 			// start parsing data
 			foreach ($xml->CommandResponse->DomainGetListResult->Domain as $domain) {
-				$domainData = [
+				/*$domainData = [
 					'ID' => (string)$domain['ID'],
 					'Name' => (string)$domain['Name'],
 					'Expires' => (string)$domain['Expires'],
-				];
+				];*/
+
+				$domainData[] = array(
+					(string)$domain['ID'],
+					(string)$domain['Name'],
+					(string)$domain['Expires'],			
+					(string)$domain['tag'],
+					(string)$domain['comment'],
+					'--'
+				);
+
+
 				$retrieved_domains[] = $domainData;
 			}	
 		}
