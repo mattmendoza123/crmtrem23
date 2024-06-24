@@ -48,7 +48,7 @@ $(document).ready(function () {
                     dataTable = $('#invalidclicks_table').DataTable({
                         processing: true,
                         order: [[3, "desc"]],
-                        "pageLength": 50, // Set default number of rows per page,
+                        "pageLength":10, // Set default number of rows per page,
                         initComplete: function () {       
                             $("#invalidclicks_table_filter label").before("<label>Date Added</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
                             jQuery("#dateSearch").click(function(){                                         
