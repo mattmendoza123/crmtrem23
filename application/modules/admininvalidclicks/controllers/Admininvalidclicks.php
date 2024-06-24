@@ -81,8 +81,8 @@ class Admininvalidclicks extends MY_Controller
 	
 		$data_arr[] = array(		
 			$i,
-			date("m/d/Y h:i:s A", strtotime($affOfers->clickTimestamp)),
-			$affOfers->clicks,					
+			date("m/d/Y h:i:s A", strtotime($affOfers['clickTimestamp'])),
+			$affOfers['clicks'],					
 			''
 		);	
 	}
