@@ -83,20 +83,11 @@ class Webassets extends MY_Controller
 			$total_records = $xml->CommandResponse->Paging->TotalItems;
 			// start parsing data
 			foreach ($xml->CommandResponse->DomainGetListResult->Domain as $domain) {
-				/*$domainData = [
+				$domainData = [
 					'ID' => (string)$domain['ID'],
 					'Name' => (string)$domain['Name'],
 					'Expires' => (string)$domain['Expires'],
-				];*/
-
-				$domainData[] = array(
-					(string)$domain['ID'],
-					(string)$domain['Name'],
-					(string)$domain['Expires'],			
-					(string)$domain['tag'],
-					(string)$domain['comment'],
-					'--'
-				);
+				];
 
 
 				$retrieved_domains[] = $domainData;
@@ -167,10 +158,10 @@ class Webassets extends MY_Controller
         fwrite($temp_file_stream, json_encode($final_domain_list));
         fclose($temp_file_stream);
 
-	/*	$response = [
-			'results' => $final_domain_list,
-		];
-*/
+		foreach($final_domain_list as $i => $domain_list){
+			print_r($domain_list);
+		}
+
 		$output = array(
 			"draw" => $draw,
 			"recordsTotal" => count($final_domain_list),
