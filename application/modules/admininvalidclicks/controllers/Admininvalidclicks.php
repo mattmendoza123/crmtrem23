@@ -109,23 +109,23 @@ class Admininvalidclicks extends MY_Controller
 		print_r($affiliateOffers);
 		
 
-		$data_arr[] = array(		
+		/*$data_arr[] = array(		
 			$affiliateName,
 			$offerName,
 			date("m/d/Y h:i:s A", strtotime($transaction->added_timestamp)),			
 			'',
 			''
-		);
+		);*/
 	}
-
+/*
 	$output = array(
 		"draw" => $draw,
 		"recordsTotal" => count($data_arr),
 		"recordsFiltered" => count($data_arr),
 		"data" => $data_arr
-	);
+	); 
 	echo json_encode($output); 
-	exit();
+	exit();*/
 		
 
 	}
