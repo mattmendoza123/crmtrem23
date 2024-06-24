@@ -108,7 +108,7 @@ class Admininvalidclicks extends MY_Controller
 	}
 
 	foreach($affiliateOffers as $i => $affOfers){
-		print_r($affOfers[$i]);
+		print_r($affOfers[$i]->offer);
 		
 		/*$data_arr[] = array(		
 			$affOfers[$i]->offer,
