@@ -221,11 +221,32 @@ $(document).ready(function () {
                                 targets: -1,
                                 data: null,
                                 defaultContent: '<button class="btn btn-sm btn-primary update-button"><i class="fa fa-edit"></i></button>'
-                            }]
+                            }],
+                            initComplete: function () {
+                                this.api().columns().every( function () {
+                                    var column = this;
+                                    var select = $('<select><option value=""></option></select>')
+                                        .appendTo( $(column.footer()).empty() )
+                                        .on( 'change', function () {
+                                            var val = $.fn.dataTable.util.escapeRegex(
+                                                $(this).val()
+                                            );
+                    
+                                            column
+                                                .search( val ? '^'+val+'$' : '', true, false )
+                                                .draw();
+                                        } );
+                    
+                                    column.data().unique().sort().each( function ( d, j ) {
+                                        select.append( '<option value="'+d+'">'+d+'</option>' )
+                                    } );
+                                } );
+                            }
                         });
                     }
 
                     domains.forEach(domain => {
+
                         var id = domain.ID;
                         var name = domain.Name;
                         var expires = domain.Expires;
