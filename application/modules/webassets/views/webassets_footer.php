@@ -188,7 +188,7 @@
 //     });
 //     });
 // });
-
+/* OLD FUNCTION 
 $(document).ready(function () {
     var base_url = "https://crm.tremendio.network/";
     var dataTable = null;
@@ -223,25 +223,25 @@ $(document).ready(function () {
                                 defaultContent: '<button class="btn btn-sm btn-primary update-button"><i class="fa fa-edit"></i></button>'
                             }],
                             initComplete: function () {
-                                this.api().columns().every( function () {
-                                    var column = this;
-                                    var select = $('<select><option value=""></option></select>')
-                                        .appendTo( $(column.footer()).empty() )
-                                        .on( 'change', function () {
-                                            var val = $.fn.dataTable.util.escapeRegex(
-                                                $(this).val()
-                                            );
-                    
-                                            column
-                                                .search( val ? '^'+val+'$' : '', true, false )
-                                                .draw();
-                                        } );
-                    
-                                    column.data().unique().sort().each( function ( d, j ) {
-                                        select.append( '<option value="'+d+'">'+d+'</option>' )
+                            this.api().columns().every( function () {
+                                var column = this;
+                                var select = $('<select><option value=""></option></select>')
+                                    .appendTo( $(column.footer()).empty() )
+                                    .on( 'change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+                
+                                        column
+                                            .search( val ? '^'+val+'$' : '', true, false )
+                                            .draw();
                                     } );
+                
+                                column.data().unique().sort().each( function ( d, j ) {
+                                    select.append( '<option value="'+d+'">'+d+'</option>' )
                                 } );
-                            }
+                            } );
+                        }
                         });
                     }
 
@@ -317,6 +317,75 @@ $(document).ready(function () {
     });
 });
 
+
+*/
+$(document).ready(function(e) {
+      get_webAssets();
+});
+
+function get_webAssets(from = null , to = null){    
+      $('#webassets_table').DataTable().clear().destroy();
+      var filter_crm_type = "";
+      var base_url = "<?php echo base_url(); ?>";
+      var data_table = $('#webassets_table').DataTable({        
+          "pageLength": 10,          
+          "processing": true,
+          bLengthChange: true,
+          "lengthMenu": [ [10, 15, 25, 50, 100, -1], [10, 15, 25, 50, 100, "All"] ],
+          "iDisplayLength": 10,
+          bInfo: false,
+          responsive: true,
+          "bAutoWidth": false,
+          "search": {regex: true},
+          "order": [
+              [0, "asc"]
+          ],            
+          ajax: {
+            url: base_url + 'webassets/webassets_api',
+              data: { from_date :from, to_date:  to},               
+              type: "POST",              
+          },
+          initComplete: function () {              
+            $("#webassets_table_filter label").before("<label>Date Created</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
+            jQuery("#dateSearch").click(function(){                                         
+                get_webAssets($("#from_date").val(),$("#to_date").val());
+            });       
+            this.api()
+                  .columns()
+                  .every(function () {
+                      let column = this;
+                      console.log(column);
+                      let title = column.footer().textContent;
+                                            
+                      if(title !="Action"){
+                        // Create select element
+                        let select = document.createElement('select');
+                        select.className = "form-control";
+                        select.add(new Option(''));
+                        column.footer().replaceChildren(select);
+        
+                        // Apply listener for user change in value
+                        select.addEventListener('change', function () {
+                            column
+                                .search(select.value, {exact: true})
+                                .draw();
+                        });
+        
+                        // Add list of options
+                        column
+                            .data()
+                            .unique()
+                            .sort()
+                            .each(function (d, j) {
+                                select.add(new Option(d));
+                            });
+                      }
+                  }); 
+
+                
+          }
+      });
+  }
 
 
 </script>
