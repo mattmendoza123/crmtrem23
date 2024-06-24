@@ -78,7 +78,7 @@ class Admininvalidclicks extends MY_Controller
 	}
 
 	foreach($affiliateOffers as $i => $affOfers){
-	
+		print_r($affOfers);die;
 		$data_arr[] = array(		
 			$i,
 			date("m/d/Y h:i:s A", strtotime($affOfers['clickTimestamp'])),
