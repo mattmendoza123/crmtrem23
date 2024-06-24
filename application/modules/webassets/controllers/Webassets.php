@@ -41,6 +41,14 @@ class Webassets extends MY_Controller
 	
 	public function webassets_api()
 {
+
+	$draw = intval($this->input->post("draw"));
+	$start = intval($this->input->post("start"));
+	$length = intval($this->input->post("length"));
+	$order = $this->input->post("order");
+	$search = $this->input->post("search");
+
+
 	header('Access-Control-Allow-Origin: *');
 	header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 	header("Access-Control-Allow-Headers: Content-Type, Authorization");
@@ -53,10 +61,24 @@ class Webassets extends MY_Controller
 	$total_records = 0;
 	
 	while ( $has_more ) {
+
+		$start_date = $this->input->post("from_date");
+	$end_date = $this->input->post("to_date");
+	/*if($start_date!="" && $end_date!=""){		
+		$url = "https://api.namecheap.com/xml.response?ApiUser=jpmacz29&ApiKey=dc559ce7bbf74489a3dcfa082e66be4d&UserName=jpmacz29&Command=namecheap.domains.getList&ClientIp=167.99.205.45&PageSize={$page_size}&Page={$page}";
+		
+	} else {
+		//$url = 'https://tremendio.scaletrk.com/api/v2/network/reports/conversions?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=added_timestamp&sortDirection=desc&perPage=300&page=1&rangeFrom=2024-03-01&rangeTo=2024-12-31&columns=transaction_id,added_timestamp,payout,sub_id1,offer,affiliate,link&filters[affiliates]=1247'; // URL of the API you want to request
+		$url = "https://api.namecheap.com/xml.response?ApiUser=jpmacz29&ApiKey=dc559ce7bbf74489a3dcfa082e66be4d&UserName=jpmacz29&Command=namecheap.domains.getList&ClientIp=167.99.205.45&PageSize={$page_size}&Page={$page}";
+		
+	}
+*/
+
 		$url = "https://api.namecheap.com/xml.response?ApiUser=jpmacz29&ApiKey=dc559ce7bbf74489a3dcfa082e66be4d&UserName=jpmacz29&Command=namecheap.domains.getList&ClientIp=167.99.205.45&PageSize={$page_size}&Page={$page}";
 		// Fetch the data from the URL
 		$data = file_get_contents($url);
 		
+		print_r($data);
 		// Check if data was fetched successfully
 		if ($data === false) {
 			$error = 'Failed to fetch data from the Namecheap API'; 
