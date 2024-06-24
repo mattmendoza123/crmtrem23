@@ -254,7 +254,7 @@ $(document).ready(function () {
    
     $(document).ready(function(e) {
      get_webassets();
-  });
+ 
     function get_webassets(from = null , to = null){    
       $('#webassets_table').DataTable().clear().destroy();
       var filter_crm_type = "";
