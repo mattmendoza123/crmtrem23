@@ -92,7 +92,7 @@ class Admininvalidclicks extends MY_Controller
 		$existingOfferIndex = array_search($offerName,$affiliateOffers);
 		echo  $offerName . "= ".$existingOfferIndex."<br/>";
 
-		/*if ($existingOfferIndex !== -1) {
+		if (!$existingOfferIndex) {
 			$affiliateOffers[$affiliateName][$existingOfferIndex]->clicks++;
 		} else {
 
@@ -105,7 +105,8 @@ class Admininvalidclicks extends MY_Controller
 		}
 
 
-		print_r(json_decode($affiliateOffers));*/
+		print_r($affiliateOffers);
+		
 
 		$data_arr[] = array(		
 			$affiliateName,
