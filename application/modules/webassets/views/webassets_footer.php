@@ -221,28 +221,7 @@ $(document).ready(function () {
                                 targets: -1,
                                 data: null,
                                 defaultContent: '<button class="btn btn-sm btn-primary update-button"><i class="fa fa-edit"></i></button>'
-                            }],
-                            initComplete: function () {
-                            this.api().columns().every( function () {
-                                var column = this;
-                                var select = $('<select><option value=""></option></select>')
-                                    .appendTo( $(column.footer()).empty() )
-                                    .on( 'change', function () {
-                                        var val = $.fn.dataTable.util.escapeRegex(
-                                            $(this).val()
-                                        );
-                
-                                        column
-                                            .search( val ? '^'+val+'$' : '', true, false )
-                                            .draw();
-                                    } );
-                
-                                column.data().unique().sort().each( function ( d, j ) {
-                                    select.append( '<option value="'+d+'">'+d+'</option>' )
-                                } );
-                            } );
-                        }
-                        });
+                            }]
                     }
 
                     domains.forEach(domain => {
@@ -272,49 +251,7 @@ $(document).ready(function () {
 
     setInterval(fetchData, 24 * 60 * 60 * 1000);
 
-    $('#webassets_table').on('click', '.update-button', function () {
-        var row = $(this).closest('tr');
-        var webId = row.find('td:eq(0)').text();
-        var tags = row.find('td:eq(3)').text(); // Assuming "Tags" is the fourth column (index 3)
-        var comments = row.find('td:eq(4)').text(); // Assuming "Comment" is the fifth column (index 4)
-
-        $('#u_web_id').val(webId);
-        $('#u_tags').val(tags);
-        $('#u_comment').val(comments);
-
-        $('#update-modal').modal('show');
-    });
-
-    $('#update-modal-form').submit(function (event) {
-        event.preventDefault();
-        var formData = $(this).serialize();
-
-        $.ajax({
-            url: base_url + 'webassets/update_modal',
-            method: 'POST',
-            data: formData,
-            dataType: 'json',
-            success: function (data) {
-                if (data.success) {
-                    $('#update-modal').modal('hide');
-                    Swal.fire({
-                        icon: 'info',
-                        text: data.message,
-                    }).then(function () {
-                        location.reload();
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        text: data.message,
-                    });
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error("Error in AJAX request:", xhr.responseText);
-            }
-        });
-    });
+   
 });
 
 
@@ -383,7 +320,49 @@ function get_webAssets(from = null , to = null){
           }
       });
   }
+  $('#webassets_table').on('click', '.update-button', function () {
+        var row = $(this).closest('tr');
+        var webId = row.find('td:eq(0)').text();
+        var tags = row.find('td:eq(3)').text(); // Assuming "Tags" is the fourth column (index 3)
+        var comments = row.find('td:eq(4)').text(); // Assuming "Comment" is the fifth column (index 4)
 
+        $('#u_web_id').val(webId);
+        $('#u_tags').val(tags);
+        $('#u_comment').val(comments);
+
+        $('#update-modal').modal('show');
+    });
+
+    $('#update-modal-form').submit(function (event) {
+        event.preventDefault();
+        var formData = $(this).serialize();
+
+        $.ajax({
+            url: base_url + 'webassets/update_modal',
+            method: 'POST',
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                if (data.success) {
+                    $('#update-modal').modal('hide');
+                    Swal.fire({
+                        icon: 'info',
+                        text: data.message,
+                    }).then(function () {
+                        location.reload();
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        text: data.message,
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error in AJAX request:", xhr.responseText);
+            }
+        });
+    });
 
 </script>
 

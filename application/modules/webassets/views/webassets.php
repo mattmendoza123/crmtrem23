@@ -30,7 +30,7 @@
                                     <th>Expires</th>
                                     <th>Tags</th>
                                     <th>Comment</th>
-                                    <th>Action</th>
+                                    <th></th>
                                 </tr>
                                 </tfoot>
                             </table>
