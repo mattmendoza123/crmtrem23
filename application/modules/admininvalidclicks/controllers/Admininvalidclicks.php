@@ -49,7 +49,7 @@ class Admininvalidclicks extends MY_Controller
 	//echo $data; // Return the response to your frontend code
 	
 
-	$affiliateOffers = [];
+	
 //$data->transactrions
 	/*
 	(transaction => {
@@ -79,10 +79,12 @@ class Admininvalidclicks extends MY_Controller
 	}); */
 	
 	$data_arr = [];
+	$affiliateOffers = [];
 	foreach ($data->info->transactions as $transaction) {
-		
+		$affiliateName = isset($transaction->affiliate) ? $transaction->affiliate->value : "N/A";
+
 		$data_arr[] = array(		
-			$transaction->affiliate->value,
+			$affiliateName,
 			$transaction->added_timestamp,	
 			$transaction->added_timestamp,	
 			''
