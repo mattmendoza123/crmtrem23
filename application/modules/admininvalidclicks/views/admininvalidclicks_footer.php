@@ -23,7 +23,7 @@ $(document).ready(function () {
     var affiliateOffers = {};
     var modalCounter = 0; // Counter to generate unique modal IDs
 
-    function fetchData() {
+    function fetchData(from = null , to = null) {
         fetch(base_url + 'admininvalidclicks/invalidclick_api', {
             headers: {
                 'api-key': 'aafcf12b64ca3230279a89aa8b6eacf03c7c59da'
@@ -39,7 +39,14 @@ $(document).ready(function () {
                     dataTable = $('#invalidclicks_table').DataTable({
                         processing: true,
                         order: [[3, "desc"]],
-                        "pageLength": 50 // Set default number of rows per page
+                        "pageLength": 50, // Set default number of rows per page,
+                        initComplete: function () {       
+                            $("#invalidclicks_table_filter label").before("<label>Date Added</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
+                            jQuery("#dateSearch").click(function(){                                         
+                                fetchData($("#from_date").val(),$("#to_date").val());
+                            });  
+                        }
+                        
                     });
                 }
 
