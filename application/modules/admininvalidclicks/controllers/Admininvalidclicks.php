@@ -87,6 +87,7 @@ class Admininvalidclicks extends MY_Controller
 			$affiliateName,
 			$offerName,
 			date("m/d/Y h:i:s A", strtotime($transaction->added_timestamp)),			
+			'',
 			''
 		);
 	}
