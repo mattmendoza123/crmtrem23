@@ -96,12 +96,13 @@ class Admininvalidclicks extends MY_Controller
 			$affiliateOffers[$affiliateName][$existingOfferIndex]->clicks++;
 		} else {
 
-			$affiliateOffers[$affiliateName].push([
+			$offerInfo = [
 				'offer'=> 'offerName',
 				'clicks'=> 1,
 				'clickTimestamp'=> $transaction->added_timestamp,
 				'reason'=>  $transaction->reason
-			]);
+			];
+			array_push($affiliateOffers[$affiliateName],$offerInfo);
 		}
 
 
