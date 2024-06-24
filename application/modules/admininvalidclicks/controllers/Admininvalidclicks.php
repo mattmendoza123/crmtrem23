@@ -102,6 +102,7 @@ class Admininvalidclicks extends MY_Controller
 				'clickTimestamp'=> $transaction->added_timestamp,
 				'reason'=>  $transaction->reason
 			];
+			print_r($offerInfo);
 			array_push($affiliateOffers[$affiliateName],$offerInfo);
 		}
 
