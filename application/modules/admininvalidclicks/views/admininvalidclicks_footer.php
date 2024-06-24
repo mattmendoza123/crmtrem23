@@ -139,13 +139,7 @@ function get_invalidClicks(from = null , to = null){
       var base_url = "<?php echo base_url(); ?>";
       var data_table = $('#invalidclicks_table').DataTable({        
           "pageLength": 10,          
-          "processing": true,
-          bLengthChange: true,
-          "lengthMenu": [ [10, 15, 25, 50, 100, -1], [10, 15, 25, 50, 100, "All"] ],
-          "iDisplayLength": 10,
-          bInfo: false,
-          responsive: true,
-          "bAutoWidth": false,
+          "processing": true,        
           "search": {regex: true},          
           ajax: {
             url: base_url + 'admininvalidclicks/invalidclick_api',
