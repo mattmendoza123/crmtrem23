@@ -23,16 +23,6 @@
                             </thead>
                                 <tbody>
                                 </tbody>
-                                <tfoot>
-                                <tr>  
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Expires</th>
-                                    <th>Tags</th>
-                                    <th>Comment</th>
-                                    <th>Action</th>
-                                </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>
