@@ -81,8 +81,8 @@ class Admininvalidclicks extends MY_Controller
 		}
 	}); */
 
-
-
+	print_r($data);
+	$data_arr = [];
 	foreach ($data->info->transactions as $transaction) {
 				
 		$data_arr[] = array(		
