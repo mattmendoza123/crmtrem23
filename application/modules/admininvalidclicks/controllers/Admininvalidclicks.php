@@ -30,8 +30,7 @@ class Admininvalidclicks extends MY_Controller
 	public function invalidclick_api()
 	{
 	
-		
-		print_r($_REQUEST);
+	print_r($this->post);	
 	header('Access-Control-Allow-Origin: *'); // Allow requests from any domain
 	header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 	header("Access-Control-Allow-Headers: Content-Type, Authorization");
