@@ -49,7 +49,7 @@ class Admininvalidclicks extends MY_Controller
 
 	echo $url;
 
-	$data = json_decode(file_get_contents($url)); // Make the request and get the response
+	$data = file_get_contents($url); // Make the request and get the response
 	//echo $data; // Return the response to your frontend code
 	
 
@@ -81,8 +81,8 @@ class Admininvalidclicks extends MY_Controller
 			});
 		}
 	}); */
+	echo $data;exit();
 
-	print_r($data);
 	$data_arr = [];
 	foreach ($data->info->transactions as $transaction) {
 				
