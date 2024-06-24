@@ -336,10 +336,7 @@ function get_webAssets(from = null , to = null){
           bInfo: false,
           responsive: true,
           "bAutoWidth": false,
-          "search": {regex: true},
-          "order": [
-              [0, "asc"]
-          ],            
+          "search": {regex: true},          
           ajax: {
             url: base_url + 'webassets/webassets_api',
               data: { from_date :from, to_date:  to},               
