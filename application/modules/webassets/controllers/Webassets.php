@@ -159,14 +159,22 @@ class Webassets extends MY_Controller
         fclose($temp_file_stream);
 
 		foreach($final_domain_list as $i => $domain_list){
-			print_r($domain_list);
+				$data_arr[] = array(			
+				$domain_list->ID,
+				$domain_list->Name,
+				$domain_list->Expires,
+				$domain_list->tag,
+				$domain_list->comment,
+
+			);
+
 		}
 
 		$output = array(
 			"draw" => $draw,
-			"recordsTotal" => count($final_domain_list),
-			"recordsFiltered" => count($final_domain_list),
-			"data" => $final_domain_list
+			"recordsTotal" => count($data_arr),
+			"recordsFiltered" => count($data_arr),
+			"data" => $data_arr
 		);
 		
 		echo json_encode($output);
