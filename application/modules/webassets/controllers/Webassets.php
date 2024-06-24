@@ -41,6 +41,12 @@ class Webassets extends MY_Controller
 	
 	public function webassets_api()
 {
+	$draw = intval($this->input->post("draw"));
+	$start = intval($this->input->post("start"));
+	$length = intval($this->input->post("length"));
+	$order = $this->input->post("order");
+	$search = $this->input->post("search");
+	
 	header('Access-Control-Allow-Origin: *');
 	header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 	header("Access-Control-Allow-Headers: Content-Type, Authorization");
