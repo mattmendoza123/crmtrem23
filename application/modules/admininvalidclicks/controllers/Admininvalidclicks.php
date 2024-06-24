@@ -97,7 +97,7 @@ class Admininvalidclicks extends MY_Controller
 		} else {
 
 			$offerInfo = [
-				'offer'=> 'offerName',
+				'offer'=> $offerName,
 				'clicks'=> 1,
 				'clickTimestamp'=> $transaction->added_timestamp,
 				'reason'=>  $transaction->reason
@@ -111,13 +111,11 @@ class Admininvalidclicks extends MY_Controller
 	
 	}
 
-	foreach($affiliateOffers as $affOfers){
-		print_r($affOfers);
+	foreach($affiliateOffers as $affOfers){		
 		$data_arr[] = array(		
 			$affOfers->offer,
 			date("m/d/Y h:i:s A", strtotime($affOfers->clickTimestamp)),
-			$affOfers->clicks,		
-			$affOfers->reason,		
+			$affOfers->clicks,					
 			''
 		);	
 	}
