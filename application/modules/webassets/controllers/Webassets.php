@@ -151,7 +151,7 @@ class Webassets extends MY_Controller
         fclose($temp_file_stream);
 
 		$response = [
-			'domains' => $final_domain_list,
+			'results' => $final_domain_list,
 		];
 
 		header('Content-Type: application/json');
