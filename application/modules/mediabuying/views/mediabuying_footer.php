@@ -7,7 +7,14 @@
 <script src="<?= base_url() . "assets"; ?>/js/multiselect-dropdown.js"></script>
 <script src="https://apis.google.com/js/api.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
-
+<style type="text/css">
+a#dateSearch {
+    background: black;
+    color: #fff;
+    padding: 5px 10px;
+    margin-right: 10px;
+}
+</style>
 
 
 
