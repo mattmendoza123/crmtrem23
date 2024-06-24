@@ -29,8 +29,8 @@ class Admininvalidclicks extends MY_Controller
 	
 	public function invalidclick_api()
 	{
-	
-	print_r($_POST);	
+		$jsonArray = json_decode($this->input->raw_input_stream, true);
+	print_r($jsonArray);	
 	header('Access-Control-Allow-Origin: *'); // Allow requests from any domain
 	header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 	header("Access-Control-Allow-Headers: Content-Type, Authorization");
