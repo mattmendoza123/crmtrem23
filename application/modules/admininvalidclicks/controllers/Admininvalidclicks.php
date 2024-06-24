@@ -82,10 +82,10 @@ class Admininvalidclicks extends MY_Controller
 	$affiliateOffers = [];
 	foreach ($data->info->transactions as $transaction) {
 		$affiliateName = ($transaction->affiliate->value!="") ? $transaction->affiliate->value : "N/A";
-
+		$offerName = ($transaction->offer->value!="") ? $transaction->offer->value : "N/A";
 		$data_arr[] = array(		
 			$affiliateName,
-			'd',
+			$offerName,
 			date("m/d/Y h:i:s A", strtotime($transaction->added_timestamp)),			
 			''
 		);
