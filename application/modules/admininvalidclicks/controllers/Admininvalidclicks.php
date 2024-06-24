@@ -101,24 +101,27 @@ class Admininvalidclicks extends MY_Controller
 				'clicks'=> 1,
 				'clickTimestamp'=> $transaction->added_timestamp,
 				'reason'=>  $transaction->reason
-			];
-			print_r($offerInfo);
+			];		
 			array_push($affiliateOffers[$affiliateName],$offerInfo);
 		}
 
 
-		print_r($affiliateOffers);
 		
-
-		/*$data_arr[] = array(		
-			$affiliateName,
-			$offerName,
-			date("m/d/Y h:i:s A", strtotime($transaction->added_timestamp)),			
-			'',
-			''
-		);*/
+				
+	
 	}
-/*
+
+	foreach($affiliateOffers as $affOfers){
+
+		$data_arr[] = array(		
+			$affOfers->offer,
+			date("m/d/Y h:i:s A", strtotime($affOfers->clickTimestamp)),
+			$affOfers->clicks,		
+			$affOfers->reason,		
+			''
+		);	
+	}
+
 	$output = array(
 		"draw" => $draw,
 		"recordsTotal" => count($data_arr),
@@ -126,7 +129,7 @@ class Admininvalidclicks extends MY_Controller
 		"data" => $data_arr
 	); 
 	echo json_encode($output); 
-	exit();*/
+	exit();
 		
 
 	}
