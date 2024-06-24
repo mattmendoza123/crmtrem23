@@ -80,7 +80,7 @@ class Admininvalidclicks extends MY_Controller
 	
 	$data_arr = [];
 	foreach ($data->info->transactions as $transaction) {
-		print_r($transaction); die;
+		
 		$data_arr[] = array(		
 			$transaction->affiliate->value,
 			$transaction->added_timestamp,	
