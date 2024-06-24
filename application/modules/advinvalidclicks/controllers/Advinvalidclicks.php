@@ -27,8 +27,7 @@ class Advinvalidclicks extends MY_Controller
 
 	}
 	
-	public function invalidclick_api()
-	{
+	public function invalidclick_api(){
 	header('Access-Control-Allow-Origin: *'); // Allow requests from any domain
 	header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 	header("Access-Control-Allow-Headers: Content-Type, Authorization");
