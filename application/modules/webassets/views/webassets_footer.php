@@ -280,10 +280,10 @@ function get_webAssets(from = null , to = null){
               type: "POST",              
           },
           initComplete: function () {              
-            $("#webassets_table_filter label").before("<label>Date Created</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
-            jQuery("#dateSearch").click(function(){                                         
-                get_webAssets($("#from_date").val(),$("#to_date").val());
-            });       
+           // $("#webassets_table_filter label").before("<label>Date Created</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
+            //jQuery("#dateSearch").click(function(){                                         
+          //      get_webAssets($("#from_date").val(),$("#to_date").val());
+          //  });       
             this.api()
                   .columns()
                   .every(function () {
