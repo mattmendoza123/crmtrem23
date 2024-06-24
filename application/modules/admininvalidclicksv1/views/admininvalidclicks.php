@@ -22,15 +22,6 @@
                             </thead>
                                 <tbody>
                                 </tbody>
-                                <tfoot>
-                                <tr>
-                                    <th>Affiliate</th>
-                                    <th>Offer</th>
-                                    <th>Added Timestamp</th>
-                                    <th>Total Clicks</th>
-                                    <th>Action</th>
-                                </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>
