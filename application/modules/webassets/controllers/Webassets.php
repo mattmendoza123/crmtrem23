@@ -94,12 +94,12 @@ class Webassets extends MY_Controller
 		// go to the next page for the next cycle
 		$page++;
 	}
-	
+	header('Content-Type: application/json');
 	if ( !is_null($error) ){
 		// Handle the error, e.g., return an error response
 		// http_response_code(500); // Internal Server Error
 		// dont return 500 so the frontend can consume the error message
-		header('Content-Type: application/json');
+		
 		echo json_encode(['error' => $error]);
 	} else {
 
@@ -150,12 +150,18 @@ class Webassets extends MY_Controller
         fwrite($temp_file_stream, json_encode($final_domain_list));
         fclose($temp_file_stream);
 
-		$response = [
+	/*	$response = [
 			'results' => $final_domain_list,
 		];
-
-		header('Content-Type: application/json');
-		echo json_encode($response);
+*/
+		$output = array(
+			"draw" => $draw,
+			"recordsTotal" => count($final_domain_list),
+			"recordsFiltered" => count($final_domain_list),
+			"data" => $final_domain_list
+		);
+		
+		echo json_encode($output);
 	}
 }
 
