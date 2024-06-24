@@ -138,8 +138,7 @@ function get_invalidClicks(from = null , to = null){
       var filter_crm_type = "";
       var base_url = "<?php echo base_url(); ?>";
       var data_table = $('#invalidclicks_table').DataTable({        
-          "pageLength": 10,          
-          "processing": true,        
+          "pageLength": 501,          
           "search": {regex: true},          
           ajax: {
             url: base_url + 'admininvalidclicks/invalidclick_api',
