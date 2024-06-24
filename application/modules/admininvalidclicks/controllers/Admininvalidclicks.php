@@ -92,7 +92,7 @@ class Admininvalidclicks extends MY_Controller
 		$existingOfferIndex = array_search($offerName,$affiliateOffers);
 
 
-		if (!$existingOfferIndex) {
+		if ($existingOfferIndex) {
 			$affiliateOffers[$affiliateName][$existingOfferIndex]->clicks++;
 		} else {
 
