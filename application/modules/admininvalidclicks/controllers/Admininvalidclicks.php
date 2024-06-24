@@ -48,9 +48,9 @@ class Admininvalidclicks extends MY_Controller
 	}
 
 
-	$data = file_get_contents($url); // Make the request and get the response
+	$data = json_decode(file_get_contents($url)); // Make the request and get the response
 	//echo $data; // Return the response to your frontend code
-
+	
 
 	$affiliateOffers = [];
 //$data->transactrions
