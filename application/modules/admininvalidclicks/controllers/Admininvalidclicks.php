@@ -46,37 +46,7 @@ class Admininvalidclicks extends MY_Controller
 	
 
 	$data = json_decode(file_get_contents($url)); // Make the request and get the response
-	//echo $data; // Return the response to your frontend code
-	
 
-	
-//$data->transactrions
-	/*
-	(transaction => {
-		var affiliateName = transaction.affiliate ? transaction.affiliate.value : "N/A";
-		var offerName = transaction.offer ? transaction.offer.value : "N/A";
-		var clickTimestamp = transaction.added_timestamp ? new Date(transaction.added_timestamp) : "N/A";
-		var reason = transaction.reason ? transaction.reason : "N/A";
-
-		// Convert the timestamp to GMT+1 (CET)
-		clickTimestamp = clickTimestamp.toLocaleString('en-US', { timeZone: 'Europe/Belgrade' });
-
-		if (!affiliateOffers[affiliateName]) {
-			affiliateOffers[affiliateName] = [];
-		}
-
-		var existingOfferIndex = affiliateOffers[affiliateName].findIndex(offerInfo => offerInfo.offer === offerName);
-		if (existingOfferIndex !== -1) {
-			affiliateOffers[affiliateName][existingOfferIndex].clicks++;
-		} else {
-			affiliateOffers[affiliateName].push({
-				offer: offerName,
-				clicks: 1,
-				clickTimestamp: clickTimestamp,
-				reason: reason
-			});
-		}
-	}); */
 	
 	$data_arr = [];
 	$affiliateOffers = [];
@@ -108,15 +78,13 @@ class Admininvalidclicks extends MY_Controller
 	}
 
 	foreach($affiliateOffers as $i => $affOfers){
-		echo $i;
-//print_r($affOfers[$i]->offer);
-		
-		/*$data_arr[] = array(		
-			$affOfers[$i]->offer,
-			date("m/d/Y h:i:s A", strtotime($affOfers[$i]->clickTimestamp)),
-			$affOfers[$i]->clicks,					
+	
+		$data_arr[] = array(		
+			$i,
+			date("m/d/Y h:i:s A", strtotime($affOfers->clickTimestamp)),
+			$affOfers->clicks,					
 			''
-		);	*/
+		);	
 	}
 
 	$output = array(
