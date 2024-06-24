@@ -27,7 +27,9 @@ $(document).ready(function () {
         fetch(base_url + 'advinvalidclicks/invalidclick_api', {
             headers: {
                 'api-key': 'aafcf12b64ca3230279a89aa8b6eacf03c7c59da'
-            }
+            },
+            method: "POST",
+            body: JSON.stringify({from_date :from, to_date:  to})
         })
             .then(response => response.json())
             .then(data => {

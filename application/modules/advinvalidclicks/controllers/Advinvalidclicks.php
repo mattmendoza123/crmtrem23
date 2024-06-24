@@ -28,11 +28,12 @@ class Advinvalidclicks extends MY_Controller
 	}
 	
 	public function invalidclick_api(){
-	$jsonArray = json_decode($this->input->raw_input_stream, true);	
+	
 
 	header('Access-Control-Allow-Origin: *'); // Allow requests from any domain
 	header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 	header("Access-Control-Allow-Headers: Content-Type, Authorization");
+	$jsonArray = json_decode($this->input->raw_input_stream, true);	
 	$start_date = $jsonArray["from_date"] != "" ? $jsonArray["from_date"]  : "2023-01-01";
 	$end_date =  $jsonArray["to_date"] != "" ? $jsonArray["to_date"]  : date("Y-m-d");
 	$url = 'https://tremendio.scaletrk.com/api/v2/network/reports/logs/clicks?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&page=1&perPage=500&lang=en&sortField=added_timestamp&sortDirection=desc&columns=added_timestamp,reason,destination,affiliate,click_referer_url,offer,link,creative,sub_id1,sub_id2,sub_id3,sub_id4,sub_id5,language,aff_param1,aff_param2,aff_param3,aff_param4,aff_param5,geo,connection_type,mobile_operator,aff_click_id,device_type,deep_link_url,device_brand,device_model,source,device_os,device_os_version,browser,browser_version&filters=affiliates,offers,reason,aff_click_ids,geo,countries,devices_types,devices_brands,devices_models,devices_os,browsers,languages,connections_types,mobile_operators,ips,idfa,gaid&rangeFrom='.$start_date.'&rangeTo='.$end_date.'';
