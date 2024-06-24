@@ -6,8 +6,16 @@
 <script src="<?= base_url() . "assets"; ?>/js/calcheight.min.js"></script>
 <script src="<?= base_url() . "assets"; ?>/js/table2csv.js"></script>
 <script src="<?= base_url() . "assets"; ?>/js/multiselect-dropdown.js"></script>
+<style type="text/css">
+a#dateSearch {
+    background: black;
+    color: #fff;
+    padding: 5px 10px;
+    margin-right: 10px;
+}
+</style>
 <script type="text/javascript">
-
+/*
 
     // Users > Table
     $(document).ready(function(e) {
@@ -37,6 +45,75 @@
     });
 
 
+    
+*/
+$(document).ready(function(e) {
+      get_crmAddlists();        
+    });
+   
+    function get_crmAddlists(from = null , to = null){
+        $('#crmads_datatable').DataTable().clear().destroy();
+        var filter_crm_type = "";
+        var base_url = "<?php echo base_url(); ?>";
+        var data_table = $('#crmads_datatable').DataTable({                    
+            "pageLength": 10,           
+            "processing": true,
+            bLengthChange: true,
+            "lengthMenu": [ [10, 15, 25, 50, 100, -1], [10, 15, 25, 50, 100, "All"] ],
+            "iDisplayLength": 10,
+            bInfo: false,
+            responsive: true,
+            "bAutoWidth": false,
+            "search": {regex: true},
+            "order": [
+                [0, "asc"]
+            ],
+            ajax: {
+                url: base_url + 'crmads/get_crmadslist/',
+                data: { from_date :from, to_date:  to},               
+                type: "POST",              
+            },
+            initComplete: function () {              
+              $("#crmads_datatable_filter label").before("<label>Date Created</label> : <input type='date' id='from_date' value='"+from+"'/> to <input type='date' id='to_date' value='"+to+"'/> <a class='btn btn-xs' href='javascript:void(0)' id='dateSearch'><i class='fa fa-search'></i></a>  ");
+              jQuery("#dateSearch").click(function(){                                         
+                    get_crmAddlists($("#from_date").val(),$("#to_date").val());
+              });       
+              this.api()
+                    .columns()
+                    .every(function () {
+                        let column = this;
+                        console.log(column);
+                        let title = column.footer().textContent;
+                                              
+                        if(title !="Action"){
+                          // Create select element
+                          let select = document.createElement('select');
+                          select.className = "form-control";
+                          select.add(new Option(''));
+                          column.footer().replaceChildren(select);
+          
+                          // Apply listener for user change in value
+                          select.addEventListener('change', function () {
+                              column
+                                  .search(select.value, {exact: true})
+                                  .draw();
+                          });
+          
+                          // Add list of options
+                          column
+                              .data()
+                              .unique()
+                              .sort()
+                              .each(function (d, j) {
+                                  select.add(new Option(d));
+                              });
+                        }
+                    });
+
+                  
+            }
+        });     
+    }
     $(document).on('click', '.edit-crmads', function(e) {
         e.preventDefault();
 
@@ -76,7 +153,6 @@
             }
         });
     });
-
 
     $(document).on('click', '.view-crmads', function(e) {
         e.preventDefault();

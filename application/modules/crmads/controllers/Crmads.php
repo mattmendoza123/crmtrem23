@@ -124,13 +124,22 @@ class Crmads extends MY_Controller
 			$this->db->group_end();
 		}
 
-        $crmads= $this->db
+       $this->db
         ->select('*')
 		->from('crmads_users') 
 		->join('crmads_user_details', 'crmads_user_details.fk_user_id= crmads_users.crmads_id')
-		->where('ads_user_status !=', '2')
-		// ->where('user_type', 'User')
-        ->get();
+		->where('ads_user_status !=', '2');
+		
+		if($this->input->post("from_date")!="" && $this->input->post("to_date") == ""){
+			$this->db->where('date_created', $this->input->post("from_date"));
+		}
+		if($this->input->post("to_date")!="" && $this->input->post("from_date") == ""){
+			$this->db->where('date_created', $this->input->post("to_date"));
+		}
+		if($this->input->post("to_date")!="" && $this->input->post("from_date") != ""){		
+			$this->db->where('date_created BETWEEN '."'".$this->input->post("from_date")."'". ' AND ' . "'".$this->input->post("to_date")."'");
+		}
+		$crmads= $this->db->get();
 		
 
 		$data = array();
