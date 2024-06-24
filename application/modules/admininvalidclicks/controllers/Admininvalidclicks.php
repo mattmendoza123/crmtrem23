@@ -83,6 +83,28 @@ class Admininvalidclicks extends MY_Controller
 	foreach ($data->info->transactions as $transaction) {
 		$affiliateName = ($transaction->affiliate->value!="") ? $transaction->affiliate->value : "N/A";
 		$offerName = ($transaction->offer->value!="") ? $transaction->offer->value : "N/A";
+
+		if (!isset($affiliateOffers[$affiliateName])) {
+			$affiliateOffers[$affiliateName]= [];
+		}
+
+		$existingOfferIndex = array_search($offerName,$affiliateOffers);
+
+		if ($existingOfferIndex !== -1) {
+			$affiliateOffers[$affiliateName][$existingOfferIndex]->clicks++;
+		} else {
+
+			$affiliateOffers[$affiliateName].push([
+				'offer'=> 'offerName',
+				'clicks'=> 1,
+				'clickTimestamp'=> $transaction->added_timestamp,
+				'reason'=>  $transaction->reason
+			]);
+		}
+
+
+		print_r(json_decode($affiliateOffers));
+
 		$data_arr[] = array(		
 			$affiliateName,
 			$offerName,
