@@ -165,7 +165,7 @@ class Webassets extends MY_Controller
 				$domain_list->Expires,
 				$domain_list->tag,
 				$domain_list->comment,
-
+				''
 			);
 
 		}
