@@ -40,6 +40,7 @@ class Api extends MY_Controller
 			foreach($data['info']['transactions'] as $transaction){			
 				unset($transaction["affiliate"]["value"] , $transaction["advertiser"]["value"]);	
 				$transaction_data[] = $transaction;		
+				print_r($transaction);
 			}
 			if(count($data['info']['transactions']) <=0){
 				$continue = false;
