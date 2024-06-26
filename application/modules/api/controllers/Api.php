@@ -12,7 +12,7 @@ class Api extends MY_Controller
 		$this->load->helper('url'); 
 	}
 	public function index(){
-		$this->filter("Today");
+		//
 	}		
 	public function reports()
 	{		
