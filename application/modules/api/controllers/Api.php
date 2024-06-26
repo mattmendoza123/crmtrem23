@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Api extends Public_Controller
+class Api extends MY_Controller
 {
 	public function __construct()
 	{
