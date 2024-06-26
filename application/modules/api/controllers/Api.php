@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Api extends MY_Controller
+class Api extends CI_Controller
 {
 
 	private $errmsg = "";
