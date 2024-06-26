@@ -31,23 +31,16 @@ class Api extends MY_Controller
 		$page = $this->input->get('page', TRUE);
 		$perPage = $this->input->get('perPage', TRUE);
 
-		$data_transactions_array = [];
 		$transaction_data = [];
 		$data_headers = [];
-		
-
+	
 		$url = 'https://tremendio.scaletrk.com/api/v2/network/reports/conversions?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=added_timestamp&sortDirection=desc&perPage='.$perPage.'&page='.$page.'&rangeFrom="'.$start_date.'"&rangeTo="'.$end_date.'"&columns=sub_id1,sub_id2,sub_id3,revenue,added_timestamp,changed_timestamp,currency,transaction_id,advertiser,affiliate&filters=advertisers:500,affiliates:1602'; // URL of the API you want to request
-		echo $url;
-		echo "<hr/>";
 		$data = json_decode(file_get_contents($url), true); 		
 
 		foreach($data['info']['transactions'] as $transaction){						
 			unset($transaction["affiliate"]["value"] , $transaction["advertiser"]["value"]);	
 			$transaction_data[] = $transaction;		
-			print_r($transaction);
 		}			
-
-
 		/*$transaction_data = [];
 		foreach($data['info']['transactions'] as $transaction){			
 
@@ -56,7 +49,7 @@ class Api extends MY_Controller
 			$transaction_data[] = $transaction;		
 		}*/		
 
-		$data_headers["info"]["transactions"] = $transaction_data;
+		$data["info"]["transactions"] = $transaction_data;
 		echo json_encode($data);
 	}
 
