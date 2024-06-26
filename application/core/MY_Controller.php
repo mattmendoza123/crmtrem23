@@ -14,7 +14,7 @@ class MY_Controller extends MX_Controller {
 				redirect(base_url(""));
 			}
 		} else {
-			if(!$this->session->has_userdata('user_id') && $route != 'register' && $route != 'whatsmyip' && $route != 'adminlogin'){
+			if(!$this->session->has_userdata('user_id') && $route != 'register' && $route != 'whatsmyip' && $route != 'adminlogin' && $route!="api"){
 				redirect(base_url('login'));
 			}
 		}
