@@ -21,37 +21,31 @@ class Api extends MY_Controller
 		header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 		header("Access-Control-Allow-Headers: Content-Type, Authorization");
 		
-		$start_date = "2023-01-01";
+		$start_date = $this->input->post("rangeFrom") !="" ? $this->input->post("rangeFrom") : "2023-01-01";
 		$end_date = date("Y-m-d");	
-
+	
 		//$url = 'https://tremendio.scaletrk.com/api/v2/network/reports/conversions?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=added_timestamp&sortDirection=desc&perPage=10&page=1&rangeFrom="'.$start_date.'"&rangeTo="'.$end_date.'"&columns=sub_id1,sub_id2,sub_id3,revenue,added_timestamp,changed_timestamp,currency,transaction_id,advertiser,affiliate&filters=advertisers:500,affiliates:1602'; // URL of the API you want to request
 		//$data = json_decode(file_get_contents($url), true); 
 		
 		$continue = true;
-		$page = 1;
+		$page = $this->input->get('page', TRUE);
+		$perPage = $this->input->get('perPage', TRUE);
+
 		$data_transactions_array = [];
 		$transaction_data = [];
 		$data_headers = [];
-		while($continue){
+		
 
-			$url = 'https://tremendio.scaletrk.com/api/v2/network/reports/conversions?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=added_timestamp&sortDirection=desc&perPage=500&page='.$page.'&rangeFrom="'.$start_date.'"&rangeTo="'.$end_date.'"&columns=sub_id1,sub_id2,sub_id3,revenue,added_timestamp,changed_timestamp,currency,transaction_id,advertiser,affiliate&filters=advertisers:500,affiliates:1602'; // URL of the API you want to request
-			$data = json_decode(file_get_contents($url), true); 
-			$i = 0;
-			foreach($data['info']['transactions'] as $transaction){	
-						
-				unset($transaction["affiliate"]["value"] , $transaction["advertiser"]["value"]);	
-				$transaction_data[$page."_".$i] = $transaction;		
-				print_r($transaction);
-			}
-			if(count($data['info']['transactions']) <=0){
-				$continue = false;
-				$data_headers = $data;
-			}		
+		$url = 'https://tremendio.scaletrk.com/api/v2/network/reports/conversions?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=added_timestamp&sortDirection=desc&perPage='.$perPage.'&page='.$page.'&rangeFrom="'.$start_date.'"&rangeTo="'.$end_date.'"&columns=sub_id1,sub_id2,sub_id3,revenue,added_timestamp,changed_timestamp,currency,transaction_id,advertiser,affiliate&filters=advertisers:500,affiliates:1602'; // URL of the API you want to request
+		echo $url;
+		echo "<hr/>";
+		$data = json_decode(file_get_contents($url), true); 		
 
-			$page++;
-			sleep(10);
-			
-		}
+		foreach($data['info']['transactions'] as $transaction){						
+			unset($transaction["affiliate"]["value"] , $transaction["advertiser"]["value"]);	
+			$transaction_data[] = $transaction;		
+			print_r($transaction);
+		}			
 
 
 		/*$transaction_data = [];
