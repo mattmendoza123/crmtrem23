@@ -49,10 +49,11 @@ class Api extends MY_Controller
 		header("Access-Control-Allow-Headers: Content-Type, Authorization");
 		$url = 'https://tremendio.scaletrk.com/api/v2/network/reports/conversions?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=added_timestamp&sortDirection=desc&perPage=10&page=1&rangeFrom=2024-01-01&rangeTo=2024-12-31&columns=sub_id1,sub_id2,sub_id3,revenue,added_timestamp,changed_timestamp,currency,transaction_id,advertiser,affiliate&filters=advertisers:500,affiliates:1602'; // URL of the API you want to request
 		$data = json_decode(file_get_contents($url), true); 
-		print_r($data);
+		//print_r($data);
 		$transaction_data = [];
 		foreach($data['info']['transactions'] as $transaction){
 			print_r($transaction);
+			echo "<hr/>";
 			//$transaction_data[] = 
 		}
 		
