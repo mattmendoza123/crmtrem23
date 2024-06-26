@@ -31,6 +31,7 @@ class Api extends MY_Controller
 		$page = 1;
 		$data_transactions_array = [];
 		$transaction_data = [];
+		$data_headers = [];
 		while($continue){
 
 			$url = 'https://tremendio.scaletrk.com/api/v2/network/reports/conversions?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=added_timestamp&sortDirection=desc&perPage=500&page='.$page.'&rangeFrom="'.$start_date.'"&rangeTo="'.$end_date.'"&columns=sub_id1,sub_id2,sub_id3,revenue,added_timestamp,changed_timestamp,currency,transaction_id,advertiser,affiliate&filters=advertisers:500,affiliates:1602'; // URL of the API you want to request
@@ -42,7 +43,9 @@ class Api extends MY_Controller
 			}
 			if(count($data['info']['transactions']) <=0){
 				$continue = false;
-			}			
+				$data_headers = $data;
+			}		
+
 			$page++;
 			sleep(10);
 			
@@ -55,8 +58,9 @@ class Api extends MY_Controller
 			unset($transaction["affiliate"]["value"] , $transaction["advertiser"]["value"]);
 
 			$transaction_data[] = $transaction;		
-		}*/
-		$data["info"]["transactions"] = $transaction_data;
+		}*/		
+
+		$data_headers["info"]["transactions"] = $transaction_data;
 		echo json_encode($data);
 	}
 
