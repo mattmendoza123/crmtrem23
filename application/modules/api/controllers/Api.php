@@ -53,7 +53,7 @@ class Api extends MY_Controller
 		$transaction_data = [];
 		foreach($data['info']['transactions'] as $transaction){			
 
-			unset($transaction["affiliate"]["value"],$transaction);
+			unset($transaction["affiliate"]["value"]);
 
 			$transaction_data[] = $transaction;
 			//echo "<hr/>";
