@@ -21,7 +21,7 @@ class Api extends MY_Controller
 		header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 		header("Access-Control-Allow-Headers: Content-Type, Authorization");
 		
-		$start_date = $this->input->post("rangeFrom") !="" ? $this->input->post("rangeFrom") : "2023-01-01";
+		$start_date = $this->input->get("rangeFrom") !="" ? $this->input->get("rangeFrom") : "2023-01-01";		
 		$end_date = date("Y-m-d");	
 	
 		//$url = 'https://tremendio.scaletrk.com/api/v2/network/reports/conversions?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=added_timestamp&sortDirection=desc&perPage=10&page=1&rangeFrom="'.$start_date.'"&rangeTo="'.$end_date.'"&columns=sub_id1,sub_id2,sub_id3,revenue,added_timestamp,changed_timestamp,currency,transaction_id,advertiser,affiliate&filters=advertisers:500,affiliates:1602'; // URL of the API you want to request
