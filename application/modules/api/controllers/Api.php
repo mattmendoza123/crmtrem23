@@ -38,12 +38,11 @@ class Api extends MY_Controller
 		$start_date = $this->input->get("rangeFrom") !="" ? $this->input->get("rangeFrom") : "2023-01-01";		
 		$end_date = date("Y-m-d");			
 		$page = $this->input->get('page', TRUE);
-		$perPage = $this->input->get('perPage', TRUE);
-		echo base_url()."/api/report_request?page=".$page."&perPage=".$perPage."&rangeFrom=".$start_date;
+		$perPage = $this->input->get('perPage', TRUE);		
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // Return data inplace of echoing on screen
-		curl_setopt($ch, CURLOPT_URL, base_url()."/api/report_request?page=".$page."&perPage=".$perPage."&rangeFrom=".$start_date);
+		curl_setopt($ch, CURLOPT_URL, base_url()."api/report_request?page=".$page."&perPage=".$perPage."&rangeFrom=".$start_date);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); // Skip SSL Verification
 		$rsData = curl_exec($ch);
 		curl_close($ch);
