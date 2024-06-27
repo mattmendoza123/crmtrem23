@@ -32,7 +32,20 @@ class Api extends MY_Controller
 		}			
 		
 		$data["info"]["transactions"] = $transaction_data;
-		echo json_encode($data);
+		
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // Return data inplace of echoing on screen
+		curl_setopt($ch, CURLOPT_URL, $strURL);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); // Skip SSL Verification
+		$rsData = curl_exec($ch);
+		curl_close($ch);
+
+		json_encode($data);
+		return $rsData;
+
+
 	}
 
 }
