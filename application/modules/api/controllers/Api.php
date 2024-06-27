@@ -31,7 +31,7 @@ class Api extends MY_Controller
 		}			
 		
 		$data["info"]["transactions"] = $transaction_data;
-		return json_encode($data);
+		echo json_encode($data);
 	}	
 	public function reports2()
 	{		
