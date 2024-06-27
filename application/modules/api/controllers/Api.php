@@ -42,7 +42,7 @@ class Api extends MY_Controller
 		$rsData = curl_exec($ch);
 		curl_close($ch);
 
-		json_encode($data);
+		echo json_encode($data);
 		return $rsData;
 
 
