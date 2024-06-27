@@ -42,7 +42,7 @@ class Api extends MY_Controller
 
 		
 		
-		$url = base_url()."api/report_request?page=".$page."&perPage=".$perPage."&rangeFrom=".$start_date;
+		$url = base_url()."api/reports?page=".$page."&perPage=".$perPage."&rangeFrom=".$start_date;
 
 		$ch = curl_init($url);
 
