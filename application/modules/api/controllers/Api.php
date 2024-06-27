@@ -39,15 +39,29 @@ class Api extends MY_Controller
 		$end_date = date("Y-m-d");			
 		$page = $this->input->get('page', TRUE);
 		$perPage = $this->input->get('perPage', TRUE);		
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // Return data inplace of echoing on screen
-		curl_setopt($ch, CURLOPT_URL, base_url()."api/report_request?page=".$page."&perPage=".$perPage."&rangeFrom=".$start_date);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); // Skip SSL Verification
-		$rsData = curl_exec($ch);
+
+		
+		
+		$url = base_url()."api/report_request?page=".$page."&perPage=".$perPage."&rangeFrom=".$start_date;
+
+		$ch = curl_init($url);
+
+		// Set cURL options for SSL/HTTPS
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Disable SSL verification (not recommended for production)
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); // Disable host verification (not recommended for production)
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return the transfer as a string
+
+		$response = curl_exec($ch);
+
+		// Check for errors
+		if (curl_errno($ch)) {
+			$error_msg = curl_error($ch);
+			// Handle error
+		}
+
 		curl_close($ch);
-	
-		echo $rsData;
+
+		echo $response;
 
 
 	}
