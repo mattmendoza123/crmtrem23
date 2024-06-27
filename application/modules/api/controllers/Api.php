@@ -58,10 +58,9 @@ class Api extends MY_Controller
 			$error_msg = curl_error($ch);
 			// Handle error
 		}
-
-		curl_close($ch);
-
 		echo $response;
+		curl_close($ch);
+		
 
 
 	}
