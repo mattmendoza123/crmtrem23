@@ -31,7 +31,7 @@ class Api extends MY_Controller
 		}			
 		
 		$data["info"]["transactions"] = $transaction_data;
-		return json_encode($data);
+		echo json_encode($data);
 	}	
 	public function reports()
 	{		
@@ -39,7 +39,7 @@ class Api extends MY_Controller
 		$end_date = date("Y-m-d");			
 		$page = $this->input->get('page', TRUE);
 		$perPage = $this->input->get('perPage', TRUE);
-
+		echo base_url()."/api/report_request?page=".$page."&perPage=".$perPage."&rangeFrom=".$start_date;
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // Return data inplace of echoing on screen
@@ -48,7 +48,7 @@ class Api extends MY_Controller
 		$rsData = curl_exec($ch);
 		curl_close($ch);
 	
-		echo $rsData;
+		return $rsData;
 
 
 	}
