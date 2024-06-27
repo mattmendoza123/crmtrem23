@@ -10,7 +10,7 @@ class Api extends MY_Controller
 	public function index(){
 		//
 	}		
-	public function report_request(){
+	public function reports(){
 		date_default_timezone_set("Europe/Paris");
 		header('Access-Control-Allow-Origin: *'); // Allow requests from any domain
 		header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
@@ -33,7 +33,7 @@ class Api extends MY_Controller
 		$data["info"]["transactions"] = $transaction_data;
 		return json_encode($data);
 	}	
-	public function reports()
+	public function reports2()
 	{		
 		$start_date = $this->input->get("rangeFrom") !="" ? $this->input->get("rangeFrom") : "2023-01-01";		
 		$end_date = date("Y-m-d");			
