@@ -235,20 +235,28 @@
 
 //     echo json_encode($response);
 // }
-
-defined('BASEPATH') or exit('No direct script access allowed');
-
 class Adminactivedomain extends MY_Controller
 {
     private $apiKey;
+    private $dbConnection;
 
     public function __construct()
     {
         parent::__construct();
         $this->load->helper('url');
         $this->load->database();
+        $this->apiKey = getenv('API_KEY') ?: '372c362e7c97ac0f7f20ee6b278179b486f23f64f0c15d87ce7562f83d27a1c8';
+        $this->dbConnection = $this->connectDatabase();
+    }
 
-        $this->apiKey = '372c362e7c97ac0f7f20ee6b278179b486f23f64f0c15d87ce7562f83d27a1c8';
+    private function connectDatabase()
+    {
+        $mysqli = new mysqli("localhost", "root", "password", "greeocvu_wp580");
+        if ($mysqli->connect_error) {
+            error_log('Connection failed: ' . $mysqli->connect_error);
+            return null;
+        }
+        return $mysqli;
     }
 
     public function index()
@@ -260,130 +268,72 @@ class Adminactivedomain extends MY_Controller
 
     public function activedomain_api()
     {
-        header('Access-Control-Allow-Origin: *');
-        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+        $this->setCorsHeaders();
         
-        $mysqli = new mysqli("localhost", "root", "password", "greeocvu_wp580");
-        if ($mysqli->connect_error) {
-            $response = ['success' => false, 'message' => 'Connection failed: ' . $mysqli->connect_error];
-            echo json_encode($response);
-            exit();
+        if (!$this->dbConnection) {
+            $this->sendErrorResponse('Database connection failed.');
+            return;
         }
 
-        $url = 'https://tremendio.scaletrk.com/api/v2/network/offers/1147/tracking-settings?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da';
-        $data = file_get_contents($url);
-        $responseData = json_decode($data, true);
+        $url = 'https://tremendio.scaletrk.com/api/v2/network/offers/1147/tracking-settings?api-key=' . $this->apiKey;
+        $responseData = $this->fetchApiResponse($url);
 
-        if (isset($responseData['info']['details']['tracking_domains']) && is_array($responseData['info']['details']['tracking_domains'])) {
-            $processedUrls = [];
-
-            foreach ($responseData['info']['details']['tracking_domains'] as $trackingDomain) {
-                $url = $trackingDomain['name'] . '/';
-                if (!in_array($url, $processedUrls)) {
-                    $stmt = $mysqli->prepare("INSERT INTO active_domain (url, tags, comments) VALUES (?, 'N/A', 'N/A')");
-                    $stmt->bind_param('s', $url);
-                    if ($stmt->execute()) {
-                        $processedUrls[] = $url;
-                    }
-                }
-            }
-            $mysqli->close();
-            $response = ['success' => true];
+        if ($responseData && isset($responseData['info']['details']['tracking_domains'])) {
+            $this->processTrackingDomains($responseData['info']['details']['tracking_domains']);
+            $this->sendSuccessResponse();
         } else {
-            $response = ['success' => false, 'message' => "No tracking domains found in the API response."];
+            $this->sendErrorResponse('No tracking domains found in the API response.');
         }
-
-        header('Content-Type: application/json');
-        echo json_encode($response);
     }
 
-    public function api()
+    private function fetchApiResponse($url)
+    {
+        $data = file_get_contents($url);
+        return json_decode($data, true);
+    }
+
+    private function processTrackingDomains($trackingDomains)
+    {
+        $processedUrls = [];
+        foreach ($trackingDomains as $trackingDomain) {
+            $url = $trackingDomain['name'];
+            if (!in_array($url, $processedUrls)) {
+                $this->insertTrackingDomain($url . '/');
+                $processedUrls[] = $url;
+            }
+        }
+    }
+
+    private function insertTrackingDomain($url)
+    {
+        $stmt = $this->dbConnection->prepare("INSERT INTO active_domain (url, tags, comments) VALUES (?, 'N/A', 'N/A')");
+        $stmt->bind_param('s', $url);
+        if (!$stmt->execute()) {
+            error_log('Insert failed: ' . $stmt->error);
+        }
+    }
+
+    private function setCorsHeaders()
     {
         header('Access-Control-Allow-Origin: *');
         header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
         header("Access-Control-Allow-Headers: Content-Type, Authorization");
-
-        $apiKey = $this->apiKey;
-        $mysqli = new mysqli("localhost", "root", "password", "greeocvu_wp580");
-        if ($mysqli->connect_error) {
-            die("Connection failed: " . $mysqli->connect_error);
-        }
-
-        $sql = "SELECT * FROM active_domain";
-        $result = $mysqli->query($sql);
-        $data = [];
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $data[] = $row;
-            }
-        }
-        $mysqli->close();
-
-        $dataWithVirusTotal = [];
-        foreach ($data as $row) {
-            $url = $row['url'];
-            $virusTotalData = $this->fetchVirusTotalData($url, $apiKey);
-            if ($virusTotalData) {
-                $dataWithVirusTotal[] = array_merge($row, $virusTotalData);
-            }
-        }
-
-        echo json_encode($dataWithVirusTotal);
     }
 
-    private function fetchVirusTotalData($url, $apiKey)
+    private function sendErrorResponse($message)
     {
-        $hash = hash('sha256', $url);
-        $urlEndpoint = "https://www.virustotal.com/api/v3/urls/{$hash}";
-
-        $options = [
-            'http' => [
-                'header' => "Content-type: application/x-www-form-urlencoded\r\nx-apikey: {$apiKey}\r\n",
-                'method' => 'GET'
-            ]
-        ];
-
-        $context = stream_context_create($options);
-        $response = file_get_contents($urlEndpoint, false, $context);
-        $result = json_decode($response, true);
-
-        if ($result && isset($result['data']['attributes']['last_analysis_stats'])) {
-            return [
-                'harmless' => $result['data']['attributes']['last_analysis_stats']['harmless'],
-                'malicious' => $result['data']['attributes']['last_analysis_stats']['malicious'],
-                'suspicious' => $result['data']['attributes']['last_analysis_stats']['suspicious'],
-                'undetected' => $result['data']['attributes']['last_analysis_stats']['undetected']
-            ];
-        } else {
-            error_log("Non-JSON response received for URL: $url");
-            return null;
-        }
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'message' => $message]);
     }
 
-    public function update_modal()
+    private function sendSuccessResponse()
     {
-        $post = $this->input->post();
-
-        $set = [
-            'url' => $post["u_url"],
-            'tags' => implode(';', $post["u_tags"]),
-            'comments' => $post["u_comment"],
-        ];
-
-        $where = ["active_id" => $post["u_active_id"]];
-        $update = $this->MY_Model->update("active_domain", $set, $where);
-
-        if ($update) {
-            $response = ['success' => true, 'message' => 'Updated Successfully.'];
-        } else {
-            $response = ['success' => false, 'message' => 'Update failed.'];
-        }
-
-        echo json_encode($response);
+        header('Content-Type: application/json');
+        echo json_encode(['success' => true]);
     }
 }
+
+
 
 
 
