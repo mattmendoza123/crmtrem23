@@ -155,40 +155,6 @@ public function api()
     echo json_encode($dataWithVirusTotal);
 }
 
-// private function fetchVirusTotalData($url, $apiKey)
-// {
-//     $hash = hash('sha256', $url);
-//     $urlEndpoint = "https://www.virustotal.com/api/v3/urls/{$hash}";
-
-//     $options = array(
-//         'http' => array(
-//             'header' => "Content-type: application/x-www-form-urlencoded\r\n" .
-//                 "x-apikey: {$apiKey}\r\n",
-//             'method' => 'GET'
-//         )
-//     );
-
-//     $context  = stream_context_create($options);
-//     $response = file_get_contents($urlEndpoint, false, $context);
-
-//     // Check if the response is valid JSON
-//     $result = json_decode($response, true);
-
-//     if ($result && isset($result['data']['attributes']['last_analysis_stats'])) {
-//         // Extract the desired scan result statistics
-//         return array(
-//             'harmless' => $result['data']['attributes']['last_analysis_stats']['harmless'],
-//             'malicious' => $result['data']['attributes']['last_analysis_stats']['malicious'],
-//             'suspicious' => $result['data']['attributes']['last_analysis_stats']['suspicious'],
-//             'undetected' => $result['data']['attributes']['last_analysis_stats']['undetected']
-//         );
-//     } else {
-//         // Handle non-JSON response (e.g., HTML error page)
-//         // You can log the response or take appropriate action
-//         error_log("Non-JSON response received for URL: $url");
-//         return null;
-//     }
-// }
 private function fetchVirusTotalData($url, $apiKey)
 {
     $hash = hash('sha256', $url);
@@ -197,7 +163,7 @@ private function fetchVirusTotalData($url, $apiKey)
     $options = array(
         'http' => array(
             'header' => "Content-type: application/x-www-form-urlencoded\r\n" .
-                        "x-apikey: {$apiKey}\r\n",
+                "x-apikey: {$apiKey}\r\n",
             'method' => 'GET'
         )
     );
@@ -208,27 +174,61 @@ private function fetchVirusTotalData($url, $apiKey)
     // Check if the response is valid JSON
     $result = json_decode($response, true);
 
-    if ($result) {
-        // Check for the presence of the 'data' key
-        if (isset($result['data']['attributes']['last_analysis_stats'])) {
-            // Extract the desired scan result statistics from the 'data' structure
-            return array(
-                'harmless' => $result['data']['attributes']['last_analysis_stats']['harmless'],
-                'malicious' => $result['data']['attributes']['last_analysis_stats']['malicious'],
-                'suspicious' => $result['data']['attributes']['last_analysis_stats']['suspicious'],
-                'undetected' => $result['data']['attributes']['last_analysis_stats']['undetected']
-            );
-        } else {
-            // Handle unexpected structure
-            error_log("Unexpected response structure for URL: $url - " . print_r($result, true));
-            return null;
-        }
+    if ($result && isset($result['data']['attributes']['last_analysis_stats'])) {
+        // Extract the desired scan result statistics
+        return array(
+            'harmless' => $result['data']['attributes']['last_analysis_stats']['harmless'],
+            'malicious' => $result['data']['attributes']['last_analysis_stats']['malicious'],
+            'suspicious' => $result['data']['attributes']['last_analysis_stats']['suspicious'],
+            'undetected' => $result['data']['attributes']['last_analysis_stats']['undetected']
+        );
     } else {
         // Handle non-JSON response (e.g., HTML error page)
+        // You can log the response or take appropriate action
         error_log("Non-JSON response received for URL: $url");
         return null;
     }
 }
+// private function fetchVirusTotalData($url, $apiKey)
+// {
+//     $hash = hash('sha256', $url);
+//     $urlEndpoint = "https://www.virustotal.com/api/v3/urls/{$hash}";
+
+//     $options = array(
+//         'http' => array(
+//             'header' => "Content-type: application/x-www-form-urlencoded\r\n" .
+//                         "x-apikey: {$apiKey}\r\n",
+//             'method' => 'GET'
+//         )
+//     );
+
+//     $context  = stream_context_create($options);
+//     $response = file_get_contents($urlEndpoint, false, $context);
+
+//     // Check if the response is valid JSON
+//     $result = json_decode($response, true);
+
+//     if ($result) {
+//         // Check for the presence of the 'data' key
+//         if (isset($result['data']['attributes']['last_analysis_stats'])) {
+//             // Extract the desired scan result statistics from the 'data' structure
+//             return array(
+//                 'harmless' => $result['data']['attributes']['last_analysis_stats']['harmless'],
+//                 'malicious' => $result['data']['attributes']['last_analysis_stats']['malicious'],
+//                 'suspicious' => $result['data']['attributes']['last_analysis_stats']['suspicious'],
+//                 'undetected' => $result['data']['attributes']['last_analysis_stats']['undetected']
+//             );
+//         } else {
+//             // Handle unexpected structure
+//             error_log("Unexpected response structure for URL: $url - " . print_r($result, true));
+//             return null;
+//         }
+//     } else {
+//         // Handle non-JSON response (e.g., HTML error page)
+//         error_log("Non-JSON response received for URL: $url");
+//         return null;
+//     }
+// }
 
 
 // public function update_modal()
