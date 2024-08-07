@@ -103,103 +103,16 @@ class Advactivedomain extends MY_Controller
 
 
 // Virustotal
-// public function api()
-// {
-//     header('Access-Control-Allow-Origin: *'); // Allow requests from any domain
-//     header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-//     header("Access-Control-Allow-Headers: Content-Type, Authorization");
-
-//     // Replace 'YOUR_API_KEY' with your actual API key
-//     $apiKey = '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e';
-    
-
-//     // Database connection
-//     $mysqli = new mysqli("localhost", "root", "password", "greeocvu_wp580");
-
-//     // Check connection
-//     if ($mysqli->connect_error) {
-//         die("Connection failed: " . $mysqli->connect_error);
-//     }
-
-//     $sql = "SELECT * FROM active_domain";
-//     $result = $mysqli->query($sql);
-
-//     $data = array();
-
-//     if ($result->num_rows > 0) {
-//         while ($row = $result->fetch_assoc()) {
-//             // Add each row as an associative array to the $data array
-//             $data[] = $row;
-//         }
-//     }
-
-//     // Close the database connection
-//     $mysqli->close();
-
-//     $dataWithVirusTotal = array();
-
-//     foreach ($data as $row) {
-//         $url = $row['url'];
-
-//         // Fetch additional data from the VirusTotal API
-//         $virusTotalData = $this->fetchVirusTotalData($url, $apiKey); // Implement this function
-
-//         if ($virusTotalData) {
-//             // Merge the VirusTotal data with the existing data
-//             $mergedData = array_merge($row, $virusTotalData);
-//             $dataWithVirusTotal[] = $mergedData;
-//         }
-//     }
-
-//     // Send the response as JSON
-//     echo json_encode($dataWithVirusTotal);
-// }
-
-// private function fetchVirusTotalData($url, $apiKey)
-// {
-//     $hash = hash('sha256', $url);
-//     $urlEndpoint = "https://www.virustotal.com/api/v3/urls/{$hash}";
-
-//     $options = array(
-//         'http' => array(
-//             'header' => "Content-type: application/x-www-form-urlencoded\r\n" .
-//                 "x-apikey: {$apiKey}\r\n",
-//             'method' => 'GET'
-//         )
-//     );
-
-//     $context  = stream_context_create($options);
-//     $response = file_get_contents($urlEndpoint, false, $context);
-
-//     // Check if the response is valid JSON
-//     $result = json_decode($response, true);
-
-//     if ($result && isset($result['data']['attributes']['last_analysis_stats'])) {
-//         // Extract the desired scan result statistics
-//         return array(
-//             'harmless' => $result['data']['attributes']['last_analysis_stats']['harmless'],
-//             'malicious' => $result['data']['attributes']['last_analysis_stats']['malicious'],
-//             'suspicious' => $result['data']['attributes']['last_analysis_stats']['suspicious'],
-//             'undetected' => $result['data']['attributes']['last_analysis_stats']['undetected']
-//         );
-//     } else {
-//         // Handle non-JSON response (e.g., HTML error page)
-//         // You can log the response or take appropriate action
-//         error_log("Non-JSON response received for URL: $url");
-//         return null;
-//     }
-// }
-
-// Virustotal
 public function api()
 {
     header('Access-Control-Allow-Origin: *'); // Allow requests from any domain
     header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
     header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
-    // Replace 'YOUR_API_KEY' with your actual API key stored securely
+    // Replace 'YOUR_API_KEY' with your actual API key
     $apiKey = '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e';
     
+
     // Database connection
     $mysqli = new mysqli("localhost", "root", "password", "greeocvu_wp580");
 
@@ -215,35 +128,42 @@ public function api()
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
+            // Add each row as an associative array to the $data array
             $data[] = $row;
         }
     }
 
+    // Close the database connection
     $mysqli->close();
 
     $dataWithVirusTotal = array();
 
     foreach ($data as $row) {
         $url = $row['url'];
-        $virusTotalData = $this->fetchVirusTotalData($url, $apiKey);
+
+        // Fetch additional data from the VirusTotal API
+        $virusTotalData = $this->fetchVirusTotalData($url, $apiKey); // Implement this function
 
         if ($virusTotalData) {
+            // Merge the VirusTotal data with the existing data
             $mergedData = array_merge($row, $virusTotalData);
             $dataWithVirusTotal[] = $mergedData;
         }
     }
 
+    // Send the response as JSON
     echo json_encode($dataWithVirusTotal);
 }
 
 private function fetchVirusTotalData($url, $apiKey)
 {
-    $hash = base64_encode($url); // Encode URL to base64 as required by VirusTotal API
+    $hash = hash('sha256', $url);
     $urlEndpoint = "https://www.virustotal.com/api/v3/urls/{$hash}";
 
     $options = array(
         'http' => array(
-            'header' => "x-apikey: {$apiKey}\r\n",
+            'header' => "Content-type: application/x-www-form-urlencoded\r\n" .
+                "x-apikey: {$apiKey}\r\n",
             'method' => 'GET'
         )
     );
@@ -251,27 +171,21 @@ private function fetchVirusTotalData($url, $apiKey)
     $context  = stream_context_create($options);
     $response = file_get_contents($urlEndpoint, false, $context);
 
-    if ($response === FALSE) {
-        error_log("Error fetching data from VirusTotal for URL: $url");
-        return null;
-    }
-
+    // Check if the response is valid JSON
     $result = json_decode($response, true);
 
     if ($result && isset($result['data']['attributes']['last_analysis_stats'])) {
+        // Extract the desired scan result statistics
         return array(
             'harmless' => $result['data']['attributes']['last_analysis_stats']['harmless'],
             'malicious' => $result['data']['attributes']['last_analysis_stats']['malicious'],
             'suspicious' => $result['data']['attributes']['last_analysis_stats']['suspicious'],
-            'undetected' => $result['data']['attributes']['last_analysis_stats']['undetected'],
-            'total_votes_harmless' => $result['data']['attributes']['total_votes']['harmless'],
-            'total_votes_malicious' => $result['data']['attributes']['total_votes']['malicious'],
-            'last_final_url' => $result['data']['attributes']['last_final_url'],
-            'reputation' => $result['data']['attributes']['reputation'],
-            'categories' => $result['data']['attributes']['categories']
+            'undetected' => $result['data']['attributes']['last_analysis_stats']['undetected']
         );
     } else {
-        error_log("Invalid response from VirusTotal for URL: $url");
+        // Handle non-JSON response (e.g., HTML error page)
+        // You can log the response or take appropriate action
+        error_log("Non-JSON response received for URL: $url");
         return null;
     }
 }
