@@ -65,7 +65,7 @@ $(document).ready(function () {
     var base_url = "https://crm.tremendio.network/";
 
     var dataTable = $('#activedomain').DataTable({
-        "pageLength": 25,
+        "pageLength": 5,
         "order": [[3, "desc"]]
     });
 
