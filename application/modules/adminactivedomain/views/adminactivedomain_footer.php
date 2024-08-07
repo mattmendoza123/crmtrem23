@@ -61,6 +61,91 @@ $(document).ready(function() {
 
 
 
+// $(document).ready(function () {
+//     var base_url = "https://crm.tremendio.network/";
+
+//     var dataTable = $('#activedomain').DataTable({
+//         "pageLength": 5,
+//         "order": [[3, "desc"]]
+//     });
+
+//     // Show a loading message in the table while fetching data
+//     dataTable.row.add(['', '', '', '', 'Please wait API is still loading...', '', '', '', '']).draw();
+
+//     fetch(base_url + 'adminactivedomain/api', {
+//         headers: {
+//             // 'x-apikey': '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e'
+//         }
+//     })
+//         .then(response => {
+//             if (!response.ok) {
+//                 throw new Error("Network response was not ok");
+//             }
+//             return response.json();
+//         })
+//         .then(data => {
+//             // Remove the loading row
+//             dataTable.row(':contains("Please wait API is still loading...")').remove().draw();
+
+//             // Check if the data is an array
+//             if (Array.isArray(data)) {
+//                 data.forEach(obj => {
+//                     var tags = obj.tags || 'N1';
+//                     var lastFinalUrl = obj.url || 'N/A';
+//                     var harmless = obj.harmless || 0;
+//                     var malicious = obj.malicious || 0;
+//                     var suspicious = obj.suspicious || 0;
+//                     var undetected = obj.undetected || 0;
+//                     var total = harmless + malicious + suspicious + undetected;
+//                     var comments = obj.comments || 'N1';
+
+
+//                     var viewButton = '<button class="view-button btn btn-xs"><i class="fa fa-eye"></i></button>';
+//                     var updateButton = '<button class="update-button btn btn-xs" data-toggle="modal" data-target="#update-modal" data-active_id="' + obj.active_id + '"><i class="fa fa-edit"></i></button>';
+//                     // var flagButton = malicious > 0 ? '<button class="flag-button btn btn-danger"><i class="fas fa-flag"></i></button>' : '<button class="flag-button btn btn-success"><i class="fas fa-flag"></i></button>';
+//                     var flagButton = malicious > 0 ? '<button class="flag-button"><i class="fas fa-flag" style="color: red;"></i></button>' : '<button class="flag-button"><i class="fas fa-flag" style="color: green;"></i></button>';
+
+//                     // Create a single cell with both buttons
+//                     var actionsCell = flagButton + ' ' + viewButton + ' ' + updateButton;
+//                     // Add the data to the DataTable
+//                     dataTable.row.add([tags, lastFinalUrl, harmless, malicious, suspicious, undetected, total, comments, actionsCell]).draw();
+//                 });
+//             } else {
+//                 console.error("Response data is not an array.");
+//             }
+//         })
+//         .catch(error => {
+//             // Remove the loading row and show an error message
+//             dataTable.row(':contains("Please wait API is still loading...")').remove().draw();
+//             console.error("Error:", error);
+//         });
+
+
+//         $('#activedomain').on('click', '.view-button', function () {
+//         var row = $(this).closest('tr');
+//         var tags = row.find('td:eq(0)').text();
+//         var url = row.find('td:eq(1)').text();
+//         var harmless = row.find('td:eq(2)').text();
+//         var malicious = row.find('td:eq(3)').text();
+//         var suspicious = row.find('td:eq(4)').text();
+//         var undetected = row.find('td:eq(5)').text();
+//         var total = row.find('td:eq(6)').text();
+//         var comments = row.find('td:eq(7)').text();
+
+//         // Populate the modal fields with data
+//         $('#modal-tags').text('Aff ID: ' + tags);
+//         $('#modal-url').text('URL: ' + url);
+//         $('#modal-harmless').text('Harmless: ' + harmless);
+//         $('#modal-malicious').text('Malicious: ' + malicious);
+//         $('#modal-suspicious').text('Suspicious: ' + suspicious);
+//         $('#modal-undetected').text('Undetected: ' + undetected);
+//         $('#modal-total').text('Total: ' + total);
+//         $('#modal-comments').text('Comments: ' + comments);
+        
+//         // Show the modal
+//         $('#view-modal').modal('show');
+//     });
+
 $(document).ready(function () {
     var base_url = "https://crm.tremendio.network/";
 
@@ -70,13 +155,9 @@ $(document).ready(function () {
     });
 
     // Show a loading message in the table while fetching data
-    dataTable.row.add(['', '', '', '', 'Please wait API is still loading...', '', '', '', '']).draw();
+    dataTable.row.add(['', '', '', '', 'Please wait, API is still loading...', '', '', '', '']).draw();
 
-    fetch(base_url + 'adminactivedomain/api', {
-        headers: {
-            // 'x-apikey': '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e'
-        }
-    })
+    fetch(base_url + 'adminactivedomain/api')
         .then(response => {
             if (!response.ok) {
                 throw new Error("Network response was not ok");
@@ -84,30 +165,29 @@ $(document).ready(function () {
             return response.json();
         })
         .then(data => {
-            // Remove the loading row
-            dataTable.row(':contains("Please wait API is still loading...")').remove().draw();
+            dataTable.clear();
 
-            // Check if the data is an array
             if (Array.isArray(data)) {
                 data.forEach(obj => {
-                    var tags = obj.tags || 'N1';
-                    var lastFinalUrl = obj.url || 'N/A';
+                    var tags = obj.tags || 'N/A';
+                    var lastFinalUrl = obj.last_final_url || obj.url || 'N/A';
                     var harmless = obj.harmless || 0;
                     var malicious = obj.malicious || 0;
                     var suspicious = obj.suspicious || 0;
                     var undetected = obj.undetected || 0;
+                    var totalVotesHarmless = obj.total_votes_harmless || 0;
+                    var totalVotesMalicious = obj.total_votes_malicious || 0;
+                    var reputation = obj.reputation || 0;
+                    var categories = obj.categories ? Object.values(obj.categories).join(', ') : 'N/A';
                     var total = harmless + malicious + suspicious + undetected;
-                    var comments = obj.comments || 'N1';
-
+                    var comments = obj.comments || 'N/A';
 
                     var viewButton = '<button class="view-button btn btn-xs"><i class="fa fa-eye"></i></button>';
                     var updateButton = '<button class="update-button btn btn-xs" data-toggle="modal" data-target="#update-modal" data-active_id="' + obj.active_id + '"><i class="fa fa-edit"></i></button>';
-                    // var flagButton = malicious > 0 ? '<button class="flag-button btn btn-danger"><i class="fas fa-flag"></i></button>' : '<button class="flag-button btn btn-success"><i class="fas fa-flag"></i></button>';
                     var flagButton = malicious > 0 ? '<button class="flag-button"><i class="fas fa-flag" style="color: red;"></i></button>' : '<button class="flag-button"><i class="fas fa-flag" style="color: green;"></i></button>';
 
-                    // Create a single cell with both buttons
                     var actionsCell = flagButton + ' ' + viewButton + ' ' + updateButton;
-                    // Add the data to the DataTable
+
                     dataTable.row.add([tags, lastFinalUrl, harmless, malicious, suspicious, undetected, total, comments, actionsCell]).draw();
                 });
             } else {
@@ -115,13 +195,12 @@ $(document).ready(function () {
             }
         })
         .catch(error => {
-            // Remove the loading row and show an error message
-            dataTable.row(':contains("Please wait API is still loading...")').remove().draw();
+            dataTable.clear();
+            dataTable.row.add(['', '', '', '', 'Error loading data', '', '', '', '']).draw();
             console.error("Error:", error);
         });
 
-
-        $('#activedomain').on('click', '.view-button', function () {
+    $('#activedomain').on('click', '.view-button', function () {
         var row = $(this).closest('tr');
         var tags = row.find('td:eq(0)').text();
         var url = row.find('td:eq(1)').text();
@@ -132,8 +211,7 @@ $(document).ready(function () {
         var total = row.find('td:eq(6)').text();
         var comments = row.find('td:eq(7)').text();
 
-        // Populate the modal fields with data
-        $('#modal-tags').text('Aff ID: ' + tags);
+        $('#modal-tags').text('Tags: ' + tags);
         $('#modal-url').text('URL: ' + url);
         $('#modal-harmless').text('Harmless: ' + harmless);
         $('#modal-malicious').text('Malicious: ' + malicious);
@@ -141,10 +219,11 @@ $(document).ready(function () {
         $('#modal-undetected').text('Undetected: ' + undetected);
         $('#modal-total').text('Total: ' + total);
         $('#modal-comments').text('Comments: ' + comments);
-        
-        // Show the modal
+
         $('#view-modal').modal('show');
     });
+});
+
 
 //     $('#activedomain').on('click', '.update-button', function () {
 //     var row = $(this).closest('tr');
