@@ -22,8 +22,7 @@ class Advactivedomain extends MY_Controller
             // $this->apiKey = '2072cda478eb51d04bed004d4d7352dc16e097ac33bfc0f8847f447f54b1fe40';
             $this->apiKey = '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e';
 
-           
-
+            
             
 	}
 
@@ -38,71 +37,195 @@ class Advactivedomain extends MY_Controller
 
 
 
-    public function activedomain_api()
-    {
-        header('Access-Control-Allow-Origin: *'); // Allow requests from any domain
-        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+    // public function activedomain_api()
+    // {
+    //     header('Access-Control-Allow-Origin: *'); // Allow requests from any domain
+    //     header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+    //     header("Access-Control-Allow-Headers: Content-Type, Authorization");
         
-        // Database connection
-        $mysqli = new mysqli("localhost", "root", "password", "greeocvu_wp580");
+    //     // Database connection
+    //     $mysqli = new mysqli("localhost", "root", "password", "greeocvu_wp580");
         
-        // Check for a successful database connection
-        if ($mysqli->connect_error) {
-            $response = ['success' => false, 'message' => 'Connection failed: ' . $mysqli->connect_error];
-        } else {
-            $url = 'https://tremendio.scaletrk.com/api/v2/network/offers/1147/tracking-settings?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da'; // URL of the API you want to request
-            $data = file_get_contents($url); // Make the request and get the response
+    //     // Check for a successful database connection
+    //     if ($mysqli->connect_error) {
+    //         $response = ['success' => false, 'message' => 'Connection failed: ' . $mysqli->connect_error];
+    //     } else {
+    //         $url = 'https://tremendio.scaletrk.com/api/v2/network/offers/1147/tracking-settings?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da'; // URL of the API you want to request
+    //         $data = file_get_contents($url); // Make the request and get the response
         
-            // Decode the JSON response
-            $responseData = json_decode($data, true);
+    //         // Decode the JSON response
+    //         $responseData = json_decode($data, true);
         
-            // Check if the response contains tracking domains
-            if (isset($responseData['info']['details']['tracking_domains']) && is_array($responseData['info']['details']['tracking_domains'])) {
-                // Create an array to store processed URLs
-                $processedUrls = [];
+    //         // Check if the response contains tracking domains
+    //         if (isset($responseData['info']['details']['tracking_domains']) && is_array($responseData['info']['details']['tracking_domains'])) {
+    //             // Create an array to store processed URLs
+    //             $processedUrls = [];
         
-                // Iterate through tracking domains and insert them into the database
-                foreach ($responseData['info']['details']['tracking_domains'] as $trackingDomain) {
-                    $url = $trackingDomain['name'];
+    //             // Iterate through tracking domains and insert them into the database
+    //             foreach ($responseData['info']['details']['tracking_domains'] as $trackingDomain) {
+    //                 $url = $trackingDomain['name'];
         
-                    // Check if the URL has already been processed
-                    if (!in_array($url, $processedUrls)) {
-                        // Insert the URL into the database
-                        $url .= '/';
+    //                 // Check if the URL has already been processed
+    //                 if (!in_array($url, $processedUrls)) {
+    //                     // Insert the URL into the database
+    //                     $url .= '/';
     
-                        $stmt = $mysqli->prepare("INSERT INTO active_domain (url, tags, comments) VALUES (?, 'N/A', 'N/A')");
-                        $stmt->bind_param('s', $url);
+    //                     $stmt = $mysqli->prepare("INSERT INTO active_domain (url, tags, comments) VALUES (?, 'N/A', 'N/A')");
+    //                     $stmt->bind_param('s', $url);
         
-                        // Execute the SQL statement
-                        if ($stmt->execute()) {
-                            $success = true;
+    //                     // Execute the SQL statement
+    //                     if ($stmt->execute()) {
+    //                         $success = true;
         
-                            // Add the URL to the list of processed URLs
-                            $processedUrls[] = $url;
-                        } else {
-                            $success = false;
-                            $errorMessage = $stmt->error;
-                        }
+    //                         // Add the URL to the list of processed URLs
+    //                         $processedUrls[] = $url;
+    //                     } else {
+    //                         $success = false;
+    //                         $errorMessage = $stmt->error;
+    //                     }
+    //                 }
+    //             }
+        
+    //             // Close the database connection
+    //             $mysqli->close();
+    //             $response = ['success' => true];
+    //         } else {
+    //             $response = ['success' => false, 'message' => "No tracking domains found in the API response."];
+    //         }
+    //     }
+        
+    //     // Send the response (you may want to return it in some way)
+    //     header('Content-Type: application/json');
+    //     echo json_encode($response);
+    // }
+    private $excludedUrls = [
+        'https://pl3.trm-tracklnk.com/',
+        'https://it.trck-capt-prv2.com/',
+        'https://4rl.armour-link.com/',
+        'https://wy.trck-securelink.com/',
+        'https://max.trckguardlnk.com/',
+        'https://onm.trck-capt-prv2.com/'
+    ];
+    public function activedomain_api()
+{
+    header('Access-Control-Allow-Origin: *'); // Allow requests from any domain
+    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+    // Database connection
+    $mysqli = new mysqli("localhost", "root", "password", "greeocvu_wp580");
+
+    // Check for a successful database connection
+    if ($mysqli->connect_error) {
+        $response = ['success' => false, 'message' => 'Connection failed: ' . $mysqli->connect_error];
+    } else {
+        $url = 'https://tremendio.scaletrk.com/api/v2/network/offers/1147/tracking-settings?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da'; // URL of the API you want to request
+        $data = file_get_contents($url); // Make the request and get the response
+
+        // Decode the JSON response
+        $responseData = json_decode($data, true);
+
+        // Check if the response contains tracking domains
+        if (isset($responseData['info']['details']['tracking_domains']) && is_array($responseData['info']['details']['tracking_domains'])) {
+            // Create an array to store processed URLs
+            $processedUrls = [];
+
+            // Iterate through tracking domains and insert them into the database
+            foreach ($responseData['info']['details']['tracking_domains'] as $trackingDomain) {
+                $url = $trackingDomain['name'] . '/';
+
+                // Check if the URL is in the excluded list
+                if (in_array($url, $this->excludedUrls)) {
+                    continue; // Skip this URL
+                }
+
+                // Check if the URL has already been processed
+                if (!in_array($url, $processedUrls)) {
+                    // Insert the URL into the database
+                    $stmt = $mysqli->prepare("INSERT INTO active_domain (url, tags, comments) VALUES (?, 'N/A', 'N/A')");
+                    $stmt->bind_param('s', $url);
+
+                    // Execute the SQL statement
+                    if ($stmt->execute()) {
+                        $success = true;
+
+                        // Add the URL to the list of processed URLs
+                        $processedUrls[] = $url;
+                    } else {
+                        $success = false;
+                        $errorMessage = $stmt->error;
                     }
                 }
-        
-                // Close the database connection
-                $mysqli->close();
-                $response = ['success' => true];
-            } else {
-                $response = ['success' => false, 'message' => "No tracking domains found in the API response."];
             }
+
+            // Close the database connection
+            $mysqli->close();
+            $response = ['success' => true];
+        } else {
+            $response = ['success' => false, 'message' => "No tracking domains found in the API response."];
         }
-        
-        // Send the response (you may want to return it in some way)
-        header('Content-Type: application/json');
-        echo json_encode($response);
     }
+
+    // Send the response (you may want to return it in some way)
+    header('Content-Type: application/json');
+    echo json_encode($response);
+}
 
 
 
 // Virustotal
+// public function api()
+// {
+//     header('Access-Control-Allow-Origin: *'); // Allow requests from any domain
+//     header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+//     header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+//     // Replace 'YOUR_API_KEY' with your actual API key
+//     $apiKey = '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e';
+    
+
+//     // Database connection
+//     $mysqli = new mysqli("localhost", "root", "password", "greeocvu_wp580");
+
+//     // Check connection
+//     if ($mysqli->connect_error) {
+//         die("Connection failed: " . $mysqli->connect_error);
+//     }
+
+//     $sql = "SELECT * FROM active_domain";
+//     $result = $mysqli->query($sql);
+
+//     $data = array();
+
+//     if ($result->num_rows > 0) {
+//         while ($row = $result->fetch_assoc()) {
+//             // Add each row as an associative array to the $data array
+//             $data[] = $row;
+//         }
+//     }
+
+//     // Close the database connection
+//     $mysqli->close();
+
+//     $dataWithVirusTotal = array();
+
+//     foreach ($data as $row) {
+//         $url = $row['url'];
+
+//         // Fetch additional data from the VirusTotal API
+//         $virusTotalData = $this->fetchVirusTotalData($url, $apiKey); // Implement this function
+
+//         if ($virusTotalData) {
+//             // Merge the VirusTotal data with the existing data
+//             $mergedData = array_merge($row, $virusTotalData);
+//             $dataWithVirusTotal[] = $mergedData;
+//         }
+//     }
+
+//     // Send the response as JSON
+//     echo json_encode($dataWithVirusTotal);
+// }
+
 public function api()
 {
     header('Access-Control-Allow-Origin: *'); // Allow requests from any domain
@@ -111,7 +234,6 @@ public function api()
 
     // Replace 'YOUR_API_KEY' with your actual API key
     $apiKey = '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e';
-    
 
     // Database connection
     $mysqli = new mysqli("localhost", "root", "password", "greeocvu_wp580");
@@ -140,6 +262,11 @@ public function api()
 
     foreach ($data as $row) {
         $url = $row['url'];
+
+        // Check if the URL is in the excluded list
+        if (in_array($url, $this->excludedUrls)) {
+            continue; // Skip this URL
+        }
 
         // Fetch additional data from the VirusTotal API
         $virusTotalData = $this->fetchVirusTotalData($url, $apiKey); // Implement this function
