@@ -1,6 +1,6 @@
 <style>
 
 select#dateFilter {
-    width: 72%;
+    width: 67%;
 }
 </style>
