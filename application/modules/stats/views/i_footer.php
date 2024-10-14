@@ -28,23 +28,24 @@ div#topoffers_table_filter{
 
 <script type="text/javascript">
 $(document).ready(function(e) {
-    get_topOffers("This Year");
-    get_topAffiliates("This Year");
+    get_topOffers("today");
+    get_topAffiliates("today");
 });
 
-function dateSelect(date_filter){
-  var dateFilter = <?=json_encode($date_filters);?>;
+function dateSelect(date_filter){ 
+ 
+  var dateFilter = [<?=json_encode($date_filters);?>];
   if(date_filter == ""){
     date_filter = "<?=$date_filter;?>";
-  }
-  console.log(date_filter)
+  } 
+ 
    var select = '<span>Date: </span><select id="dateFilter" class="form-control">';
-   dateFilter.forEach(df => {
-      if(date_filter == df){
-        select += '<option value="'+df+'" selected=selected>'+df+"</option>";
-      } else {
-        select += '<option value="'+df+'">'+df+"</option>";
-      }
+    dateFilter[0].forEach((df,i) => {  
+      if(date_filter == df.name){
+        select += '<option value="'+df.name+'" selected=selected>'+df.val+"</option>";
+     } else {
+        select += '<option value="'+df.name+'">'+df.val+"</option>";
+     }
    });
    return select += '</select>';
 }
