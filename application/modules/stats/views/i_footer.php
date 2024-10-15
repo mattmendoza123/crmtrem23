@@ -12,6 +12,12 @@ a#dateSearch {
     padding: 5px 10px;
     margin-right: 10px;
 }
+span.green{
+  color:#008000;
+}
+span.red{
+  color:#fb3a3a;
+}
 div#topoffers_table_filter{
   display: flex;
 }
@@ -23,6 +29,11 @@ div#topoffers_table_filter{
 }
 .dataTable thead , .dataTable tfoot{
     background: #ccc;
+}
+select#dateFilter {
+    width: 67%;
+    margin-top: 3px;
+    margin-bottom: 9px;
 }
 </style>
 
@@ -37,8 +48,7 @@ function dateSelect(date_filter){
   var dateFilter = [<?=json_encode($date_filters);?>];
   if(date_filter == ""){
     date_filter = "<?=$date_filter;?>";
-  } 
- 
+  }  
    var select = '<span>Date: </span><select id="dateFilter" class="form-control">';
     dateFilter[0].forEach((df,i) => {  
       if(date_filter == df.name){

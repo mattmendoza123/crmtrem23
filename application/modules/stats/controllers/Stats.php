@@ -45,11 +45,13 @@ class Stats extends MY_Controller
 		$search = $this->input->post("search");		
 		$newreporst_api = $this->newreports_api("top-offers",$date_filter);
 		
-		foreach ($newreporst_api['info']['rows'] as $offer) {					
+		foreach ($newreporst_api['info']['rows'] as $offer) {	
+			$cls = (floatval($offer['change']) > 0) ? "green" : "red";		
+
 			$data_arr[] = array(				
-				$offer['entity']['title'],
-				$offer['value'],		
-				$offer['change']	
+				"#".$offer['entity']['id']. " ".$offer['entity']['title'],
+				"$".number_format($offer['value'],2,'.',''),		
+				"<span class='$cls'>".$offer['change']."%"."</span>"
 			);
 		}
 	
@@ -72,10 +74,11 @@ class Stats extends MY_Controller
 		$newreporst_api = $this->newreports_api("top-affiliates",$date_filter);
 		
 		foreach ($newreporst_api['info']['rows'] as $offer) {					
+			$cls = (floatval($offer['change']) > 0) ? "green" : "red";		
 			$data_arr[] = array(				
-				$offer['entity']['title'],
-				$offer['value'],		
-				$offer['change']	
+				"#".$offer['entity']['id']. " ".$offer['entity']['title'],
+				"$".number_format($offer['value'],2,'.',''),		
+				"<span class='$cls'>".$offer['change']."%"."</span>"
 			);
 		}
 	
@@ -99,7 +102,7 @@ class Stats extends MY_Controller
 		if($date_filter !="custom"){
 			$url = 'https://tremendio.scaletrk.com/api/v2/network/dashboard/statistics/'.$type.'?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=value&sortDirection=desc&perPage=50&page=1&preset='.$date_filter; // URL of the API you want to request		
 		} else {
-			$url = 'https://tremendio.scaletrk.com/api/v2/network/dashboard/statistics/'.$type.'?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=value&sortDirection=desc&perPage=50&page=1&rangeFrom='.$start_date.'&rangeTo='.$end_date; // URL of the API you want to request		
+			//$url = 'https://tremendio.scaletrk.com/api/v2/network/dashboard/statistics/'.$type.'?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=value&sortDirection=desc&perPage=50&page=1&rangeFrom='.$start_date.'&rangeTo='.$end_date; // URL of the API you want to request		
 		}	
 		$data = json_decode(file_get_contents($url), true); 	
 		return $data;

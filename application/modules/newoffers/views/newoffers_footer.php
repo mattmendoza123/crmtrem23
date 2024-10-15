@@ -349,7 +349,7 @@ $(document).ready(function() {
                   .columns()
                   .every(function () {
                       let column = this;
-                      console.log(column);
+                     
                       let title = column.footer().textContent;
                                             
                       if(title !="Action"){
