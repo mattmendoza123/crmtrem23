@@ -15,6 +15,7 @@
                                 <tr>
                                 <th class="aff-id">Aff ID</th>
                                 <th class="url">URL</th>
+                                <th class="tags">Tags</th>
                                 <th class="comments">Comments</th>
                                 <th class="actions">Actions</th>
                                 </tr>
