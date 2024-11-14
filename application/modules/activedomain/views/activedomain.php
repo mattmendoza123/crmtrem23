@@ -105,7 +105,7 @@
 </div>
 
 
-<div class="actvie_domain_links" style="display: none;">
+<div class="actvie_domain_links">
 <div class="page-wrapper" >
     <div class="container-fluid">
         <div class="row page-titles">
