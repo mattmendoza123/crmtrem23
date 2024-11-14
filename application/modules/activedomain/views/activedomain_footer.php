@@ -62,211 +62,86 @@ $(document).ready(function() {
 
 
 $(document).ready(function () {
-    var base_url = "https://crm.tremendio.network/";
+    const base_url = "https://crm.tremendio.network/";
 
     var dataTable = $('#activedomain').DataTable({
         "pageLength": 10,
         "order": [[3, "desc"]]
     });
 
-    // Show a loading message in the table while fetching data
-    dataTable.row.add(['', '', '', '', 'Please wait API is still loading...', '', '', '', '']).draw();
+    fetchData();
 
-    fetch(base_url + 'activedomain/api', {
-        headers: {
-        }
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
+    function fetchData() {
+        fetch(base_url + 'activedomain/activedomain_api', {
+            headers: {
+                'api-key': 'aafcf12b64ca3230279a89aa8b6eacf03c7c59da'
             }
-            return response.json();
         })
+        .then(response => response.json())
         .then(data => {
-            // Remove the loading row
-            dataTable.row(':contains("Please wait API is still loading...")').remove().draw();
+            dataTable.clear().draw(); // Clear existing data in DataTable
 
-            // Check if the data is an array
             if (Array.isArray(data)) {
                 data.forEach(obj => {
-                    var tags = obj.tags || 'N1';
-                    var lastFinalUrl = obj.url || 'N/A';
-                    var comments = obj.comments || 'N1';
+                    const tags = obj.tags || 'N1';
+                    const lastFinalUrl = obj.url || 'N/A';
+                    const comments = obj.comments || 'N1';
 
-                    var viewButton = '<button class="view-button btn btn-xs"><i class="fa fa-eye"></i></button>';
-                    var updateButton = '<button class="update-button btn btn-xs" data-toggle="modal" data-target="#update-modal" data-active_id="' + obj.active_id + '"><i class="fa fa-edit"></i></button>';
+                    // Actions cell with view and update buttons
+                    const actionsCell = `
+                        <button class="view-button btn btn-xs"><i class="fa fa-eye"></i></button>
+                        <button class="update-button btn btn-xs" data-toggle="modal" data-target="#update-modal" data-active_id="${obj.active_id}">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                    `;
 
-                    // Create a single cell with both buttons
-                    var actionsCell = viewButton + ' ' + updateButton;
-
-                    // Add the data to the DataTable
                     dataTable.row.add([tags, lastFinalUrl, '', '', '', '', '', comments, actionsCell]).draw();
                 });
-            } else {
-                console.error("Response data is not an array.");
             }
         })
-        .catch(error => {
-            // Remove the loading row and show an error message
-            dataTable.row(':contains("Please wait API is still loading...")').remove().draw();
-            console.error("Error:", error);
-        });
+        .catch(error => console.error("Error:", error));
+    }
 
     $('#activedomain').on('click', '.view-button', function () {
-        var row = $(this).closest('tr');
-        var tags = row.find('td:eq(0)').text();
-        var url = row.find('td:eq(1)').text();
-        var comments = row.find('td:eq(7)').text();
-
-        // Populate the modal fields with data
-        $('#modal-tags').text('Aff ID: ' + tags);
-        $('#modal-url').text('URL: ' + url);
-        $('#modal-comments').text('Comments: ' + comments);
-        
-        // Show the modal
+        const row = $(this).closest('tr');
+        $('#modal-tags').text('Aff ID: ' + row.find('td:eq(0)').text());
+        $('#modal-url').text('URL: ' + row.find('td:eq(1)').text());
+        $('#modal-comments').text('Comments: ' + row.find('td:eq(7)').text());
         $('#view-modal').modal('show');
     });
 
     $('#activedomain').on('click', '.update-button', function () {
-        var row = $(this).closest('tr');
-        var active_id = $(this).data('active_id');
-        var tags = row.find('td:eq(0)').text(); // Assuming this contains semicolon-separated tags
-
-        // Split the tags into an array using the semicolon delimiter
-        var tagArray = tags.split(';');
-
-        // Set the "Aff ID" input field with the first tag
-        $('#u_tags').val(tagArray.shift());
-
-        // Populate the "additional-tags-container" with the remaining tags
-        var additionalTagsContainer = document.getElementById("additional-tags-container");
-        additionalTagsContainer.innerHTML = ''; // Clear previous tags
-        tagArray.forEach(function (tag) {
-            const input = document.createElement("input");
-            input.setAttribute("type", "text");
-            input.setAttribute("class", "form-control");
-            input.setAttribute("name", "u_tags[]");
-            input.setAttribute("placeholder", "Additional Aff ID");
-            input.value = tag;
-            additionalTagsContainer.appendChild(input);
-        });
-
-        // Show the update modal
-        $('#update-modal').modal('show');
-
-        // Set other fields as well
-        var url = row.find('td:eq(1)').text();
-        var comments = row.find('td:eq(7)').text();
+        const row = $(this).closest('tr');
+        const active_id = $(this).data('active_id');
+        const tags = row.find('td:eq(0)').text().split(';');
+        const url = row.find('td:eq(1)').text();
+        const comments = row.find('td:eq(7)').text();
 
         $('#u_url').val(url);
         $('#u_comment').val(comments);
-        $('#u_active_id').val(active_id); // Set the active_id in a hidden input field
-    });
-});
+        $('#u_active_id').val(active_id);
+        $('#u_tags').val(tags.shift());
 
-document.addEventListener("DOMContentLoaded", function () {
-    const addTagsButton = document.getElementById("add-tags-button");
-    const removeTagsButton = document.getElementById("remove-tags-button");
-    const additionalTagsContainer = document.getElementById("additional-tags-container");
-
-    addTagsButton.addEventListener("click", function () {
-        const input = createInputField();
-        additionalTagsContainer.appendChild(input);
-    });
-
-    removeTagsButton.addEventListener("click", function () {
-        const inputFields = additionalTagsContainer.querySelectorAll("input");
-        if (inputFields.length > 0) {
-            const lastInputField = inputFields[inputFields.length - 1];
-            additionalTagsContainer.removeChild(lastInputField);
-        }
-    });
-
-    function createInputField() {
-        const input = document.createElement("input");
-        input.setAttribute("type", "text");
-        input.setAttribute("class", "form-control");
-        input.setAttribute("name", "u_tags[]");
-        input.setAttribute("placeholder", "Additional Aff ID");
-
-        // Add an event listener to restrict input to numbers and semicolons
-        input.addEventListener("input", function () {
-            const inputValue = input.value;
-            const filteredValue = inputValue.replace(/[^0-9;NA\-_.,?!@#$%^&*()+=<>\/]/g, ''); // Allow numbers, semicolons, 'N', 'A', '/', and specified symbols
-            input.value = filteredValue;
+        const additionalTagsContainer = document.getElementById("additional-tags-container");
+        additionalTagsContainer.innerHTML = ''; 
+        tags.forEach(tag => {
+            const input = createInputField(tag);
+            additionalTagsContainer.appendChild(input);
         });
 
+        $('#update-modal').modal('show');
+    });
+
+    function createInputField(value = '') {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.className = "form-control";
+        input.name = "u_tags[]";
+        input.placeholder = "Additional Aff ID";
+        input.value = value;
         return input;
     }
-
-    const form = document.getElementById("update-modal-form");
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        // Get the value from the "Aff ID" input field
-        const uTagsInput = document.getElementById("u_tags");
-        const uTagsValue = uTagsInput.value;
-
-        // Gather all values of input fields with the name "u_tags[]" into an array
-        const uTagsInputs = document.querySelectorAll('input[name="u_tags[]"]');
-        const uTagsValues = Array.from(uTagsInputs).map((input) => input.value);
-
-        // Combine the "Aff ID" value with the dynamically added tags
-        const allTags = [uTagsValue, ...uTagsValues];
-
-        const formData = {
-            u_tags: allTags,
-            u_url: $('#u_url').val(),
-            u_comment: $('#u_comment').val(),
-            u_active_id: $('#u_active_id').val(),
-        };
-
-        var base_url = "https://crm.tremendio.network/activedomain/update_modal";
-
-        $.ajax({
-            type: "POST",
-            url: base_url,
-            data: formData,
-            dataType: "json",
-            success: function (data) {
-                if (data.success) {
-                    $('#update-modal').modal('hide');
-                    Swal.fire({
-                        icon: 'info',
-                        text: data.message,
-                    }).then(function () {
-                        location.reload();
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        text: data.message,
-                    });
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error(xhr.responseText);
-                alert("An error occurred while updating the record. Please check the console for details.");
-            }
-        });
-    });
 });
-
-// Get the input element by its ID
-var inputElement = document.getElementById("u_tags");
-
-// Add an input event listener to the input element
-inputElement.addEventListener("input", function(event) {
-    // Get the input value
-    var inputValue = event.target.value;
-
-    // Use a regular expression to allow only numbers and semicolon
-    var numbersAndSemicolonOnly = inputValue.replace(/[^0-9;NA\-_.,?!@#$%^&*()+=<>\/]/g, ''); // Allow numbers, semicolons, 'N', 'A', '/', and specified symbols
-
-    // Update the input value with only numbers and semicolon
-    event.target.value = numbersAndSemicolonOnly;
-});
-
 
 
 
