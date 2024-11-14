@@ -64,7 +64,7 @@ $(document).ready(function() {
 $(document).ready(function () {
     var base_url = "https://crm.tremendio.network/";
 
-    var dataTable = $('#activedomain').DataTable({
+    var dataTable = $('#activedomaintable').DataTable({
         "pageLength": 10,
         "order": [[3, "desc"]]
     });
@@ -92,21 +92,10 @@ $(document).ready(function () {
                 data.forEach(obj => {
                     var tags = obj.tags || 'N1';
                     var lastFinalUrl = obj.url || 'N/A';
-                    var harmless = obj.harmless || 0;
-                    var malicious = obj.malicious || 0;
-                    var suspicious = obj.suspicious || 0;
-                    var undetected = obj.undetected || 0;
-                    var total = harmless + malicious + suspicious + undetected;
                     var comments = obj.comments || 'N1';
 
 
-                    var viewButton = '<button class="view-button btn btn-xs"><i class="fa fa-eye"></i></button>';
                     var updateButton = '<button class="update-button btn btn-xs" data-toggle="modal" data-target="#update-modal" data-active_id="' + obj.active_id + '"><i class="fa fa-edit"></i></button>';
-                    // var flagButton = malicious > 0 ? '<button class="flag-button btn btn-danger"><i class="fas fa-flag"></i></button>' : '<button class="flag-button btn btn-success"><i class="fas fa-flag"></i></button>';
-                    var flagButton = malicious > 0 ? '<button class="flag-button"><i class="fas fa-flag" style="color: red;"></i></button>' : '<button class="flag-button"><i class="fas fa-flag" style="color: green;"></i></button>';
-
-                    // Create a single cell with both buttons
-                    var actionsCell = flagButton + ' ' + viewButton + ' ' + updateButton;
                     // Add the data to the DataTable
                     dataTable.row.add([tags, lastFinalUrl, harmless, malicious, suspicious, undetected, total, comments, actionsCell]).draw();
                 });
@@ -146,22 +135,7 @@ $(document).ready(function () {
         $('#view-modal').modal('show');
     });
 
-//     $('#activedomain').on('click', '.update-button', function () {
-//     var row = $(this).closest('tr');
-//     var active_id = $(this).data('active_id');
-//     var tags = row.find('td:eq(0)').text();
-//     var url = row.find('td:eq(1)').text();
-//     var comments = row.find('td:eq(7)').text();
 
-//     // Populate the modal fields with data
-//     $('#u_tags').val(tags);
-//     $('#u_url').val(url);
-//     $('#u_comment').val(comments);
-//     $('#u_active_id').val(active_id); // Set the active_id in a hidden input field
-
-//     // Show the update modal
-//     $('#update-modal').modal('show');
-// });
 $('#activedomain').on('click', '.update-button', function () {
     var row = $(this).closest('tr');
     var active_id = $(this).data('active_id');
@@ -286,49 +260,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-// $(document).on('submit', '#update-modal-form', function (e) {
-//     e.preventDefault();
-
-//     var base_url = "https://crm.tremendio.network/adminactivedomain/update_modal";
-    
-//     var formData = {
-   
-//         u_tags: $('#u_tags').val(),
-//         u_url: $('#u_url').val(),
-//         u_comment: $('#u_comment').val(),
-//         u_active_id: $('#u_active_id').val()
-//     };
-
-//     $.ajax({
-//         type: "POST",
-//         url: base_url,
-//         data: formData,
-//         dataType: "json", // Assuming you're returning JSON from the server
-//         success: function(data) {
-//                         if (data.success) {
-//                             $('#update-modal').modal('hide');
-//                             Swal.fire({
-//                                 icon: 'info',
-//                                 // title: 'Success',
-//                                 text: data.message,
-//                             }).then(function() {
-//                             // Reload the page
-//                             location.reload();
-//                             });
-//                         } else {
-//                             Swal.fire({
-//                                 icon: 'error',
-//                                 // title: 'Error',
-//                                 text: data.message,
-//                             });
-//                         }
-//                     },
-//         error: function(xhr, status, error) {
-//             console.error(xhr.responseText); // Log the actual error message
-//             alert("An error occurred while updating the record. Please check the console for details.");
-//         }
-//     });
-// });
 
 // Get the input element by its ID
 var inputElement = document.getElementById("u_tags");
