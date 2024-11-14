@@ -12,7 +12,7 @@ $(document).ready(function() {
     var existingUrls = []; // Array to store existing URLs in the database
 
     function fetchData() {
-        fetch(base_url + 'admindomains/activedomain_api', {
+        fetch(base_url + 'activedomain/activedomain_api', {
             headers: {
                 'api-key': 'aafcf12b64ca3230279a89aa8b6eacf03c7c59da'
             }
@@ -72,7 +72,7 @@ $(document).ready(function () {
     // Show a loading message in the table while fetching data
     dataTable.row.add(['', '', '', '', 'Please wait API is still loading...', '', '', '', '']).draw();
 
-    fetch(base_url + 'admindomains/api', {
+    fetch(base_url + 'activedomain/api', {
         headers: {
         }
     })
@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
             u_active_id: $('#u_active_id').val(),
         };
 
-        var base_url = "https://crm.tremendio.network/admindomains/update_modal";
+        var base_url = "https://crm.tremendio.network/activedomain/update_modal";
 
         $.ajax({
             type: "POST",
