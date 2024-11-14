@@ -32,7 +32,7 @@
 
 
  <!-- Update modal -->
-<div class="modal fade" id="update-modal" tabindex="-1" role="dialog" aria-labelledby="UpdateModalTitle" aria-hidden="true">
+<!-- <div class="modal fade" id="update-modal" tabindex="-1" role="dialog" aria-labelledby="UpdateModalTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -53,7 +53,7 @@
                         </div>
                         <div class="col-md-8">
                             <div id="additional-tags-container">
-                                <!-- Additional text fields will be added here -->
+                                
                             </div>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
             </form>
         </div>
     </div>
-</div>
+</div> -->
 
 
 <div class="actvie_domain_links">

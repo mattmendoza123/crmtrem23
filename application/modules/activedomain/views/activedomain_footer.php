@@ -62,116 +62,72 @@ $(document).ready(function() {
 
 
 $(document).ready(function () {
-    var base_url = "https://crm.tremendio.network/";
-
     var dataTable = $('#activedomaintable').DataTable({
         "pageLength": 10,
-        "order": [[3, "desc"]]
+        "order": [[3, "desc"]],
+        "processing": true
     });
 
-    // Show a loading message in the table while fetching data
-    dataTable.row.add(['', '', '', '', 'Please wait API is still loading...', '', '', '', '']).draw();
-
-    fetch(base_url + 'activedomain/api', {
-        headers: {
-            // 'x-apikey': '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e'
-        }
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-            return response.json();
+    function fetchActiveDomains() {
+        fetch(base_url + 'activedomain/activedomain_api', {
+            headers: { 'api-key': 'aafcf12b64ca3230279a89aa8b6eacf03c7c59da' }
         })
-        .then(data => {
-            // Remove the loading row
-            dataTable.row(':contains("Please wait API is still loading...")').remove().draw();
+            .then(response => response.json())
+            .then(data => {
+                dataTable.clear();
+                if (data.success) {
+                    data.info.details.tracking_domains.forEach(domain => {
+                        dataTable.row.add([domain.name]);
+                    });
+                    dataTable.draw();
+                } else {
+                    console.error("Error:", data.message);
+                }
+            })
+            .catch(error => console.error("Error:", error));
+    }
 
-            // Check if the data is an array
-            if (Array.isArray(data)) {
-                data.forEach(obj => {
-                    var tags = obj.tags || 'N1';
-                    var lastFinalUrl = obj.url || 'N/A';
-                    var comments = obj.comments || 'N1';
+    fetchActiveDomains();
 
-
-                    var updateButton = '<button class="update-button btn btn-xs" data-toggle="modal" data-target="#update-modal" data-active_id="' + obj.active_id + '"><i class="fa fa-edit"></i></button>';
-                    // Add the data to the DataTable
-                    dataTable.row.add([tags, lastFinalUrl, harmless, malicious, suspicious, undetected, total, comments, actionsCell]).draw();
-                });
-            } else {
-                console.error("Response data is not an array.");
-            }
-        })
-        .catch(error => {
-            // Remove the loading row and show an error message
-            dataTable.row(':contains("Please wait API is still loading...")').remove().draw();
-            console.error("Error:", error);
-        });
-
-
-        $('#activedomain').on('click', '.view-button', function () {
+    $('#activedomain').on('click', '.update-button', function () {
         var row = $(this).closest('tr');
-        var tags = row.find('td:eq(0)').text();
-        var url = row.find('td:eq(1)').text();
-        var harmless = row.find('td:eq(2)').text();
-        var malicious = row.find('td:eq(3)').text();
-        var suspicious = row.find('td:eq(4)').text();
-        var undetected = row.find('td:eq(5)').text();
-        var total = row.find('td:eq(6)').text();
-        var comments = row.find('td:eq(7)').text();
-
-        // Populate the modal fields with data
-        $('#modal-tags').text('Aff ID: ' + tags);
-        $('#modal-url').text('URL: ' + url);
-        $('#modal-harmless').text('Harmless: ' + harmless);
-        $('#modal-malicious').text('Malicious: ' + malicious);
-        $('#modal-suspicious').text('Suspicious: ' + suspicious);
-        $('#modal-undetected').text('Undetected: ' + undetected);
-        $('#modal-total').text('Total: ' + total);
-        $('#modal-comments').text('Comments: ' + comments);
-        
-        // Show the modal
-        $('#view-modal').modal('show');
+        var active_id = $(this).data('active_id');
+        $('#u_active_id').val(active_id);
+        $('#u_tags').val(row.find('td:eq(0)').text());
+        $('#u_url').val(row.find('td:eq(1)').text());
+        $('#u_comment').val(row.find('td:eq(7)').text());
+        $('#update-modal').modal('show');
     });
 
+    $('#update-modal-form').on('submit', function (e) {
+        e.preventDefault();
+        const formData = {
+            u_tags: [$('#u_tags').val(), ...$('input[name="u_tags[]"]').map((_, el) => el.value).get()],
+            u_url: $('#u_url').val(),
+            u_comment: $('#u_comment').val(),
+            u_active_id: $('#u_active_id').val(),
+        };
 
-$('#activedomain').on('click', '.update-button', function () {
-    var row = $(this).closest('tr');
-    var active_id = $(this).data('active_id');
-    var tags = row.find('td:eq(0)').text(); // Assuming this contains semicolon-separated tags
-
-    // Split the tags into an array using the semicolon delimiter
-    var tagArray = tags.split(';');
-
-    // Set the "Aff ID" input field with the first tag
-    $('#u_tags').val(tagArray.shift());
-
-    // Populate the "additional-tags-container" with the remaining tags
-    var additionalTagsContainer = document.getElementById("additional-tags-container");
-    additionalTagsContainer.innerHTML = ''; // Clear previous tags
-    tagArray.forEach(function (tag) {
-        const input = document.createElement("input");
-        input.setAttribute("type", "text");
-        input.setAttribute("class", "form-control");
-        input.setAttribute("name", "u_tags[]");
-        input.setAttribute("placeholder", "Additional Aff ID");
-        input.value = tag;
-        additionalTagsContainer.appendChild(input);
+        $.ajax({
+            type: "POST",
+            url: base_url + 'activedomain/update_modal',
+            data: formData,
+            dataType: "json",
+            success: function (data) {
+                $('#update-modal').modal('hide');
+                Swal.fire({
+                    icon: data.success ? 'success' : 'error',
+                    text: data.message,
+                }).then(() => location.reload());
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alert("An error occurred. Check the console for details.");
+            }
+        });
     });
-
-    // Show the update modal
-    $('#update-modal').modal('show');
-
-    // Set other fields as well
-    var url = row.find('td:eq(1)').text();
-    var comments = row.find('td:eq(7)').text();
-
-    $('#u_url').val(url);
-    $('#u_comment').val(comments);
-    $('#u_active_id').val(active_id); // Set the active_id in a hidden input field
 });
-});
+
 
 document.addEventListener("DOMContentLoaded", function () {
             const addTagsButton = document.getElementById("add-tags-button");
