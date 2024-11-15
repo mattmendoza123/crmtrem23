@@ -7,51 +7,51 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <script type="text/javascript">
-// $(document).ready(function() {
-//     var dataTable = null;
-//     var existingUrls = []; // Array to store existing URLs in the database
+$(document).ready(function() {
+    var dataTable = null;
+    var existingUrls = []; // Array to store existing URLs in the database
 
-//     function fetchData() {
-//         fetch(base_url + 'adminactivedomain/activedomain_api', {
-//             headers: {
-//                 'api-key': 'aafcf12b64ca3230279a89aa8b6eacf03c7c59da'
-//             }
-//         })
-//         .then(response => response.json())
-//         .then(data => {
-//             var trackingDomains = data.info.details.tracking_domains;
+    function fetchData() {
+        fetch(base_url + 'adminactivedomain/activedomain_api', {
+            headers: {
+                'api-key': 'aafcf12b64ca3230279a89aa8b6eacf03c7c59da'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            var trackingDomains = data.info.details.tracking_domains;
 
-//             if (dataTable) {
-//                 dataTable.clear().draw(); // Clear existing data in DataTable
-//             } else {
-//                 dataTable = $('#activedomain_tremendio').DataTable({
-//                     processing: true,
-//                     order: [[0, "desc"]],
-//                     pageLength: 50
-//                 });
-//             }
+            if (dataTable) {
+                dataTable.clear().draw(); // Clear existing data in DataTable
+            } else {
+                dataTable = $('#activedomain_tremendio').DataTable({
+                    processing: true,
+                    order: [[0, "desc"]],
+                    pageLength: 50
+                });
+            }
 
-//             trackingDomains.forEach(trackingDomain => {
-//                 var trackingDomainName = trackingDomain.name;
-//                 if (!existingUrls.includes(trackingDomainName)) {
-//                     // Insert only if it's not in the existing URLs array
-//                     dataTable.row.add([trackingDomainName]);
-//                     existingUrls.push(trackingDomainName); // Add to existing URLs
-//                 }
-//             });
+            trackingDomains.forEach(trackingDomain => {
+                var trackingDomainName = trackingDomain.name;
+                if (!existingUrls.includes(trackingDomainName)) {
+                    // Insert only if it's not in the existing URLs array
+                    dataTable.row.add([trackingDomainName]);
+                    existingUrls.push(trackingDomainName); // Add to existing URLs
+                }
+            });
 
-//             dataTable.draw();
-//         })
-//         .catch(error => {
-//             console.error("Error:", error);
-//         });
-//     }
+            dataTable.draw();
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    }
 
-//     fetchData(); // Initial fetch and insertion on page load
+    fetchData(); // Initial fetch and insertion on page load
 
-//     // Refresh data every 24 hours
-//     setInterval(fetchData, 24 * 60 * 60 * 1000);
-// });
+    // Refresh data every 24 hours
+    setInterval(fetchData, 24 * 60 * 60 * 1000);
+});
 
 
 
@@ -65,7 +65,7 @@ $(document).ready(function () {
     var base_url = "https://crm.tremendio.network/";
 
     var dataTable = $('#activedomain').DataTable({
-        "pageLength": 50,
+        "pageLength": 10,
         "order": [[3, "desc"]]
     });
 
@@ -74,7 +74,7 @@ $(document).ready(function () {
 
     fetch(base_url + 'adminactivedomain/api', {
         headers: {
-            //  'x-apikey': '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e'
+            // 'x-apikey': '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e'
         }
     })
         .then(response => {
