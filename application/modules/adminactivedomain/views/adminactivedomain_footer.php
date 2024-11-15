@@ -65,7 +65,7 @@ $(document).ready(function () {
     var base_url = "https://crm.tremendio.network/";
 
     var dataTable = $('#activedomain').DataTable({
-        "pageLength": 10,
+        "pageLength": 50,
         "order": [[3, "desc"]]
     });
 
@@ -74,7 +74,7 @@ $(document).ready(function () {
 
     fetch(base_url + 'adminactivedomain/api', {
         headers: {
-            // 'x-apikey': '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e'
+             'x-apikey': '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e'
         }
     })
         .then(response => {
