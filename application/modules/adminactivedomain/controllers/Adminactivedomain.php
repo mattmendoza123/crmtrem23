@@ -110,17 +110,10 @@ function fetchVirusTotalData($hash){
             $this->db->set('date_fetch', date("Y-m-d"));     
             $this->db->where('hash', $hash);
             $this->db->update('active_domain'); 
-            $vtotal_data = unserialize($result[0]->vtotal);
-          //  print_r($vtotal_data);
-            /*$vtotal = array(
-                'harmless' => $result[0]->harmless,
-                'malicious' => $result[0]->malicious,
-                'suspicious' => $result[0]->suspicious,
-                'undetected' => $result[0]->undetected,          
-            ); */
+            $vtotal_data = unserialize($result[0]->vtotal);         
             return json_encode($vtotal_data);
         }
-    }
+    } 
     
 
     $apiKey = '2d79fa4d329c17de8973a1e862539c344830a0a96ccc53599848164c11630c86';      
@@ -150,10 +143,14 @@ function fetchVirusTotalData($hash){
         );
         if($num_rows != 0){     
             $this->db->set('date_fetch', date("Y-m-d"));     
-            $this->db->set('vtotal', serialize($vtotal));     
-            $this->db->where('hash', $hash);
-            $this->db->update('active_domain');
+            $this->db->set('vtotal', serialize($vtotal));                 
+            $this->db->where('hash', $hash);          
+        }else{
+            $this->db->set('date_fetch', date("Y-m-d"));     
+            $this->db->set('vtotal', serialize($vtotal));                 
+            $this->db->where('url', $final_url);           
         }
+        $this->db->update('active_domain');
 
         return json_encode($vtotal);
     }else {
