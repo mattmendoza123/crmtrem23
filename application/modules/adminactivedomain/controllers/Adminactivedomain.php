@@ -106,6 +106,8 @@ function fetchVirusTotalData($hash){
     $response = file_get_contents($urlEndpoint, false, $context);   
     // Check if the response is valid JSON
     $result = json_decode($response, true);    
+    print_r($result);
+    die;
     if ($result && isset($result['data']['attributes']['last_analysis_stats'])) {
         // Extract the desired scan result statistics
         return array(
