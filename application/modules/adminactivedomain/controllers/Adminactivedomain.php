@@ -91,7 +91,7 @@ class Adminactivedomain extends MY_Controller
 }
 
 function fetchVirusTotalData($hash){
-    $apiKey = '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e';      
+    $apiKey = '2072cda478eb51d04bed004d4d7352dc16e097ac33bfc0f8847f447f54b1fe40';      
     $urlEndpoint = "https://www.virustotal.com/api/v3/urls/{$hash}";
 
     $options = array(

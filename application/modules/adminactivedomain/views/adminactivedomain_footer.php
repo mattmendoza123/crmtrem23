@@ -43,7 +43,7 @@ $(document).ready(function() {
         return $.ajax(settings).done(res => {                      
            return res;
         });
-      
+        
 
     }
     function fetchData() {
@@ -101,7 +101,7 @@ $(document).ready(function() {
                     var actionsCell = flagButton + ' ' + viewButton + ' ' + updateButton;
                     // Add the data to the DataTable
                     dataTable.row.add([tags, trackingDomainName, harmless, malicious, suspicious, undetected, total, comments, actionsCell]).draw();
-                    //setTimeout(console.log("Done : " + lastFinalUrl), 10000);                  
+                    setTimeout(console.log("Done : " + lastFinalUrl), 10000);                  
                 }
 
                 
