@@ -76,31 +76,33 @@ $(document).ready(function() {
                     
                    vTotal = await getVTotal(obj.urlHash);                         
                    console.log("vTotal",vTotal);
-                   vTotalAnalysisStats = vTotal['data']['attributes']['last_analysis_stats'];
-                   
-                   
+                   if(vTotal){
+                        vTotalAnalysisStats = vTotal['data']['attributes']['last_analysis_stats'];
+                        
+                        
 
-                    // Insert only if it's not in the existing URLs array
-                   // dataTable.row.add([trackingDomainName]);
-                    existingUrls.push(trackingDomainName); // Add to existing URLs
+                            // Insert only if it's not in the existing URLs array
+                        // dataTable.row.add([trackingDomainName]);
+                            existingUrls.push(trackingDomainName); // Add to existing URLs
 
-                    var tags = obj.tags || 'N1';
-                    var lastFinalUrl = vTotalAnalysisStats.last_final_url || 'N/A';
-                    var harmless = vTotalAnalysisStats.harmless || 0;
-                    var malicious = vTotalAnalysisStats.malicious || 0;
-                    var suspicious = vTotalAnalysisStats.suspicious || 0;
-                    var undetected = vTotalAnalysisStats.undetected || 0;
-                    var total = harmless + malicious + suspicious + undetected;
-                    var comments = obj.comments || 'N1';
+                            var tags = obj.tags || 'N1';
+                            var lastFinalUrl = vTotalAnalysisStats.last_final_url || 'N/A';
+                            var harmless = vTotalAnalysisStats.harmless || 0;
+                            var malicious = vTotalAnalysisStats.malicious || 0;
+                            var suspicious = vTotalAnalysisStats.suspicious || 0;
+                            var undetected = vTotalAnalysisStats.undetected || 0;
+                            var total = harmless + malicious + suspicious + undetected;
+                            var comments = obj.comments || 'N1';
 
-                    var viewButton = '<button class="view-button btn btn-xs"><i class="fa fa-eye"></i></button>';
-                    var updateButton = '<button class="update-button btn btn-xs" data-toggle="modal" data-target="#update-modal" data-active_id="' + obj.active_id + '"><i class="fa fa-edit"></i></button>';                    
-                    var flagButton = malicious > 0 ? '<button class="flag-button"><i class="fas fa-flag" style="color: red;"></i></button>' : '<button class="flag-button"><i class="fas fa-flag" style="color: green;"></i></button>';
+                            var viewButton = '<button class="view-button btn btn-xs"><i class="fa fa-eye"></i></button>';
+                            var updateButton = '<button class="update-button btn btn-xs" data-toggle="modal" data-target="#update-modal" data-active_id="' + obj.active_id + '"><i class="fa fa-edit"></i></button>';                    
+                            var flagButton = malicious > 0 ? '<button class="flag-button"><i class="fas fa-flag" style="color: red;"></i></button>' : '<button class="flag-button"><i class="fas fa-flag" style="color: green;"></i></button>';
 
-                    // Create a single cell with both buttons
-                    var actionsCell = flagButton + ' ' + viewButton + ' ' + updateButton;
-                    // Add the data to the DataTable
-                    dataTable.row.add([tags, trackingDomainName, harmless, malicious, suspicious, undetected, total, comments, actionsCell]).draw();
+                            // Create a single cell with both buttons
+                            var actionsCell = flagButton + ' ' + viewButton + ' ' + updateButton;
+                            // Add the data to the DataTable
+                            dataTable.row.add([tags, trackingDomainName, harmless, malicious, suspicious, undetected, total, comments, actionsCell]).draw();
+                   }
                     setTimeout(console.log("Done : " + lastFinalUrl), 10000);                  
                 }
 
