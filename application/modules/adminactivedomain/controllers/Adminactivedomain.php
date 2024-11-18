@@ -102,12 +102,13 @@ function fetchVirusTotalData($hash){
     $num_rows = $query->num_rows();
     $result = $query->result();
     
-
-    if($result[0]->date_fetch == date("Y-m-d")){
-        $this->db->set('date_fetch', date("Y-m-d"));     
-        $this->db->where('hash', $hash);
-        $this->db->update('active_domain');
-        return;
+    if(count($result)){
+        if($result[0]->date_fetch == date("Y-m-d")){
+            $this->db->set('date_fetch', date("Y-m-d"));     
+            $this->db->where('hash', $hash);
+            $this->db->update('active_domain');
+            return;
+        }
     }
     
 
