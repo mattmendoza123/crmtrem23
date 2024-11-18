@@ -14,7 +14,7 @@ $(document).ready(function() {
 
     
     function getVTotal(hashUrl){       
-      const settings = {
+      /*const settings = {
         async: true,
         crossDomain: true,
         url: 'https://www.virustotal.com/api/v3/urls/'+hashUrl,
@@ -33,7 +33,17 @@ $(document).ready(function() {
 
         return $.ajax(settings).done(res => {                      
            return res;
+        });*/
+        const settings = {
+            async: true,
+            crossDomain: true,
+            url: base_url + 'adminactivedomain/fetchVirusTotalData/'+hashUrl,
+            method: 'GET'
+        }
+        return $.ajax(settings).done(res => {                      
+           return res;
         });
+      
 
     }
     function fetchData() {
@@ -65,7 +75,9 @@ $(document).ready(function() {
                 if (!existingUrls.includes(trackingDomainName)) {          
                     
                    vTotal = await getVTotal(obj.urlHash);                  
+                   console.log("vTotal",vTotal);
                    vTotalAnalysisStats = vTotal['data']['attributes']['last_analysis_stats'];
+                   
                    
 
                     // Insert only if it's not in the existing URLs array

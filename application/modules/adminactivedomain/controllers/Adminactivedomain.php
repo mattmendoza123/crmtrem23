@@ -88,9 +88,41 @@ class Adminactivedomain extends MY_Controller
         // Send the response (you may want to return it in some way)
         header('Content-Type: application/json');
         echo json_encode($response);
+}
+
+function fetchVirusTotalData($hash){
+    $apiKey = '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e';      
+    $urlEndpoint = "https://www.virustotal.com/api/v3/urls/{$hash}";
+
+    $options = array(
+        'http' => array(
+            'header' => "Content-type: application/x-www-form-urlencoded\r\n" .
+            "x-apikey: {$apiKey}\r\n",
+            'method' => 'GET'
+        )
+    );
+
+    $context  = stream_context_create($options);
+    $response = file_get_contents($urlEndpoint, false, $context);
+
+    // Check if the response is valid JSON
+    $result = json_decode($response, true);    
+    if ($result && isset($result['data']['attributes']['last_analysis_stats'])) {
+        // Extract the desired scan result statistics
+        return array(
+            'harmless' => $result['data']['attributes']['last_analysis_stats']['harmless'],
+            'malicious' => $result['data']['attributes']['last_analysis_stats']['malicious'],
+            'suspicious' => $result['data']['attributes']['last_analysis_stats']['suspicious'],
+            'undetected' => $result['data']['attributes']['last_analysis_stats']['undetected']
+        );
+    } else {
+        // Handle non-JSON response (e.g., HTML error page)
+        // You can log the response or take appropriate action
+        error_log("Non-JSON response received for URL: $url");
+        return null;
     }
-
-
+    
+}
 
 // Virustotal
 /*
