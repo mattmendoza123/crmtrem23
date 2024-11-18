@@ -21,8 +21,7 @@ $(document).ready(function() {
             data:{"url": url},
             method: 'POST'
         } 
-        return $.ajax(settings).done(res => {         
-            console.log(res);             
+        return $.ajax(settings).done(res => {                   
            return res;
         });
         
@@ -61,8 +60,7 @@ $(document).ready(function() {
             var total;           
             var comments;
             trackingDomains.forEach(async obj => {                           
-                if (!existingUrls.includes(obj.name)) {     
-                  console.log("UR",obj.urlHash);                  
+                if (!existingUrls.includes(obj.name)) {                      
                    vTotal = await getVTotal(obj.urlHash,obj.url);                                      
                    if(!vTotal){                        
                       vTotal = obj.vtotal;
