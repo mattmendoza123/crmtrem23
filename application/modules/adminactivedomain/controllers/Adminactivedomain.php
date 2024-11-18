@@ -115,7 +115,7 @@ function fetchVirusTotalData($hash){
             }
         }     
     }
-   
+   echo $hash."==>";
     
     $apiKey = 'd04a998808ef6d256cfb90991efbc5fd1987b7283bec8c38f5e5efcd2ceb2d2b';      
     $urlEndpoint = "https://www.virustotal.com/api/v3/urls/{$hash}";
@@ -144,7 +144,8 @@ function fetchVirusTotalData($hash){
     );
     $this->db->set('date_fetch', date("Y-m-d"));     
     $this->db->set('vtotal', serialize($vtotal));                 
-    $this->db->set('hash', $hash);                
+    $this->db->set('hash', $hash);  
+    $this->db->where('url', $final_url);              
     $this->db->update('active_domain');
 
     return json_encode($vtotal);
