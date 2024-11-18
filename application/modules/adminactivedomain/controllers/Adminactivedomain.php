@@ -75,7 +75,7 @@ class Adminactivedomain extends MY_Controller
                     
                     $responseData['info']['details']['tracking_domains'][$x]['vtotal'] = unserialize($result[0]->vtotal);
                     $responseData['info']['details']['tracking_domains'][$x]['tags'] =  $result[0]->tags;
-                    
+
                     if($num_rows == 0){
                         $insert_domain = $this->db->insert('active_domain', $domain_info);    
                         $processedUrls[] = $url;                                    
@@ -104,7 +104,7 @@ function fetchVirusTotalData($hash){
     $num_rows = $query->num_rows();
     $result = $query->result();
     
-    if(count($result)){
+    if(count($result) > 0){
         if($result[0]->date_fetch == date("Y-m-d")){
             $this->db->set('date_fetch', date("Y-m-d"));     
             $this->db->where('hash', $hash);
