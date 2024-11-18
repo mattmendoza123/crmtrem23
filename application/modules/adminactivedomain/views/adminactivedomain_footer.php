@@ -13,13 +13,7 @@ $(document).ready(function() {
     var existingUrls = []; // Array to store existing URLs in the database
 
     
-    function getVTotal(hashUrl){
-        /*var base_url = "<?=BASE_URL();?>";
-        return $.ajax({
-            url: base_url + 'adminactivedomain/fetchVirusTotalData/'+url,
-            type: 'GET',
-        });
-       */
+    function getVTotal(hashUrl){       
       const settings = {
         async: true,
         crossDomain: true,
@@ -29,7 +23,7 @@ $(document).ready(function() {
         headers: {
                 accept: 'application/json',
                 'content-type': 'application/x-www-form-urlencoded',
-                'x-apikey' : '2072cda478eb51d04bed004d4d7352dc16e097ac33bfc0f8847f447f54b1fe40'
+                'x-apikey' : '372c362e7c97ac0f7f20ee6b278179b486f23f64f0c15d87ce7562f83d27a1c8'
             }
         };
 
