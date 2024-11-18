@@ -115,7 +115,7 @@ function fetchVirusTotalData($hash){
     }
     
 
-    $apiKey = '2072cda478eb51d04bed004d4d7352dc16e097ac33bfc0f8847f447f54b1fe40';      
+    $apiKey = '2d79fa4d329c17de8973a1e862539c344830a0a96ccc53599848164c11630c86';      
     $urlEndpoint = "https://www.virustotal.com/api/v3/urls/{$hash}";
 
     $options = array(
