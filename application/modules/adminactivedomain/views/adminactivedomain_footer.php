@@ -23,6 +23,8 @@ $(document).ready(function() {
         headers: {
                 accept: 'application/json',
                 'Access-Control-Allow-Origin':'*',
+                'Access-Control-Allow-Methods':'GET, POST, PUT, DELETE',
+                'Access-Control-Allow-Headers':'Content-Type, Authorization',
                 'content-type': 'application/x-www-form-urlencoded',
                 'x-apikey' : '372c362e7c97ac0f7f20ee6b278179b486f23f64f0c15d87ce7562f83d27a1c8'
             }
