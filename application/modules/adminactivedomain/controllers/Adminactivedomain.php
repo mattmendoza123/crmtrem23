@@ -98,27 +98,28 @@ class Adminactivedomain extends MY_Controller
 }
 
 function fetchVirusTotalData($hash){
-
+    error_reporting(0);
+    if($hash != ""){
+        $this->db->where('hash',$hash);                    
+        $query = $this->db->get('active_domain');
+        $num_rows = $query->num_rows();
+        $result = $query->result();
+        
+        if(count($result) > 0){
+            if($result[0]->date_fetch != null || $result[0]->date_fetch == date("Y-m-d")){
+                $this->db->set('date_fetch', date("Y-m-d"));     
+                $this->db->where('hash', $hash);
+                $this->db->update('active_domain'); 
+                $vtotal_data = unserialize($result[0]->vtotal);         
+                return json_encode($vtotal_data);
+            }
+        }     
+    }
+   
     
-    $this->db->where('hash',$hash);                    
-    $query = $this->db->get('active_domain');
-    $num_rows = $query->num_rows();
-    $result = $query->result();
-    
-    if(count($result) > 0){
-        if($result[0]->date_fetch != null || $result[0]->date_fetch == date("Y-m-d")){
-            $this->db->set('date_fetch', date("Y-m-d"));     
-            $this->db->where('hash', $hash);
-            $this->db->update('active_domain'); 
-            $vtotal_data = unserialize($result[0]->vtotal);         
-            return json_encode($vtotal_data);
-        }
-    } 
-    
-
-    $apiKey = '2d79fa4d329c17de8973a1e862539c344830a0a96ccc53599848164c11630c86';      
+    $apiKey = 'd04a998808ef6d256cfb90991efbc5fd1987b7283bec8c38f5e5efcd2ceb2d2b';      
     $urlEndpoint = "https://www.virustotal.com/api/v3/urls/{$hash}";
-
+   
     $options = array(
         'http' => array(
             'header' => "Content-type: application/x-www-form-urlencoded\r\n" .
@@ -129,12 +130,18 @@ function fetchVirusTotalData($hash){
 
     $context  = stream_context_create($options);
     $response = file_get_contents($urlEndpoint, false, $context);   
+   
     // Check if the response is valid JSON
-    $result = json_decode($response, true);       
-    $analysis_stats = $result['data']['attributes']['last_analysis_stats'];
-    $final_url = $result['data']['attributes']['last_final_url'];
+    $result = json_decode($response, true);     
+    echo $hash;
+    print_r($result);
 
+    $analysis_stats = $result['data']['attributes']['last_analysis_stats'];
+    
+    
     if(isset($analysis_stats)){
+        $final_url = $result['data']['attributes']['last_final_url'];
+       
         $vtotal = array(
             'harmless' => $analysis_stats['harmless'],
             'malicious' => $analysis_stats['malicious'],
@@ -149,6 +156,7 @@ function fetchVirusTotalData($hash){
             $this->db->set('vtotal', serialize($vtotal));                 
             $this->db->where('url', $final_url);           
         }
+        
         $this->db->update('active_domain');
 
         return json_encode($vtotal);
@@ -158,175 +166,6 @@ function fetchVirusTotalData($hash){
     die;
 }
 
-// Virustotal
-/*
-public function api()
-{
-    header('Access-Control-Allow-Origin: *'); // Allow requests from any domain
-    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-    header("Access-Control-Allow-Headers: Content-Type, Authorization");
-
-    // Replace 'YOUR_API_KEY' with your actual API key
-    $apiKey = 'd04a998808ef6d256cfb90991efbc5fd1987b7283bec8c38f5e5efcd2ceb2d2b';
-    
-
-    // Database connection
-    $mysqli = new mysqli("localhost", "root", "password", "greeocvu_wp580");
-
-    // Check connection
-    if ($mysqli->connect_error) {
-        die("Connection failed: " . $mysqli->connect_error);
-    }
-
-    $sql = "SELECT * FROM active_domain";
-    $result = $mysqli->query($sql);
-
-    $data = array();
-
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            // Add each row as an associative array to the $data array
-            $data[] = $row;
-        }
-    }
-
-    // Close the database connection
-    $mysqli->close();
-
-    $dataWithVirusTotal = array();
-
-    foreach ($data as $row) {
-        $url = $row['url'];
-
-        // Fetch additional data from the VirusTotal API
-        $virusTotalData = $this->fetchVirusTotalData($url, $this->apiKey); // Implement this function
-
-        if ($virusTotalData) {
-            // Merge the VirusTotal data with the existing data
-            $mergedData = array_merge($row, $virusTotalData);
-            $dataWithVirusTotal[] = $mergedData;
-        }
-      
-    }
-
-    // Send the response as JSON
-    echo json_encode($dataWithVirusTotal);
-}
-/*
-private function fetchVTotalData($url, $apiKey)
-{
-    $hash = hash('sha256', $url);
-    $urlEndpoint = "https://www.virustotal.com/api/v3/urls/{$hash}";
-
-    $options = array(
-        'http' => array(
-            'header' => "Content-type: application/x-www-form-urlencoded\r\n" .
-                        "x-apikey: {$apiKey}\r\n",
-            'method' => 'GET'
-        )
-    );
-
-    $context  = stream_context_create($options);
-    $response = file_get_contents($urlEndpoint, false, $context);
-
-    // Check if the response is valid JSON
-    $result = json_decode($response, true);
-
-    if ($result) {
-        // Check for the presence of the 'data' key
-        if (isset($result['data']['attributes']['last_analysis_stats'])) {
-            // Extract the desired scan result statistics from the 'data' structure
-            return array(
-                'harmless' => $result['data']['attributes']['last_analysis_stats']['harmless'],
-                'malicious' => $result['data']['attributes']['last_analysis_stats']['malicious'],
-                'suspicious' => $result['data']['attributes']['last_analysis_stats']['suspicious'],
-                'undetected' => $result['data']['attributes']['last_analysis_stats']['undetected']
-            );
-        } else {
-            // Handle unexpected structure
-            error_log("Unexpected response structure for URL: $url - " . print_r($result, true));
-            return null;
-        }
-    } else {
-        // Handle non-JSON response (e.g., HTML error page)
-        error_log("Non-JSON response received for URL: $url");
-        return null;
-    }
-}
-/*
-function fetchVirusTotalData($url)
-{
-    $apiKey = '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e';
-    $hash = hash('sha256', $url);
-    $urlEndpoint = "https://www.virustotal.com/api/v3/urls/{$hash}";
-
-    $options = array(
-        'http' => array(
-            'header' => "Content-type: application/x-www-form-urlencoded\r\n" .
-            "x-apikey: {$apiKey}\r\n",
-            'method' => 'GET'
-        )
-    );
-
-    $opts = [
-        'http' => [
-          'method' => "GET",
-          // Use newline \n to separate multiple headers
-          'header' => "Accept-language: en\nCookie: foo=bar",
-        ]
-      ];
-      
-      $context = stream_context_create($options);
-      
-    
-
-    $context  = stream_context_create($options);
-    $response = file_get_contents($urlEndpoint, false, $context);
-
-    // Check if the response is valid JSON
-    $result = json_decode($response, true);
-
-    print_r($result);die;
-    if ($result && isset($result['data']['attributes']['last_analysis_stats'])) {
-        // Extract the desired scan result statistics
-        return array(
-            'harmless' => $result['data']['attributes']['last_analysis_stats']['harmless'],
-            'malicious' => $result['data']['attributes']['last_analysis_stats']['malicious'],
-            'suspicious' => $result['data']['attributes']['last_analysis_stats']['suspicious'],
-            'undetected' => $result['data']['attributes']['last_analysis_stats']['undetected']
-        );
-    } else {
-        // Handle non-JSON response (e.g., HTML error page)
-        // You can log the response or take appropriate action
-        error_log("Non-JSON response received for URL: $url");
-        return null;
-    }
- 
-}
-*/
-
-// public function update_modal()
-// {
-//     $post = $this->input->post();
-
-//     $set = array(
-//         'url' => $post["u_url"],
-//         'tags' => $post["u_tags"],
-//         'comments' => $post["u_comment"],
-//     );
-
-//     $where = array("active_id" => $post["u_active_id"]);
-//     $update = $this->MY_Model->update("active_domain", $set, $where);
-
-//     if ($update) {
-//         $response = array('success' => true, 'message' => 'Updated Successfully.');
-        
-//     } else {
-//         $response = array('success' => false, 'message' => 'Update failed.');
-//     }
-
-//     echo json_encode($response);
-// }
 public function update_modal()
 {
     $post = $this->input->post();

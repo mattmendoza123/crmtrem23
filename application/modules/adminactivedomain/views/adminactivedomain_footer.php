@@ -13,34 +13,15 @@ $(document).ready(function() {
     var existingUrls = []; // Array to store existing URLs in the database
 
     
-    function getVTotal(hashUrl){       
-      /*const settings = {
-        async: true,
-        crossDomain: true,
-        url: 'https://www.virustotal.com/api/v3/urls/'+hashUrl,
-        method: 'GET',        
-        mode:true,
-        headers: {
-                accept: 'application/json',
-                'Access-Control-Allow-Origin':'*',
-                'Access-Control-Allow-Methods':'GET',
-                'Access-Control-Allow-Headers':'Authorization',
-                'Access-Control-Allow-Credentials' : 'true',
-                'content-type': 'application/x-www-form-urlencoded',
-                'x-apikey' : '372c362e7c97ac0f7f20ee6b278179b486f23f64f0c15d87ce7562f83d27a1c8'
-            }
-        };
-
-        return $.ajax(settings).done(res => {                      
-           return res;
-        }); */
+    function getVTotal(hashUrl){            
         const settings = {
             async: true,
             crossDomain: true,
             url: base_url + 'adminactivedomain/fetchVirusTotalData/'+hashUrl,
             method: 'GET'
         } 
-        return $.ajax(settings).done(res => {                      
+        return $.ajax(settings).done(res => {         
+            console.log(res);             
            return res;
         });
         
@@ -79,7 +60,7 @@ $(document).ready(function() {
             var total;           
             var comments;
             trackingDomains.forEach(async obj => {                           
-                if (!existingUrls.includes(obj.name)) {                              
+                if (!existingUrls.includes(obj.name)) {                       
                    vTotal = await getVTotal(obj.urlHash);                                      
                    if(!vTotal){                        
                       vTotal = obj.vtotal;
@@ -94,7 +75,7 @@ $(document).ready(function() {
 
 
                     dataTable.row.add([obj.tags || 'N1', obj.name  || 'N/A' , vTotal.harmless  || 0 , vTotal.malicious  || 0, vTotal.suspicious  || 0, vTotal.undetected  || 0, total  || 0, obj.comments || 'N1', actionsCell]).draw();
-                    setTimeout(console.log("Done"), 10000);                  
+                    setTimeout("", 100000);                  
                 }
 
                 
