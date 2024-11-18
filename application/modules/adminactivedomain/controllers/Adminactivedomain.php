@@ -110,6 +110,7 @@ function fetchVirusTotalData($hash){
             $this->db->set('date_fetch', date("Y-m-d"));     
             $this->db->where('hash', $hash);
             $this->db->update('active_domain');
+            echo $result[0]->url;
             return;
         }
     }
