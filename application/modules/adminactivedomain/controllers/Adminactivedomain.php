@@ -107,14 +107,13 @@ function fetchVirusTotalData($hash){
     // Check if the response is valid JSON
     $result = json_decode($response, true);       
     $analysis_stats = $result['data']['attributes']['last_analysis_stats'];
-
+    print_r($analysis_stats);
     if(isset($analysis_stats)){
         return json_encode(array(
             'harmless' => $analysis_stats['harmless'],
             'malicious' => $analysis_stats['malicious'],
             'suspicious' => $analysis_stats['suspicious'],
-            'undetected' => $analysis_stats['undetected'],
-            'last_final_url'=>$analysis_stats['last_final_url']
+            'undetected' => $analysis_stats['undetected'],          
         ));
     }else {
         return null;
