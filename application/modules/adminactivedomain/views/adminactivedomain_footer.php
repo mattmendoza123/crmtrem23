@@ -19,13 +19,13 @@ $(document).ready(function() {
         crossDomain: true,
         url: 'https://www.virustotal.com/api/v3/urls/'+hashUrl,
         method: 'GET',        
-       
+        mode:true,
         headers: {
                 accept: 'application/json',
                 'Access-Control-Allow-Origin':'https://crm.tremendio.network/',
-                'Access-Control-Allow-Methods':'GET, POST, PUT, DELETE',
+                'Access-Control-Allow-Methods':'GET',
                 'Access-Control-Allow-Headers':'Authorization',
-                'Access-Control-Allow-Credentials' : true,
+                'Access-Control-Allow-Credentials' : 'true',
                 'content-type': 'application/x-www-form-urlencoded',
                 'x-apikey' : '372c362e7c97ac0f7f20ee6b278179b486f23f64f0c15d87ce7562f83d27a1c8'
             }
