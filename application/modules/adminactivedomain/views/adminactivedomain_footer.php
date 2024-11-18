@@ -70,40 +70,31 @@ $(document).ready(function() {
             
             var vTotal;
             var vTotalAnalysisStats;
-            trackingDomains.forEach(async obj => {
-                var trackingDomainName = obj.name;               
-                if (!existingUrls.includes(trackingDomainName)) {          
-                    
-                   vTotal = await getVTotal(obj.urlHash);                         
-                   console.log("vTotal",vTotal);
-                   if(vTotal){
-                        vTotalAnalysisStats = vTotal['data']['attributes']['last_analysis_stats'];
-                        
-                        
-
-                            // Insert only if it's not in the existing URLs array
-                        // dataTable.row.add([trackingDomainName]);
-                            existingUrls.push(trackingDomainName); // Add to existing URLs
-
-                            var tags = obj.tags || 'N1';
-                            var lastFinalUrl = vTotalAnalysisStats.last_final_url || 'N/A';
-                            var harmless = vTotalAnalysisStats.harmless || 0;
-                            var malicious = vTotalAnalysisStats.malicious || 0;
-                            var suspicious = vTotalAnalysisStats.suspicious || 0;
-                            var undetected = vTotalAnalysisStats.undetected || 0;
-                            var total = harmless + malicious + suspicious + undetected;
-                            var comments = obj.comments || 'N1';
-
-                            var viewButton = '<button class="view-button btn btn-xs"><i class="fa fa-eye"></i></button>';
-                            var updateButton = '<button class="update-button btn btn-xs" data-toggle="modal" data-target="#update-modal" data-active_id="' + obj.active_id + '"><i class="fa fa-edit"></i></button>';                    
-                            var flagButton = malicious > 0 ? '<button class="flag-button"><i class="fas fa-flag" style="color: red;"></i></button>' : '<button class="flag-button"><i class="fas fa-flag" style="color: green;"></i></button>';
-
-                            // Create a single cell with both buttons
-                            var actionsCell = flagButton + ' ' + viewButton + ' ' + updateButton;
-                            // Add the data to the DataTable
-                            dataTable.row.add([tags, trackingDomainName, harmless, malicious, suspicious, undetected, total, comments, actionsCell]).draw();
+            var tags;
+            var lastFinalUrl;
+            var harmless;
+            var malicious;
+            var suspicious;
+            var undetected;
+            var total;           
+            var comments;
+            trackingDomains.forEach(async obj => {                           
+                if (!existingUrls.includes(obj.name)) {                              
+                   vTotal = await getVTotal(obj.urlHash);                                      
+                   if(!vTotal){                        
+                      vTotal = obj.vtotal;
                    }
-                    setTimeout(console.log("Done : " + lastFinalUrl), 10000);                  
+                   existingUrls.push(obj.name);  
+                   total = vTotal.harmless + vTotal.malicious + vTotal.suspicious + vTotal.undetected;
+
+                   var viewButton = '<button class="view-button btn btn-xs"><i class="fa fa-eye"></i></button>';
+                   var updateButton = '<button class="update-button btn btn-xs" data-toggle="modal" data-target="#update-modal" data-active_id="' + obj.active_id + '"><i class="fa fa-edit"></i></button>';                    
+                   var flagButton = vTotal.malicious > 0 ? '<button class="flag-button"><i class="fas fa-flag" style="color: red;"></i></button>' : '<button class="flag-button"><i class="fas fa-flag" style="color: green;"></i></button>';
+                   var actionsCell = flagButton + ' ' + viewButton + ' ' + updateButton;
+
+
+                    dataTable.row.add([obj.tags || 'N1', obj.name  || 'N/A' , vTotal.harmless  || 0 , vTotal.malicious  || 0, vTotal.suspicious  || 0, vTotal.undetected  || 0, total  || 0, obj.comments || 'N1', actionsCell]).draw();
+                    setTimeout(console.log("Done"), 10000);                  
                 }
 
                 

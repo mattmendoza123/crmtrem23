@@ -46,7 +46,7 @@ class Adminactivedomain extends MY_Controller
         
         // Decode the JSON response
         $responseData = json_decode($data, true);      
-
+      
         // Check if the response contains tracking domains
         if (isset($responseData['info']['details']['tracking_domains']) && is_array($responseData['info']['details']['tracking_domains'])) {
             // Create an array to store processed URLs
@@ -63,19 +63,23 @@ class Adminactivedomain extends MY_Controller
                     $domain_info = array(
                         'url' => $url,
                         'tags' => 'N/A',
-                        'comments' =>'N/A',                    
+                        'comments' =>'N/A',       
+                        'hash'=> hash('sha256',$url)             
                     );
 
                     $this->db->where('url',$url);
                     
                     $query = $this->db->get('active_domain');
                     $num_rows = $query->num_rows();
-                                   
+                    $result = $query->result();
+                    
+                    $responseData['info']['details']['tracking_domains'][$x]['vtotal'] = unserialize($result[0]->vtotal);
                     if($num_rows == 0){
                         $insert_domain = $this->db->insert('active_domain', $domain_info);    
-                        $processedUrls[] = $url;            
-                        
-                    }                
+                        $processedUrls[] = $url;                                    
+                    } 
+                    
+                    //die;
                 }
             }
           
@@ -91,6 +95,22 @@ class Adminactivedomain extends MY_Controller
 }
 
 function fetchVirusTotalData($hash){
+
+    
+    $this->db->where('hash',$hash);                    
+    $query = $this->db->get('active_domain');
+    $num_rows = $query->num_rows();
+    $result = $query->result();
+    
+
+    if($result[0]->date_fetch == date("Y-m-d")){
+        $this->db->set('date_fetch', date("Y-m-d"));     
+        $this->db->where('hash', $hash);
+        $this->db->update('active_domain');
+        return;
+    }
+    
+
     $apiKey = '2072cda478eb51d04bed004d4d7352dc16e097ac33bfc0f8847f447f54b1fe40';      
     $urlEndpoint = "https://www.virustotal.com/api/v3/urls/{$hash}";
 
@@ -107,30 +127,27 @@ function fetchVirusTotalData($hash){
     // Check if the response is valid JSON
     $result = json_decode($response, true);       
     $analysis_stats = $result['data']['attributes']['last_analysis_stats'];
-    print_r($result['data']['attributes']);die;
+    $final_url = $result['data']['attributes']['last_final_url'];
+
     if(isset($analysis_stats)){
-        return json_encode(array(
+        $vtotal = array(
             'harmless' => $analysis_stats['harmless'],
             'malicious' => $analysis_stats['malicious'],
             'suspicious' => $analysis_stats['suspicious'],
             'undetected' => $analysis_stats['undetected'],          
-        ));
+        );
+        if($num_rows != 0){     
+            $this->db->set('date_fetch', date("Y-m-d"));     
+            $this->db->set('vtotal', serialize($vtotal));     
+            $this->db->where('hash', $hash);
+            $this->db->update('active_domain');
+        }
+
+        return json_encode($vtotal);
     }else {
-        return null;
+        return "hello";
     }
     die;
-   /* if ($result && isset($result['data']['attributes']['last_analysis_stats'])) {
-        // Extract the desired scan result statistics
-        return json_encode(array(
-            'harmless' => $result['data']['attributes']['last_analysis_stats']['harmless'],
-            'malicious' => $result['data']['attributes']['last_analysis_stats']['malicious'],
-            'suspicious' => $result['data']['attributes']['last_analysis_stats']['suspicious'],
-            'undetected' => $result['data']['attributes']['last_analysis_stats']['undetected']
-        ));
-    } else {
-        return null;
-    }
-    */
 }
 
 // Virustotal
