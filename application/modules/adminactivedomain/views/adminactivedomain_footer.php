@@ -63,7 +63,7 @@ $(document).ready(function() {
             } else {
                 dataTable = $('#activedomain').DataTable({
                     processing: true,
-                    order: [[0, "desc"]],
+                    order: [[3, "desc"]],
                     pageLength: 50
                 });
             }
