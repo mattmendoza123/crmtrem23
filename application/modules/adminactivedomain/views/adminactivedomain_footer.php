@@ -74,8 +74,7 @@ $(document).ready(function() {
                 var trackingDomainName = obj.name;               
                 if (!existingUrls.includes(trackingDomainName)) {          
                     
-                   vTotal = await getVTotal(obj.urlHash);       
-                   return;           
+                   vTotal = await getVTotal(obj.urlHash);                         
                    console.log("vTotal",vTotal);
                    vTotalAnalysisStats = vTotal['data']['attributes']['last_analysis_stats'];
                    

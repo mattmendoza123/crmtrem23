@@ -114,13 +114,7 @@ function fetchVirusTotalData($hash){
             'suspicious' => $result['data']['attributes']['last_analysis_stats']['suspicious'],
             'undetected' => $result['data']['attributes']['last_analysis_stats']['undetected']
         );
-    } else {
-        // Handle non-JSON response (e.g., HTML error page)
-        // You can log the response or take appropriate action
-        error_log("Non-JSON response received for URL: $url");
-        return null;
-    }
-    
+    } 
 }
 
 // Virustotal
