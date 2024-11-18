@@ -4,7 +4,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Adminactivedomain extends MY_Controller
 {
 
-    private $apiKey;
 
 	private $errmsg = "";
 
@@ -21,79 +20,70 @@ class Adminactivedomain extends MY_Controller
             // $this->apiKey = 'f2fe677fe6439e8574fcc40519aa398fb3e09b1096e8c3313cfb59437dcd29ab';
             // $this->apiKey = '2072cda478eb51d04bed004d4d7352dc16e097ac33bfc0f8847f447f54b1fe40';
             // $this->apiKey = '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e';
-
-           
-
-            
+      
 	}
-
 	public function index()
 	{
-	
-		$data["title"] = "Active Domain | Tremendio Portal";
+			$data["title"] = "Active Domain | Tremendio Portal";
 		$data["pagename"] = "Active Domain";
-
 		$this->load_page2("adminactivedomain", $data, "adminactivedomain_footer.php", "adminactivedomain_header.php");
 	}
 
-
-
     public function activedomain_api()
     {
+        error_reporting(0);
         header('Access-Control-Allow-Origin: *'); // Allow requests from any domain
         header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
         header("Access-Control-Allow-Headers: Content-Type, Authorization");
-        
+       
         // Database connection
-        $mysqli = new mysqli("localhost", "root", "password", "greeocvu_wp580");
+        //$mysqli = new mysqli("localhost", "root", "", "greeocvu_wp580");
         
         // Check for a successful database connection
-        if ($mysqli->connect_error) {
-            $response = ['success' => false, 'message' => 'Connection failed: ' . $mysqli->connect_error];
-        } else {
-            $url = 'https://tremendio.scaletrk.com/api/v2/network/offers/1147/tracking-settings?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da'; // URL of the API you want to request
-            $data = file_get_contents($url); // Make the request and get the response
+           
+        $url = 'https://tremendio.scaletrk.com/api/v2/network/offers/1147/tracking-settings?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da'; // URL of the API you want to request
+        $data = file_get_contents($url); // Make the request and get the response
         
-            // Decode the JSON response
-            $responseData = json_decode($data, true);
-        
-            // Check if the response contains tracking domains
-            if (isset($responseData['info']['details']['tracking_domains']) && is_array($responseData['info']['details']['tracking_domains'])) {
-                // Create an array to store processed URLs
-                $processedUrls = [];
-        
-                // Iterate through tracking domains and insert them into the database
-                foreach ($responseData['info']['details']['tracking_domains'] as $trackingDomain) {
-                    $url = $trackingDomain['name'];
-        
-                    // Check if the URL has already been processed
-                    if (!in_array($url, $processedUrls)) {
-                        // Insert the URL into the database
-                        $url .= '/';
-    
-                        $stmt = $mysqli->prepare("INSERT INTO active_domain (url, tags, comments) VALUES (?, 'N/A', 'N/A')");
-                        $stmt->bind_param('s', $url);
-        
-                        // Execute the SQL statement
-                        if ($stmt->execute()) {
-                            $success = true;
-        
-                            // Add the URL to the list of processed URLs
-                            $processedUrls[] = $url;
-                        } else {
-                            $success = false;
-                            $errorMessage = $stmt->error;
-                        }
-                    }
+        // Decode the JSON response
+        $responseData = json_decode($data, true);      
+
+        // Check if the response contains tracking domains
+        if (isset($responseData['info']['details']['tracking_domains']) && is_array($responseData['info']['details']['tracking_domains'])) {
+            // Create an array to store processed URLs
+            $processedUrls = [];
+           
+            // Iterate through tracking domains and insert them into the database
+            foreach ($responseData['info']['details']['tracking_domains'] as $x=> $trackingDomain) {
+                $responseData['info']['details']['tracking_domains'][$x]['urlHash'] = hash('sha256',$url);
+                $url = $trackingDomain['name'];                          
+                // Check if the URL has already been processed
+                if (!in_array($url, $processedUrls)) {                 
+                    // Insert the URL into the database
+                    $url .= '/';      
+                    $domain_info = array(
+                        'url' => $url,
+                        'tags' => 'N/A',
+                        'comments' =>'N/A',                    
+                    );
+
+                    $this->db->where('url',$url);
+                    
+                    $query = $this->db->get('active_domain');
+                    $num_rows = $query->num_rows();
+                                   
+                    if($num_rows == 0){
+                        $insert_domain = $this->db->insert('active_domain', $domain_info);    
+                        $processedUrls[] = $url;            
+                        
+                    }                
                 }
-        
-                // Close the database connection
-                $mysqli->close();
-                $response = ['success' => true];
-            } else {
-                $response = ['success' => false, 'message' => "No tracking domains found in the API response."];
             }
+          
+            $response = ['success' => true , 'data' => $responseData];
+        } else {
+            $response = ['success' => false, 'message' => "No tracking domains found in the API response."];
         }
+      
         
         // Send the response (you may want to return it in some way)
         header('Content-Type: application/json');
@@ -103,7 +93,7 @@ class Adminactivedomain extends MY_Controller
 
 
 // Virustotal
-
+/*
 public function api()
 {
     header('Access-Control-Allow-Origin: *'); // Allow requests from any domain
@@ -143,20 +133,21 @@ public function api()
         $url = $row['url'];
 
         // Fetch additional data from the VirusTotal API
-        $virusTotalData = $this->fetchVirusTotalData($url, $apiKey); // Implement this function
+        $virusTotalData = $this->fetchVirusTotalData($url, $this->apiKey); // Implement this function
 
         if ($virusTotalData) {
             // Merge the VirusTotal data with the existing data
             $mergedData = array_merge($row, $virusTotalData);
             $dataWithVirusTotal[] = $mergedData;
         }
+      
     }
 
     // Send the response as JSON
     echo json_encode($dataWithVirusTotal);
 }
-
-private function fetchVirusTotalData($url, $apiKey)
+/*
+private function fetchVTotalData($url, $apiKey)
 {
     $hash = hash('sha256', $url);
     $urlEndpoint = "https://www.virustotal.com/api/v3/urls/{$hash}";
@@ -164,7 +155,7 @@ private function fetchVirusTotalData($url, $apiKey)
     $options = array(
         'http' => array(
             'header' => "Content-type: application/x-www-form-urlencoded\r\n" .
-                "x-apikey: {$apiKey}\r\n",
+                        "x-apikey: {$apiKey}\r\n",
             'method' => 'GET'
         )
     );
@@ -175,6 +166,61 @@ private function fetchVirusTotalData($url, $apiKey)
     // Check if the response is valid JSON
     $result = json_decode($response, true);
 
+    if ($result) {
+        // Check for the presence of the 'data' key
+        if (isset($result['data']['attributes']['last_analysis_stats'])) {
+            // Extract the desired scan result statistics from the 'data' structure
+            return array(
+                'harmless' => $result['data']['attributes']['last_analysis_stats']['harmless'],
+                'malicious' => $result['data']['attributes']['last_analysis_stats']['malicious'],
+                'suspicious' => $result['data']['attributes']['last_analysis_stats']['suspicious'],
+                'undetected' => $result['data']['attributes']['last_analysis_stats']['undetected']
+            );
+        } else {
+            // Handle unexpected structure
+            error_log("Unexpected response structure for URL: $url - " . print_r($result, true));
+            return null;
+        }
+    } else {
+        // Handle non-JSON response (e.g., HTML error page)
+        error_log("Non-JSON response received for URL: $url");
+        return null;
+    }
+}
+/*
+function fetchVirusTotalData($url)
+{
+    $apiKey = '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e';
+    $hash = hash('sha256', $url);
+    $urlEndpoint = "https://www.virustotal.com/api/v3/urls/{$hash}";
+
+    $options = array(
+        'http' => array(
+            'header' => "Content-type: application/x-www-form-urlencoded\r\n" .
+            "x-apikey: {$apiKey}\r\n",
+            'method' => 'GET'
+        )
+    );
+
+    $opts = [
+        'http' => [
+          'method' => "GET",
+          // Use newline \n to separate multiple headers
+          'header' => "Accept-language: en\nCookie: foo=bar",
+        ]
+      ];
+      
+      $context = stream_context_create($options);
+      
+    
+
+    $context  = stream_context_create($options);
+    $response = file_get_contents($urlEndpoint, false, $context);
+
+    // Check if the response is valid JSON
+    $result = json_decode($response, true);
+
+    print_r($result);die;
     if ($result && isset($result['data']['attributes']['last_analysis_stats'])) {
         // Extract the desired scan result statistics
         return array(
@@ -189,8 +235,9 @@ private function fetchVirusTotalData($url, $apiKey)
         error_log("Non-JSON response received for URL: $url");
         return null;
     }
+ 
 }
-
+*/
 
 // public function update_modal()
 // {
