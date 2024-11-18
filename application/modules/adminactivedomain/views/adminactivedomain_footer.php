@@ -14,7 +14,7 @@ $(document).ready(function() {
 
     
     function getVTotal(hashUrl){       
-      const settings = {
+      /*const settings = {
         async: true,
         crossDomain: true,
         url: 'https://www.virustotal.com/api/v3/urls/'+hashUrl,
@@ -22,7 +22,7 @@ $(document).ready(function() {
         mode:true,
         headers: {
                 accept: 'application/json',
-                'Access-Control-Allow-Origin':'https://crm.tremendio.network/',
+                'Access-Control-Allow-Origin':'*',
                 'Access-Control-Allow-Methods':'GET',
                 'Access-Control-Allow-Headers':'Authorization',
                 'Access-Control-Allow-Credentials' : 'true',
@@ -33,13 +33,13 @@ $(document).ready(function() {
 
         return $.ajax(settings).done(res => {                      
            return res;
-        });
-        /*const settings = {
+        }); */
+        const settings = {
             async: true,
             crossDomain: true,
             url: base_url + 'adminactivedomain/fetchVirusTotalData/'+hashUrl,
             method: 'GET'
-        } */
+        } 
         return $.ajax(settings).done(res => {                      
            return res;
         });
