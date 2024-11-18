@@ -75,6 +75,7 @@ class Adminactivedomain extends MY_Controller
                     
                     $responseData['info']['details']['tracking_domains'][$x]['vtotal'] = unserialize($result[0]->vtotal);
                     $responseData['info']['details']['tracking_domains'][$x]['tags'] =  $result[0]->tags;
+                    $responseData['info']['details']['tracking_domains'][$x]['comments'] =  $result[0]->comments;
 
                     if($num_rows == 0){
                         $insert_domain = $this->db->insert('active_domain', $domain_info);    
