@@ -151,7 +151,7 @@ $(document).ready(function() {
     fetchData(); // Initial fetch and insertion on page load
 
     // Refresh data every 24 hours
-   // setInterval(fetchData,1000);
+    setInterval(fetchData, 24 * 60 * 60 * 1000);
 });
 
 
