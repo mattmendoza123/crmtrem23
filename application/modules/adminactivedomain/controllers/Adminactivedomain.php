@@ -76,6 +76,7 @@ class Adminactivedomain extends MY_Controller
                     $responseData['info']['details']['tracking_domains'][$x]['tags'] =  $result[0]->tags;
                     $responseData['info']['details']['tracking_domains'][$x]['comments'] =  $result[0]->comments;
                     $responseData['info']['details']['tracking_domains'][$x]['urlHash'] =  $domain_info['hash'];
+                    $responseData['info']['details']['tracking_domains'][$x]['url'] =  $domain_info['url'];
 
                     if($num_rows == 0){
                         $insert_domain = $this->db->insert('active_domain', $domain_info);    
@@ -99,6 +100,7 @@ class Adminactivedomain extends MY_Controller
 
 function fetchVirusTotalData($hash){
     error_reporting(0);
+    $url = $this->input->post("url");
     if($hash != ""){
         $this->db->where('hash',$hash);                    
         $query = $this->db->get('active_domain');
@@ -143,8 +145,8 @@ function fetchVirusTotalData($hash){
     );
     $this->db->set('date_fetch', date("Y-m-d"));     
     $this->db->set('vtotal', serialize($vtotal));                 
-    $this->db->set('hashz', $hash);  
-    $this->db->where('url', $final_url);              
+    $this->db->set('hash', $hash);  
+    $this->db->where('url', $url);              
     $this->db->update('active_domain');
 
     return json_encode($vtotal);

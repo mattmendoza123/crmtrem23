@@ -13,12 +13,13 @@ $(document).ready(function() {
     var existingUrls = []; // Array to store existing URLs in the database
 
     
-    function getVTotal(hashUrl){            
+    function getVTotal(hashUrl,url){            
         const settings = {
             async: true,
             crossDomain: true,
             url: base_url + 'adminactivedomain/fetchVirusTotalData/'+hashUrl,
-            method: 'GET'
+            data:{"url": url},
+            method: 'POST'
         } 
         return $.ajax(settings).done(res => {         
             console.log(res);             
@@ -62,7 +63,7 @@ $(document).ready(function() {
             trackingDomains.forEach(async obj => {                           
                 if (!existingUrls.includes(obj.name)) {     
                   console.log("UR",obj.urlHash);                  
-                   vTotal = await getVTotal(obj.urlHash);                                      
+                   vTotal = await getVTotal(obj.urlHash,obj.url);                                      
                    if(!vTotal){                        
                       vTotal = obj.vtotal;
                    }
