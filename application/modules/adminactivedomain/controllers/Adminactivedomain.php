@@ -142,15 +142,9 @@ function fetchVirusTotalData($hash){
         'suspicious' => $analysis_stats['suspicious'],
         'undetected' => $analysis_stats['undetected'],          
     );
-        $this->db->set('date_fetch', date("Y-m-d"));     
-    if($num_rows != 0){                 
-        $this->db->set('vtotal', serialize($vtotal));                 
-        $this->db->where('hash', $hash);          
-    }else{            
-        $this->db->set('vtotal', serialize($vtotal));                 
-        $this->db->where('url', $final_url);           
-    }
-    
+    $this->db->set('date_fetch', date("Y-m-d"));     
+    $this->db->set('vtotal', serialize($vtotal));                 
+    $this->db->set('hash', $hash);                
     $this->db->update('active_domain');
 
     return json_encode($vtotal);
