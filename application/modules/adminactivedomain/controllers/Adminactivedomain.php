@@ -104,7 +104,7 @@ function fetchVirusTotalData($hash){
 
     $context  = stream_context_create($options);
     $response = file_get_contents($urlEndpoint, false, $context);
-
+    var_dump($response);
     // Check if the response is valid JSON
     $result = json_decode($response, true);    
     if ($result && isset($result['data']['attributes']['last_analysis_stats'])) {
