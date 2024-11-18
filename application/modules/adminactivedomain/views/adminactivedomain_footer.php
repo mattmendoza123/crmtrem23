@@ -60,7 +60,8 @@ $(document).ready(function() {
             var total;           
             var comments;
             trackingDomains.forEach(async obj => {                           
-                if (!existingUrls.includes(obj.name)) {                       
+                if (!existingUrls.includes(obj.name)) {     
+                  console.log("UR",obj.urlHash);                  
                    vTotal = await getVTotal(obj.urlHash);                                      
                    if(!vTotal){                        
                       vTotal = obj.vtotal;

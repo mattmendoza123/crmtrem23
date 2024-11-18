@@ -53,8 +53,7 @@ class Adminactivedomain extends MY_Controller
             $processedUrls = [];
            
             // Iterate through tracking domains and insert them into the database
-            foreach ($responseData['info']['details']['tracking_domains'] as $x=> $trackingDomain) {
-                $responseData['info']['details']['tracking_domains'][$x]['urlHash'] = hash('sha256',$url);
+            foreach ($responseData['info']['details']['tracking_domains'] as $x=> $trackingDomain) {                
                 $url = $trackingDomain['name'];                          
                 // Check if the URL has already been processed
                 if (!in_array($url, $processedUrls)) {                 
@@ -76,6 +75,7 @@ class Adminactivedomain extends MY_Controller
                     $responseData['info']['details']['tracking_domains'][$x]['vtotal'] = unserialize($result[0]->vtotal);
                     $responseData['info']['details']['tracking_domains'][$x]['tags'] =  $result[0]->tags;
                     $responseData['info']['details']['tracking_domains'][$x]['comments'] =  $result[0]->comments;
+                    $responseData['info']['details']['tracking_domains'][$x]['urlHash'] =  $domain_info['hash'];
 
                     if($num_rows == 0){
                         $insert_domain = $this->db->insert('active_domain', $domain_info);    
@@ -115,8 +115,7 @@ function fetchVirusTotalData($hash){
             }
         }     
     }
-   echo $hash."==>";
-    
+      
     $apiKey = 'd04a998808ef6d256cfb90991efbc5fd1987b7283bec8c38f5e5efcd2ceb2d2b';      
     $urlEndpoint = "https://www.virustotal.com/api/v3/urls/{$hash}";
    
@@ -135,7 +134,7 @@ function fetchVirusTotalData($hash){
     $result = json_decode($response, true);        
     $analysis_stats = $result['data']['attributes']['last_analysis_stats'];
     $final_url = $result['data']['attributes']['last_final_url'];
-    
+    print_r($result);
     $vtotal = array(
         'harmless' => $analysis_stats['harmless'],
         'malicious' => $analysis_stats['malicious'],
@@ -144,7 +143,7 @@ function fetchVirusTotalData($hash){
     );
     $this->db->set('date_fetch', date("Y-m-d"));     
     $this->db->set('vtotal', serialize($vtotal));                 
-    $this->db->set('hash', $hash);  
+    $this->db->set('hashz', $hash);  
     $this->db->where('url', $final_url);              
     $this->db->update('active_domain');
 
