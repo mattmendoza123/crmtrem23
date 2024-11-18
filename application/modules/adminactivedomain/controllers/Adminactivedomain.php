@@ -110,13 +110,15 @@ function fetchVirusTotalData($hash){
             $this->db->set('date_fetch', date("Y-m-d"));     
             $this->db->where('hash', $hash);
             $this->db->update('active_domain'); 
-            $vtotal = array(
+            $vtotal_data = unserialize($result[0]->vtotal);
+          //  print_r($vtotal_data);
+            /*$vtotal = array(
                 'harmless' => $result[0]->harmless,
                 'malicious' => $result[0]->malicious,
                 'suspicious' => $result[0]->suspicious,
                 'undetected' => $result[0]->undetected,          
-            );
-            return json_encode($vtotal);
+            ); */
+            return json_encode($vtotal_data);
         }
     }
     
