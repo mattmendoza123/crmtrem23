@@ -22,7 +22,7 @@ $(document).ready(function() {
        
         headers: {
                 accept: 'application/json',
-                'Access-Control-Allow-Origin':'*',
+                'Access-Control-Allow-Origin':'https://crm.tremendio.network/',
                 'Access-Control-Allow-Methods':'GET, POST, PUT, DELETE',
                 'Access-Control-Allow-Headers':'Authorization',
                 'Access-Control-Allow-Credentials' : true,
