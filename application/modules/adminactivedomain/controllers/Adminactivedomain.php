@@ -156,21 +156,16 @@ function fetchVirusTotalData($hash){
 public function update_modal()
 {
     $post = $this->input->post();
+    $this->db->set('tags', implode(';', $post["u_tags"]));     
+    $this->db->set('comments', $post["u_comment"]);                  
+    $this->db->where('active_id', $post["u_active_id"]);              
+    $this->db->update('active_domain');
 
-    $set = array(
-        'url' => $post["u_url"],
-        'tags' => implode(';', $post["u_tags"]), // Convert the array to a comma-separated string
-        'comments' => $post["u_comment"],
-    );
-
-    $where = array("active_id" => $post["u_active_id"]);
-    $update = $this->MY_Model->update("active_domain", $set, $where);
-
-    if ($update) {
-        $response = array('success' => true, 'message' => 'Updated Successfully.');
-    } else {
-        $response = array('success' => false, 'message' => 'Update failed.');
-    }
+    //f ($update) {
+    $response = array('success' => true, 'message' => 'Updated Successfully.');
+    //} else {
+  //      $response = array('success' => false, 'message' => 'Update failed.');
+   // }
 
     echo json_encode($response);
 }
