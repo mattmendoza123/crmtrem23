@@ -111,6 +111,7 @@ $(document).ready(function() {
         $('#activedomain').on('click', '.update-button', function () {
         var row = $(this).closest('tr');
         var active_id = $(this).data('active_id');
+        console.log($(this))
         var tags = row.find('td:eq(0)').text(); // Assuming this contains semicolon-separated tags
 
         // Split the tags into an array using the semicolon delimiter
@@ -338,12 +339,12 @@ document.addEventListener("DOMContentLoaded", function () {
             u_comment: $('#u_comment').val(),
             u_active_id: $('#u_active_id').val(),
         };
-
-        var base_url = "https://crm.tremendio.network/adminactivedomain/update_modal";
+        
+        var update_url = base_url +"adminactivedomain/update_modal";
 
         $.ajax({
             type: "POST",
-            url: base_url,
+            url: update_url,
             data: formData,
             dataType: "json",
             success: function (data) {

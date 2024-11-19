@@ -71,7 +71,7 @@ class Adminactivedomain extends MY_Controller
                     $query = $this->db->get('active_domain');
                     $num_rows = $query->num_rows();
                     $result = $query->result();
-                    
+                    $responseData['info']['details']['tracking_domains'][$x]['active_id'] =  $result[0]->active_id;
                     $responseData['info']['details']['tracking_domains'][$x]['vtotal'] = unserialize($result[0]->vtotal);
                     $responseData['info']['details']['tracking_domains'][$x]['tags'] =  $result[0]->tags;
                     $responseData['info']['details']['tracking_domains'][$x]['comments'] =  $result[0]->comments;
