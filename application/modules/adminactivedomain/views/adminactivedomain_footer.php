@@ -281,7 +281,7 @@ $('#activedomain').on('click', '.update-button', function () {
     $('#u_active_id').val(active_id); // Set the active_id in a hidden input field
 });
 });
-
+*/
 document.addEventListener("DOMContentLoaded", function () {
             const addTagsButton = document.getElementById("add-tags-button");
             const removeTagsButton = document.getElementById("remove-tags-button");
@@ -384,5 +384,5 @@ inputElement.addEventListener("input", function(event) {
 
     // Update the input value with only numbers and semicolon
     event.target.value = numbersAndSemicolonOnly;
-}); */
+}); 
 </script>
