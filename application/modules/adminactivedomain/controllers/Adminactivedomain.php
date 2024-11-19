@@ -160,13 +160,9 @@ public function update_modal()
     $this->db->set('comments', $post["u_comment"]);                  
     $this->db->where('active_id', $post["u_active_id"]);              
     $this->db->update('active_domain');
-
-    //f ($update) {
+ 
     $response = array('success' => true, 'message' => 'Updated Successfully.');
-    //} else {
-  //      $response = array('success' => false, 'message' => 'Update failed.');
-   // }
-
+  
     echo json_encode($response);
 }
 
