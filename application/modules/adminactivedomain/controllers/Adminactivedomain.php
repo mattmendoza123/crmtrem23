@@ -108,7 +108,7 @@ function fetchVirusTotalData($hash){
         $result = $query->result();
         
         if(count($result) > 0){
-            if($result[0]->date_fetch != null || $result[0]->date_fetch == date("Y-m-d")){
+            if(date("Y-m-d",strtotime($result[0]->date_fetch)) == date("Y-m-d")){                             
                 $this->db->set('date_fetch', date("Y-m-d"));     
                 $this->db->where('hash', $hash);
                 $this->db->update('active_domain'); 
