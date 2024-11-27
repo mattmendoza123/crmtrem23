@@ -98,61 +98,110 @@ class Adminactivedomain extends MY_Controller
         echo json_encode($response);
 }
 
-function fetchVirusTotalData($hash){
+// function fetchVirusTotalData($hash){
+//     error_reporting(0);
+//     $url = $this->input->post("url");
+//     if($hash != ""){
+//         $this->db->where('hash',$hash);                    
+//         $query = $this->db->get('active_domain');
+//         $num_rows = $query->num_rows();
+//         $result = $query->result();
+        
+//         if(count($result) > 0){
+//             if($result[0]->date_fetch != null || $result[0]->date_fetch == date("Y-m-d")){
+//                 $this->db->set('date_fetch', date("Y-m-d"));     
+//                 $this->db->where('hash', $hash);
+//                 $this->db->update('active_domain'); 
+//                 $vtotal_data = unserialize($result[0]->vtotal);         
+//                 return json_encode($vtotal_data);
+//             }
+//         }     
+//     }
+      
+//     $apiKey = '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e';      
+//     $urlEndpoint = "https://www.virustotal.com/api/v3/urls/{$hash}";
+   
+//     $options = array(
+//         'http' => array(
+//             'header' => "Content-type: application/x-www-form-urlencoded\r\n" .
+//             "x-apikey: {$apiKey}\r\n",
+//             'method' => 'GET'
+//         )
+//     );
+
+//     $context  = stream_context_create($options);
+//     $response = file_get_contents($urlEndpoint, false, $context);   
+   
+//     // Check if the response is valid JSON
+//     $result = json_decode($response, true);        
+//     $analysis_stats = $result['data']['attributes']['last_analysis_stats'];
+//     $final_url = $result['data']['attributes']['last_final_url'];  
+//     $vtotal = array(
+//         'harmless' => $analysis_stats['harmless'],
+//         'malicious' => $analysis_stats['malicious'],
+//         'suspicious' => $analysis_stats['suspicious'],
+//         'undetected' => $analysis_stats['undetected'],          
+//     );
+//     $this->db->set('date_fetch', date("Y-m-d"));     
+//     $this->db->set('vtotal', serialize($vtotal));                 
+//     $this->db->set('hash', $hash);  
+//     $this->db->where('url', $url);              
+//     $this->db->update('active_domain');
+
+//     return json_encode($vtotal);
+    
+//     die;
+// }
+public function fetchVirusTotalData($hash) {
     error_reporting(0);
     $url = $this->input->post("url");
-    if($hash != ""){
-        $this->db->where('hash',$hash);                    
+
+    if ($hash) {
+        $this->db->where('hash', $hash);
         $query = $this->db->get('active_domain');
-        $num_rows = $query->num_rows();
-        $result = $query->result();
-        
-        if(count($result) > 0){
-            if($result[0]->date_fetch != null || $result[0]->date_fetch == date("Y-m-d")){
-                $this->db->set('date_fetch', date("Y-m-d"));     
+        $result = $query->row();
+
+        // Check if the record exists and if the data is outdated
+        if ($result && ($result->date_fetch == null || $result->date_fetch < date("Y-m-d"))) {
+            // Fetch new data from VirusTotal
+            $apiKey = '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e';
+            $urlEndpoint = "https://www.virustotal.com/api/v3/urls/{$hash}";
+            $options = [
+                'http' => [
+                    'header' => "Content-type: application/x-www-form-urlencoded\r\nx-apikey: {$apiKey}\r\n",
+                    'method' => 'GET'
+                ]
+            ];
+
+            $context = stream_context_create($options);
+            $response = file_get_contents($urlEndpoint, false, $context);
+
+            if ($response) {
+                $resultData = json_decode($response, true);
+                $analysisStats = $resultData['data']['attributes']['last_analysis_stats'];
+                $vtotal = [
+                    'harmless' => $analysisStats['harmless'],
+                    'malicious' => $analysisStats['malicious'],
+                    'suspicious' => $analysisStats['suspicious'],
+                    'undetected' => $analysisStats['undetected']
+                ];
+
+                // Update the database with the new data
+                $this->db->set('date_fetch', date("Y-m-d"));
+                $this->db->set('vtotal', serialize($vtotal));
                 $this->db->where('hash', $hash);
-                $this->db->update('active_domain'); 
-                $vtotal_data = unserialize($result[0]->vtotal);         
-                return json_encode($vtotal_data);
+                $this->db->update('active_domain');
+
+                return json_encode($vtotal);
             }
-        }     
+        } elseif ($result) {
+            // Return cached data
+            return $result->vtotal ? json_encode(unserialize($result->vtotal)) : json_encode([]);
+        }
     }
-      
-    $apiKey = '5664f3e4ced248681f8f0ac0c4f062e8ad618ffdfb5581e382e12ca86c8bbe6e';      
-    $urlEndpoint = "https://www.virustotal.com/api/v3/urls/{$hash}";
-   
-    $options = array(
-        'http' => array(
-            'header' => "Content-type: application/x-www-form-urlencoded\r\n" .
-            "x-apikey: {$apiKey}\r\n",
-            'method' => 'GET'
-        )
-    );
 
-    $context  = stream_context_create($options);
-    $response = file_get_contents($urlEndpoint, false, $context);   
-   
-    // Check if the response is valid JSON
-    $result = json_decode($response, true);        
-    $analysis_stats = $result['data']['attributes']['last_analysis_stats'];
-    $final_url = $result['data']['attributes']['last_final_url'];  
-    $vtotal = array(
-        'harmless' => $analysis_stats['harmless'],
-        'malicious' => $analysis_stats['malicious'],
-        'suspicious' => $analysis_stats['suspicious'],
-        'undetected' => $analysis_stats['undetected'],          
-    );
-    $this->db->set('date_fetch', date("Y-m-d"));     
-    $this->db->set('vtotal', serialize($vtotal));                 
-    $this->db->set('hash', $hash);  
-    $this->db->where('url', $url);              
-    $this->db->update('active_domain');
-
-    return json_encode($vtotal);
-    
-    die;
+    return json_encode([]);
 }
-
 public function update_modal()
 {
     $post = $this->input->post();
