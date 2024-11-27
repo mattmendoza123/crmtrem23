@@ -27,112 +27,61 @@ $(document).ready(function() {
         
 
     }
-    // function fetchData() {
-    //     fetch(base_url + 'adminactivedomain/activedomain_api', {
-    //         headers: {
-    //             'api-key': 'aafcf12b64ca3230279a89aa8b6eacf03c7c59da'
-    //         }
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //        // console.log(data.data);
-    //         var trackingDomains = data.data.info.details.tracking_domains;
-    //        // dataTable.row.add(['', '', '', '', 'Please wait API is still loading...', '', '', '', '']).draw();
+    function fetchData() {
+        fetch(base_url + 'adminactivedomain/activedomain_api', {
+            headers: {
+                'api-key': 'aafcf12b64ca3230279a89aa8b6eacf03c7c59da'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+           // console.log(data.data);
+            var trackingDomains = data.data.info.details.tracking_domains;
+           // dataTable.row.add(['', '', '', '', 'Please wait API is still loading...', '', '', '', '']).draw();
 
-    //         if (dataTable) {
-    //             dataTable.clear().draw(); // Clear existing data in DataTable
-    //         } else {
-    //             dataTable = $('#activedomain').DataTable({
-    //                 processing: true,
-    //                 order: [[3, "desc"]],
-    //                 pageLength: 50
-    //             });
-    //         }
+            if (dataTable) {
+                dataTable.clear().draw(); // Clear existing data in DataTable
+            } else {
+                dataTable = $('#activedomain').DataTable({
+                    processing: true,
+                    order: [[3, "desc"]],
+                    pageLength: 50
+                });
+            }
             
-    //         var vTotal;
-    //         var vTotalAnalysisStats;
-    //         var tags;
-    //         var lastFinalUrl;
-    //         var harmless;
-    //         var malicious;
-    //         var suspicious;
-    //         var undetected;
-    //         var total;           
-    //         var comments;
-    //         trackingDomains.forEach(async obj => {                           
-    //             if (!existingUrls.includes(obj.name)) {                      
-    //                vTotal = await getVTotal(obj.urlHash,obj.url);                                      
-    //                if(!vTotal){                        
-    //                   vTotal = obj.vtotal;
-    //                }
-    //                existingUrls.push(obj.name);  
-    //                total = vTotal.harmless + vTotal.malicious + vTotal.suspicious + vTotal.undetected;
+            var vTotal;
+            var vTotalAnalysisStats;
+            var tags;
+            var lastFinalUrl;
+            var harmless;
+            var malicious;
+            var suspicious;
+            var undetected;
+            var total;           
+            var comments;
+            trackingDomains.forEach(async obj => {                           
+                if (!existingUrls.includes(obj.name)) {                      
+                   vTotal = await getVTotal(obj.urlHash,obj.url);                                      
+                   if(!vTotal){                        
+                      vTotal = obj.vtotal;
+                   }
+                   existingUrls.push(obj.name);  
+                   total = vTotal.harmless + vTotal.malicious + vTotal.suspicious + vTotal.undetected;
 
-    //                var viewButton = '<button class="view-button btn btn-xs"><i class="fa fa-eye"></i></button>';
-    //                var updateButton = '<button class="update-button btn btn-xs" data-toggle="modal" data-target="#update-modal" data-active_id="' + obj.active_id + '"><i class="fa fa-edit"></i></button>';                    
-    //                var flagButton = vTotal.malicious > 0 ? '<button class="flag-button"><i class="fas fa-flag" style="color: red;"></i></button>' : '<button class="flag-button"><i class="fas fa-flag" style="color: green;"></i></button>';
-    //                var actionsCell = flagButton + ' ' + viewButton + ' ' + updateButton;
+                   var viewButton = '<button class="view-button btn btn-xs"><i class="fa fa-eye"></i></button>';
+                   var updateButton = '<button class="update-button btn btn-xs" data-toggle="modal" data-target="#update-modal" data-active_id="' + obj.active_id + '"><i class="fa fa-edit"></i></button>';                    
+                   var flagButton = vTotal.malicious > 0 ? '<button class="flag-button"><i class="fas fa-flag" style="color: red;"></i></button>' : '<button class="flag-button"><i class="fas fa-flag" style="color: green;"></i></button>';
+                   var actionsCell = flagButton + ' ' + viewButton + ' ' + updateButton;
 
 
-    //                 dataTable.row.add([obj.tags || 'N1', obj.name  || 'N/A' , vTotal.harmless  || 0 , vTotal.malicious  || 0, vTotal.suspicious  || 0, vTotal.undetected  || 0, total  || 0, obj.comments || 'N1', actionsCell]).draw();
-    //                 setTimeout("", 100000);                  
-    //             }
+                    dataTable.row.add([obj.tags || 'N1', obj.name  || 'N/A' , vTotal.harmless  || 0 , vTotal.malicious  || 0, vTotal.suspicious  || 0, vTotal.undetected  || 0, total  || 0, obj.comments || 'N1', actionsCell]).draw();
+                    setTimeout("", 100000);                  
+                }
 
                 
-    //         });      
+            });      
                  
-    //     })  
-
-    function fetchData() {
-    fetch(base_url + 'adminactivedomain/activedomain_api', {
-        headers: {
-            'api-key': 'aafcf12b64ca3230279a89aa8b6eacf03c7c59da'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        var trackingDomains = data.data.info.details.tracking_domains;
-
-        if (dataTable) {
-            dataTable.clear().draw(); // Clear existing data in DataTable
-        } else {
-            dataTable = $('#activedomain').DataTable({
-                processing: true,
-                order: [[3, "desc"]],
-                pageLength: 50
-            });
-        }
-
-        trackingDomains.forEach(async obj => {
-            if (!existingUrls.includes(obj.name)) {
-                const vTotal = await getVTotal(obj.urlHash, obj.url) || obj.vtotal;
-
-                existingUrls.push(obj.name);
-
-                const total = (vTotal.harmless || 0) + (vTotal.malicious || 0) + (vTotal.suspicious || 0) + (vTotal.undetected || 0);
-
-                const actionsCell = `
-                    <button class="flag-button"><i class="fas fa-flag" style="color: ${vTotal.malicious > 0 ? 'red' : 'green'};"></i></button>
-                    <button class="view-button btn btn-xs"><i class="fa fa-eye"></i></button>
-                    <button class="update-button btn btn-xs" data-toggle="modal" data-target="#update-modal" data-active_id="${obj.active_id}"><i class="fa fa-edit"></i></button>
-                `;
-
-                dataTable.row.add([
-                    obj.tags || 'N/A',
-                    obj.name || 'N/A',
-                    vTotal.harmless || 0,
-                    vTotal.malicious || 0,
-                    vTotal.suspicious || 0,
-                    vTotal.undetected || 0,
-                    total,
-                    obj.comments || 'N/A',
-                    actionsCell
-                ]).draw();
-            }
-        });
-    })
-    .catch(err => console.error('Error fetching data:', err));
-
+        })  
         
         $('#activedomain').on('click', '.view-button', function () {
         var row = $(this).closest('tr');
