@@ -21,6 +21,7 @@
                                 <th>Undetected</th>
                                 <th class="total">Total</th>
                                 <th class="comments">Comments</th>
+                                <th class="total">Date Fetch</th>
                                 <th class="actions">Actions</th>
                                 </tr>
                             </thead>

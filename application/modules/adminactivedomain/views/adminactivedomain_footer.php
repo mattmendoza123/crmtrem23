@@ -75,7 +75,7 @@ $(document).ready(function() {
                    var actionsCell = flagButton + ' ' + viewButton + ' ' + updateButton;
 
 
-                    dataTable.row.add([obj.tags || 'N1', obj.name  || 'N/A' , vTotal.harmless  || 0 , vTotal.malicious  || 0, vTotal.suspicious  || 0, vTotal.undetected  || 0, total  || 0, obj.comments || 'N1', actionsCell]).draw();
+                    dataTable.row.add([obj.tags || 'N1', obj.name  || 'N/A' , vTotal.harmless  || 0 , vTotal.malicious  || 0, vTotal.suspicious  || 0, vTotal.undetected  || 0, total  || 0, obj.comments || 0, obj.date_fetch || 'N1', actionsCell]).draw();
                     setTimeout("", 100000);                  
                 }
 

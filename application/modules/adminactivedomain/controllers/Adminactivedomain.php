@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
+date_default_timezone_set('Asia/Manila'); 
 class Adminactivedomain extends MY_Controller
 {
 
@@ -77,7 +77,7 @@ class Adminactivedomain extends MY_Controller
                     $responseData['info']['details']['tracking_domains'][$x]['comments'] =  $result[0]->comments;
                     $responseData['info']['details']['tracking_domains'][$x]['urlHash'] =  $domain_info['hash'];
                     $responseData['info']['details']['tracking_domains'][$x]['url'] =  $domain_info['url'];
-
+                    $responseData['info']['details']['tracking_domains'][$x]['date_fetch'] = date("m/d/Y H:i:s A",strtotime($result[0]->date_fetch));
                     if($num_rows == 0){
                         $insert_domain = $this->db->insert('active_domain', $domain_info);    
                         $processedUrls[] = $url;                                    
@@ -109,7 +109,7 @@ function fetchVirusTotalData($hash){
         
         if(count($result) > 0){
             if(date("Y-m-d",strtotime($result[0]->date_fetch)) == date("Y-m-d")){                             
-                $this->db->set('date_fetch', date("Y-m-d"));     
+                $this->db->set('date_fetch', date("Y-m-d h:i:s"));     
                 $this->db->where('hash', $hash);
                 $this->db->update('active_domain'); 
                 $vtotal_data = unserialize($result[0]->vtotal);         
@@ -142,7 +142,7 @@ function fetchVirusTotalData($hash){
         'suspicious' => $analysis_stats['suspicious'],
         'undetected' => $analysis_stats['undetected'],          
     );
-    $this->db->set('date_fetch', date("Y-m-d"));     
+    $this->db->set('date_fetch', date("Y-m-d h:i:s"));     
     $this->db->set('vtotal', serialize($vtotal));                 
     $this->db->set('hash', $hash);  
     $this->db->where('url', $url);              
