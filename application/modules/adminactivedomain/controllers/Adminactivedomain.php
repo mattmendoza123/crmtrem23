@@ -77,7 +77,7 @@ class Adminactivedomain extends MY_Controller
                     $responseData['info']['details']['tracking_domains'][$x]['comments'] =  $result[0]->comments;
                     $responseData['info']['details']['tracking_domains'][$x]['urlHash'] =  $domain_info['hash'];
                     $responseData['info']['details']['tracking_domains'][$x]['url'] =  $domain_info['url'];
-                    $responseData['info']['details']['tracking_domains'][$x]['date_fetch'] = date("m/d/Y H:i:s p",strtotime($result[0]->date_fetch));
+                    $responseData['info']['details']['tracking_domains'][$x]['date_fetch'] = date("m/d/Y H:i:s A",strtotime($result[0]->date_fetch));
                     if($num_rows == 0){
                         $insert_domain = $this->db->insert('active_domain', $domain_info);    
                         $processedUrls[] = $url;                                    
