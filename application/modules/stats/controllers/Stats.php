@@ -131,7 +131,9 @@ class Stats extends MY_Controller
 
 		if($date_filter =="alltime"){
 			$url = 'https://tremendio.scaletrk.com/api/v2/network/dashboard/statistics/'.$type.'?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=value&sortDirection=desc&perPage=50&page=1'; // URL of the API you want to request		
-		} else {
+		} else if($date_filter == "today"){
+			$url = 'https://tremendio.scaletrk.com/api/v2/network/dashboard/statistics/'.$type.'?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=value&sortDirection=desc&perPage=50&page=1&rangeFrom='.$start_date.'&rangeTo='.$end_date.'&preset=today'; // URL of the API you want to request		
+		}else {
 			$url = 'https://tremendio.scaletrk.com/api/v2/network/dashboard/statistics/'.$type.'?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=value&sortDirection=desc&perPage=50&page=1&rangeFrom='.$start_date.'&rangeTo='.$end_date; // URL of the API you want to request		
 		}			
 		$data = json_decode(file_get_contents($url), true); 	
