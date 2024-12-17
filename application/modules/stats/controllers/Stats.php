@@ -26,7 +26,8 @@ class Stats extends MY_Controller
 			array("name"=> "last14Days", "val"=> "Last 14 Days"),		
 			array("name"=> "last30Days", "val"=> "Last 30 Days"),
 			array("name"=> "last90Days", "val"=> "Last 90 Days"),
-			array("name"=> "thisMonth", "val"=> "Last Month"),
+			array("name"=> "lastMonth", "val"=> "Last Month"),
+			array("name"=> "thisMonth", "val"=> "This Month"),
 			array("name"=> "thisYear", "val"=> "This Year"),
 			array("name"=> "lastYear", "val"=> "Last Year"),
 			array("name"=> "alltime", "val"=> "All Time"),			
@@ -95,16 +96,46 @@ class Stats extends MY_Controller
 	{				
 		date_default_timezone_set("Europe/Paris");
 		//today, yesterday, last7Days, last14Days, last30Days, last90Days, thisMonth, lastMonth, thisYear, lastYear, allTime and custom
-		
+		$date_filter = str_replace(" ","",$date_filter);	
+		if($date_filter == "today"){
+			$start_date = date("Y-m-d");
+			$end_date = date("Y-m-d");	
+		} elseif($date_filter =="thisMonth"){
+			$start_date = date("Y-m-01");
+			$end_date = date("Y-m-d");	
+		} elseif($date_filter =="lastMonth"){
+			$start_date = date("Y-m-d",strtotime("first day of previous month"));
+			$end_date = date("Y-m-d",strtotime("last day of previous month"));	
+		} elseif($date_filter =="thisYear"){
+			$start_date = date("Y-01-01");
+			$end_date = date("Y-m-d");	
+		} elseif($date_filter =="lastYear"){
+			$start_date = date("Y-01-01",strtotime("-1 year"));
+			$end_date = date("Y-12-31",strtotime("-1 year"));
+		}else{
+			$minus_day = 0;			
+			switch($date_filter){
+				case "yesterday" : $minus_day = -1; break;
+				case "last7Days" : $minus_day = -7; break;
+				case "last14Days" : $minus_day = -14; break;
+				case "last30Days" : $minus_day = -30; break;
+				case "last60Days" : $minus_day = -60; break;
+				case "last90Days" : $minus_day = -90; break;
+			}
+			$start_date = date("Y-m-d",strtotime("$minus_day days"));
+			$end_date = date("Y-m-d",strtotime("-1 days"));
+		}		
 		header('Access-Control-Allow-Origin: *'); // Allow requests from any domain
 		header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 		header("Access-Control-Allow-Headers: Content-Type, Authorization");
-		if($date_filter !="custom"){
-			$url = 'https://tremendio.scaletrk.com/api/v2/network/dashboard/statistics/'.$type.'?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=value&sortDirection=desc&perPage=50&page=1&preset='.$date_filter; // URL of the API you want to request		
+
+		if($date_filter =="alltime"){
+			$url = 'https://tremendio.scaletrk.com/api/v2/network/dashboard/statistics/'.$type.'?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=value&sortDirection=desc&perPage=50&page=1'; // URL of the API you want to request		
 		} else {
-			//$url = 'https://tremendio.scaletrk.com/api/v2/network/dashboard/statistics/'.$type.'?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=value&sortDirection=desc&perPage=50&page=1&rangeFrom='.$start_date.'&rangeTo='.$end_date; // URL of the API you want to request		
-		}	
+			$url = 'https://tremendio.scaletrk.com/api/v2/network/dashboard/statistics/'.$type.'?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&lang=en&sortField=value&sortDirection=desc&perPage=50&page=1&rangeFrom='.$start_date.'&rangeTo='.$end_date; // URL of the API you want to request		
+		}			
 		$data = json_decode(file_get_contents($url), true); 	
+		
 		return $data;
 	}
 
