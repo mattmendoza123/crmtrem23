@@ -14,7 +14,7 @@
             margin: 0;
             background-color: #f4f4f4;
         } */
-        /* .form-container {
+        .form-container {
             width: 640px;
             height: 1700px;
             background: white;
@@ -22,7 +22,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
             overflow: hidden;
-        } */
+        }
         iframe {
         width: 100%;
         height: 100%;
