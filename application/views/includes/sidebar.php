@@ -78,10 +78,12 @@
                                     echo "not-active";
                                 }  ?>">
                      <li><a class="waves-effect" href="<?= base_url("crmads") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM</span></a></li>
+                     <li> <a class="waves-effect" href="<?= base_url("leaverequest") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Request Leave</span></a></li>
                      <li> <a class="waves-effect" href="<?= base_url("stats") ?>" aria-expanded="false"><i class="fas fa-chart-line" style="color: #fff;"></i><span class="hide-menu">TOP Stats</span></a></li>
                      <li> <a class="waves-effect" href="<?= base_url("advinvalidclicks") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Invalid Clicks</span></a></li>
                      <li> <a class="waves-effect" href="<?= base_url("adminactivedomain") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Active Domain</span></a></li>
                      <li> <a class="waves-effect" href="<?= base_url("advoverdueinvoice") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Overdue Invoice</span></a></li>
+                
                      
                     </li>
                 </ul>
@@ -93,10 +95,12 @@
                                     echo "not-active";
                                 }  ?>">
                         <li> <a class="waves-effect" href="<?= base_url("crmaff") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM</span></a></li>
+                        <li> <a class="waves-effect" href="<?= base_url("leaverequest") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Request Leave</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("newoffers") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">New Offers</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("stats") ?>" aria-expanded="false"><i class="fas fa-chart-line" style="color: #fff;"></i><span class="hide-menu">TOP Stats</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("exclusiveoffers") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Exclusive Offers</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("adminactivedomain") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Active Domain</span></a></li>
+              
                         
                     </li>
                 </ul>
@@ -108,6 +112,7 @@
                                     echo "not-active";
                                 }  ?>">
                         <li> <a class="waves-effect" href="<?= base_url("dashboard") ?>" aria-expanded="false"><i class="fas fa-tachometer-alt" style="color: #fff;"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li> <a class="waves-effect" href="<?= base_url("leaverequest") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Request Leave</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("manageadmin") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Manage Access</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("scaleo") ?>" aria-expanded="false"><i class="fas fa-chart-bar" style="color: #fff;"></i><span class="hide-menu">Review Site</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("admincrmads") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM Advertiser</span></a></li>
@@ -121,6 +126,7 @@
                         <li> <a class="waves-effect" href="<?= base_url("adminoverdueinvoice") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Overdue Invoice</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("webassets") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Web Assets</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("mediabuying") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Media Buying</span></a></li>
+                       
                         
                     </li>
                 </ul>
