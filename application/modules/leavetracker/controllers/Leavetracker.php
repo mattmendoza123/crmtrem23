@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Leaverequest extends MY_Controller
+class Leavetracker extends MY_Controller
 {
 
 	private $errmsg = "";
@@ -15,8 +15,8 @@ class Leaverequest extends MY_Controller
 	public function index()
 	{
 		// echo "<pre>";print_r($this->session->userdata());exit;
-		$data["title"] = "Request Leave | Tremendio Portal";
-		$data["pagename"] = "Request Leave";
+		$data["title"] = "Leave Tracker | Tremendio Portal";
+		$data["pagename"] = "Leave Tracker";
 	
 
 
@@ -32,7 +32,7 @@ class Leaverequest extends MY_Controller
 		// count_all_results();
 		// }
 
-		$this->load_page2("leaverequest", $data, "i_footer.php", "i_header.php");
+		$this->load_page2("leavetracker", $data, "i_footer.php", "i_header.php");
 	}
 	
 

@@ -113,6 +113,7 @@
                                 }  ?>">
                         <li> <a class="waves-effect" href="<?= base_url("dashboard") ?>" aria-expanded="false"><i class="fas fa-tachometer-alt" style="color: #fff;"></i><span class="hide-menu">Dashboard</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("leaverequest") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Request Leave</span></a></li>
+                        <li> <a class="waves-effect" href="<?= base_url("leavetracker") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Leave Tracker</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("manageadmin") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">Manage Access</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("scaleo") ?>" aria-expanded="false"><i class="fas fa-chart-bar" style="color: #fff;"></i><span class="hide-menu">Review Site</span></a></li>
                         <li> <a class="waves-effect" href="<?= base_url("admincrmads") ?>" aria-expanded="false"><i class="fas fa-copy" style="color: #fff;"></i><span class="hide-menu">CRM Advertiser</span></a></li>
