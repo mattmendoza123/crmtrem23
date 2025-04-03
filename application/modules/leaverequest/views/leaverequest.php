@@ -5,9 +5,8 @@
                 <h3 class="text-themecolor">Request Leave</h3>
             </div>
         </div>
-    </div>
-</div>
-    <style>
+
+        <style>
         body {
             display: flex;
             justify-content: center;
@@ -43,7 +42,8 @@
     <div class="form-container">
         <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSds4Bc8tFosbcPZJASTZ_H0lNOMCEBkhjHdgVRq0XDJB9hh_w/viewform?embedded=true"></iframe>
     </div>
-</body>
-</html>
+    </div>
+</div>
+    
 
 
