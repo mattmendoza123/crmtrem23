@@ -30,7 +30,7 @@ $(document).ready(function() {
     function fetchData() {
         fetch(base_url + 'adminactivedomain/activedomain_api', {
             headers: {
-                'api-key': 'aafcf12b64ca3230279a89aa8b6eacf03c7c59da'
+                'api-key': '50b3610e8131bed482340559725750ac13682d0d'
             }
         })
         .then(response => response.json())

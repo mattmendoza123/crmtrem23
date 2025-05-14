@@ -51,7 +51,7 @@ class Affactivedomain extends MY_Controller
         if ($mysqli->connect_error) {
             $response = ['success' => false, 'message' => 'Connection failed: ' . $mysqli->connect_error];
         } else {
-            $url = 'https://tremendio.scaletrk.com/api/v2/network/offers/1147/tracking-settings?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da'; // URL of the API you want to request
+            $url = 'https://tremendio.scaletrk.com/api/v2/network/offers/1147/tracking-settings?api-key=50b3610e8131bed482340559725750ac13682d0d'; // URL of the API you want to request
             $data = file_get_contents($url); // Make the request and get the response
         
             // Decode the JSON response

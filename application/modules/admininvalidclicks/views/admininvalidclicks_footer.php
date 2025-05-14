@@ -33,7 +33,7 @@ $(document).ready(function () {
     function fetchData(from = null , to = null) {
         fetch(base_url + 'admininvalidclicks/invalidclick_api', {
             headers: {
-                'api-key': 'aafcf12b64ca3230279a89aa8b6eacf03c7c59da'
+                'api-key': '50b3610e8131bed482340559725750ac13682d0d'
             },
             method: "POST",
             body: JSON.stringify({from_date :from, to_date:  to})

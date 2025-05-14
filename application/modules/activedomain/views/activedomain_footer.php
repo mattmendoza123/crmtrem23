@@ -14,7 +14,7 @@ $(document).ready(function() {
     function fetchData() {
         fetch(base_url + 'activedomain/activedomain_api', {
             headers: {
-                'api-key': 'aafcf12b64ca3230279a89aa8b6eacf03c7c59da'
+                'api-key': '50b3610e8131bed482340559725750ac13682d0d'
             }
         })
         .then(response => response.json())
@@ -70,7 +70,7 @@ $(document).ready(function () {
 
     function fetchActiveDomains() {
         fetch(base_url + 'activedomain/activedomain_api', {
-            headers: { 'api-key': 'aafcf12b64ca3230279a89aa8b6eacf03c7c59da' }
+            headers: { 'api-key': '50b3610e8131bed482340559725750ac13682d0d' }
         })
             .then(response => response.json())
             .then(data => {

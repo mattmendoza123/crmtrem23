@@ -40,9 +40,9 @@ class Exclusiveoffers extends MY_Controller
 	$start_date = $this->input->post("from_date");
 	$end_date = $this->input->post("to_date");
 	if($start_date!="" && $end_date!=""){
-		$url = 'https://tremendio.scaletrk.com/api/v2/network/offers?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&status=active&search=&perPage=20&categories=62&rangeFrom='.$start_date.'&rangeTo='.$end_date.'&page=1'; // URL of the API you want to request
+		$url = 'https://tremendio.scaletrk.com/api/v2/network/offers?api-key=50b3610e8131bed482340559725750ac13682d0d&status=active&search=&perPage=20&categories=62&rangeFrom='.$start_date.'&rangeTo='.$end_date.'&page=1'; // URL of the API you want to request
 	} else {
-		$url = 'https://tremendio.scaletrk.com/api/v2/network/offers?api-key=aafcf12b64ca3230279a89aa8b6eacf03c7c59da&status=active&search=&perPage=20&page=1&categories=62';
+		$url = 'https://tremendio.scaletrk.com/api/v2/network/offers?api-key=50b3610e8131bed482340559725750ac13682d0d&status=active&search=&perPage=20&page=1&categories=62';
 	}
 	$data = json_decode(file_get_contents($url));
 

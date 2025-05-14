@@ -130,11 +130,11 @@ class Stats extends MY_Controller
 		header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 		if($date_filter =="alltime"){
-			$url = 'https://tremendio.scaletrk.com/api/v2/network/dashboard/statistics/'.$type.'?api-key=97d7c37fad58d5a748140615c815d8def92356f8&lang=en&sortField=value&sortDirection=desc&perPage=50&page=1'; // URL of the API you want to request		
+			$url = 'https://tremendio.scaletrk.com/api/v2/network/dashboard/statistics/'.$type.'?api-key=50b3610e8131bed482340559725750ac13682d0d&lang=en&sortField=value&sortDirection=desc&perPage=50&page=1'; // URL of the API you want to request		
 		} else if($date_filter == "today"){
-			$url = 'https://tremendio.scaletrk.com/api/v2/network/dashboard/statistics/'.$type.'?api-key=97d7c37fad58d5a748140615c815d8def92356f8&lang=en&sortField=value&sortDirection=desc&perPage=50&page=1&rangeFrom='.$start_date.'&rangeTo='.$end_date.'&preset=today'; // URL of the API you want to request		
+			$url = 'https://tremendio.scaletrk.com/api/v2/network/dashboard/statistics/'.$type.'?api-key=50b3610e8131bed482340559725750ac13682d0d&lang=en&sortField=value&sortDirection=desc&perPage=50&page=1&rangeFrom='.$start_date.'&rangeTo='.$end_date.'&preset=today'; // URL of the API you want to request		
 		}else {
-			$url = 'https://tremendio.scaletrk.com/api/v2/network/dashboard/statistics/'.$type.'?api-key=97d7c37fad58d5a748140615c815d8def92356f8&lang=en&sortField=value&sortDirection=desc&perPage=50&page=1&rangeFrom='.$start_date.'&rangeTo='.$end_date; // URL of the API you want to request		
+			$url = 'https://tremendio.scaletrk.com/api/v2/network/dashboard/statistics/'.$type.'?api-key=50b3610e8131bed482340559725750ac13682d0d&lang=en&sortField=value&sortDirection=desc&perPage=50&page=1&rangeFrom='.$start_date.'&rangeTo='.$end_date; // URL of the API you want to request		
 		}			
 		$data = json_decode(file_get_contents($url), true); 	
 		
