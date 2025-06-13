@@ -95,10 +95,10 @@ class MY_Controller extends MX_Controller {
 
 		$config['protocol']    = 'smtp';
 		$config['smtp_host']    = 'smtp.gmail.com';
-		$config['smtp_port']    = '587';
-		$config['smtp_user']    = 'devteam@tremendio.com';
+		$config['smtp_port']    = '465';
+		$config['smtp_user']    = 'ragnarmendoza3@gmail.com';
 		$config['_smtp_auth'] = TRUE;
-		$config['smtp_pass']    = 'rqkqzgjqedzazili';
+		$config['smtp_pass']    = 'rjhhelymkblzmpmn';
 		$config['smtp_crypto'] = 'tls';
 		$config['mailtype'] = 'html'; // or html
 		$config['charset'] = 'utf-8';
