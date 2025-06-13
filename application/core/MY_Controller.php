@@ -99,7 +99,7 @@ class MY_Controller extends MX_Controller {
 		$config['smtp_user']    = 'ragnarmendoza3@gmail.com';
 		$config['_smtp_auth'] = TRUE;
 		$config['smtp_pass']    = 'rjhhelymkblzmpmn';
-		$config['smtp_crypto'] = 'tls';
+		$config['smtp_crypto'] = 'ssl';
 		$config['mailtype'] = 'html'; // or html
 		$config['charset'] = 'utf-8';
 		$config['wordwrap'] = TRUE;
